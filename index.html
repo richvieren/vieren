@@ -154,12 +154,13 @@ nav {
 
 /* Floating images */
 .float-img {
-  position: absolute; width: 100px; height: 80px;
-  background: var(--s2); border: 1px solid rgba(255,255,255,.06);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 7px; letter-spacing: .15em; text-transform: uppercase; color: var(--t4);
+  position: absolute;
   will-change: transform;
   transition: none;
+}
+.float-img img {
+  height: 100px;
+  width: auto;
 }
 
 /* ══ WHAT WE DO ══ */
@@ -389,14 +390,14 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ WHO WE ARE ══ -->
 <section class="who">
-  <div class="float-img" style="--rot:-12deg;">img</div>
-  <div class="float-img" style="--rot:8deg;">img</div>
-  <div class="float-img" style="--rot:5deg;">img</div>
-  <div class="float-img" style="--rot:-7deg;">img</div>
-  <div class="float-img" style="--rot:15deg;">img</div>
-  <div class="float-img" style="--rot:-3deg;">img</div>
-  <div class="float-img" style="--rot:10deg;">img</div>
-  <div class="float-img" style="--rot:-8deg;">img</div>
+  <div class="float-img" style="--rot:-12deg;"><img src="image/vieren_0000_Layer-8.png"></div>
+  <div class="float-img" style="--rot:8deg;"><img src="image/vieren_0001_Layer-7.png"></div>
+  <div class="float-img" style="--rot:5deg;"><img src="image/vieren_0002_Layer-6.png"></div>
+  <div class="float-img" style="--rot:-7deg;"><img src="image/vieren_0003_Layer-5.png"></div>
+  <div class="float-img" style="--rot:15deg;"><img src="image/vieren_0004_Layer-4.png"></div>
+  <div class="float-img" style="--rot:-3deg;"><img src="image/vieren_0005_Layer-3.png"></div>
+  <div class="float-img" style="--rot:10deg;"><img src="image/vieren_0006_Layer-2.png"></div>
+  <div class="float-img" style="--rot:-8deg;"><img src="image/vieren_0007_Layer-1.png"></div>
   <span class="pill">About</span>
   <div class="who-text">
     Author, photographer, filmmaker. Building <strong>four companies</strong> with <em>taste, not noise.</em>
