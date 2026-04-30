@@ -19,6 +19,25 @@
   font-weight: 400;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Dharma Gothic';
+  src: url('fonts/dharma-gothic-heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 :root {
   --bg: #2C2E2C;
@@ -398,9 +417,12 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="float-img" style="--rot:-3deg;"><img src="image/vieren_0005_Layer-3.png" style="height:50px;"></div>
   <div class="float-img" style="--rot:10deg;"><img src="image/vieren_0006_Layer-2.png"></div>
   <div class="float-img" style="--rot:-8deg;"><img src="image/vieren_0007_Layer-1.png"></div>
-  <span class="pill">About</span>
-  <div class="who-text">
-    Author, filmmaker, builder, storyteller, founder, hair god, editor. Spent over a decade documenting brands, artists, and athletes...<br>now focused on writing my own stories.
+  <span class="pill">Since 1982</span>
+  <div class="who-text" style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,80px);line-height:1;text-transform:uppercase;letter-spacing:.02em;">
+    Author + Founder + Editor + Storyteller
+  </div>
+  <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
+    Spent over a decade documenting brands, artists, and athletes...<br>now focused on writing my own stories.
   </div>
 </section>
 
