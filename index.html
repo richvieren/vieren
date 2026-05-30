@@ -203,15 +203,17 @@ nav {
 }
 .what-headline em { font-style: italic; color: var(--ac); }
 .what-body { font-size: 15px; color: var(--t3); line-height: 1.8; margin-bottom: 36px; max-width: 480px; }
-.what-btns { display: flex; gap: 16px; margin-bottom: 48px; }
-.what-btn {
-  padding: 14px 32px; border: 1px solid rgba(255,255,255,.2); border-radius: 100px;
-  font-size: 11px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--t1); transition: all .3s; cursor: pointer;
+.proj-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
+.proj-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+  transition: all .3s; cursor: pointer;
 }
-.what-btn:hover { background: var(--t1); color: var(--bg); }
-.what-btn.filled { background: var(--t1); color: var(--bg); border-color: var(--t1); }
-.what-btn.filled:hover { background: var(--ac); border-color: var(--ac); color: var(--bg); }
+.proj-item:first-child { border-top: 1px solid rgba(255,255,255,.08); }
+.proj-item:hover { padding-left: 8px; }
+.proj-item:hover .proj-title { color: var(--ac); }
+.proj-title { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--t1); transition: color .3s; }
+.proj-caption { font-size: 13px; color: var(--t4); font-weight: 300; }
 .client-logos { display: flex; gap: 40px; align-items: center; opacity: .35; }
 .client-logos span { font-size: 14px; font-weight: 500; color: var(--t2); letter-spacing: .04em; }
 
@@ -223,7 +225,7 @@ nav {
   font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--t4);
   overflow: hidden;
 }
-.what-thumbs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.what-thumbs { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
 .what-thumb {
   aspect-ratio: 9/16; background: var(--s2); border-radius: 4px;
   display: flex; align-items: center; justify-content: center;
@@ -364,11 +366,11 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .vid-overlay:hover { background: rgba(22,18,21,.4); }
 .vid-overlay .play-circle {
   width: 72px; height: 72px; border-radius: 50%;
-  border: 2px solid rgba(248,53,74,.5); background: rgba(248,53,74,.12);
+  border: 2px solid rgba(255,159,0,.5); background: rgba(255,159,0,.12);
   display: flex; align-items: center; justify-content: center;
   transition: all .3s;
 }
-.vid-overlay:hover .play-circle { border-color: var(--sg); background: rgba(248,53,74,.2); }
+.vid-overlay:hover .play-circle { border-color: var(--ac); background: rgba(255,159,0,.2); }
 .vid-overlay .play-circle svg { margin-left: 3px; }
 .vid-overlay.hidden { display: none; }
 
@@ -432,37 +434,43 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     <span class="pill">Projects</span>
     <h2 class="what-headline">Never not<br><em>shipping.</em></h2>
     <p class="what-body">Each one built deliberately. Health as the base. Craft over noise. Companies that look like they mean something.</p>
-    <div class="what-btns">
-      <a href="https://lore.video" class="what-btn" target="_blank">Lore.video</a>
-      <a href="https://countingsheep.club" class="what-btn" target="_blank">Counting Sheep Club</a>
-      <a href="https://wolfchildren.co" class="what-btn" target="_blank">Wolf Children</a>
-      <a href="#" class="what-btn">Apex OS</a>
+    <div class="proj-list">
+      <a href="https://lore.video" target="_blank" class="proj-item"><span class="proj-title">Lore.video</span><span class="proj-caption">Video agency for funded startups</span></a>
+      <a href="https://countingsheep.club" target="_blank" class="proj-item"><span class="proj-title">Counting Sheep Club</span><span class="proj-caption">Bedtime stories app for parents</span></a>
+      <a href="https://wolfchildren.co" target="_blank" class="proj-item"><span class="proj-title">Wolf Children</span><span class="proj-caption">Book and community on raising kids offline</span></a>
+      <a href="#" class="proj-item"><span class="proj-title">Apex OS</span><span class="proj-caption">Premium personal training for men</span></a>
     </div>
   </div>
   <div class="what-right">
     <div class="what-hero-img" style="padding:0;overflow:hidden;position:relative"><div class="vid-wrap">
-        <iframe data-src="https://player.vimeo.com/video/1016141421?title=0&byline=0&portrait=0&color=F8354A&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <iframe data-src="https://player.vimeo.com/video/1016141421?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
         <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
-          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#F8354A"/></svg></div>
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
     <div class="what-thumbs">
       <div class="what-thumb" style="padding:0;overflow:hidden;position:relative"><div class="vid-wrap">
-        <iframe data-src="https://player.vimeo.com/video/1146300426?title=0&byline=0&portrait=0&color=F8354A&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <iframe data-src="https://player.vimeo.com/video/1146300426?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
         <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
-          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#F8354A"/></svg></div>
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
       <div class="what-thumb" style="padding:0;overflow:hidden;position:relative"><div class="vid-wrap">
-        <iframe data-src="https://player.vimeo.com/video/1133486488?title=0&byline=0&portrait=0&color=F8354A&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <iframe data-src="https://player.vimeo.com/video/1133486488?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
         <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
-          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#F8354A"/></svg></div>
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
       <div class="what-thumb" style="padding:0;overflow:hidden;position:relative"><div class="vid-wrap">
-        <iframe data-src="https://player.vimeo.com/video/1094996108?title=0&byline=0&portrait=0&color=F8354A&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <iframe data-src="https://player.vimeo.com/video/1094996108?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
         <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
-          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#F8354A"/></svg></div>
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
+        </div>
+      </div></div>
+      <div class="what-thumb" style="padding:0;overflow:hidden;position:relative"><div class="vid-wrap">
+        <iframe data-src="https://player.vimeo.com/video/1136626687?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
     </div>
@@ -520,9 +528,9 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="proj-grid">
     <div class="proj-card">
       <div class="proj-card-img brackets brackets-b" style="padding:0;overflow:hidden"><div class="vid-wrap">
-        <iframe data-src="https://player.vimeo.com/video/1016204970?title=0&byline=0&portrait=0&color=F8354A&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <iframe data-src="https://player.vimeo.com/video/1016204970?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
         <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
-          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#F8354A"/></svg></div>
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
       <div class="proj-card-body">
@@ -533,9 +541,9 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     </div>
     <div class="proj-card">
       <div class="proj-card-img brackets brackets-b" style="padding:0;overflow:hidden"><div class="vid-wrap">
-        <iframe data-src="https://player.vimeo.com/video/1033450404?title=0&byline=0&portrait=0&color=F8354A&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <iframe data-src="https://player.vimeo.com/video/1033450404?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
         <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
-          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#F8354A"/></svg></div>
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
       <div class="proj-card-body">
@@ -546,9 +554,9 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     </div>
     <div class="proj-card">
       <div class="proj-card-img brackets brackets-b" style="padding:0;overflow:hidden"><div class="vid-wrap">
-        <iframe data-src="https://player.vimeo.com/video/1148316457?title=0&byline=0&portrait=0&color=F8354A&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
+        <iframe data-src="https://player.vimeo.com/video/1148316457?title=0&byline=0&portrait=0&color=FF9F00&autoplay=0&loop=0&muted=1" src="about:blank" allow="fullscreen" loading="lazy" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe>
         <div class="vid-overlay" onclick="this.classList.add('hidden');var f=this.parentElement.querySelector('iframe');f.src=f.src.replace('autoplay=0','autoplay=1')">
-          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#F8354A"/></svg></div>
+          <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
       <div class="proj-card-body">
