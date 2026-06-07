@@ -460,28 +460,60 @@ nav {
 .timeline-section {
   display: none;
   padding: 80px 40px;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 .timeline-section.open { display: block; }
 .timeline-line {
   position: relative;
-  padding-left: 40px;
-  border-left: 1px solid rgba(255,255,255,0.08);
+}
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+  transform: translateX(-50%);
 }
 .timeline-entry {
   position: relative;
-  padding-bottom: 48px;
+  display: flex;
+  padding-bottom: 60px;
+  align-items: flex-start;
 }
 .timeline-entry:last-child { padding-bottom: 0; }
+.timeline-entry:nth-child(odd) {
+  flex-direction: row;
+}
+.timeline-entry:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.timeline-side {
+  width: 45%;
+}
+.timeline-center {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 .timeline-dot {
-  position: absolute;
-  left: -44px;
-  top: 4px;
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--ac);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+.timeline-entry:nth-child(odd) .timeline-side:first-child {
+  text-align: right;
+  padding-right: 0;
+}
+.timeline-entry:nth-child(even) .timeline-side:first-child {
+  text-align: left;
+  padding-left: 0;
 }
 .timeline-year {
   font-family: 'Playfair Display', serif;
@@ -497,11 +529,28 @@ nav {
   line-height: 1.6;
 }
 .timeline-img-placeholder {
-  width: 160px;
-  height: 120px;
+  width: 140px;
+  height: 105px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.06);
   margin-top: 12px;
+  display: inline-block;
+}
+.timeline-entry:nth-child(odd) .timeline-img-placeholder {
+  margin-left: auto;
+}
+@media (max-width: 768px) {
+  .timeline-line::before { left: 20px; }
+  .timeline-entry,
+  .timeline-entry:nth-child(even) {
+    flex-direction: row !important;
+  }
+  .timeline-center { width: 40px; min-width: 40px; }
+  .timeline-side { width: auto; }
+  .timeline-side:last-child { display: none; }
+  .timeline-entry .timeline-side:first-child {
+    text-align: left !important;
+  }
 }
 
 /* Client carousel */
@@ -668,62 +717,65 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <!-- ══ TIMELINE ══ -->
 <section class="timeline-section" id="timeline">
   <div class="timeline-line">
+    <!-- 1: left -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">1982</div>
-      <div class="timeline-text">Born. Belgium.</div>
+      <div class="timeline-side"><div class="timeline-year">1982</div><div class="timeline-text">Born. Belgium.</div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 2: right -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">1998</div>
-      <div class="timeline-text">First video camera. Started filming everything.</div>
-      <div class="timeline-img-placeholder"></div>
+      <div class="timeline-side"><div class="timeline-year">1998</div><div class="timeline-text">First video camera. Started filming everything.</div><div class="timeline-img-placeholder"></div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 3: left -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2000</div>
-      <div class="timeline-text">First digital photo camera. Van der Vieren begins.</div>
-      <div class="timeline-img-placeholder"></div>
+      <div class="timeline-side"><div class="timeline-year">2000</div><div class="timeline-text">First digital photo camera. Van der Vieren begins.</div><div class="timeline-img-placeholder"></div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 4: right -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2005</div>
-      <div class="timeline-text">Sony VX2100. The camera that made everything real.</div>
-      <div class="timeline-img-placeholder"></div>
+      <div class="timeline-side"><div class="timeline-year">2005</div><div class="timeline-text">Sony VX2100. The camera that made everything real.</div><div class="timeline-img-placeholder"></div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 5: left -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2007</div>
-      <div class="timeline-text">Sony PMW-EX1. Shooting sk8, BMX and snowboarding.</div>
-      <div class="timeline-img-placeholder"></div>
+      <div class="timeline-side"><div class="timeline-year">2007</div><div class="timeline-text">Sony PMW-EX1. Shooting sk8, BMX and snowboarding.</div><div class="timeline-img-placeholder"></div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 6: right -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2010</div>
-      <div class="timeline-text">Canon 5D Mark II. Shot the World Cup in South Africa. Lost my heart there.</div>
-      <div class="timeline-img-placeholder"></div>
+      <div class="timeline-side"><div class="timeline-year">2010</div><div class="timeline-text">Canon 5D Mark II. Shot the World Cup in South Africa. Lost my heart there.</div><div class="timeline-img-placeholder"></div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 7: left -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2012</div>
-      <div class="timeline-text">Start touring with Steve Aoki. One man army across the globe.</div>
-      <div class="timeline-img-placeholder"></div>
+      <div class="timeline-side"><div class="timeline-year">2012</div><div class="timeline-text">Start touring with Steve Aoki. One man army across the globe.</div><div class="timeline-img-placeholder"></div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 8: right -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2018</div>
-      <div class="timeline-text">Created the coffee table book.</div>
-      <div class="timeline-img-placeholder"></div>
+      <div class="timeline-side"><div class="timeline-year">2018</div><div class="timeline-text">Created the coffee table book.</div><div class="timeline-img-placeholder"></div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 9: left -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2019–2023</div>
-      <div class="timeline-text">Lots of soul sucking work.</div>
+      <div class="timeline-side"><div class="timeline-year">2019–2023</div><div class="timeline-text">Lots of soul sucking work.</div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
+    <!-- 10: right -->
     <div class="timeline-entry">
-      <div class="timeline-dot"></div>
-      <div class="timeline-year">2025</div>
-      <div class="timeline-text">Resurrection.</div>
+      <div class="timeline-side"><div class="timeline-year">2025</div><div class="timeline-text">Resurrection.</div></div>
+      <div class="timeline-center"><div class="timeline-dot"></div></div>
+      <div class="timeline-side"></div>
     </div>
   </div>
 </section>
