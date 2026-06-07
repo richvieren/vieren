@@ -506,6 +506,24 @@ nav {
   background: var(--ac);
   flex-shrink: 0;
   margin-top: 8px;
+  position: relative;
+}
+.timeline-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: 40px;
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-50%);
+}
+.timeline-entry:nth-child(odd) .timeline-dot::after {
+  right: 100%;
+  margin-right: 4px;
+}
+.timeline-entry:nth-child(even) .timeline-dot::after {
+  left: 100%;
+  margin-left: 4px;
 }
 .timeline-entry:nth-child(odd) .timeline-side:first-child {
   text-align: right;
