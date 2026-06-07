@@ -444,6 +444,66 @@ nav {
   }
 }
 
+/* Timeline */
+.timeline-trigger {
+  display: inline-block;
+  cursor: pointer;
+  opacity: 0.15;
+  transition: opacity 0.3s;
+  margin-top: 24px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--t3);
+}
+.timeline-trigger:hover { opacity: 0.6; }
+.timeline-section {
+  display: none;
+  padding: 80px 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.timeline-section.open { display: block; }
+.timeline-line {
+  position: relative;
+  padding-left: 40px;
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+.timeline-entry {
+  position: relative;
+  padding-bottom: 48px;
+}
+.timeline-entry:last-child { padding-bottom: 0; }
+.timeline-dot {
+  position: absolute;
+  left: -44px;
+  top: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ac);
+}
+.timeline-year {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--t3);
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.timeline-text {
+  font-size: 14px;
+  color: var(--t2);
+  line-height: 1.6;
+}
+.timeline-img-placeholder {
+  width: 160px;
+  height: 120px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-top: 12px;
+}
+
 /* Client carousel */
 .client-carousel-wrap {
   overflow: hidden;
@@ -599,6 +659,72 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
   <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
     Spent over a decade documenting brands, artists, and athletes...<br>now also writing (and shipping) my own stories.
+  </div>
+  <div class="timeline-trigger" onclick="document.getElementById('timeline').classList.toggle('open')">
+    ↓ the backstory
+  </div>
+</section>
+
+<!-- ══ TIMELINE ══ -->
+<section class="timeline-section" id="timeline">
+  <div class="timeline-line">
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">1982</div>
+      <div class="timeline-text">Born. Belgium.</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">1998</div>
+      <div class="timeline-text">First video camera. Started filming everything.</div>
+      <div class="timeline-img-placeholder"></div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2000</div>
+      <div class="timeline-text">First digital photo camera. Van der Vieren begins.</div>
+      <div class="timeline-img-placeholder"></div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2005</div>
+      <div class="timeline-text">Sony VX2100. The camera that made everything real.</div>
+      <div class="timeline-img-placeholder"></div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2007</div>
+      <div class="timeline-text">Sony PMW-EX1. Shooting sk8, BMX and snowboarding.</div>
+      <div class="timeline-img-placeholder"></div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2010</div>
+      <div class="timeline-text">Canon 5D Mark II. Shot the World Cup in South Africa. Lost my heart there.</div>
+      <div class="timeline-img-placeholder"></div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2012</div>
+      <div class="timeline-text">Start touring with Steve Aoki. One man army across the globe.</div>
+      <div class="timeline-img-placeholder"></div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2018</div>
+      <div class="timeline-text">Created the coffee table book.</div>
+      <div class="timeline-img-placeholder"></div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2019–2023</div>
+      <div class="timeline-text">Lots of soul sucking work.</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2025</div>
+      <div class="timeline-text">Resurrection.</div>
+    </div>
   </div>
 </section>
 
