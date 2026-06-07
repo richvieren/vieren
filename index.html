@@ -313,6 +313,120 @@ nav {
 .tag-campaign { background: var(--t2); color: var(--bg); }
 .tag-launch { background: var(--ac); color: var(--bg); }
 
+/* Project showcase — hover to reveal */
+.proj-showcase {
+  padding: 100px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+.proj-showcase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.proj-showcase-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  color: var(--t1);
+  font-weight: 400;
+}
+.proj-showcase-header span {
+  font-size: 14px;
+  color: var(--t3);
+}
+.proj-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
+}
+.proj-showcase-list {
+  display: flex;
+  flex-direction: column;
+}
+.proj-showcase-item {
+  display: grid;
+  grid-template-columns: 30px 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: opacity 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+.proj-showcase-item:hover {
+  opacity: 1;
+}
+.proj-showcase-item .ps-num {
+  font-size: 12px;
+  color: var(--t3);
+}
+.proj-showcase-item .ps-name {
+  font-family: 'Gira Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--t2);
+}
+.proj-showcase-item .ps-year {
+  font-size: 12px;
+  color: var(--t3);
+  text-align: right;
+}
+.proj-showcase-item .ps-cat {
+  font-size: 12px;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: right;
+  min-width: 100px;
+}
+.proj-showcase-item:hover .ps-name {
+  color: var(--t1);
+}
+.proj-showcase-media {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.proj-showcase-media-inner {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 3/4;
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.proj-showcase-media-inner img,
+.proj-showcase-media-inner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s;
+}
+@media (max-width: 768px) {
+  .proj-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .proj-showcase-media {
+    display: none;
+  }
+  .proj-showcase-item {
+    grid-template-columns: 30px 1fr auto;
+  }
+  .proj-showcase-item .ps-year {
+    display: none;
+  }
+}
+
 /* Client carousel */
 .client-carousel-wrap {
   overflow: hidden;
@@ -521,6 +635,91 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     </div>
   </div>
 </section>
+
+<!-- ══ PROJECT SHOWCASE ══ -->
+<section class="proj-showcase">
+  <div class="proj-showcase-header">
+    <h2>PROJECTS</h2>
+    <span>/08</span>
+  </div>
+  <div class="proj-showcase-grid">
+    <div class="proj-showcase-list" style="grid-column: 1 / 2;">
+      <a href="https://lore.mov" target="_blank" class="proj-showcase-item" data-media="projects/lore-preview.jpg">
+        <span class="ps-num">01.</span>
+        <span class="ps-name">LORE.MOV</span>
+        <span class="ps-year">2024</span>
+        <span class="ps-cat">VIDEO AGENCY</span>
+      </a>
+      <a href="https://countingsheep.club" target="_blank" class="proj-showcase-item" data-media="projects/csc-preview.jpg">
+        <span class="ps-num">02.</span>
+        <span class="ps-name">COUNTING SHEEP CLUB</span>
+        <span class="ps-year">2025</span>
+        <span class="ps-cat">APP</span>
+      </a>
+      <a href="https://wolfchildren.co" target="_blank" class="proj-showcase-item" data-media="projects/wc-preview.jpg">
+        <span class="ps-num">03.</span>
+        <span class="ps-name">WOLF CHILDREN</span>
+        <span class="ps-year">2025</span>
+        <span class="ps-cat">BOOK</span>
+      </a>
+      <a href="#" class="proj-showcase-item" data-media="projects/apex-preview.jpg">
+        <span class="ps-num">04.</span>
+        <span class="ps-name">APEX OS</span>
+        <span class="ps-year">2025</span>
+        <span class="ps-cat">FITNESS</span>
+      </a>
+      <a href="https://astrocartography-app-lovat.vercel.app" target="_blank" class="proj-showcase-item" data-media="projects/meridians-preview.jpg">
+        <span class="ps-num">05.</span>
+        <span class="ps-name">MERIDIANS</span>
+        <span class="ps-year">2026</span>
+        <span class="ps-cat">RELOCATION APP</span>
+      </a>
+      <a href="#" class="proj-showcase-item" data-media="projects/lis-preview.jpg">
+        <span class="ps-num">06.</span>
+        <span class="ps-name">LOCK IN SEASON</span>
+        <span class="ps-year">2026</span>
+        <span class="ps-cat">COMMUNITY</span>
+      </a>
+      <a href="#" class="proj-showcase-item" data-media="projects/beastmode-preview.jpg">
+        <span class="ps-num">07.</span>
+        <span class="ps-name">BEASTMODE</span>
+        <span class="ps-year">2026</span>
+        <span class="ps-cat">CONTENT CREATION</span>
+      </a>
+      <a href="#" class="proj-showcase-item" data-media="projects/vdv-preview.jpg">
+        <span class="ps-num">08.</span>
+        <span class="ps-name">VAN DER VIEREN</span>
+        <span class="ps-year">2026</span>
+        <span class="ps-cat">PHOTOGRAPHY</span>
+      </a>
+    </div>
+    <div class="proj-showcase-media">
+      <div class="proj-showcase-media-inner" id="showcase-media">
+        <div style="color:var(--t3);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Hover a project</div>
+      </div>
+    </div>
+    <div style="grid-column: 3 / 4;"></div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const mediaBox = document.getElementById('showcase-media');
+  const items = document.querySelectorAll('.proj-showcase-item');
+  items.forEach(function(item) {
+    item.addEventListener('mouseenter', function() {
+      const src = item.getAttribute('data-media');
+      if (!src) return;
+      const isVideo = src.endsWith('.mp4') || src.endsWith('.webm');
+      if (isVideo) {
+        mediaBox.innerHTML = '<video src="' + src + '" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>';
+      } else {
+        mediaBox.innerHTML = '<img src="' + src + '" alt="" style="width:100%;height:100%;object-fit:cover;">';
+      }
+    });
+  });
+})();
+</script>
 
 <!-- ══ ADDRESSING ══ -->
 <section class="addressing">
