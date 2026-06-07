@@ -313,6 +313,32 @@ nav {
 .tag-campaign { background: var(--t2); color: var(--bg); }
 .tag-launch { background: var(--ac); color: var(--bg); }
 
+/* Client carousel */
+.client-carousel-wrap {
+  overflow: hidden;
+  margin-top: 32px;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+.client-carousel-track {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  animation: client-scroll 20s linear infinite;
+  width: max-content;
+}
+.client-carousel-track img {
+  height: 20px;
+  opacity: 0.6;
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+@keyframes client-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* Project cards grid */
 .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .proj-card { border-radius: 12px; overflow: hidden; }
@@ -427,6 +453,24 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
   <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
     Spent over a decade documenting brands, artists, and athletes...<br>now focused on writing my own stories.
+  </div>
+  <div class="client-carousel-wrap" style="max-width:600px;">
+    <div class="client-carousel-track">
+      <img src="image/clients/fujifilm.svg" alt="Fujifilm">
+      <img src="image/clients/tnf.png" alt="The North Face">
+      <img src="image/clients/tml.png" alt="Tomorrowland">
+      <img src="image/clients/samsung.png" alt="Samsung">
+      <img src="image/clients/aoki.png" alt="Steve Aoki">
+      <img src="image/clients/levis.png" alt="Levis">
+      <img src="image/clients/redbull.png" alt="Red Bull">
+      <img src="image/clients/fujifilm.svg" alt="Fujifilm">
+      <img src="image/clients/tnf.png" alt="The North Face">
+      <img src="image/clients/tml.png" alt="Tomorrowland">
+      <img src="image/clients/samsung.png" alt="Samsung">
+      <img src="image/clients/aoki.png" alt="Steve Aoki">
+      <img src="image/clients/levis.png" alt="Levis">
+      <img src="image/clients/redbull.png" alt="Red Bull">
+    </div>
   </div>
 </section>
 
