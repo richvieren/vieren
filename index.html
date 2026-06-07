@@ -212,7 +212,21 @@ nav {
 }
 .proj-item:first-child { border-top: 1px solid rgba(255,255,255,.08); }
 .proj-item:hover { padding-left: 8px; }
-.proj-item:hover .proj-title { color: var(--ac); }
+.proj-item:hover .proj-caption { color: var(--ac); }
+.proj-item-desc {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  font-size: 13px;
+  color: var(--t3);
+  line-height: 1.7;
+  font-weight: 300;
+  padding: 0 0 0 14px;
+}
+.proj-item.open .proj-item-desc {
+  max-height: 200px;
+  padding: 8px 0 4px 14px;
+}
 .proj-name { display: flex; align-items: baseline; }
 .proj-num { font-family: 'Montserrat', sans-serif; font-size: 6px; font-weight: 700; color: var(--t4); margin-right: 4px; position: relative; top: -.6em; }
 .proj-title { font-size: 13px; color: var(--t3); font-weight: 300; text-transform: uppercase; letter-spacing: 0.04em; transition: color .3s; }
@@ -593,11 +607,11 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     <h2 class="what-headline">My service<br><em>stack.</em></h2>
     <p class="what-body">Some run under their own brand. Others I do under my own name.</p>
     <div class="proj-list">
-      <a href="#" class="proj-item"><span class="proj-name"><span class="proj-num">01.</span><span class="proj-title">Strategy & Ideation</span></span><span class="proj-caption">@richvieren</span></a>
-      <a href="#" class="proj-item"><span class="proj-name"><span class="proj-num">02.</span><span class="proj-title">Photography</span></span><span class="proj-caption">Van der Vieren</span></a>
-      <a href="https://lore.mov" target="_blank" class="proj-item"><span class="proj-name"><span class="proj-num">03.</span><span class="proj-title">Video Production</span></span><span class="proj-caption">Lore.mov</span></a>
-      <a href="#" class="proj-item"><span class="proj-name"><span class="proj-num">04.</span><span class="proj-title">Bulk Content Production</span></span><span class="proj-caption">Beastmode</span></a>
-      <a href="#" class="proj-item"><span class="proj-name"><span class="proj-num">05.</span><span class="proj-title">Content Distribution</span></span><span class="proj-caption">@richvieren</span></a>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><span class="proj-name"><span class="proj-num">01.</span><span class="proj-title">Strategy & Ideation</span></span><span class="proj-caption">@richvieren</span><div class="proj-item-desc">Brand positioning, content strategy, and go-to-market for personal brands and startups. From zero to first revenue.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><span class="proj-name"><span class="proj-num">02.</span><span class="proj-title">Photography</span></span><span class="proj-caption">Van der Vieren</span><div class="proj-item-desc">Editorial and commercial photography. Campaigns, portraits, product. 20+ years behind the lens.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><span class="proj-name"><span class="proj-num">03.</span><span class="proj-title">Video Production</span></span><span class="proj-caption">Lore.mov</span><div class="proj-item-desc">Hero videos, founder content, ad creative, campaign films. Built for funded startups in Africa and Europe.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><span class="proj-name"><span class="proj-num">04.</span><span class="proj-title">Bulk Content Production</span></span><span class="proj-caption">Beastmode</span><div class="proj-item-desc">High-volume content shoots. One day, dozens of assets. Reels, talking heads, B-roll, carousels. All in one session.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><span class="proj-name"><span class="proj-num">05.</span><span class="proj-title">Content Distribution</span></span><span class="proj-caption">@richvieren</span><div class="proj-item-desc">Organic growth strategy across X, Instagram, LinkedIn, and YouTube. Hooks, formats, scheduling, repurposing.</div></div>
     </div>
   </div>
   <div class="what-right">
