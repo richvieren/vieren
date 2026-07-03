@@ -131,6 +131,26 @@ nav {
 .hero-center {
   text-align: center; position: relative; z-index: 10;
 }
+.ascii-logo {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(6px, 1.8vw, 16px);
+  line-height: 1.1;
+  margin: 0 auto 24px;
+  display: inline-block;
+}
+.hero-tagline {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(9px, 1.2vw, 13px);
+  letter-spacing: .12em;
+  color: #9a9a8a;
+  margin-bottom: 8px;
+}
+.hero-coords {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(8px, 1vw, 11px);
+  letter-spacing: .08em;
+  color: #6a6a5a;
+}
 .hero-title {
   font-family: 'Podium', sans-serif; font-weight: 900;
   font-size: clamp(48px, 10vw, 140px);
@@ -690,7 +710,14 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="waveform" id="waveform"></div>
   <div class="filmstrip"><span></span><span></span><span></span><span></span><span></span></div>
   <div class="hero-center">
-    <img src="image/vieren-logo.png" alt="Vieren" style="width:100%;">
+    <pre class="ascii-logo"><span style="color:#F6B200">██╗   ██╗██╗███████╗██████╗ ███████╗███╗   ██╗</span>
+<span style="color:#F3A500">██║   ██║██║██╔════╝██╔══██╗██╔════╝████╗  ██║</span>
+<span style="color:#F09A00">██║   ██║██║█████╗  ██████╔╝█████╗  ██╔██╗ ██║</span>
+<span style="color:#EE9000">╚██╗ ██╔╝██║██╔══╝  ██╔══██╗██╔══╝  ██║╚██╗██║</span>
+<span style="color:#EC8700"> ╚████╔╝ ██║███████╗██║  ██║███████╗██║ ╚████║</span>
+<span style="color:#EA7F00">  ╚═══╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝</span></pre>
+    <div class="hero-tagline">─────── HYBRID PRODUCTION STUDIO ───────</div>
+    <div class="hero-coords">CAPE TOWN, SOUTH AFRICA · -34.072066, 18.382694</div>
   </div>
 </section>
 
