@@ -769,7 +769,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
     Spent over a decade documenting brands, artists, and athletes...<br>now also writing (and shipping) my own stories.
   </div>
-  <div class="timeline-trigger" onclick="document.getElementById('timeline').classList.toggle('open')">
+  <div class="timeline-trigger" onclick="document.getElementById('timeline').classList.toggle('open');bananaFireworks(event);">
     ↓ the backstory
   </div>
 </section>
@@ -1205,6 +1205,29 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
 
 // Disable links
 document.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+
+// Banana fireworks
+function bananaFireworks(e) {
+  if (document.getElementById('timeline').classList.contains('open')) return;
+  var cx = e.clientX, cy = e.clientY;
+  for (var i = 0; i < 18; i++) {
+    var b = document.createElement('div');
+    b.textContent = '🍌';
+    var angle = (Math.PI * 2 / 18) * i + (Math.random() - .5) * .4;
+    var dist = Math.random() * 140 + 80;
+    var spin = Math.random() * 720 - 360;
+    var size = Math.random() * 16 + 18;
+    b.style.cssText = 'position:fixed;left:' + cx + 'px;top:' + cy + 'px;font-size:' + size + 'px;pointer-events:none;z-index:9999;transition:all .8s cubic-bezier(.2,.8,.2,1);opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg);';
+    document.body.appendChild(b);
+    setTimeout(function(el, a, d, s) {
+      return function() {
+        el.style.transform = 'translate(calc(-50% + ' + Math.cos(a) * d + 'px), calc(-50% + ' + Math.sin(a) * d + 'px)) scale(0) rotate(' + s + 'deg)';
+        el.style.opacity = '0';
+      };
+    }(b, angle, dist, spin), 10);
+    setTimeout(function(el) { return function() { el.remove(); }; }(b), 900);
+  }
+}
 </script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
