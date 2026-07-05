@@ -1214,10 +1214,10 @@ function bananaFireworks(e) {
     var b = document.createElement('div');
     b.textContent = '🍌';
     var angle = (Math.PI * 2 / 18) * i + (Math.random() - .5) * .4;
-    var dist = Math.random() * 140 + 80;
+    var dist = Math.random() * 280 + 160;
     var spin = Math.random() * 720 - 360;
-    var size = Math.random() * 16 + 18;
-    b.style.cssText = 'position:fixed;left:' + cx + 'px;top:' + cy + 'px;font-size:' + size + 'px;pointer-events:none;z-index:9999;transition:all .8s cubic-bezier(.2,.8,.2,1);opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg);';
+    var size = Math.random() * 20 + 28;
+    b.style.cssText = 'position:fixed;left:' + cx + 'px;top:' + cy + 'px;font-size:' + size + 'px;pointer-events:none;z-index:9999;transition:all 1.4s cubic-bezier(.15,.6,.2,1);opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg);';
     document.body.appendChild(b);
     setTimeout(function(el, a, d, s) {
       return function() {
@@ -1225,7 +1225,7 @@ function bananaFireworks(e) {
         el.style.opacity = '0';
       };
     }(b, angle, dist, spin), 10);
-    setTimeout(function(el) { return function() { el.remove(); }; }(b), 900);
+    setTimeout(function(el) { return function() { el.remove(); }; }(b), 1600);
   }
 }
 </script>
