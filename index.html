@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vieren — Richard van der Veren</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Podium';
@@ -823,6 +823,28 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     </div>
   </div>
 </section>
+
+<!-- ══ MANIFESTO ══ -->
+<section style="background:var(--ac);padding:100px 40px;">
+  <div style="max-width:800px;margin:0 auto;">
+    <p style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:#000;font-weight:700;">
+      Vieren is a one man hybrid production studio, fusing high-end commercial work with a drive to explore the
+      <span class="word-cycle"><span class="word-cycle-a">unconventional</span><span class="word-cycle-b">unhinged</span></span>
+      through personal passion projects.
+    </p>
+    <p style="font-family:'Archivo',sans-serif;font-size:clamp(15px,1.8vw,20px);line-height:1.35;color:rgba(0,0,0,.65);margin-top:28px;font-weight:500;">
+      Our projects are inaccessible to almost everyone, because it requires a rare overlap of deep technical skill and world-class creative craft.
+    </p>
+  </div>
+</section>
+<style>
+.word-cycle{position:relative;display:inline-block;}
+.word-cycle-a,.word-cycle-b{display:inline-block;animation:wordcycle 4s infinite;}
+.word-cycle-b{position:absolute;left:0;top:0;animation:wordcycle-b 4s infinite;}
+.word-cycle-a{animation:wordcycle-a 4s infinite;}
+@keyframes wordcycle-a{0%,40%{opacity:1;transform:translateY(0)}45%,90%{opacity:0;transform:translateY(-8px)}95%,100%{opacity:1;transform:translateY(0)}}
+@keyframes wordcycle-b{0%,40%{opacity:0;transform:translateY(8px)}45%,90%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(8px)}}
+</style>
 
 <!-- ══ PROJECTS ══ -->
 <section class="what">
