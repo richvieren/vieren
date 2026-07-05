@@ -769,7 +769,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
     Spent over a decade documenting brands, artists, and athletes...<br>now also writing (and shipping) my own stories.
   </div>
-  <div class="timeline-trigger" onclick="document.getElementById('timeline').classList.toggle('open');bananaFireworks(event);">
+  <div class="timeline-trigger" onclick="document.getElementById('timeline').classList.toggle('open');shockwave(event);">
     ↓ the backstory
   </div>
 </section>
@@ -1206,8 +1206,8 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
 // Disable links
 document.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
 
-// Shockwave ring
-function bananaFireworks(e) {
+// Shockwave
+function shockwave(e) {
   if (!document.getElementById('timeline').classList.contains('open')) return;
   var cx = e.clientX, cy = e.clientY;
   var ring = document.createElement('div');
