@@ -478,12 +478,20 @@ nav {
 }
 .timeline-trigger:hover { opacity: 0.6; }
 .timeline-section {
-  display: none;
-  padding: 80px 40px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .8s cubic-bezier(.4,0,.2,1), padding .8s cubic-bezier(.4,0,.2,1);
+  padding: 0 40px;
+  background: var(--ac);
+}
+.timeline-section .timeline-line {
   max-width: 900px;
   margin: 0 auto;
 }
-.timeline-section.open { display: block; }
+.timeline-section.open {
+  max-height: 2000px;
+  padding: 80px 40px;
+}
 .timeline-line {
   position: relative;
 }
@@ -767,7 +775,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </section>
 
 <!-- ══ TIMELINE ══ -->
-<section class="timeline-section" id="timeline" style="background:var(--ac);">
+<section class="timeline-section" id="timeline">
   <div class="timeline-line">
     <!-- 1: left -->
     <div class="timeline-entry">
