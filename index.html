@@ -1208,7 +1208,7 @@ document.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>e.preven
 
 // Banana fireworks
 function bananaFireworks(e) {
-  if (document.getElementById('timeline').classList.contains('open')) return;
+  if (!document.getElementById('timeline').classList.contains('open')) return;
   var cx = e.clientX, cy = e.clientY;
   for (var i = 0; i < 18; i++) {
     var b = document.createElement('div');
@@ -1221,7 +1221,7 @@ function bananaFireworks(e) {
     document.body.appendChild(b);
     setTimeout(function(el, a, d, s) {
       return function() {
-        el.style.transform = 'translate(calc(-50% + ' + Math.cos(a) * d + 'px), calc(-50% + ' + Math.sin(a) * d + 'px)) scale(0) rotate(' + s + 'deg)';
+        el.style.transform = 'translate(calc(-50% + ' + Math.cos(a) * d + 'px), calc(-50% + ' + Math.sin(a) * d + 'px)) scale(1) rotate(' + s + 'deg)';
         el.style.opacity = '0';
       };
     }(b, angle, dist, spin), 10);
