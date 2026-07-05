@@ -824,20 +824,6 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
 </section>
 
-<!-- ══ MANIFESTO ══ -->
-<section style="background:var(--ac);padding:100px 40px;">
-  <div style="max-width:800px;margin:0 auto;position:relative;">
-    <div style="font-family:'Archivo',sans-serif;font-size:clamp(120px,18vw,240px);font-weight:900;color:rgba(0,0,0,.08);line-height:1;position:absolute;top:-40px;left:-20px;pointer-events:none;user-select:none;">[01]</div>
-    <p style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:#000;font-weight:700;position:relative;">
-      Vieren is a one man hybrid production studio, fusing high-end commercial work with a drive to explore the
-      <span class="word-cycle"><span class="word-cycle-a">unconventional</span><span class="word-cycle-b">unhinged</span></span>
-      through personal passion projects.
-    </p>
-    <p style="font-family:'Archivo',sans-serif;font-size:clamp(15px,1.8vw,20px);line-height:1.35;color:rgba(0,0,0,.65);margin-top:28px;font-weight:500;">
-      Our projects are inaccessible to almost everyone, because it requires a rare overlap of deep technical skill and world-class creative craft.
-    </p>
-  </div>
-</section>
 <style>
 .word-cycle{position:relative;display:inline-block;}
 .word-cycle-a,.word-cycle-b{display:inline-block;animation:wordcycle 4s infinite;}
@@ -845,6 +831,10 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .word-cycle-a{animation:wordcycle-a 4s infinite;}
 @keyframes wordcycle-a{0%,40%{opacity:1;transform:translateY(0)}45%,90%{opacity:0;transform:translateY(-8px)}95%,100%{opacity:1;transform:translateY(0)}}
 @keyframes wordcycle-b{0%,40%{opacity:0;transform:translateY(8px)}45%,90%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(8px)}}
+.manifesto-row{display:flex;align-items:flex-start;gap:clamp(24px,4vw,60px);max-width:1200px;margin:0 auto;}
+.manifesto-num{font-family:'Archivo',sans-serif;font-size:clamp(80px,12vw,180px);font-weight:900;color:rgba(0,0,0,.12);line-height:.85;flex-shrink:0;letter-spacing:-.04em;}
+.manifesto-text{flex:1;padding-top:clamp(8px,1.5vw,24px);}
+@media(max-width:600px){.manifesto-row{flex-direction:column;gap:12px;}.manifesto-num{font-size:64px;}}
 </style>
 
 <!-- ══ PROJECTS ══ -->
@@ -895,6 +885,23 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
           <div class="play-circle"><svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M6 4l11 6-11 6V4z" fill="#FF9F00"/></svg></div>
         </div>
       </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MANIFESTO ══ -->
+<section style="background:var(--ac);padding:100px 40px;">
+  <div class="manifesto-row">
+    <div class="manifesto-num">[01]</div>
+    <div class="manifesto-text">
+      <p style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:#000;font-weight:700;">
+        Vieren is a one man hybrid production studio, fusing high-end commercial work with a drive to explore the
+        <span class="word-cycle"><span class="word-cycle-a">unconventional</span><span class="word-cycle-b">unhinged</span></span>
+        through personal passion projects.
+      </p>
+      <p style="font-family:'Archivo',sans-serif;font-size:clamp(15px,1.8vw,20px);line-height:1.35;color:rgba(0,0,0,.65);margin-top:28px;font-weight:500;">
+        Our projects are inaccessible to almost everyone, because it requires a rare overlap of deep technical skill and world-class creative craft.
+      </p>
     </div>
   </div>
 </section>
