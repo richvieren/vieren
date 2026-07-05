@@ -591,6 +591,14 @@ nav {
   }
 }
 
+/* Timeline on yellow bg */
+.timeline-section .timeline-year { color: rgba(0,0,0,.35); }
+.timeline-section .timeline-text { color: #000; }
+.timeline-section .timeline-dot { background: #000; }
+.timeline-section .timeline-line::before { background: rgba(0,0,0,.12); }
+.timeline-section .timeline-dot::after { background: rgba(0,0,0,.12); }
+.timeline-section .timeline-img-placeholder { background: rgba(0,0,0,.05); border-color: rgba(0,0,0,.1); }
+
 /* Client carousel */
 .client-carousel-wrap {
   overflow: hidden;
@@ -759,7 +767,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </section>
 
 <!-- ══ TIMELINE ══ -->
-<section class="timeline-section" id="timeline">
+<section class="timeline-section" id="timeline" style="background:var(--ac);">
   <div class="timeline-line">
     <!-- 1: left -->
     <div class="timeline-entry">
