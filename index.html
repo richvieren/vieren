@@ -466,44 +466,31 @@ nav {
 
 /* Timeline */
 .timeline-trigger {
-  display: block;
+  display: inline-block;
   cursor: pointer;
+  opacity: 0.15;
+  transition: opacity 0.3s;
+  margin-top: 24px;
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #000;
-  transition: color .4s;
-  text-align: center;
-  padding: 0;
+  color: var(--t3);
 }
-.timeline-trigger:hover { opacity: 0.7; }
-.timeline-close {
-  display: none;
-  cursor: pointer;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,.4);
-  text-align: center;
-  padding: 40px 0 0;
-  transition: color .2s;
-}
-.timeline-close:hover { color: #000; }
-.timeline-section.open .timeline-close { display: block; }
+.timeline-trigger:hover { opacity: 0.6; }
 .timeline-section {
+  max-height: 0;
   overflow: hidden;
-  transition: max-height 1.4s cubic-bezier(.25,.1,.25,1), padding 1.4s cubic-bezier(.25,.1,.25,1);
-  padding: 20px 40px;
+  transition: max-height .8s cubic-bezier(.4,0,.2,1), padding .8s cubic-bezier(.4,0,.2,1);
+  padding: 0 40px;
   background: var(--ac);
-  max-height: 60px;
 }
 .timeline-section .timeline-line {
   max-width: 900px;
   margin: 0 auto;
 }
 .timeline-section.open {
-  max-height: 4000px;
-  padding: 40px 40px 80px;
+  max-height: 2000px;
+  padding: 80px 40px;
 }
 .timeline-line {
   position: relative;
@@ -782,13 +769,13 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
     Spent over a decade documenting brands, artists, and athletes...<br>now also writing (and shipping) my own stories.
   </div>
+  <div class="timeline-trigger" onclick="document.getElementById('timeline').classList.toggle('open')">
+    ↓ the backstory
+  </div>
 </section>
 
 <!-- ══ TIMELINE ══ -->
 <section class="timeline-section" id="timeline">
-  <div class="timeline-trigger" id="backstory-trigger" onclick="toggleBackstory(this, event)">
-    ↓ the backstory
-  </div>
   <div class="timeline-line">
     <!-- 1: left -->
     <div class="timeline-entry">
@@ -851,7 +838,6 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       <div class="timeline-side"></div>
     </div>
   </div>
-  <div class="timeline-close" onclick="toggleBackstory(document.getElementById('backstory-trigger'), event)">✕ close</div>
 </section>
 
 <style>
@@ -1219,35 +1205,6 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
 
 // Disable links
 document.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
-
-// Backstory toggle + particle burst
-function toggleBackstory(el, e) {
-  var tl = document.getElementById('timeline');
-  var opening = !tl.classList.contains('open');
-  tl.classList.toggle('open');
-  if (opening) burstParticles(e.clientX, e.clientY);
-}
-
-function burstParticles(x, y) {
-  var colors = ['#FF9F00', '#FFB833', '#FFD580', '#000', '#EEE8D8'];
-  var shapes = ['circle', 'square', 'star'];
-  for (var i = 0; i < 24; i++) {
-    var p = document.createElement('div');
-    var size = Math.random() * 8 + 4;
-    var angle = (Math.PI * 2 / 24) * i + (Math.random() - .5) * .5;
-    var dist = Math.random() * 120 + 60;
-    var shape = shapes[Math.floor(Math.random() * shapes.length)];
-    p.style.cssText = 'position:fixed;pointer-events:none;z-index:9999;left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;background:' + colors[i % colors.length] + ';' + (shape === 'circle' ? 'border-radius:50%;' : shape === 'star' ? 'clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);' : '') + 'transition:all .7s cubic-bezier(.2,.8,.2,1);opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg);';
-    document.body.appendChild(p);
-    setTimeout(function(el, a, d) {
-      return function() {
-        el.style.transform = 'translate(calc(-50% + ' + Math.cos(a) * d + 'px), calc(-50% + ' + Math.sin(a) * d + 'px)) scale(0) rotate(' + (Math.random() * 360) + 'deg)';
-        el.style.opacity = '0';
-      };
-    }(p, angle, dist), 10);
-    setTimeout(function(el) { return function() { el.remove(); }; }(p), 800);
-  }
-}
 </script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
