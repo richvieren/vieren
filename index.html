@@ -471,13 +471,12 @@ nav {
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ac);
+  color: #000;
   transition: color .4s;
   text-align: center;
-  padding: 24px 0 0;
+  padding: 0;
 }
 .timeline-trigger:hover { opacity: 0.7; }
-.timeline-section.open .timeline-trigger { color: #000; }
 .timeline-close {
   display: none;
   cursor: pointer;
@@ -492,11 +491,11 @@ nav {
 .timeline-close:hover { color: #000; }
 .timeline-section.open .timeline-close { display: block; }
 .timeline-section {
-  max-height: 48px;
   overflow: hidden;
   transition: max-height 1.4s cubic-bezier(.25,.1,.25,1), padding 1.4s cubic-bezier(.25,.1,.25,1);
-  padding: 0 40px 24px;
+  padding: 20px 40px;
   background: var(--ac);
+  max-height: 60px;
 }
 .timeline-section .timeline-line {
   max-width: 900px;
