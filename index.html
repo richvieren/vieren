@@ -466,25 +466,36 @@ nav {
 
 /* Timeline */
 .timeline-trigger {
-  display: inline-block;
+  display: block;
   cursor: pointer;
-  margin-top: 24px;
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ac);
-  transition: color .4s, background .4s, padding .4s;
-  padding: 6px 14px;
-  border-radius: 100px;
-  border: 1px solid rgba(255,159,0,.3);
+  transition: color .4s;
+  text-align: center;
+  padding: 24px 0 0;
 }
-.timeline-trigger:hover { background: rgba(255,159,0,.1); }
-.timeline-trigger.active { background: var(--ac); color: #000; border-color: var(--ac); }
+.timeline-trigger:hover { opacity: 0.7; }
+.timeline-section.open .timeline-trigger { color: #000; }
+.timeline-close {
+  display: none;
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.4);
+  text-align: center;
+  padding: 40px 0 0;
+  transition: color .2s;
+}
+.timeline-close:hover { color: #000; }
+.timeline-section.open .timeline-close { display: block; }
 .timeline-section {
-  max-height: 0;
+  max-height: 48px;
   overflow: hidden;
   transition: max-height 1.4s cubic-bezier(.25,.1,.25,1), padding 1.4s cubic-bezier(.25,.1,.25,1);
-  padding: 0 40px;
+  padding: 0 40px 24px;
   background: var(--ac);
 }
 .timeline-section .timeline-line {
@@ -493,7 +504,7 @@ nav {
 }
 .timeline-section.open {
   max-height: 4000px;
-  padding: 80px 40px;
+  padding: 40px 40px 80px;
 }
 .timeline-line {
   position: relative;
@@ -772,13 +783,13 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
     Spent over a decade documenting brands, artists, and athletes...<br>now also writing (and shipping) my own stories.
   </div>
-  <div class="timeline-trigger" id="backstory-trigger" onclick="toggleBackstory(this, event)">
-    ↓ the backstory
-  </div>
 </section>
 
 <!-- ══ TIMELINE ══ -->
 <section class="timeline-section" id="timeline">
+  <div class="timeline-trigger" id="backstory-trigger" onclick="toggleBackstory(this, event)">
+    ↓ the backstory
+  </div>
   <div class="timeline-line">
     <!-- 1: left -->
     <div class="timeline-entry">
@@ -841,6 +852,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       <div class="timeline-side"></div>
     </div>
   </div>
+  <div class="timeline-close" onclick="toggleBackstory(document.getElementById('backstory-trigger'), event)">✕ close</div>
 </section>
 
 <style>
@@ -1214,8 +1226,6 @@ function toggleBackstory(el, e) {
   var tl = document.getElementById('timeline');
   var opening = !tl.classList.contains('open');
   tl.classList.toggle('open');
-  el.classList.toggle('active');
-  el.textContent = opening ? '✕ close' : '↓ the backstory';
   if (opening) burstParticles(e.clientX, e.clientY);
 }
 
