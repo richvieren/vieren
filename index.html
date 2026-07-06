@@ -1207,20 +1207,62 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
 // Disable links
 document.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
 
-// Shockwave — thick pulse
+// Emoji burst (originkit style — gravity physics, no walls)
 function shockwave(e) {
   if (!document.getElementById('timeline').classList.contains('open')) return;
   var cx = e.clientX, cy = e.clientY;
-  var ring = document.createElement('div');
-  ring.style.cssText = 'position:fixed;left:' + cx + 'px;top:' + cy + 'px;width:0;height:0;border:20px solid rgba(255,159,0,.5);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:all 1.4s cubic-bezier(.1,.6,.2,1);';
-  document.body.appendChild(ring);
-  setTimeout(function() {
-    ring.style.width = '1200px';
-    ring.style.height = '1200px';
-    ring.style.borderWidth = '1px';
-    ring.style.borderColor = 'rgba(255,159,0,0)';
-  }, 10);
-  setTimeout(function() { ring.remove(); }, 1500);
+  var emojis = ['🍌','🎬','📷','🎥','🎞️','🔥'];
+  var count = 28;
+  var power = 18;
+  var spread = 70;
+  var gravity = 6;
+  var particles = [];
+
+  for (var i = 0; i < count; i++) {
+    var el = document.createElement('div');
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.cssText = 'position:fixed;left:' + cx + 'px;top:' + cy + 'px;font-size:' + (Math.random() * 20 + 24) + 'px;pointer-events:none;z-index:9999;will-change:transform;';
+    document.body.appendChild(el);
+    var angle = -90 + (Math.random() - .5) * spread * 2;
+    var rad = angle * Math.PI / 180;
+    var speed = power * (.6 + Math.random() * .8);
+    particles.push({
+      el: el,
+      x: 0, y: 0,
+      vx: Math.cos(rad) * speed,
+      vy: Math.sin(rad) * speed,
+      life: 1,
+      decay: .008 + Math.random() * .006,
+      spin: (Math.random() - .5) * 8,
+      rot: 0
+    });
+  }
+
+  var last = performance.now();
+  function tick(now) {
+    var dt = Math.min((now - last) / 16, 3);
+    last = now;
+    var alive = false;
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      if (p.life <= 0) continue;
+      alive = true;
+      p.vy += gravity * .15 * dt;
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.rot += p.spin * dt;
+      p.life -= p.decay * dt;
+      if (p.life < 0) p.life = 0;
+      p.el.style.transform = 'translate(calc(-50% + ' + p.x + 'px), calc(-50% + ' + p.y + 'px)) rotate(' + p.rot + 'deg)';
+      p.el.style.opacity = p.life;
+    }
+    if (alive) {
+      requestAnimationFrame(tick);
+    } else {
+      for (var i = 0; i < particles.length; i++) particles[i].el.remove();
+    }
+  }
+  requestAnimationFrame(tick);
 }
 </script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
