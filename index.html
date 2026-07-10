@@ -162,11 +162,15 @@ nav {
   font-size: 13px; font-weight: 400; letter-spacing: .28em;
   text-transform: uppercase; color: rgba(255,255,255,.5);
 }
-/* Video placeholder overlay */
+/* Video background */
 .hero-video-bg {
-  position: absolute; inset: 0; background: var(--s1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4);
+  position: absolute; inset: 0; overflow: hidden;
+}
+.hero-video-bg iframe {
+  position: absolute; top: 50%; left: 50%; width: 177.78vh; height: 100vh;
+  min-width: 100%; min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: 0; pointer-events: none;
 }
 
 /* ══ WHO WE ARE ══ */
@@ -719,22 +723,11 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-video-bg"></div>
+  <div class="hero-video-bg"><iframe src="https://player.vimeo.com/video/1208891164?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
   <div class="vf vf-tl"></div><div class="vf vf-tr"></div><div class="vf vf-bl"></div><div class="vf vf-br"></div>
-  <div class="ch-h"></div><div class="ch-v"></div>
   <div class="ts"><div class="time" id="clock">00:00:00</div><div id="date-display">16 Apr 2026</div></div>
   <div class="waveform" id="waveform"></div>
   <div class="filmstrip"><span></span><span></span><span></span><span></span><span></span></div>
-  <div class="hero-center">
-    <pre class="ascii-logo"><span style="color:#F6B200">██╗   ██╗██╗███████╗██████╗ ███████╗███╗   ██╗</span>
-<span style="color:#F3A500">██║   ██║██║██╔════╝██╔══██╗██╔════╝████╗  ██║</span>
-<span style="color:#F09A00">██║   ██║██║█████╗  ██████╔╝█████╗  ██╔██╗ ██║</span>
-<span style="color:#EE9000">╚██╗ ██╔╝██║██╔══╝  ██╔══██╗██╔══╝  ██║╚██╗██║</span>
-<span style="color:#EC8700"> ╚████╔╝ ██║███████╗██║  ██║███████╗██║ ╚████║</span>
-<span style="color:#EA7F00">  ╚═══╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝</span></pre>
-    <div class="hero-tagline">─────── HYBRID PRODUCTION STUDIO ───────</div>
-    <div class="hero-coords">CAPE TOWN, SOUTH AFRICA · -34.072066, 18.382694</div>
-  </div>
 </section>
 
 <!-- ══ WHO WE ARE ══ -->
