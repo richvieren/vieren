@@ -162,16 +162,10 @@ nav {
   font-size: 13px; font-weight: 400; letter-spacing: .28em;
   text-transform: uppercase; color: rgba(255,255,255,.5);
 }
-/* Video background */
-.hero-video-bg {
-  position: absolute; inset: 0; overflow: hidden;
-}
-.hero-video-bg iframe {
-  position: absolute; top: 50%; left: 50%;
-  width: 100vw; height: 56.25vw;
-  min-height: 100vh; min-width: 177.78vh;
-  transform: translate(-50%, -50%);
-  border: 0; pointer-events: none;
+/* Hero background image */
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('image/vierenheader.jpg') center center / cover no-repeat;
 }
 
 /* ══ WHO WE ARE ══ */
@@ -724,7 +718,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-video-bg"><iframe src="https://player.vimeo.com/video/1208891164?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+  <div class="hero-bg"></div>
   <div class="vf vf-tl"></div><div class="vf vf-tr"></div><div class="vf vf-bl"></div><div class="vf vf-br"></div>
   <div class="ts"><div class="time" id="clock">00:00:00</div><div id="date-display">16 Apr 2026</div></div>
   <div class="waveform" id="waveform"></div>
