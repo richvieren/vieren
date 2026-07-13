@@ -696,7 +696,7 @@ nav {
 .case-study-card {
   cursor: pointer; position: relative; overflow: hidden;
   border-radius: 8px; background: rgba(0,0,0,.1);
-  transition: transform .3s;
+  transition: transform .3s; display: block;
 }
 .case-study-card:hover { transform: translateY(-4px); }
 .case-study-card img {
@@ -1046,14 +1046,14 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
         <span>Business Astrologer</span>
       </div>
     </a>
-    <div class="case-study-card" onclick="openCaseStudy(this)" data-case="2">
+    <div class="case-study-card">
       <img src="image/vierenheader.jpg" alt="Case study placeholder">
       <div class="case-study-caption">
         <h3>Coming Soon</h3>
         <span>Case Study</span>
       </div>
     </div>
-    <div class="case-study-card" onclick="openCaseStudy(this)" data-case="3">
+    <div class="case-study-card">
       <img src="image/vierenheader.jpg" alt="Case study placeholder">
       <div class="case-study-caption">
         <h3>Coming Soon</h3>
