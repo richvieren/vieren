@@ -1163,10 +1163,10 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
   <div class="cases-grid">
     <div class="case-study-card" onclick="openCaseStudy(this)" data-case="1">
-      <img src="image/vierenheader.jpg" alt="Case study placeholder">
+      <img src="image/cato-thumb.jpg" alt="Cato Vermeulen case study">
       <div class="case-study-caption">
-        <h3>Coming Soon</h3>
-        <span>Case Study</span>
+        <h3>Cato Vermeulen</h3>
+        <span>Business Astrologer</span>
       </div>
     </div>
     <div class="case-study-card" onclick="openCaseStudy(this)" data-case="2">
@@ -1225,11 +1225,32 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <script>
 var caseStudies = {
   1: {
-    title: 'Coming Soon',
-    what: 'Consultancy',
-    scope: 'Full Stack',
-    when: '2026',
-    body: '<p>Full case study coming soon.</p>',
+    title: 'Cato Vermeulen',
+    heroImg: 'image/cato-hero.jpg',
+    what: 'Business Astrologer',
+    scope: 'Brand, Portal, Automation, Bot',
+    when: '2025 \u2013 Present',
+    body: '<p>A woman who reads the stars for a living asked me to build her a tech stack. She had fifty clients, a notes app, and a system held together by memory and caffeine.</p>' +
+      '<p>She didn\u2019t need more clients. She needed to stop running her business like a group chat.</p>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">We started with her brain</h2>' +
+      '<p>Before touching a single line of code, we pulled everything out of her head and into a structured vault. Two years of brand voice docs. SOPs she\u2019d developed but never saved anywhere searchable. Content frameworks. Client intake patterns. Her entire vocabulary.</p>' +
+      '<p>All of it went into folders. Brand bible. Voice samples. Templates. Then we set up a shared workspace that syncs between her system and mine. She edits her brand bible, I see it. I write a new SOP, she gets it. She never opens a terminal. She just writes.</p>' +
+      '<p>This became the foundation for everything else. Every system we built after this reads from the same source of truth.</p>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The portal</h2>' +
+      '<p>Every client needed a place to go. Not an email attachment. Not a Google Drive link. A proper portal that felt like it belonged to a premium astrology brand.</p>' +
+      '<p>Dark background. Gold accents. Frosted glass cards. Client buys a reading, gets an email with a one-click login, lands in their portal, fills in birth details, and the reading appears when it\u2019s ready.</p>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The reading machine</h2>' +
+      '<p>Four types of readings. A full natal chart blueprint. A three-month transit reading. An astrocartography reading. A quick mini reading. Each requires birth data, business context, and chart computation.</p>' +
+      '<p>Client submits details, the system processes the chart, the reading gets produced and uploaded. She gets a Telegram ping. Client gets an email. Nobody touches anything in between.</p>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The Cosmic Business Profile</h2>' +
+      '<p>A $27 interactive dashboard. Plug in your birth data, get your chart mapped to business. Element balance bars. Modality breakdowns. Business archetype spectrums. A money style analysis. A visibility score. A leadership badge. Over 300 text snippets written in her mentoring voice.</p>' +
+      '<p>It works as a product on its own. It also works as the thing that makes you want the full reading. Gateway product. Low ticket. High perceived value. No manual work per client.</p>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The Telegram bot</h2>' +
+      '<p>Every premium client now gets personalized daily transit alerts. Not generic horoscope copy. Actual alerts based on their individual natal chart matched against real planetary positions for that specific day.</p>' +
+      '<p>The alerts are pre-generated in batches. The morning delivery is just a queue. Nothing to compute, nothing that can break. The bot also delivers course lessons and manages a free channel with 242 subscribers.</p>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">What it adds up to</h2>' +
+      '<p>52 clients through the portal. Four reading products, one interactive profile, two masterminds, a course, and a Telegram ecosystem. Monthly infrastructure cost for all of it: less than a gym membership.</p>' +
+      '<p>She didn\u2019t hire a team. She hired me.</p>',
     quote: '',
     cite: '',
     images: []
@@ -1260,9 +1281,7 @@ function openCaseStudy(card) {
   var id = card.getAttribute('data-case');
   var cs = caseStudies[id];
   var overlay = document.getElementById('case-detail');
-  var heroImg = card.querySelector('img');
-
-  document.getElementById('case-detail-hero-img').src = heroImg.src;
+  document.getElementById('case-detail-hero-img').src = cs.heroImg || card.querySelector('img').src;
   document.getElementById('case-detail-title').textContent = cs.title;
   document.getElementById('cd-what').textContent = cs.what;
   document.getElementById('cd-scope').textContent = cs.scope;
