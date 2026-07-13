@@ -719,19 +719,19 @@ nav {
 /* ══ CASE STUDY DETAIL PAGE ══ */
 .case-detail-overlay {
   position: fixed; inset: 0; z-index: 9999;
-  background: #d4c9b8; overflow-y: auto;
+  background: var(--bg); overflow-y: auto;
   display: none; flex-direction: column;
-  color: #2a2520;
+  color: var(--t1);
 }
 .case-detail-overlay.open { display: flex; }
 .case-detail-close {
   position: fixed; top: 24px; right: 32px; z-index: 10000;
-  font-size: 14px; color: #2a2520; cursor: pointer;
+  font-size: 12px; color: var(--t3); cursor: pointer;
   background: none; border: none; font-family: 'Inter', sans-serif;
-  letter-spacing: .08em; text-transform: uppercase;
-  transition: opacity .3s;
+  letter-spacing: .1em; text-transform: uppercase;
+  transition: color .3s;
 }
-.case-detail-close:hover { opacity: .5; }
+.case-detail-close:hover { color: var(--ac); }
 /* Hero */
 .case-detail-hero {
   width: 100%; height: 75vh; overflow: hidden;
@@ -743,7 +743,7 @@ nav {
 /* Page marker */
 .case-detail-pg {
   font-family: 'Instrument Serif', serif; font-style: italic;
-  font-size: 13px; color: rgba(42,37,32,.4); margin-bottom: 8px;
+  font-size: 13px; color: var(--t4); margin-bottom: 8px;
 }
 /* Title block */
 .case-detail-title-block {
@@ -753,7 +753,7 @@ nav {
 .case-detail-title-block h1 {
   font-family: 'Instrument Serif', serif; font-weight: 400;
   font-size: clamp(40px, 7vw, 90px); text-transform: uppercase;
-  color: #2a2520; line-height: .95; margin-bottom: 40px;
+  color: var(--t1); line-height: .95; margin-bottom: 40px;
   letter-spacing: .02em;
 }
 /* Three-column meta */
@@ -765,12 +765,12 @@ nav {
 .case-detail-meta-label {
   font-family: 'Archivo', sans-serif; font-size: 11px;
   letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(42,37,32,.45); margin-bottom: 6px;
+  color: var(--t4); margin-bottom: 6px;
 }
 .case-detail-meta-value {
   font-family: 'Archivo', sans-serif; font-size: 13px;
   font-weight: 600; text-transform: uppercase;
-  letter-spacing: .06em; color: #2a2520;
+  letter-spacing: .06em; color: var(--ac);
 }
 /* Body text */
 .case-detail-body {
@@ -779,7 +779,7 @@ nav {
 }
 .case-detail-body p {
   font-family: 'Instrument Serif', serif; font-size: clamp(16px, 1.8vw, 20px);
-  line-height: 1.7; color: #2a2520; margin-bottom: 32px;
+  line-height: 1.7; color: var(--t2); margin-bottom: 32px;
 }
 /* Gallery — asymmetric pairs */
 .case-detail-gallery {
@@ -806,32 +806,32 @@ nav {
 }
 .case-detail-quote h2 {
   font-family: 'Instrument Serif', serif; font-weight: 400;
-  font-size: clamp(24px, 3vw, 36px); color: #2a2520;
+  font-size: clamp(24px, 3vw, 36px); color: var(--t1);
   margin-bottom: 32px;
 }
 .case-detail-quote blockquote {
   font-family: 'Instrument Serif', serif; font-style: italic;
   font-size: clamp(16px, 2vw, 22px); line-height: 1.6;
-  color: #2a2520; margin: 0 0 20px;
+  color: var(--t2); margin: 0 0 20px;
 }
 .case-detail-quote cite {
   font-family: 'Instrument Serif', serif; font-style: italic;
-  font-size: 14px; color: rgba(42,37,32,.5);
+  font-size: 14px; color: var(--t4);
 }
 /* Nav at bottom */
 .case-detail-nav {
   display: flex; justify-content: flex-end; align-items: center;
   gap: 24px; padding: 40px;
   max-width: 1100px; margin: 0 auto; width: 100%;
-  border-top: 1px solid rgba(42,37,32,.12);
+  border-top: 1px solid rgba(255,255,255,.08);
 }
 .case-detail-nav a {
   font-family: 'Archivo', sans-serif; font-size: 12px;
   letter-spacing: .1em; text-transform: uppercase;
-  color: #2a2520; text-decoration: none;
-  transition: opacity .3s;
+  color: var(--t2); text-decoration: none;
+  transition: color .3s;
 }
-.case-detail-nav a:hover { opacity: .5; }
+.case-detail-nav a:hover { color: var(--ac); }
 @media (max-width: 600px) {
   .case-detail-meta-row { flex-direction: column; gap: 16px; }
   .case-detail-gallery-row { flex-direction: column; }
@@ -1232,23 +1232,23 @@ var caseStudies = {
     when: '2025 \u2013 Present',
     body: '<p>A woman who reads the stars for a living asked me to build her a tech stack. She had fifty clients, a notes app, and a system held together by memory and caffeine.</p>' +
       '<p>She didn\u2019t need more clients. She needed to stop running her business like a group chat.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">We started with her brain</h2>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">We started with her brain</h2>' +
       '<p>Before touching a single line of code, we pulled everything out of her head and into a structured vault. Two years of brand voice docs. SOPs she\u2019d developed but never saved anywhere searchable. Content frameworks. Client intake patterns. Her entire vocabulary.</p>' +
       '<p>All of it went into folders. Brand bible. Voice samples. Templates. Then we set up a shared workspace that syncs between her system and mine. She edits her brand bible, I see it. I write a new SOP, she gets it. She never opens a terminal. She just writes.</p>' +
       '<p>This became the foundation for everything else. Every system we built after this reads from the same source of truth.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The portal</h2>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The portal</h2>' +
       '<p>Every client needed a place to go. Not an email attachment. Not a Google Drive link. A proper portal that felt like it belonged to a premium astrology brand.</p>' +
       '<p>Dark background. Gold accents. Frosted glass cards. Client buys a reading, gets an email with a one-click login, lands in their portal, fills in birth details, and the reading appears when it\u2019s ready.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The reading machine</h2>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The reading machine</h2>' +
       '<p>Four types of readings. A full natal chart blueprint. A three-month transit reading. An astrocartography reading. A quick mini reading. Each requires birth data, business context, and chart computation.</p>' +
       '<p>Client submits details, the system processes the chart, the reading gets produced and uploaded. She gets a Telegram ping. Client gets an email. Nobody touches anything in between.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The Cosmic Business Profile</h2>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The Cosmic Business Profile</h2>' +
       '<p>A $27 interactive dashboard. Plug in your birth data, get your chart mapped to business. Element balance bars. Modality breakdowns. Business archetype spectrums. A money style analysis. A visibility score. A leadership badge. Over 300 text snippets written in her mentoring voice.</p>' +
       '<p>It works as a product on its own. It also works as the thing that makes you want the full reading. Gateway product. Low ticket. High perceived value. No manual work per client.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">The Telegram bot</h2>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The Telegram bot</h2>' +
       '<p>Every premium client now gets personalized daily transit alerts. Not generic horoscope copy. Actual alerts based on their individual natal chart matched against real planetary positions for that specific day.</p>' +
       '<p>The alerts are pre-generated in batches. The morning delivery is just a queue. Nothing to compute, nothing that can break. The bot also delivers course lessons and manages a free channel with 242 subscribers.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;">What it adds up to</h2>' +
+      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">What it adds up to</h2>' +
       '<p>52 clients through the portal. Four reading products, one interactive profile, two masterminds, a course, and a Telegram ecosystem. Monthly infrastructure cost for all of it: less than a gym membership.</p>' +
       '<p>She didn\u2019t hire a team. She hired me.</p>',
     quote: '',
