@@ -50,18 +50,19 @@ nav {
 }
 .cd-hero img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Portrait */
+/* Portrait — large, overlaps hero and title */
 .cd-portrait-wrap {
   display: flex; justify-content: center;
-  margin-top: -120px; position: relative; z-index: 2;
+  margin-top: -280px; position: relative; z-index: 2;
+  margin-bottom: -180px;
 }
 .cd-portrait {
-  width: 240px; height: 336px; object-fit: cover;
-  border: 4px solid var(--bg); box-shadow: 0 8px 40px rgba(0,0,0,.5);
+  width: 420px; height: 560px; object-fit: cover;
+  box-shadow: 0 12px 60px rgba(0,0,0,.5);
 }
 
-/* Title */
-.cd-title-block { text-align: center; padding: 40px 40px 0; max-width: 1000px; margin: 0 auto; }
+/* Title — sits behind/below portrait */
+.cd-title-block { text-align: center; padding: 40px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 .cd-title {
   font-family: 'Instrument Serif', serif; font-weight: 400;
   font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
@@ -222,8 +223,8 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 }
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
-  .cd-portrait { width: 180px; height: 252px; }
-  .cd-portrait-wrap { margin-top: -90px; }
+  .cd-portrait { width: 260px; height: 347px; }
+  .cd-portrait-wrap { margin-top: -160px; margin-bottom: -100px; }
 }
 </style>
 </head>
