@@ -733,121 +733,205 @@ nav {
 }
 .case-detail-close:hover { color: var(--ac); }
 /* Hero */
-.case-detail-hero {
-  width: 100%; height: 75vh; overflow: hidden;
-  position: relative;
-}
-.case-detail-hero img {
-  width: 100%; height: 100%; object-fit: cover;
-}
+.cd-hero { width: 100%; height: 75vh; overflow: hidden; position: relative; }
+.cd-hero img { width: 100%; height: 100%; object-fit: cover; }
 /* Portrait overlay */
-.case-detail-portrait-wrap {
+.cd-portrait-wrap {
   display: flex; justify-content: center;
-  margin-top: -120px; position: relative; z-index: 2;
+  margin-top: -140px; position: relative; z-index: 2;
 }
-.case-detail-portrait {
-  width: 240px; height: 336px; object-fit: cover;
-  border: 4px solid var(--bg);
-  box-shadow: 0 8px 40px rgba(0,0,0,.4);
-}
-/* Page marker */
-.case-detail-pg {
-  font-family: 'Instrument Serif', serif; font-style: italic;
-  font-size: 13px; color: var(--t4); margin-bottom: 8px;
+.cd-portrait {
+  width: 260px; height: 364px; object-fit: cover;
+  border: 4px solid var(--bg); box-shadow: 0 8px 40px rgba(0,0,0,.5);
 }
 /* Title block */
-.case-detail-title-block {
-  text-align: center; padding: 48px 40px 48px;
+.cd-title-block { text-align: center; padding: 48px 40px 0; max-width: 1000px; margin: 0 auto; }
+.cd-title {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
+  color: var(--t1); line-height: .9; margin-bottom: 40px; letter-spacing: .02em;
+}
+/* Three-column value props */
+.cd-props {
+  display: flex; justify-content: center; gap: clamp(40px, 8vw, 120px);
+  padding: 0 40px 48px; max-width: 900px; margin: 0 auto;
+}
+.cd-prop { text-align: center; }
+.cd-prop-label {
+  font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ac); line-height: 1.5;
+}
+/* Intro paragraph */
+.cd-intro {
+  max-width: 800px; margin: 0 auto; padding: 40px 40px 80px; text-align: center;
+}
+.cd-intro p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.6; color: var(--t2);
+}
+/* Two-column text */
+.cd-twocol {
+  background: var(--s2); padding: 80px 40px;
+}
+.cd-twocol-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.cd-twocol p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8;
+  color: var(--t2); text-align: justify;
+}
+.cd-twocol strong {
+  display: block; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--t1); margin-bottom: 12px; margin-top: 24px;
+}
+.cd-twocol strong:first-child { margin-top: 0; }
+/* Dark feature section */
+.cd-features {
+  background: var(--s1); padding: 100px 40px;
+}
+.cd-features-header {
+  text-align: center; max-width: 700px; margin: 0 auto 80px;
+}
+.cd-features-header h2 {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px); color: var(--t2); margin-bottom: 16px;
+}
+.cd-feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  max-width: 1100px; margin: 0 auto; align-items: center;
+  padding: 40px 0; border-top: 1px solid rgba(255,255,255,.06);
+}
+.cd-feature-row:nth-child(even) .cd-feature-img { order: -1; }
+.cd-feature-text h3 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(28px, 3.5vw, 44px); color: var(--t1);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.cd-feature-text p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8;
+  color: var(--t3);
+}
+.cd-feature-img {
+  width: 100%; aspect-ratio: 4/3; background: var(--s2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
+  overflow: hidden;
+}
+.cd-feature-img img { width: 100%; height: 100%; object-fit: cover; }
+/* Process steps */
+.cd-process {
+  background: var(--s2); padding: 100px 40px;
+}
+.cd-process-header {
+  max-width: 1100px; margin: 0 auto 60px;
+}
+.cd-process-header h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.cd-step {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  max-width: 1100px; margin: 0 auto; align-items: center;
+  padding: 48px 0; border-top: 1px solid rgba(255,255,255,.06);
+}
+.cd-step:nth-child(odd) .cd-step-img { order: 1; }
+.cd-step-num {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: 14px; color: var(--t4); margin-bottom: 8px;
+}
+.cd-step-title {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(24px, 3vw, 36px); color: var(--t1); margin-bottom: 16px;
+}
+.cd-step-text {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8;
+  color: var(--t3);
+}
+.cd-step-img {
+  width: 100%; aspect-ratio: 4/3; background: var(--s1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
+  overflow: hidden;
+}
+.cd-step-img img { width: 100%; height: 100%; object-fit: cover; }
+/* Results section */
+.cd-results {
+  background: var(--bg); padding: 100px 40px; text-align: center;
+}
+.cd-results h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.cd-results-subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 32px); color: var(--t3); margin-bottom: 60px;
+}
+.cd-results-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
   max-width: 900px; margin: 0 auto;
 }
-.case-detail-title-block h1 {
+.cd-results-grid .cd-result-item {
+  aspect-ratio: 4/3; background: var(--s2); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
+}
+.cd-results-grid .cd-result-item img { width: 100%; height: 100%; object-fit: cover; }
+/* Testimonial */
+.cd-testimonial {
+  background: var(--bg); padding: 100px 40px; text-align: center;
+}
+.cd-testimonial h2 {
   font-family: 'Instrument Serif', serif; font-weight: 400;
-  font-size: clamp(40px, 7vw, 90px); text-transform: uppercase;
-  color: var(--t1); line-height: .95; margin-bottom: 40px;
-  letter-spacing: .02em;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1); margin-bottom: 40px;
 }
-/* Three-column meta */
-.case-detail-meta-row {
-  display: flex; justify-content: center; gap: clamp(32px, 6vw, 80px);
-  margin-bottom: 48px;
+.cd-testimonial blockquote {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(18px, 2.5vw, 28px); line-height: 1.6;
+  color: var(--t2); max-width: 800px; margin: 0 auto 24px;
 }
-.case-detail-meta-item { text-align: center; }
-.case-detail-meta-label {
-  font-family: 'Archivo', sans-serif; font-size: 11px;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--t4); margin-bottom: 6px;
-}
-.case-detail-meta-value {
+.cd-testimonial cite {
   font-family: 'Archivo', sans-serif; font-size: 13px;
-  font-weight: 600; text-transform: uppercase;
-  letter-spacing: .06em; color: var(--ac);
+  letter-spacing: .08em; color: var(--t4);
 }
-/* Body text */
-.case-detail-body {
-  max-width: 680px; margin: 0 auto; padding: 0 40px 80px;
-  text-align: center;
+/* CTA */
+.cd-cta {
+  background: var(--s1); padding: 100px 40px; text-align: center;
 }
-.case-detail-body p {
-  font-family: 'Instrument Serif', serif; font-size: clamp(16px, 1.8vw, 20px);
-  line-height: 1.7; color: var(--t2); margin-bottom: 32px;
-}
-/* Gallery — asymmetric pairs */
-.case-detail-gallery {
-  max-width: 1100px; margin: 0 auto; padding: 0 40px 60px;
-}
-.case-detail-gallery-row {
-  display: flex; gap: 20px; margin-bottom: 20px;
-  align-items: flex-start;
-}
-.case-detail-gallery-row.offset-right { justify-content: flex-end; }
-.case-detail-gallery-row.offset-left { justify-content: flex-start; }
-.case-detail-gallery-row.centered { justify-content: center; }
-.case-detail-gallery img {
-  object-fit: cover; display: block;
-}
-.case-detail-gallery .img-lg { width: 55%; }
-.case-detail-gallery .img-md { width: 40%; }
-.case-detail-gallery .img-sm { width: 30%; }
-.case-detail-gallery .img-full { width: 100%; }
-/* Testimonial / quote */
-.case-detail-quote {
-  max-width: 700px; margin: 40px auto 80px;
-  text-align: center; padding: 0 40px;
-}
-.case-detail-quote h2 {
+.cd-cta h2 {
   font-family: 'Instrument Serif', serif; font-weight: 400;
-  font-size: clamp(24px, 3vw, 36px); color: var(--t1);
-  margin-bottom: 32px;
+  font-size: clamp(24px, 3vw, 40px); color: var(--t1);
+  max-width: 700px; margin: 0 auto 32px; line-height: 1.3;
 }
-.case-detail-quote blockquote {
-  font-family: 'Instrument Serif', serif; font-style: italic;
-  font-size: clamp(16px, 2vw, 22px); line-height: 1.6;
-  color: var(--t2); margin: 0 0 20px;
+.cd-cta a {
+  display: inline-block; padding: 14px 32px; border: 1px solid var(--ac);
+  color: var(--ac); font-family: 'Archivo', sans-serif; font-size: 12px;
+  letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+  transition: all .3s;
 }
-.case-detail-quote cite {
-  font-family: 'Instrument Serif', serif; font-style: italic;
-  font-size: 14px; color: var(--t4);
+.cd-cta a:hover { background: var(--ac); color: var(--bg); }
+/* Nav */
+.cd-nav {
+  padding: 24px 40px; border-top: 1px solid rgba(255,255,255,.06);
+  text-align: right;
 }
-/* Nav at bottom */
-.case-detail-nav {
-  display: flex; justify-content: flex-end; align-items: center;
-  gap: 24px; padding: 40px;
-  max-width: 1100px; margin: 0 auto; width: 100%;
-  border-top: 1px solid rgba(255,255,255,.08);
-}
-.case-detail-nav a {
+.cd-nav a {
   font-family: 'Archivo', sans-serif; font-size: 12px;
   letter-spacing: .1em; text-transform: uppercase;
-  color: var(--t2); text-decoration: none;
-  transition: color .3s;
+  color: var(--t3); text-decoration: none; transition: color .3s;
 }
-.case-detail-nav a:hover { color: var(--ac); }
-@media (max-width: 600px) {
-  .case-detail-meta-row { flex-direction: column; gap: 16px; }
-  .case-detail-gallery-row { flex-direction: column; }
-  .case-detail-gallery .img-lg,
-  .case-detail-gallery .img-md,
-  .case-detail-gallery .img-sm { width: 100%; }
+.cd-nav a:hover { color: var(--ac); }
+/* Responsive */
+@media (max-width: 768px) {
+  .cd-twocol-inner { grid-template-columns: 1fr; }
+  .cd-feature-row { grid-template-columns: 1fr; }
+  .cd-feature-row:nth-child(even) .cd-feature-img { order: 0; }
+  .cd-step { grid-template-columns: 1fr; }
+  .cd-step:nth-child(odd) .cd-step-img { order: 0; }
+  .cd-props { flex-direction: column; gap: 16px; }
+  .cd-results-grid { grid-template-columns: 1fr; }
 }
 
 /* ══ FOOTER ══ */
@@ -1200,136 +1284,166 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <div class="case-detail-overlay" id="case-detail">
   <button class="case-detail-close" onclick="closeCaseStudy()">CLOSE</button>
 
-  <div class="case-detail-hero"><img id="case-detail-hero-img" src="" alt=""></div>
-  <div class="case-detail-portrait-wrap"><img class="case-detail-portrait" id="case-detail-portrait-img" src="" alt=""></div>
+  <!-- Hero + Portrait -->
+  <div class="cd-hero"><img id="cd-hero-img" src="" alt=""></div>
+  <div class="cd-portrait-wrap"><img class="cd-portrait" id="cd-portrait-img" src="" alt=""></div>
 
-  <div class="case-detail-title-block">
-    <div class="case-detail-pg">pg 01</div>
-    <h1 id="case-detail-title"></h1>
-    <div class="case-detail-meta-row" id="case-detail-meta">
-      <div class="case-detail-meta-item">
-        <div class="case-detail-meta-label">what</div>
-        <div class="case-detail-meta-value" id="cd-what"></div>
-      </div>
-      <div class="case-detail-meta-item">
-        <div class="case-detail-meta-label">scope</div>
-        <div class="case-detail-meta-value" id="cd-scope"></div>
-      </div>
-      <div class="case-detail-meta-item">
-        <div class="case-detail-meta-label">when</div>
-        <div class="case-detail-meta-value" id="cd-when"></div>
-      </div>
-    </div>
+  <!-- Title -->
+  <div class="cd-title-block">
+    <h1 class="cd-title" id="cd-title"></h1>
   </div>
 
-  <div class="case-detail-body" id="case-detail-body"></div>
+  <!-- Value props -->
+  <div class="cd-props" id="cd-props"></div>
 
-  <div class="case-detail-gallery" id="case-detail-gallery"></div>
+  <!-- Intro -->
+  <div class="cd-intro" id="cd-intro"></div>
 
-  <div class="case-detail-quote" id="case-detail-quote"></div>
+  <!-- Two-column overview -->
+  <div class="cd-twocol" id="cd-twocol"></div>
 
-  <div class="case-detail-nav">
+  <!-- Features -->
+  <div class="cd-features" id="cd-features"></div>
+
+  <!-- Process steps -->
+  <div class="cd-process" id="cd-process"></div>
+
+  <!-- Results -->
+  <div class="cd-results" id="cd-results"></div>
+
+  <!-- Testimonial -->
+  <div class="cd-testimonial" id="cd-testimonial"></div>
+
+  <!-- CTA -->
+  <div class="cd-cta">
+    <h2>I build systems like this for coaches, consultants, and service providers who are doing premium work and running out of hours.</h2>
+    <a href="mailto:hello@vieren.co">Get In Touch</a>
+  </div>
+
+  <div class="cd-nav">
     <a href="#" onclick="closeCaseStudy();return false;">BACK TO WORK</a>
   </div>
 </div>
 
 <script>
-var caseStudies = {
-  1: {
-    title: 'Cato Vermeulen',
-    heroImg: 'image/cato-banner.jpg',
-    portraitImg: 'image/cato-portrait.jpg',
-    what: 'Business Astrologer',
-    scope: 'Brand, Portal, Product, Bot',
-    when: '2025 \u2013 Present',
-    body: '<p>A woman who reads the stars for a living asked me to build her a tech stack. She had fifty clients, a notes app, and a system held together by memory and caffeine.</p>' +
-      '<p>She didn\u2019t need more clients. She needed to stop running her business like a group chat.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">We started with her brain</h2>' +
-      '<p>Before touching a single line of code, we pulled everything out of her head and into a structured vault. Two years of brand voice docs. SOPs she\u2019d developed but never saved anywhere searchable. Content frameworks. Client intake patterns. Her entire vocabulary.</p>' +
-      '<p>All of it went into folders. Brand bible. Voice samples. Templates. Then we set up a shared workspace that syncs between her system and mine. She edits her brand bible, I see it. I write a new SOP, she gets it. She never opens a terminal. She just writes.</p>' +
-      '<p>This became the foundation for everything else. Every system we built after this reads from the same source of truth.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The portal</h2>' +
-      '<p>Every client needed a place to go. Not an email attachment. Not a Google Drive link. A proper portal that felt like it belonged to a premium astrology brand.</p>' +
-      '<p>Dark background. Gold accents. Frosted glass cards. Client buys a reading, gets an email with a one-click login, lands in their portal, fills in birth details, and the reading appears when it\u2019s ready.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The readings</h2>' +
-      '<p>Four types of readings. A full natal chart blueprint. A three-month transit reading. An astrocartography reading. A quick mini reading. Each requires birth data, business context, and chart computation.</p>' +
-      '<p>We streamlined the entire process. Client submits their details through the portal, the chart gets computed, and Cato delivers the reading through the same system. She gets notified, the client gets an email. Clean handoffs, no loose threads.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The Cosmic Business Profile</h2>' +
-      '<p>A $27 interactive dashboard. Plug in your birth data, get your chart mapped to business. Element balance bars. Modality breakdowns. Business archetype spectrums. A money style analysis. A visibility score. A leadership badge. Over 300 text snippets written in her mentoring voice.</p>' +
-      '<p>It works as a product on its own. It also works as the thing that makes you want the full reading. Gateway product. Low ticket. High perceived value.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">The Telegram bot</h2>' +
-      '<p>Every premium client now gets personalized daily transit alerts. Not generic horoscope copy. Actual insights based on their individual natal chart matched against real planetary positions for that specific day.</p>' +
-      '<p>The bot also delivers course lessons and manages a free channel with 242 subscribers getting weekly value drops. When someone wants the personalized version, they start the bot and link their email.</p>' +
-      '<h2 style="font-family:Instrument Serif,serif;font-weight:400;font-size:clamp(24px,3vw,36px);text-align:center;margin:48px 0 24px;color:#EEE8D8;">What it adds up to</h2>' +
-      '<p>52 clients through the portal. Four reading products, one interactive profile, two masterminds, a course, and a Telegram ecosystem. Monthly infrastructure cost for all of it: less than a gym membership.</p>' +
-      '<p>She didn\u2019t hire a team. She hired me.</p>',
-    quote: '',
-    cite: '',
-    images: []
-  },
-  2: {
-    title: 'Coming Soon',
-    what: 'Consultancy',
-    scope: 'Full Stack',
-    when: '2026',
-    body: '<p>Full case study coming soon.</p>',
-    quote: '',
-    cite: '',
-    images: []
-  },
-  3: {
-    title: 'Coming Soon',
-    what: 'Consultancy',
-    scope: 'Full Stack',
-    when: '2026',
-    body: '<p>Full case study coming soon.</p>',
-    quote: '',
-    cite: '',
-    images: []
-  }
-};
-
 function openCaseStudy(card) {
   var id = card.getAttribute('data-case');
-  var cs = caseStudies[id];
   var overlay = document.getElementById('case-detail');
-  document.getElementById('case-detail-hero-img').src = cs.heroImg || card.querySelector('img').src;
-  var portraitEl = document.getElementById('case-detail-portrait-img');
-  if (cs.portraitImg) { portraitEl.src = cs.portraitImg; portraitEl.style.display = 'block'; }
-  else { portraitEl.style.display = 'none'; }
-  document.getElementById('case-detail-title').textContent = cs.title;
-  document.getElementById('cd-what').textContent = cs.what;
-  document.getElementById('cd-scope').textContent = cs.scope;
-  document.getElementById('cd-when').textContent = cs.when;
-  document.getElementById('case-detail-body').innerHTML = cs.body;
 
-  var gallery = document.getElementById('case-detail-gallery');
-  gallery.innerHTML = '';
-  if (cs.images.length) {
-    cs.images.forEach(function(row) {
-      var div = document.createElement('div');
-      div.className = 'case-detail-gallery-row ' + (row.align || 'centered');
-      row.imgs.forEach(function(img) {
-        var el = document.createElement('img');
-        el.src = img.src;
-        el.className = img.size || 'img-full';
-        el.alt = '';
-        div.appendChild(el);
-      });
-      gallery.appendChild(div);
-    });
-  }
-
-  var quoteBlock = document.getElementById('case-detail-quote');
-  if (cs.quote) {
-    quoteBlock.innerHTML = '<h2>Testimonial</h2><blockquote>' + cs.quote + '</blockquote><cite>' + cs.cite + '</cite>';
-  } else {
-    quoteBlock.innerHTML = '';
-  }
+  if (id === '1') { renderCato(overlay, card); }
+  else { renderPlaceholder(overlay, card); }
 
   overlay.classList.add('open');
   overlay.scrollTop = 0;
   document.body.style.overflow = 'hidden';
+}
+
+function renderPlaceholder(ov, card) {
+  document.getElementById('cd-hero-img').src = card.querySelector('img').src;
+  document.getElementById('cd-portrait-img').style.display = 'none';
+  document.getElementById('cd-title').textContent = 'Coming Soon';
+  document.getElementById('cd-props').innerHTML = '';
+  document.getElementById('cd-intro').innerHTML = '<p>Full case study coming soon.</p>';
+  document.getElementById('cd-twocol').innerHTML = '';
+  document.getElementById('cd-features').innerHTML = '';
+  document.getElementById('cd-process').innerHTML = '';
+  document.getElementById('cd-results').innerHTML = '';
+  document.getElementById('cd-testimonial').innerHTML = '';
+}
+
+function renderCato(ov, card) {
+  // Hero + Portrait
+  document.getElementById('cd-hero-img').src = 'image/cato-banner.jpg';
+  var p = document.getElementById('cd-portrait-img');
+  p.src = 'image/cato-portrait.jpg'; p.style.display = 'block';
+
+  // Title
+  document.getElementById('cd-title').textContent = 'Cato Vermeulen';
+
+  // Value props
+  document.getElementById('cd-props').innerHTML =
+    '<div class="cd-prop"><div class="cd-prop-label">Brand<br>Systems</div></div>' +
+    '<div class="cd-prop"><div class="cd-prop-label">Portal<br>Design</div></div>' +
+    '<div class="cd-prop"><div class="cd-prop-label">Product<br>Development</div></div>';
+
+  // Intro
+  document.getElementById('cd-intro').innerHTML =
+    '<p>A woman who reads the stars for a living asked me to build her a tech stack. She had fifty clients, a notes app, and a system held together by memory and caffeine. She didn\u2019t need more clients. She needed to stop running her business like a group chat.</p>';
+
+  // Two-column overview
+  document.getElementById('cd-twocol').innerHTML =
+    '<div class="cd-twocol-inner">' +
+      '<div>' +
+        '<p>Cato Vermeulen is a business astrologer. She maps natal charts to business strategy. Pricing, positioning, team dynamics, timing. The whole thing runs on planetary math and an ability to make founders feel seen.</p>' +
+        '<p>When I met her setup, it looked like this: two years of brand voice documents living inside a chat AI tool. Client details in email threads. PDFs sent as attachments. Content ideas scattered across four apps. A growing waitlist and a system held together by memory.</p>' +
+      '</div>' +
+      '<div>' +
+        '<strong>The Challenge</strong>' +
+        '<p>She needed every piece of her business organized, systematized, and running through a single source of truth. A brand bible that feeds every output. A portal that handles clients while she sleeps. Products that scale without adding hours.</p>' +
+        '<strong>The Approach</strong>' +
+        '<p>We started with her brain. Before touching code, we extracted everything into a structured vault. Brand voice, SOPs, templates, client patterns. Then built outward: portal, reading pipeline, interactive products, daily client touchpoints.</p>' +
+      '</div>' +
+    '</div>';
+
+  // Features — "What We Built"
+  document.getElementById('cd-features').innerHTML =
+    '<div class="cd-features-header"><h2>What We Built</h2></div>' +
+    '<div class="cd-feature-row">' +
+      '<div class="cd-feature-text"><h3>The Vault</h3><p>Two years of brand voice docs, SOPs, content frameworks, and client intake patterns pulled out of her head and into a structured workspace. A shared system that syncs between her vault and mine. She edits her brand bible, I see it. She never opens a terminal. She just writes. Every system we built after this reads from the same source of truth.</p></div>' +
+      '<div class="cd-feature-img">[ vault screenshot ]</div>' +
+    '</div>' +
+    '<div class="cd-feature-row">' +
+      '<div class="cd-feature-text"><h3>The Portal</h3><p>Every client needed a proper home. Dark background. Gold accents. Frosted glass cards. Client buys a reading, gets an email with a one-click login, lands in their portal, fills in birth details, and the reading appears when it\u2019s ready. No attachments, no drive links.</p></div>' +
+      '<div class="cd-feature-img">[ portal screenshot ]</div>' +
+    '</div>' +
+    '<div class="cd-feature-row">' +
+      '<div class="cd-feature-text"><h3>The Readings</h3><p>Four types. A full natal chart blueprint. A three-month transit reading. An astrocartography reading. A quick mini reading. We streamlined the entire process. Client submits details through the portal, the chart gets computed, and Cato delivers the reading through the same system. Clean handoffs, no loose threads.</p></div>' +
+      '<div class="cd-feature-img">[ reading screenshot ]</div>' +
+    '</div>' +
+    '<div class="cd-feature-row">' +
+      '<div class="cd-feature-text"><h3>Cosmic Business Profile</h3><p>A $27 interactive dashboard. Plug in your birth data, get your chart mapped to business. Element balance bars. Modality breakdowns. Business archetype spectrums. A money style analysis. A visibility score. Over 300 text snippets written in her mentoring voice. Gateway product that makes you want the full reading.</p></div>' +
+      '<div class="cd-feature-img">[ cosmic profile screenshot ]</div>' +
+    '</div>' +
+    '<div class="cd-feature-row">' +
+      '<div class="cd-feature-text"><h3>Telegram Bot</h3><p>Personalized daily transit alerts for every premium client. Not generic horoscope copy. Actual insights based on their individual natal chart matched against real planetary positions. The bot also delivers course lessons and manages a free channel with 242 subscribers. When someone wants the personalized version, they start the bot and link their email.</p></div>' +
+      '<div class="cd-feature-img">[ telegram screenshot ]</div>' +
+    '</div>' +
+    '<div class="cd-feature-row">' +
+      '<div class="cd-feature-text"><h3>Content Engine</h3><p>Astrology carousels for every zodiac season. Each one pulls current transit data, gets copy written in her voice, and lands straight in her Canva account. Design template ready. She swaps her photos and hits publish. Fifteen minutes per carousel instead of an afternoon.</p></div>' +
+      '<div class="cd-feature-img">[ carousel screenshot ]</div>' +
+    '</div>';
+
+  // Process
+  document.getElementById('cd-process').innerHTML =
+    '<div class="cd-process-header"><h2>The Process</h2></div>' +
+    '<div class="cd-step">' +
+      '<div><div class="cd-step-num">01</div><div class="cd-step-title">Brand Foundation</div><p class="cd-step-text">Extracted two years of accumulated knowledge into a structured vault. Brand bible, voice samples, anti-slop rules, content templates. Set up a shared workspace that syncs automatically. This became the single source of truth that feeds every other system.</p></div>' +
+      '<div class="cd-step-img">[ vault screenshot ]</div>' +
+    '</div>' +
+    '<div class="cd-step">' +
+      '<div><div class="cd-step-num">02</div><div class="cd-step-title">Portal &amp; Products</div><p class="cd-step-text">Built the client portal, the reading pipeline, and the Cosmic Business Profile. Four reading products, one interactive dashboard, all flowing through a single system. Clients land in a premium environment that matches the quality of Cato\u2019s work.</p></div>' +
+      '<div class="cd-step-img">[ portal screenshot ]</div>' +
+    '</div>' +
+    '<div class="cd-step">' +
+      '<div><div class="cd-step-num">03</div><div class="cd-step-title">Growth Engine</div><p class="cd-step-text">Launched the Telegram ecosystem for daily client touchpoints. Built the carousel pipeline for content production. Connected the entire funnel: free channel to bot to profile to full reading. Every piece feeds the next.</p></div>' +
+      '<div class="cd-step-img">[ telegram screenshot ]</div>' +
+    '</div>';
+
+  // Results
+  document.getElementById('cd-results').innerHTML =
+    '<h2>The Results</h2>' +
+    '<div class="cd-results-subtitle">in numbers</div>' +
+    '<div class="cd-results-grid">' +
+      '<div class="cd-result-item">[ result image ]</div>' +
+      '<div class="cd-result-item">[ result image ]</div>' +
+    '</div>' +
+    '<div style="max-width:680px;margin:48px auto 0;text-align:center;">' +
+      '<p style="font-family:Instrument Serif,serif;font-size:clamp(18px,2.2vw,24px);line-height:1.6;color:var(--t2);">52 clients through the portal. Four reading products, one interactive profile, two masterminds, a course, and a Telegram ecosystem. Monthly infrastructure cost: less than a gym membership.</p>' +
+      '<p style="font-family:Instrument Serif,serif;font-size:clamp(18px,2.2vw,24px);line-height:1.6;color:var(--t1);margin-top:24px;">She didn\u2019t hire a team. She hired me.</p>' +
+    '</div>';
+
+  // Testimonial (empty for now)
+  document.getElementById('cd-testimonial').innerHTML = '';
 }
 
 function closeCaseStudy() {
