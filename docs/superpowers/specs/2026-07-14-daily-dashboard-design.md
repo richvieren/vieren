@@ -2,7 +2,7 @@
 
 ## Overview
 
-A private, local-first daily dashboard for tracking habits, health, content output, finances, and creative work. Runs as a Bun + Hono server on localhost. All data stored as local JSON files. Uploads flow directly to vieren.studio via git auto-push. Daily logs sync to the AOOA Obsidian vault.
+A private, local-first daily dashboard for tracking habits, health, content output, finances, and creative work. Runs as a Bun + Hono server on localhost. All data stored as local JSON files. Uploads flow directly to vieren.studio via git auto-push. Daily logs sync to the AOOA Obsidian vault. Content posting status pulled from Ayrshare API (Eden's scheduler backend).
 
 This is a living tool — V1 ships with core tracking, new widgets get added over time.
 
@@ -13,6 +13,7 @@ This is a living tool — V1 ships with core tracking, new widgets get added ove
 - **Frontend:** Vanilla HTML / CSS / JS (no framework)
 - **Data:** JSON files in `~/vieren/dashboard/data/`
 - **Config:** JSON files in `~/vieren/dashboard/config/`
+- **External API:** Ayrshare (read-only, for pulling posted content status)
 
 ## System Integration
 
@@ -33,8 +34,14 @@ This is a living tool — V1 ships with core tracking, new widgets get added ove
 
 ### Obsidian sync
 - End-of-day action writes a markdown summary to `~/AOOA/vieren/log/YYYY-MM-DD.md`
-- Includes all tracked data for that day: habits, weight, content posted, reach-outs, finances
+- Includes all tracked data for that day: habits, weight, content posted, reach-outs, balance
 - Searchable and linkable inside the AOOA vault
+
+### Ayrshare integration (read-only)
+- Pulls today's posted content from Ayrshare API on dashboard load
+- Auto-fills the social posting checklist (no manual check-off needed for posts)
+- Feeds real posting data into trends view
+- API key stored in `config/settings.json`
 
 ---
 
@@ -73,17 +80,21 @@ The main screen. Everything about TODAY.
 
 3. **Money Card**
    - Bank balance input (single number, daily snapshot)
-   - Monthly fixed costs overview (from `finances.json` config)
-   - Remaining budget calculation (balance minus outstanding costs)
    - Sparkline showing balance trend over last 30 days
+   - That's it — simple number in, line chart out
 
 4. **Content Card**
-   - Grok generation counter: X / 15 today (circular progress)
-   - Monthly Grok pace bar: on track / behind / ahead
-   - Weekly edit: 0/1 this week (with week progress bar)
-   - Social posting: talking head (check), random content (check)
-   - Long-form: 0/1 this week
-   - Articles: X/3 this week (or whatever config says)
+   - **Grok generations:** X / 15 today (circular progress) + monthly pace bar (on track / behind / ahead)
+   - **Grok +/- buttons** for manual counting
+   - **Production pipeline (kanban-lite):**
+     - Weekly edit: stage indicator (idea → recorded → edited → posted)
+     - Long-form piece: same stages (0/1 this week)
+     - Articles: same stages (X/3 this week)
+   - **Daily posting (auto-filled from Ayrshare):**
+     - Talking head video: recorded (manual check) + posted (auto-detected)
+     - Random content: recorded (manual check) + posted (auto-detected)
+     - Posts today by platform (X, Instagram, LinkedIn, YouTube) — pulled from Ayrshare
+   - Recording and posting tracked separately — batch-record in the morning, post throughout the day
 
 5. **Photos Card**
    - Drag & drop zone
@@ -107,10 +118,10 @@ Historical data and patterns. Accessible via toggle in the header.
 - **Weight graph** — line chart, selectable range (7d / 30d / 90d / all)
 - **Habit completion** — calendar heat map (GitHub contribution graph style)
 - **Grok usage** — daily bar chart + monthly cumulative line
-- **Posting consistency** — calendar heat map per content type
+- **Posting consistency** — calendar heat map per content type, real data from Ayrshare
 - **Reach-out frequency** — weekly bar chart
 - **Streak history** — longest streaks, current streaks per habit
-- **Money** — balance over time line chart, monthly cost breakdown
+- **Money** — balance over time line chart
 
 ---
 
@@ -128,12 +139,14 @@ Historical data and patterns. Accessible via toggle in the header.
 │   │   ├── photos.ts     # Upload, EXIF extraction, diary pipeline
 │   │   ├── generations.ts # VTCN upload pipeline
 │   │   ├── reachouts.ts  # Reach-out logging
-│   │   ├── finances.ts   # Balance logging, costs
+│   │   ├── finances.ts   # Balance logging
+│   │   ├── content.ts    # Ayrshare pull + Grok counter + production pipeline
 │   │   └── trends.ts     # Aggregated data for trend views
 │   └── lib/
 │       ├── git.ts        # Commit + push helper
 │       ├── exif.ts       # EXIF extraction
 │       ├── resize.ts     # Image compression
+│       ├── ayrshare.ts   # Ayrshare API client (read-only)
 │       └── obsidian.ts   # Daily log markdown writer
 ├── ui/
 │   ├── index.html        # Single page app shell
@@ -145,14 +158,14 @@ Historical data and patterns. Accessible via toggle in the header.
 │   ├── weight.json             # Array of { date, value }
 │   ├── reachouts/
 │   │   └── YYYY-MM-DD.json    # Per-day reach-out logs
-│   ├── finances/
-│   │   └── YYYY-MM-DD.json    # Per-day balance snapshot
+│   ├── balance.json            # Array of { date, value }
+│   ├── content/
+│   │   └── YYYY-MM-DD.json    # Per-day: grok count, recording status, pipeline stages
 │   └── generations/
 │       └── YYYY-MM-DD.json    # Per-day generation count + metadata
 ├── config/
 │   ├── habits.json             # Habit definitions (editable)
-│   ├── finances.json           # Monthly fixed costs
-│   └── settings.json           # Grok targets, content goals
+│   └── settings.json           # Grok targets, content goals, Ayrshare key, server port
 └── inbox/                      # Temp landing for uploads before processing
 ```
 
@@ -166,23 +179,7 @@ Historical data and patterns. Accessible via toggle in the header.
     { "id": "meditate", "label": "Meditate / breathe", "type": "check" },
     { "id": "steps", "label": "10,000 steps", "type": "number", "target": 10000 },
     { "id": "workout", "label": "Work out", "type": "check" },
-    { "id": "reachout", "label": "Reach out to someone", "type": "log" },
-    { "id": "social_talking_head", "label": "Talking head video", "type": "check" },
-    { "id": "social_random", "label": "Random content post", "type": "check" }
-  ]
-}
-```
-
-### Config: `finances.json`
-
-```json
-{
-  "currency": "EUR",
-  "monthlyCosts": [
-    { "id": "rent", "label": "Rent", "amount": 0 },
-    { "id": "subscriptions", "label": "Subscriptions", "amount": 0 },
-    { "id": "insurance", "label": "Insurance", "amount": 0 },
-    { "id": "food", "label": "Food budget", "amount": 0 }
+    { "id": "reachout", "label": "Reach out to someone", "type": "log" }
   ]
 }
 ```
@@ -199,6 +196,9 @@ Historical data and patterns. Accessible via toggle in the header.
     "weeklyEdit": 1,
     "weeklyLongForm": 1,
     "weeklyArticles": { "min": 1, "max": 3 }
+  },
+  "ayrshare": {
+    "apiKey": ""
   },
   "server": {
     "port": 3000
@@ -217,9 +217,33 @@ Historical data and patterns. Accessible via toggle in the header.
     "meditate": false,
     "steps": 8432,
     "workout": true,
-    "reachout": "Asked Marco about intro to Studio X",
-    "social_talking_head": true,
-    "social_random": false
+    "reachout": "Asked Marco about intro to Studio X"
+  }
+}
+```
+
+### Daily data example: `data/content/2026-07-14.json`
+
+```json
+{
+  "date": "2026-07-14",
+  "grokGenerations": 12,
+  "recorded": {
+    "talkingHead": true,
+    "randomContent": true
+  },
+  "posted": {
+    "platforms": ["x", "instagram", "linkedin"],
+    "count": 4,
+    "source": "ayrshare"
+  },
+  "pipeline": {
+    "weeklyEdit": "edited",
+    "longForm": "idea",
+    "articles": [
+      { "title": "AI video workflow", "stage": "posted" },
+      { "title": "Dashboard build log", "stage": "idea" }
+    ]
   }
 }
 ```
@@ -233,12 +257,14 @@ Historical data and patterns. Accessible via toggle in the header.
 | GET | `/api/today` | Full snapshot of today's data across all widgets |
 | PUT | `/api/habits/:date` | Update habit completions for a date |
 | GET/POST | `/api/weight` | Get history / log today's weight |
+| GET/POST | `/api/balance` | Get history / log today's balance |
 | POST | `/api/photos/upload` | Upload photo(s), extract EXIF, return preview + form |
 | POST | `/api/photos/publish` | Process photo to diary, commit + push |
 | POST | `/api/generations/upload` | Upload AI generation to VTCN |
 | GET/POST | `/api/reachouts/:date` | Get/add reach-out logs |
-| GET/POST | `/api/finances/:date` | Get/add daily balance |
-| GET | `/api/trends/:metric` | Aggregated trend data (weight, habits, grok, etc.) |
+| GET/PUT | `/api/content/:date` | Get/update content tracking (grok count, recordings, pipeline) |
+| GET | `/api/content/posted` | Pull today's posts from Ayrshare |
+| GET | `/api/trends/:metric` | Aggregated trend data (weight, habits, grok, balance, etc.) |
 | POST | `/api/day/close` | Trigger Obsidian sync for today |
 
 ---
@@ -284,24 +310,23 @@ Writes to `~/AOOA/vieren/log/YYYY-MM-DD.md`:
 - [ ] Meditate / breathe
 - Steps: 8,432 / 10,000
 - [x] Work out
-- [x] Talking head video
-- [ ] Random content post
 
 ## Weight
-78.2 kg (−0.3 vs yesterday)
+78.2 kg (-0.3 vs yesterday)
 
 ## Reach-outs
 - Marco — Asked about intro to Studio X
 
 ## Content
 - Grok generations: 12/15
-- Weekly edit: 0/1
+- Recorded: talking head, random content
+- Posted: 4 posts (X, Instagram, LinkedIn)
+- Weekly edit: editing
 - Long-form: 0/1
 - Articles: 1/3
 
-## Finances
-- Balance: €X,XXX
-- Monthly costs remaining: €X,XXX
+## Balance
+EUR 4,312
 
 ## Photos
 - 3 photos added to diary (Cape Town BTS)
@@ -313,14 +338,17 @@ Writes to `~/AOOA/vieren/log/YYYY-MM-DD.md`:
 
 - All 7 dashboard cards (health, weight, money, content, photos, generations, reach-outs)
 - Daily view + trends view
-- JSON config for habits, finances, content targets
+- JSON config for habits and content targets
 - Photo upload → diary pipeline with EXIF extraction
 - AI generation upload → VTCN pipeline
-- Grok daily/monthly counter
+- Grok daily/monthly counter with pace indicator
+- Content production pipeline (kanban-lite stages)
+- Ayrshare read-only integration (auto-detect posts)
+- Separate recording vs posting tracking
 - Streak tracking for daily non-negotiables
-- Weight trend graph
+- Trend graphs and heat maps for all metrics
 - Obsidian daily log sync
-- launchd auto-start + notifications
+- launchd auto-start + 8am/8pm notifications
 - `dash` terminal alias
 
 ## V1 Scope — What's Out
@@ -330,6 +358,7 @@ Writes to `~/AOOA/vieren/log/YYYY-MM-DD.md`:
 - No settings UI (edit JSON in Claude Code)
 - No authentication (localhost only)
 - No cloud storage or sync
+- No detailed finance breakdown (just balance tracking)
 - Case study on vieren.studio (later, after V1 is solid)
 
 ---
@@ -343,12 +372,13 @@ A single-page dashboard application with two views (Daily / Trends), dark immers
 - Modern finance dashboard (Financia-style): clean card grid, subtle depth, accent colors for metrics
 - Fitness tracker UI: progress rings, completion indicators, streaks
 - GitHub contribution graph style heat maps for the trends view
+- Kanban-lite for content pipeline stages
 
 ### Cards to design (Daily View)
-1. Health & Habits — checklist with checkboxes, number inputs, progress ring for steps
+1. Health & Habits — checklist with checkboxes, number inputs, progress ring for steps, completion %
 2. Weight — number input, sparkline, delta indicator
-3. Money — balance input, cost list, remaining budget, sparkline
-4. Content — Grok counter (circular progress), weekly trackers (progress bars), social checklist
+3. Money — balance input, sparkline (simple, no cost breakdown)
+4. Content — Grok counter (circular progress + monthly pace), recording checklist, auto-filled posting status from Ayrshare, kanban-lite pipeline for edit/long-form/articles
 5. Photos — drag & drop zone, thumbnail grid, metadata form overlay
 6. AI Generations — drag & drop zone, thumbnail grid, counter
 7. Reach-outs — two text inputs + add button, log list
@@ -357,10 +387,10 @@ A single-page dashboard application with two views (Daily / Trends), dark immers
 1. Weight line chart (with range selector)
 2. Habit heat map (calendar grid)
 3. Grok usage bar chart + cumulative line
-4. Posting consistency heat map
+4. Posting consistency heat map (real data from Ayrshare)
 5. Reach-out frequency bars
 6. Streak history
-7. Balance line chart + cost breakdown
+7. Balance line chart
 
 ### Design tokens needed
 - Color palette (background, surface, border, text primary/secondary/muted, accent, success, warning, danger)
@@ -369,6 +399,7 @@ A single-page dashboard application with two views (Daily / Trends), dark immers
 - Border radius
 - Card elevation / depth treatment
 - Interactive states (hover, active, checked, drag-over)
+- Pipeline stage colors (idea, recorded, edited, posted)
 
 ### Responsive
 - Optimized for desktop (1440px+) — this is the primary use case
