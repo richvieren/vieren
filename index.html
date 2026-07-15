@@ -653,13 +653,14 @@ nav {
 
 /* ══ PHOTO DIARY STRIP ══ */
 .diary-section {
-  padding: 80px 40px 60px;
+  padding: 80px 0 60px;
   max-width: 100%;
   overflow: hidden;
 }
 .diary-top {
-  max-width: 1200px;
-  margin: 0 auto 24px;
+  max-width: 100%;
+  margin: 0 0 24px;
+  padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -698,11 +699,11 @@ nav {
 }
 .diary-strip-border {
   background: #1a1a1a;
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
 }
 .diary-sprockets {
-  height: 22px;
+  height: 44px;
   position: relative;
   overflow: hidden;
 }
@@ -713,24 +714,24 @@ nav {
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  height: 10px;
+  height: 18px;
   background: repeating-linear-gradient(
     90deg,
     #2a2a2a 0px,
-    #2a2a2a 12px,
-    transparent 12px,
-    transparent 20px
+    #2a2a2a 16px,
+    transparent 16px,
+    transparent 26px
   );
   border-radius: 1.5px;
 }
 .diary-slider-track {
   display: flex;
-  gap: 8px;
-  padding: 0 8px;
+  gap: 12px;
+  padding: 0 12px;
   transition: transform 0.5s ease;
 }
 .diary-slide {
-  flex: 0 0 calc((100% - 48px) / 6);
+  flex: 0 0 calc((100% - 48px) / 3);
   aspect-ratio: 3/4;
   overflow: hidden;
   position: relative;
@@ -742,12 +743,12 @@ nav {
   display: block;
 }
 .diary-frame-counter {
-  height: 18px;
+  height: 32px;
   display: flex;
   align-items: center;
   padding: 0 12px;
   font-family: 'Archivo', monospace;
-  font-size: 7px;
+  font-size: 9px;
   letter-spacing: .12em;
   color: rgba(255,255,255,.15);
   text-transform: uppercase;
@@ -768,13 +769,14 @@ nav {
 
 @media (max-width: 900px) {
   .diary-slide {
-    flex: 0 0 calc((100% - 24px) / 4);
+    flex: 0 0 calc((100% - 36px) / 2);
   }
 }
 @media (max-width: 600px) {
-  .diary-section { padding-left: 20px; padding-right: 20px; }
+  .diary-section { padding: 60px 0 40px; }
+  .diary-top { padding: 0 20px; }
   .diary-slide {
-    flex: 0 0 calc((100% - 16px) / 2.5);
+    flex: 0 0 calc((100% - 24px) / 1.5);
   }
 }
 
