@@ -336,7 +336,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       gateHTML = '<div class="film-gate">';
       gateHTML += '<div class="film-gate-slider" data-swiper>';
       photos.forEach(p => {
-        gateHTML += '<img src="image/diary/' + p + '" alt="" loading="lazy">';
+        gateHTML += '<img src="image/diary/' + entry.date + '/' + p + '" alt="" loading="lazy">';
       });
       gateHTML += '</div>';
       gateHTML += '<div class="slide-indicators">';
@@ -346,7 +346,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       gateHTML += '</div>';
       gateHTML += '</div>';
     } else if (photos.length === 1) {
-      gateHTML = '<div class="film-gate"><img src="image/diary/' + photos[0] + '" alt="" loading="lazy"></div>';
+      gateHTML = '<div class="film-gate"><img src="image/diary/' + entry.date + '/' + photos[0] + '" alt="" loading="lazy"></div>';
     }
 
     el.innerHTML = metaHTML +

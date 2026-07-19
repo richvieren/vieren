@@ -1,34 +1,51 @@
 #!/bin/bash
-# Auto-generate diary.json from image/diary/ folder
+# Auto-generate diary.json from image/diary/ date subfolders
+# Structure: image/diary/2026-07-19/photo.jpg
 # Run after dropping new photos, before pushing
 
 cd "$(dirname "$0")"
 
-photos=$(ls image/diary/*.{jpg,jpeg,png,webp} 2>/dev/null | sed 's|image/diary/||' | sort)
+entries=()
+total=0
 
-if [ -z "$photos" ]; then
+for dir in $(ls -d image/diary/*/  2>/dev/null | sort -r); do
+  date=$(basename "$dir")
+  photos=$(ls "$dir"*.{jpg,jpeg,png,webp} 2>/dev/null | sed "s|$dir||")
+
+  if [ -z "$photos" ]; then
+    continue
+  fi
+
+  photo_json=""
+  first=true
+  while IFS= read -r photo; do
+    if [ "$first" = true ]; then
+      first=false
+    else
+      photo_json="$photo_json, "
+    fi
+    photo_json="$photo_json\"$photo\""
+    total=$((total + 1))
+  done <<< "$photos"
+
+  entries+=("  { \"date\": \"$date\", \"photos\": [$photo_json] }")
+done
+
+if [ ${#entries[@]} -eq 0 ]; then
   echo "[]" > diary.json
   echo "No photos found. diary.json cleared."
   exit 0
 fi
 
-# Build JSON array
+# Write JSON
 echo "[" > diary.json
-echo "  { \"date\": \"$(date +%Y-%m-%d)\", \"photos\": [" >> diary.json
-
-first=true
-while IFS= read -r photo; do
-  if [ "$first" = true ]; then
-    first=false
+for i in "${!entries[@]}"; do
+  if [ $i -lt $((${#entries[@]} - 1)) ]; then
+    echo "${entries[$i]}," >> diary.json
   else
-    echo "," >> diary.json
+    echo "${entries[$i]}" >> diary.json
   fi
-  printf "    \"%s\"" "$photo" >> diary.json
-done <<< "$photos"
-
-echo "" >> diary.json
-echo "  ] }" >> diary.json
+done
 echo "]" >> diary.json
 
-count=$(echo "$photos" | wc -l | tr -d ' ')
-echo "diary.json updated with $count photos."
+echo "diary.json updated: ${#entries[@]} dates, $total photos."
