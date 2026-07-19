@@ -664,14 +664,15 @@ nav {
 
 /* ══ PHOTO DIARY STRIP ══ */
 .diary-section {
-  padding: 80px 0 60px;
+  padding: 0;
   max-width: 100%;
   overflow: hidden;
+  background: #c4baa6;
 }
 .diary-top {
   max-width: 100%;
-  margin: 0 0 24px;
-  padding: 0 40px;
+  margin: 0;
+  padding: 28px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -682,11 +683,11 @@ nav {
   font-weight: 500;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--t1);
+  color: #1a1a1a;
 }
 .diary-nav {
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 .diary-nav button {
   background: none;
@@ -696,13 +697,13 @@ nav {
   font-weight: 400;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--t3);
+  color: #5a5448;
   cursor: pointer;
   transition: color .3s;
   padding: 0;
 }
 .diary-nav button:hover {
-  color: var(--t1);
+  color: #1a1a1a;
 }
 .diary-strip-wrap {
   position: relative;
@@ -710,34 +711,34 @@ nav {
   display: block;
 }
 .diary-strip-border {
-  background: #1c1c1c;
+  background: #292724;
   position: relative;
 }
-/* Sprocket holes — light squares on dark film, like real 35mm */
+/* Sprocket holes — cream/white squares punched into dark film */
 .diary-sprockets {
-  height: 28px;
+  height: 34px;
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 6px;
+  gap: 6px;
+  padding: 0 4px;
   overflow: hidden;
 }
 .diary-sprockets .hole {
-  width: 12px;
-  height: 8px;
-  background: rgba(200,190,170,.35);
-  border-radius: 1.5px;
+  width: 14px;
+  height: 10px;
+  background: #c4baa6;
+  border-radius: 2px;
   flex-shrink: 0;
 }
 .diary-slider-track {
   display: flex;
   gap: 3px;
-  padding: 0 3px;
+  padding: 0;
   transition: transform 0.5s ease;
 }
 .diary-slide {
-  flex: 0 0 calc((100% - 24px) / 7);
+  flex: 0 0 calc((100% - 18px) / 7);
   aspect-ratio: 3/4;
   overflow: hidden;
   position: relative;
@@ -748,25 +749,25 @@ nav {
   object-fit: cover;
   display: block;
 }
-/* Frame counter — upside down, right-aligned, like Kodak film edge */
+/* Frame counter — upside down, left-aligned, Kodak film edge style */
 .diary-frame-counter {
-  height: 24px;
+  height: 26px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 6px;
+  justify-content: flex-start;
+  padding: 0 8px;
   font-family: 'Jost', sans-serif;
   font-size: 8px;
   font-weight: 300;
-  letter-spacing: .06em;
-  color: rgba(200,190,170,.3);
+  letter-spacing: .04em;
+  color: rgba(180,170,150,.4);
   text-transform: uppercase;
   overflow: hidden;
   white-space: nowrap;
   transform: rotate(180deg);
 }
 .diary-frame-counter span {
-  margin-right: 40px;
+  margin-right: 48px;
   display: inline-block;
 }
 .diary-strip-empty {
@@ -779,14 +780,13 @@ nav {
 
 @media (max-width: 900px) {
   .diary-slide {
-    flex: 0 0 calc((100% - 16px) / 4);
+    flex: 0 0 calc((100% - 12px) / 4);
   }
 }
 @media (max-width: 600px) {
-  .diary-section { padding: 60px 0 40px; }
-  .diary-top { padding: 0 20px; }
+  .diary-top { padding: 20px; }
   .diary-slide {
-    flex: 0 0 calc((100% - 10px) / 2.5);
+    flex: 0 0 calc((100% - 8px) / 2.5);
   }
 }
 
@@ -1482,7 +1482,7 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
       var counterHTML = '';
       for (var c = allPhotos.length; c >= 1; c--) {
         var num = String(c).padStart(2, '0');
-        counterHTML += '<span>VIEREN STUDIO 800\u201311 \u00a0\u00a0 ' + num + ' \u00a0\u00a0 \u25c0\u25b6</span>';
+        counterHTML += '<span>\u25c0\u25b6 \u00a0\u00a0 ' + num + ' \u00a0\u00a0 \u2014\u2014 \u00a0\u00a0 VIEREN STUDIO 800\u201311</span>';
       }
       counter.innerHTML = counterHTML;
 
