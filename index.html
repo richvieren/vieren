@@ -742,7 +742,7 @@ nav {
   transition: transform 0.5s ease;
 }
 .diary-slide {
-  flex: 0 0 calc((100% - 48px) / 3);
+  flex: 0 0 calc((100% - 112px) / 8);
   aspect-ratio: 3/4;
   overflow: hidden;
   position: relative;
@@ -780,14 +780,14 @@ nav {
 
 @media (max-width: 900px) {
   .diary-slide {
-    flex: 0 0 calc((100% - 36px) / 2);
+    flex: 0 0 calc((100% - 48px) / 4);
   }
 }
 @media (max-width: 600px) {
   .diary-section { padding: 60px 0 40px; }
   .diary-top { padding: 0 20px; }
   .diary-slide {
-    flex: 0 0 calc((100% - 24px) / 1.5);
+    flex: 0 0 calc((100% - 24px) / 2.5);
   }
 }
 
@@ -1449,17 +1449,19 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
         return;
       }
 
-      // Build slides — first photo from each entry
+      // Build slides — all photos from all entries
       entries.forEach((entry, i) => {
         if (!entry.photos || !entry.photos.length) return;
-        const slide = document.createElement('div');
-        slide.className = 'diary-slide';
-        const img = document.createElement('img');
-        img.src = 'image/diary/' + entry.photos[0];
-        img.alt = '';
-        img.loading = 'lazy';
-        slide.appendChild(img);
-        track.appendChild(slide);
+        entry.photos.forEach(photo => {
+          const slide = document.createElement('div');
+          slide.className = 'diary-slide';
+          const img = document.createElement('img');
+          img.src = 'image/diary/' + photo;
+          img.alt = '';
+          img.loading = 'lazy';
+          slide.appendChild(img);
+          track.appendChild(slide);
+        });
       });
 
       // Frame counter text
