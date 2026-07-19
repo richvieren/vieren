@@ -667,7 +667,7 @@ nav {
   padding: 0;
   max-width: 100%;
   overflow: hidden;
-  background: #c4baa6;
+  background: #c9c5ba;
 }
 .diary-top {
   max-width: 100%;
@@ -683,7 +683,7 @@ nav {
   font-weight: 500;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: #1c1512;
 }
 .diary-nav {
   display: flex;
@@ -697,13 +697,13 @@ nav {
   font-weight: 400;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #5a5448;
+  color: rgba(28,21,18,0.5);
   cursor: pointer;
   transition: color .3s;
   padding: 0;
 }
 .diary-nav button:hover {
-  color: #1a1a1a;
+  color: #1c1512;
 }
 .diary-strip-wrap {
   position: relative;
@@ -711,35 +711,36 @@ nav {
   display: block;
 }
 .diary-strip-border {
-  background: #292724;
+  background: #1c1512;
   position: relative;
 }
-/* Sprocket holes — cream/white squares punched into dark film */
+/* Sprocket holes — 20x30px cutouts showing section bg through */
 .diary-sprockets {
-  height: 34px;
+  height: 48px;
   position: relative;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 4px;
+  gap: 10px;
+  padding: 0 6px;
   overflow: hidden;
 }
 .diary-sprockets .hole {
-  width: 14px;
-  height: 10px;
-  background: #c4baa6;
-  border-radius: 2px;
+  width: 20px;
+  height: 30px;
+  background: #c9c5ba;
+  border-radius: 3px;
   flex-shrink: 0;
 }
 .diary-slider-track {
   display: flex;
-  gap: 3px;
-  padding: 0;
+  gap: 20px;
+  padding: 0 6px;
   transition: transform 0.5s ease;
 }
 .diary-slide {
-  flex: 0 0 calc((100% - 18px) / 7);
-  aspect-ratio: 3/4;
+  flex: 0 0 auto;
+  width: 295px;
+  height: 440px;
   overflow: hidden;
   position: relative;
 }
@@ -751,43 +752,47 @@ nav {
 }
 /* Frame counter — upside down, left-aligned, Kodak film edge style */
 .diary-frame-counter {
-  height: 26px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 8px;
+  padding: 0 10px;
   font-family: 'Jost', sans-serif;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 300;
   letter-spacing: .04em;
-  color: rgba(180,170,150,.4);
+  color: rgba(201,197,186,0.35);
   text-transform: uppercase;
   overflow: hidden;
   white-space: nowrap;
   transform: rotate(180deg);
 }
 .diary-frame-counter span {
-  margin-right: 48px;
+  margin-right: 60px;
   display: inline-block;
 }
 .diary-strip-empty {
   padding: 60px 0;
   text-align: center;
   font-size: 12px;
-  color: rgba(255,255,255,.15);
+  color: rgba(201,197,186,.15);
   letter-spacing: .06em;
 }
 
 @media (max-width: 900px) {
   .diary-slide {
-    flex: 0 0 calc((100% - 12px) / 4);
+    width: 200px;
+    height: 300px;
   }
 }
 @media (max-width: 600px) {
   .diary-top { padding: 20px; }
   .diary-slide {
-    flex: 0 0 calc((100% - 8px) / 2.5);
+    width: 140px;
+    height: 210px;
   }
+  .diary-sprockets { height: 28px; gap: 6px; }
+  .diary-sprockets .hole { width: 10px; height: 16px; }
 }
 
 /* ══ DECK CTA ══ */
