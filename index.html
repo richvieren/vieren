@@ -710,43 +710,34 @@ nav {
   display: block;
 }
 .diary-strip-border {
-  background: var(--film, #1a1a1a);
+  background: #3a3630;
   position: relative;
 }
-/* Sprocket holes — punched through the film border */
+/* Sprocket holes — individual rounded squares punched through */
 .diary-sprockets {
-  height: 36px;
+  height: 32px;
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  gap: 0;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 14px;
 }
-.diary-sprockets::before {
-  content: '';
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 10px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--bg) 0px,
-    var(--bg) 8px,
-    transparent 8px,
-    transparent 16px
-  );
-  border-radius: 1px;
+.diary-sprockets .hole {
+  width: 9px;
+  height: 6px;
+  background: var(--bg);
+  border-radius: 1.5px;
+  flex-shrink: 0;
 }
 .diary-slider-track {
   display: flex;
-  gap: 6px;
-  padding: 0 10px;
+  gap: 4px;
+  padding: 0 8px;
   transition: transform 0.5s ease;
 }
 .diary-slide {
-  flex: 0 0 calc((100% - 66px) / 7);
+  flex: 0 0 calc((100% - 60px) / 7);
   aspect-ratio: 3/4;
   overflow: hidden;
   position: relative;
@@ -757,24 +748,25 @@ nav {
   object-fit: cover;
   display: block;
 }
-/* Frame counter — upside down text like Kodak film edge */
+/* Frame counter — upside down text like film edge markings */
 .diary-frame-counter {
-  height: 28px;
+  height: 22px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  font-family: 'Jost', monospace;
+  padding: 0 14px;
+  font-family: 'Jost', sans-serif;
   font-size: 7px;
-  letter-spacing: .1em;
-  color: rgba(255,255,255,.12);
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.18);
   text-transform: uppercase;
   overflow: hidden;
   white-space: nowrap;
-  transform: scaleY(-1);
+  transform: rotate(180deg);
 }
 .diary-frame-counter span {
-  margin-right: 24px;
-  transform: scaleX(-1);
+  margin-right: 20px;
+  display: inline-block;
 }
 .diary-strip-empty {
   padding: 60px 0;
@@ -793,7 +785,7 @@ nav {
   .diary-section { padding: 60px 0 40px; }
   .diary-top { padding: 0 20px; }
   .diary-slide {
-    flex: 0 0 calc((100% - 18px) / 2.5);
+    flex: 0 0 calc((100% - 14px) / 2.5);
   }
 }
 
@@ -1313,10 +1305,10 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
   <a href="diary.html" class="diary-strip-wrap">
     <div class="diary-strip-border">
-      <div class="diary-sprockets"></div>
+      <div class="diary-sprockets" id="sprocketsTop"></div>
       <div class="diary-slider-track" id="diaryTrack"></div>
       <div class="diary-frame-counter" id="diaryCounter"></div>
-      <div class="diary-sprockets"></div>
+      <div class="diary-sprockets" id="sprocketsBot"></div>
     </div>
   </a>
 </section>
@@ -1470,12 +1462,27 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
         });
       });
 
-      // Frame counter text
-      let counterHTML = '';
-      entries.forEach((_, i) => {
-        const num = String(i + 1).padStart(2, '0');
-        counterHTML += '<span>VIEREN STUDIO \u2014 ' + num + '</span>';
+      // Generate sprocket holes
+      var holeCount = Math.ceil(window.innerWidth / 19);
+      ['sprocketsTop','sprocketsBot'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = '';
+        for (var h = 0; h < holeCount; h++) {
+          var hole = document.createElement('div');
+          hole.className = 'hole';
+          el.appendChild(hole);
+        }
       });
+
+      // Frame counter text — Kodak film edge style
+      var allPhotos = [];
+      entries.forEach(function(e) { e.photos.forEach(function() { allPhotos.push(1); }); });
+      var counterHTML = '';
+      for (var c = 0; c < allPhotos.length; c++) {
+        var num = String(c + 1).padStart(2, '0');
+        counterHTML += '<span>VIEREN STUDIO 800\u201311 \u00a0\u00a0 ' + num + ' \u00a0\u00a0 \u25c0\u25b6 \u00a0\u00a0</span>';
+      }
       counter.innerHTML = counterHTML;
 
       // Navigation
