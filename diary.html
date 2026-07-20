@@ -119,33 +119,18 @@ nav {
   margin-right: 8px;
 }
 
-/* Photo grid — single photo full width, multi in grid */
+/* Photo grid — masonry-style, no cropping */
 .entry-photos {
-  display: grid;
-  gap: 4px;
+  columns: 2;
+  column-gap: 4px;
 }
 .entry-photos.single {
-  grid-template-columns: 1fr;
-}
-.entry-photos.multi-2 {
-  grid-template-columns: 1fr 1fr;
-}
-.entry-photos.multi-3 {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-.entry-photos.multi-4 {
-  grid-template-columns: 1fr 1fr;
+  columns: 1;
 }
 .entry-photos img {
   width: 100%;
   display: block;
-  object-fit: cover;
-  aspect-ratio: 3/4;
-}
-.entry-photos.single img {
-  aspect-ratio: auto;
-  max-height: 80vh;
-  object-fit: contain;
+  margin-bottom: 4px;
 }
 
 /* ══ EMPTY STATE ══ */
@@ -228,11 +213,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     }
 
     var photos = entry.photos || [];
-    var count = photos.length;
-    var gridClass = 'single';
-    if (count === 2) gridClass = 'multi-2';
-    if (count === 3) gridClass = 'multi-3';
-    if (count >= 4) gridClass = 'multi-4';
+    var gridClass = photos.length === 1 ? 'single' : '';
 
     html += '<div class="entry-photos ' + gridClass + '">';
     photos.forEach(function(p) {
