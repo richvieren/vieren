@@ -716,31 +716,31 @@ nav {
 }
 /* Sprocket holes — portrait orientation, ~41 across full width */
 .diary-sprockets {
-  height: 38px;
+  height: clamp(20px, 2.8vw, 38px);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8px;
+  padding: 0 0.5vw;
   overflow: hidden;
 }
 .diary-sprockets .hole {
-  width: 15px;
-  height: 24px;
+  width: clamp(6px, 1.1vw, 15px);
+  height: clamp(10px, 1.7vw, 24px);
   background: #c9c5ba;
   border-radius: 2px;
   flex-shrink: 0;
 }
 .diary-slider-track {
   display: flex;
-  gap: 20px;
-  padding: 0 6px;
+  gap: clamp(4px, 0.7vw, 10px);
+  padding: 0 0.4vw;
   transition: transform 0.5s ease;
 }
 .diary-slide {
   flex: 0 0 auto;
-  width: 177px;
-  height: 264px;
+  width: clamp(100px, 13vw, 177px);
+  height: clamp(150px, 19.4vw, 264px);
   overflow: hidden;
   position: relative;
 }
@@ -753,13 +753,13 @@ nav {
 /* Frame counter — BELOW bottom sprockets, upside down, full width */
 .diary-frame-counter {
   background: #1a1a1a;
-  height: 24px;
+  height: clamp(16px, 1.8vw, 24px);
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 8px;
+  padding: 0 0.5vw;
   font-family: 'Jost', sans-serif;
-  font-size: 8px;
+  font-size: clamp(5px, 0.6vw, 8px);
   font-weight: 300;
   letter-spacing: .04em;
   color: rgba(152,145,82,0.6);
@@ -780,21 +780,8 @@ nav {
   letter-spacing: .06em;
 }
 
-@media (max-width: 900px) {
-  .diary-slide {
-    width: 150px;
-    height: 224px;
-  }
-}
 @media (max-width: 600px) {
-  .diary-top { padding: 20px; }
-  .diary-slide {
-    width: 140px;
-    height: 210px;
-  }
-  .diary-sprockets { height: 24px; }
-  .diary-sprockets .hole { width: 8px; height: 13px; }
-  .diary-slide { width: 120px; height: 180px; }
+  .diary-top { padding: 16px 20px; }
 }
 
 /* ══ DECK CTA ══ */
