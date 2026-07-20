@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Photo Diary — Vieren</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Podium';
@@ -23,16 +24,11 @@
 :root {
   --bg: #2C2E2C;
   --s1: #242624;
-  --s2: #363836;
-  --card: #EEE8D8;
   --t1: #EEE8D8;
   --t2: #EEE8D8;
   --t3: #9a9a8a;
   --t4: #6a6a5a;
   --ac: #FF9F00;
-  --sg: #284521;
-  --film: #1a1a1a;
-  --sprocket: #2a2a2a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,11 +38,9 @@ body {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
 
-/* ══ NAV ══ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 99;
   padding: 24px 40px;
@@ -64,10 +58,9 @@ nav {
 }
 .nav-cta:hover { background: var(--t1); color: var(--bg); }
 
-/* ══ PAGE HEADER ══ */
 .diary-header {
   padding: 120px 40px 60px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .diary-header h1 {
@@ -88,7 +81,7 @@ nav {
 
 /* ══ DIARY ENTRIES ══ */
 .diary-feed {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 40px 120px;
 }
@@ -99,147 +92,60 @@ nav {
   margin-bottom: 0;
 }
 
-/* Entry meta */
-.entry-meta {
-  margin-bottom: 16px;
-  padding-left: 4px;
-}
 .entry-date {
-  font-family: 'Archivo', monospace;
+  font-family: 'Jost', sans-serif;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--t1);
+  font-weight: 400;
+  color: var(--t3);
   letter-spacing: .1em;
   text-transform: uppercase;
+  margin-bottom: 16px;
 }
 .entry-location {
   font-size: 12px;
-  color: var(--t3);
-  margin-top: 4px;
+  color: var(--t4);
+  margin-top: -12px;
+  margin-bottom: 16px;
   letter-spacing: .06em;
 }
 .entry-tags {
   font-size: 11px;
   color: var(--t4);
-  margin-top: 4px;
+  margin-top: -12px;
+  margin-bottom: 16px;
   letter-spacing: .04em;
 }
 .entry-tags span {
   margin-right: 8px;
 }
 
-/* ══ FILM FRAME ══ */
-.film-frame {
-  background: var(--film);
-  border-radius: 4px;
-  padding: 0;
-  position: relative;
-  overflow: hidden;
+/* Photo grid — single photo full width, multi in grid */
+.entry-photos {
+  display: grid;
+  gap: 4px;
 }
-
-/* Sprocket holes */
-.sprockets-top,
-.sprockets-bottom {
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding: 0 12px;
-  position: relative;
+.entry-photos.single {
+  grid-template-columns: 1fr;
 }
-.sprockets-top::before,
-.sprockets-bottom::before {
-  content: '';
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  height: 100%;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0px,
-    transparent 8px,
-    var(--sprocket) 8px,
-    var(--sprocket) 20px,
-    transparent 20px,
-    transparent 28px
-  );
-  mask: repeating-linear-gradient(
-    90deg,
-    transparent 0px,
-    transparent 8px,
-    black 8px,
-    black 20px,
-    transparent 20px,
-    transparent 28px
-  );
-  border-radius: 2px;
+.entry-photos.multi-2 {
+  grid-template-columns: 1fr 1fr;
 }
-.sprocket-hole {
-  width: 12px;
-  height: 8px;
-  background: var(--sprocket);
-  border-radius: 2px;
-  flex-shrink: 0;
+.entry-photos.multi-3 {
+  grid-template-columns: 1fr 1fr 1fr;
 }
-
-/* Film gate (photo area) */
-.film-gate {
-  position: relative;
-  overflow: hidden;
+.entry-photos.multi-4 {
+  grid-template-columns: 1fr 1fr;
 }
-.film-gate img {
+.entry-photos img {
   width: 100%;
   display: block;
   object-fit: cover;
+  aspect-ratio: 3/4;
 }
-
-/* Multi-photo swipe */
-.film-gate-slider {
-  display: flex;
-  transition: transform 0.4s ease;
-  touch-action: pan-y;
-}
-.film-gate-slider img {
-  min-width: 100%;
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-/* Slide indicators */
-.slide-indicators {
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 5;
-}
-.slide-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.3);
-  transition: background .3s;
-}
-.slide-dot.active {
-  background: rgba(255,255,255,.9);
-}
-
-/* Frame counter */
-.frame-counter {
-  height: 20px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  font-family: 'Archivo', monospace;
-  font-size: 8px;
-  letter-spacing: .12em;
-  color: rgba(255,255,255,.2);
-  text-transform: uppercase;
-  justify-content: space-between;
+.entry-photos.single img {
+  aspect-ratio: auto;
+  max-height: 80vh;
+  object-fit: contain;
 }
 
 /* ══ EMPTY STATE ══ */
@@ -251,7 +157,6 @@ nav {
   letter-spacing: .04em;
 }
 
-/* ══ FOOTER ══ */
 footer {
   padding: 32px 40px; border-top: 1px solid rgba(255,255,255,.06);
   display: flex; justify-content: space-between; align-items: center;
@@ -259,12 +164,12 @@ footer {
 footer .fl { font-size: 13px; color: var(--t4); }
 footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); }
 
-/* ══ RESPONSIVE ══ */
 @media (max-width: 600px) {
   nav { padding-left: 20px; padding-right: 20px; }
   .diary-header { padding: 100px 20px 40px; }
   .diary-feed { padding: 0 20px 80px; }
   .diary-entry { margin-bottom: 60px; }
+  .entry-photos.multi-3 { grid-template-columns: 1fr 1fr; }
   footer { padding-left: 20px; padding-right: 20px; }
 }
 </style>
@@ -273,7 +178,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <nav>
   <a href="/" class="nav-logo">Vieren</a>
-  <a href="mailto:hello@vieren.co" class="nav-cta">Get In Touch</a>
+  <a href="mailto:hello@vieren.studio" class="nav-cta">Get In Touch</a>
 </nav>
 
 <div class="diary-header">
@@ -290,125 +195,53 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <script>
 (function() {
-  const feed = document.getElementById('diaryFeed');
+  var feed = document.getElementById('diaryFeed');
 
   fetch('diary.json')
-    .then(r => r.json())
-    .then(entries => {
+    .then(function(r) { return r.json(); })
+    .then(function(entries) {
       if (!entries.length) {
         feed.innerHTML = '<div class="diary-empty">Nothing here yet.</div>';
         return;
       }
-      entries.forEach((entry, idx) => {
-        feed.appendChild(createEntry(entry, idx));
+      entries.forEach(function(entry) {
+        feed.appendChild(createEntry(entry));
       });
-      initSwipers();
     });
 
   function formatDate(dateStr) {
-    const d = new Date(dateStr + 'T00:00:00');
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var d = new Date(dateStr + 'T00:00:00');
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
   }
 
-  function createEntry(entry, idx) {
-    const el = document.createElement('div');
+  function createEntry(entry) {
+    var el = document.createElement('div');
     el.className = 'diary-entry';
 
-    // Meta
-    let metaHTML = '<div class="entry-meta">';
-    metaHTML += '<div class="entry-date">' + formatDate(entry.date) + '</div>';
+    var html = '<div class="entry-date">' + formatDate(entry.date) + '</div>';
     if (entry.location) {
-      metaHTML += '<div class="entry-location">' + entry.location + '</div>';
+      html += '<div class="entry-location">' + entry.location + '</div>';
     }
     if (entry.tags && entry.tags.length) {
-      metaHTML += '<div class="entry-tags">' + entry.tags.map(t => '<span>' + t + '</span>').join('') + '</div>';
-    }
-    metaHTML += '</div>';
-
-    // Film frame
-    const photos = entry.photos || [];
-    const isMulti = photos.length > 1;
-    const frameNum = String(idx + 1).padStart(2, '0');
-
-    let gateHTML = '';
-    if (isMulti) {
-      gateHTML = '<div class="film-gate">';
-      gateHTML += '<div class="film-gate-slider" data-swiper>';
-      photos.forEach(p => {
-        gateHTML += '<img src="image/diary/' + entry.date + '/' + p + '" alt="" loading="lazy">';
-      });
-      gateHTML += '</div>';
-      gateHTML += '<div class="slide-indicators">';
-      photos.forEach((_, i) => {
-        gateHTML += '<div class="slide-dot' + (i === 0 ? ' active' : '') + '"></div>';
-      });
-      gateHTML += '</div>';
-      gateHTML += '</div>';
-    } else if (photos.length === 1) {
-      gateHTML = '<div class="film-gate"><img src="image/diary/' + entry.date + '/' + photos[0] + '" alt="" loading="lazy"></div>';
+      html += '<div class="entry-tags">' + entry.tags.map(function(t) { return '<span>' + t + '</span>'; }).join('') + '</div>';
     }
 
-    el.innerHTML = metaHTML +
-      '<div class="film-frame">' +
-        '<div class="sprockets-top">' + sprocketHoles() + '</div>' +
-        gateHTML +
-        '<div class="frame-counter"><span>VIEREN STUDIO</span><span>' + frameNum + '</span></div>' +
-        '<div class="sprockets-bottom">' + sprocketHoles() + '</div>' +
-      '</div>';
+    var photos = entry.photos || [];
+    var count = photos.length;
+    var gridClass = 'single';
+    if (count === 2) gridClass = 'multi-2';
+    if (count === 3) gridClass = 'multi-3';
+    if (count >= 4) gridClass = 'multi-4';
 
-    return el;
-  }
-
-  function sprocketHoles() {
-    let html = '';
-    for (let i = 0; i < 40; i++) {
-      html += '<div class="sprocket-hole"></div>';
-    }
-    return html;
-  }
-
-  // Touch swipe for multi-photo entries
-  function initSwipers() {
-    document.querySelectorAll('[data-swiper]').forEach(slider => {
-      const imgs = slider.querySelectorAll('img');
-      const dots = slider.parentElement.querySelectorAll('.slide-dot');
-      const total = imgs.length;
-      let current = 0;
-      let startX = 0;
-      let diff = 0;
-      let dragging = false;
-
-      function goTo(i) {
-        current = Math.max(0, Math.min(i, total - 1));
-        slider.style.transform = 'translateX(' + (-current * 100) + '%)';
-        dots.forEach((d, di) => d.classList.toggle('active', di === current));
-      }
-
-      slider.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        dragging = true;
-        slider.style.transition = 'none';
-      }, { passive: true });
-
-      slider.addEventListener('touchmove', e => {
-        if (!dragging) return;
-        diff = e.touches[0].clientX - startX;
-        const offset = (-current * 100) + (diff / slider.offsetWidth * 100);
-        slider.style.transform = 'translateX(' + offset + '%)';
-      }, { passive: true });
-
-      slider.addEventListener('touchend', () => {
-        dragging = false;
-        slider.style.transition = 'transform 0.4s ease';
-        if (Math.abs(diff) > 50) {
-          goTo(current + (diff < 0 ? 1 : -1));
-        } else {
-          goTo(current);
-        }
-        diff = 0;
-      });
+    html += '<div class="entry-photos ' + gridClass + '">';
+    photos.forEach(function(p) {
+      html += '<img src="image/diary/' + entry.date + '/' + p + '" alt="" loading="lazy">';
     });
+    html += '</div>';
+
+    el.innerHTML = html;
+    return el;
   }
 })();
 </script>
