@@ -714,29 +714,26 @@ nav {
   background: #1a1a1a;
   position: relative;
 }
-/* Sprocket holes — wide, short cutouts like real 35mm film */
+/* Sprocket holes — portrait orientation, ~41 across full width */
 .diary-sprockets {
-  height: 30px;
+  height: 32px;
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 4px;
+  justify-content: space-between;
+  padding: 0 8px;
   overflow: hidden;
 }
 .diary-sprockets .hole {
-  width: 18px;
-  height: 12px;
+  width: 10px;
+  height: 16px;
   background: #c9c5ba;
   border-radius: 2px;
   flex-shrink: 0;
 }
-.diary-sprockets-bot {
-  height: 26px;
-}
 .diary-sprockets-bot .hole {
-  width: 16px;
-  height: 10px;
+  width: 9px;
+  height: 14px;
 }
 .diary-slider-track {
   display: flex;
@@ -799,10 +796,9 @@ nav {
     width: 140px;
     height: 210px;
   }
-  .diary-sprockets { height: 20px; gap: 5px; }
-  .diary-sprockets .hole { width: 10px; height: 7px; }
-  .diary-sprockets-bot { height: 18px; }
-  .diary-sprockets-bot .hole { width: 9px; height: 6px; }
+  .diary-sprockets { height: 22px; }
+  .diary-sprockets .hole { width: 6px; height: 10px; }
+  .diary-sprockets-bot .hole { width: 5px; height: 9px; }
 }
 
 /* ══ DECK CTA ══ */
@@ -1478,8 +1474,8 @@ for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math
         });
       });
 
-      // Generate sprocket holes
-      var holeCount = Math.ceil(window.innerWidth / 19);
+      // Generate sprocket holes — 41 per row like reference
+      var holeCount = 41;
       ['sprocketsTop','sprocketsBot'].forEach(function(id) {
         var el = document.getElementById(id);
         if (!el) return;
