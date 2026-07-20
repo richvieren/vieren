@@ -716,7 +716,7 @@ nav {
 }
 /* Sprocket holes — portrait orientation, ~41 across full width */
 .diary-sprockets {
-  height: 32px;
+  height: 38px;
   position: relative;
   display: flex;
   align-items: center;
@@ -725,15 +725,11 @@ nav {
   overflow: hidden;
 }
 .diary-sprockets .hole {
-  width: 10px;
-  height: 16px;
+  width: 15px;
+  height: 24px;
   background: #c9c5ba;
   border-radius: 2px;
   flex-shrink: 0;
-}
-.diary-sprockets-bot .hole {
-  width: 9px;
-  height: 14px;
 }
 .diary-slider-track {
   display: flex;
@@ -743,8 +739,8 @@ nav {
 }
 .diary-slide {
   flex: 0 0 auto;
-  width: 295px;
-  height: 440px;
+  width: 177px;
+  height: 264px;
   overflow: hidden;
   position: relative;
 }
@@ -766,7 +762,7 @@ nav {
   font-size: 8px;
   font-weight: 300;
   letter-spacing: .04em;
-  color: rgba(201,197,186,0.3);
+  color: rgba(152,145,82,0.6);
   text-transform: uppercase;
   overflow: hidden;
   white-space: nowrap;
@@ -786,8 +782,8 @@ nav {
 
 @media (max-width: 900px) {
   .diary-slide {
-    width: 200px;
-    height: 300px;
+    width: 150px;
+    height: 224px;
   }
 }
 @media (max-width: 600px) {
@@ -796,9 +792,9 @@ nav {
     width: 140px;
     height: 210px;
   }
-  .diary-sprockets { height: 22px; }
-  .diary-sprockets .hole { width: 6px; height: 10px; }
-  .diary-sprockets-bot .hole { width: 5px; height: 9px; }
+  .diary-sprockets { height: 24px; }
+  .diary-sprockets .hole { width: 8px; height: 13px; }
+  .diary-slide { width: 120px; height: 180px; }
 }
 
 /* ══ DECK CTA ══ */
