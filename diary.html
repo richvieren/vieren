@@ -14,6 +14,12 @@
   font-weight: 900;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Dharma Gothic';
+  src: url('fonts/dharma-gothic-heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+}
 
 :root {
   --bg: #0a0a0a;
@@ -36,34 +42,113 @@ a { color: inherit; text-decoration: none; }
 /* ══ NAV ══ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 99;
-  padding: 24px 40px;
-  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 40px;
+  display: flex; align-items: center;
   mix-blend-mode: difference;
+}
+.nav-left {
+  display: flex; align-items: baseline; gap: 12px;
 }
 .nav-logo {
   font-family: 'Podium', sans-serif; font-weight: 900;
   font-size: 20px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
 }
-.nav-links {
-  display: flex; gap: 28px; align-items: center;
+.nav-title {
+  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
+  font-size: 28px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
+  line-height: 1;
 }
-.nav-links a, .nav-links button {
+.nav-center {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 0;
+}
+.nav-center a, .nav-center button {
   font-family: 'Jost', sans-serif;
-  font-size: 13px; font-weight: 400;
-  letter-spacing: .1em; text-transform: uppercase;
+  font-size: 13px; font-weight: 300;
+  letter-spacing: .06em;
   color: #fff; background: none; border: none; cursor: pointer;
   transition: opacity .3s;
 }
-.nav-links a:hover, .nav-links button:hover { opacity: 0.6; }
+.nav-center a:hover, .nav-center button:hover { opacity: 0.5; }
+.nav-sep {
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  margin: 0 12px;
+  font-weight: 300;
+}
 
-/* ══ ARCHIVE DROPDOWN ══ */
-.archive-wrap { position: relative; }
+/* ══ ZOOM CONTROLS ══ */
+.zoom-controls {
+  position: fixed; top: 20px; left: 50%; z-index: 98;
+  transform: translateX(-50%);
+  margin-left: -180px;
+  display: flex; gap: 8px; align-items: center;
+  mix-blend-mode: difference;
+}
+.zoom-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 18px; font-weight: 300;
+  color: #fff; background: none; border: none;
+  cursor: pointer; line-height: 1;
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .3s;
+}
+.zoom-btn:hover { opacity: 0.5; }
+
+/* ══ FIXED DATE ══ */
+.diary-date {
+  position: fixed;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  z-index: 50;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s;
+}
+.diary-date.visible { opacity: 1; }
+
+/* ══ DIARY ENTRIES ══ */
+.diary-feed {
+  width: 100%;
+  padding-top: 60px;
+  transition: max-width .4s ease, padding .4s ease;
+}
+.diary-entry {
+  position: relative;
+  width: 100%;
+}
+.diary-entry img {
+  width: 100%;
+  display: block;
+  transition: border-radius .4s ease;
+}
+
+/* Zoom levels */
+body.zoom-1 .diary-feed { max-width: 100%; margin: 0; padding-left: 0; padding-right: 0; }
+body.zoom-1 .diary-entry img { border-radius: 0; }
+
+body.zoom-2 .diary-feed { max-width: 80%; margin: 0 auto; }
+body.zoom-2 .diary-entry img { border-radius: 0; }
+body.zoom-2 .diary-entry { margin-bottom: 4px; }
+
+body.zoom-3 .diary-feed { max-width: 60%; margin: 0 auto; }
+body.zoom-3 .diary-entry img { border-radius: 0; }
+body.zoom-3 .diary-entry { margin-bottom: 8px; }
+
+/* ══ ARCHIVE OVERLAY ══ */
 .archive-dropdown {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 98;
+  z-index: 100;
   background: rgba(10,10,10,0.95);
   display: none; align-items: center; justify-content: center;
-  mix-blend-mode: normal;
 }
 .archive-dropdown.open { display: flex; }
 .archive-inner {
@@ -107,57 +192,10 @@ nav {
 .archive-close {
   position: absolute; top: 24px; right: 40px;
   font-family: 'Jost', sans-serif;
-  font-size: 13px; font-weight: 400;
-  letter-spacing: .1em; text-transform: uppercase;
+  font-size: 13px; font-weight: 300;
+  letter-spacing: .06em;
   color: #fff; background: none; border: none; cursor: pointer;
 }
-
-/* ══ INTRO ══ */
-.diary-intro {
-  padding: 120px 40px 60px;
-  text-align: center;
-}
-.diary-intro h1 {
-  font-family: 'Podium', sans-serif; font-weight: 900;
-  font-size: clamp(28px, 5vw, 48px);
-  letter-spacing: .06em; text-transform: uppercase;
-  color: var(--t1);
-  margin-bottom: 12px;
-}
-.diary-intro p {
-  font-size: 14px;
-  color: var(--t3);
-  letter-spacing: .04em;
-  max-width: 400px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* ══ FIXED DATE ══ */
-.diary-date {
-  position: fixed;
-  top: 50%;
-  left: 40px;
-  transform: translateY(-50%);
-  z-index: 50;
-  font-family: 'Podium', sans-serif;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
-  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
-  mix-blend-mode: difference;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity .4s;
-}
-.diary-date.visible { opacity: 1; }
-
-/* ══ DIARY ENTRIES ══ */
-.diary-feed { width: 100%; }
-.diary-entry { position: relative; width: 100%; }
-.diary-entry img { width: 100%; display: block; }
 
 /* ══ EMPTY STATE ══ */
 .diary-empty {
@@ -167,34 +205,41 @@ nav {
 
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
-  .nav-links { gap: 16px; }
-  .nav-links a, .nav-links button { font-size: 11px; }
-  .diary-intro { padding: 90px 20px 40px; }
-  .diary-date { left: 20px; font-size: 12px; }
+  .nav-title { font-size: 22px; }
+  .nav-center { position: static; transform: none; margin-left: auto; }
+  .nav-sep { margin: 0 8px; }
+  .zoom-controls { display: none; }
+  .diary-date { left: 20px; font-size: 11px; }
   .archive-close { top: 16px; right: 20px; }
+  body.zoom-2 .diary-feed, body.zoom-3 .diary-feed { max-width: 100%; }
 }
 </style>
 </head>
-<body>
+<body class="zoom-1">
 
 <nav>
-  <a href="/" class="nav-logo">Vieren</a>
-  <div class="nav-links">
+  <div class="nav-left">
+    <a href="/" class="nav-logo">Vieren</a>
+    <span class="nav-title">Photo Diary</span>
+  </div>
+  <div class="nav-center">
     <a href="/">portfolio</a>
+    <span class="nav-sep">+</span>
     <button id="archiveToggle">archive</button>
+    <span class="nav-sep">+</span>
     <a href="mailto:richard@vieren.studio">contact</a>
   </div>
 </nav>
+
+<div class="zoom-controls">
+  <button class="zoom-btn" id="zoomIn" title="Zoom in">+</button>
+  <button class="zoom-btn" id="zoomOut" title="Zoom out">&minus;</button>
+</div>
 
 <!-- Archive overlay -->
 <div class="archive-dropdown" id="archiveDropdown">
   <button class="archive-close" id="archiveClose">close</button>
   <div class="archive-inner" id="archiveInner"></div>
-</div>
-
-<div class="diary-intro">
-  <h1>shit photos / great memories</h1>
-  <p>a photo dump for life, behind the scenes, building in public.</p>
 </div>
 
 <div class="diary-date" id="diaryDate"></div>
@@ -208,8 +253,19 @@ nav {
   var archiveDropdown = document.getElementById('archiveDropdown');
   var archiveClose = document.getElementById('archiveClose');
   var archiveInner = document.getElementById('archiveInner');
+  var zoomInBtn = document.getElementById('zoomIn');
+  var zoomOutBtn = document.getElementById('zoomOut');
   var allEntries = [];
+  var currentZoom = 1;
   var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  // Zoom
+  function setZoom(level) {
+    currentZoom = Math.max(1, Math.min(3, level));
+    document.body.className = 'zoom-' + currentZoom;
+  }
+  zoomInBtn.addEventListener('click', function() { setZoom(currentZoom + 1); });
+  zoomOutBtn.addEventListener('click', function() { setZoom(currentZoom - 1); });
 
   function formatDate(dateStr) {
     var d = new Date(dateStr + 'T00:00:00');
@@ -222,8 +278,11 @@ nav {
     return { year: parts[0], month: parseInt(parts[1], 10) };
   }
 
+  var entryObserver;
   function renderEntries(entries) {
     feed.innerHTML = '';
+    if (entryObserver) entryObserver.disconnect();
+
     if (!entries.length) {
       feed.innerHTML = '<div class="diary-empty">Nothing here yet.</div>';
       dateEl.classList.remove('visible');
@@ -242,14 +301,9 @@ nav {
       });
       feed.appendChild(el);
     });
-    setupObserver();
-  }
 
-  function setupObserver() {
-    dateEl.textContent = '';
-    dateEl.classList.remove('visible');
-
-    var observer = new IntersectionObserver(function(obs) {
+    // Date observer
+    entryObserver = new IntersectionObserver(function(obs) {
       obs.forEach(function(e) {
         if (e.isIntersecting) {
           dateEl.textContent = e.target.dataset.date;
@@ -259,23 +313,12 @@ nav {
     }, { rootMargin: '-50% 0px -50% 0px' });
 
     document.querySelectorAll('.diary-entry').forEach(function(el) {
-      observer.observe(el);
+      entryObserver.observe(el);
     });
-
-    // Show date once user scrolls past intro
-    var introObs = new IntersectionObserver(function(obs) {
-      obs.forEach(function(e) {
-        if (e.isIntersecting) {
-          dateEl.classList.remove('visible');
-        }
-      });
-    });
-    var intro = document.querySelector('.diary-intro');
-    if (intro) introObs.observe(intro);
   }
 
+  // Archive
   function buildArchive() {
-    // Group by year > month
     var years = {};
     allEntries.forEach(function(entry) {
       var ym = getYearMonth(entry.date);
@@ -284,11 +327,9 @@ nav {
     });
 
     var html = '';
-    var sortedYears = Object.keys(years).sort().reverse();
-    sortedYears.forEach(function(year) {
+    Object.keys(years).sort().reverse().forEach(function(year) {
       html += '<div class="archive-year">' + year + '</div><div class="archive-months">';
-      var sortedMonths = Object.keys(years[year]).map(Number).sort().reverse();
-      sortedMonths.forEach(function(m) {
+      Object.keys(years[year]).map(Number).sort().reverse().forEach(function(m) {
         html += '<button class="archive-month" data-year="' + year + '" data-month="' + m + '">' + monthNames[m - 1] + '</button>';
       });
       html += '</div>';
@@ -296,7 +337,6 @@ nav {
     html += '<button class="archive-all">show all</button>';
     archiveInner.innerHTML = html;
 
-    // Month click handlers
     archiveInner.querySelectorAll('.archive-month').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var y = btn.dataset.year;
@@ -307,11 +347,10 @@ nav {
         });
         renderEntries(filtered);
         closeArchive();
-        window.scrollTo({ top: document.querySelector('.diary-intro').offsetHeight, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
 
-    // Show all
     archiveInner.querySelector('.archive-all').addEventListener('click', function() {
       renderEntries(allEntries);
       closeArchive();
@@ -332,7 +371,7 @@ nav {
     if (e.key === 'Escape') closeArchive();
   });
 
-  // Load data
+  // Load
   fetch('diary.json')
     .then(function(r) { return r.json(); })
     .then(function(entries) {
