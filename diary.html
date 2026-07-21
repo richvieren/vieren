@@ -43,7 +43,7 @@ a { color: inherit; text-decoration: none; }
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 99;
   padding: 20px 40px;
-  display: flex; align-items: center;
+  display: flex; align-items: center; justify-content: space-between;
   mix-blend-mode: difference;
 }
 .nav-left {
@@ -58,26 +58,7 @@ nav {
   font-size: 22px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
   line-height: 1;
 }
-.nav-center {
-  position: absolute; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 0;
-}
-.nav-center a, .nav-center button {
-  font-family: 'Jost', sans-serif;
-  font-size: 13px; font-weight: 300;
-  letter-spacing: .06em;
-  color: #fff; background: none; border: none; cursor: pointer;
-  transition: opacity .3s;
-}
-.nav-center a:hover, .nav-center button:hover { opacity: 0.5; }
-.nav-sep {
-  font-size: 13px; color: rgba(255,255,255,0.4);
-  margin: 0 12px;
-  font-weight: 300;
-}
-
-/* ══ ZOOM CONTROLS ══ */
-.zoom-controls {
+.nav-mid {
   display: flex; align-items: center; gap: 0;
 }
 .zoom-btn {
@@ -93,6 +74,22 @@ nav {
   font-size: 13px; color: rgba(255,255,255,0.4);
   font-weight: 300;
   margin: 0 1px;
+}
+.nav-right {
+  display: flex; align-items: center; gap: 0;
+}
+.nav-right a, .nav-right button {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 300;
+  letter-spacing: .06em;
+  color: #fff; background: none; border: none; cursor: pointer;
+  transition: opacity .3s;
+}
+.nav-right a:hover, .nav-right button:hover { opacity: 0.5; }
+.nav-comma {
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  margin: 0 8px;
+  font-weight: 300;
 }
 
 /* ══ FIXED DATE ══ */
@@ -110,15 +107,12 @@ nav {
   text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   mix-blend-mode: difference;
   pointer-events: none;
-  opacity: 0;
   transition: opacity .4s;
 }
-.diary-date.visible { opacity: 1; }
 
 /* ══ DIARY ENTRIES ══ */
 .diary-feed {
   width: 100%;
-  padding-top: 60px;
   transition: max-width .4s ease, padding .4s ease;
 }
 .diary-entry {
@@ -128,17 +122,16 @@ nav {
 .diary-entry img {
   width: 100%;
   display: block;
-  transition: border-radius .4s ease;
 }
 
 /* Zoom levels */
-body.zoom-1 .diary-feed { max-width: 100%; margin: 0; padding-left: 0; padding-right: 0; }
+body.zoom-1 .diary-feed { max-width: 100%; margin: 0; }
 body.zoom-1 .diary-entry { margin-bottom: 0; }
 
-body.zoom-2 .diary-feed { max-width: 55%; margin: 0 auto; }
+body.zoom-2 .diary-feed { max-width: 35%; margin: 0 auto; }
 body.zoom-2 .diary-entry { margin-bottom: 12px; }
 
-body.zoom-3 .diary-feed { max-width: 35%; margin: 0 auto; }
+body.zoom-3 .diary-feed { max-width: 10%; margin: 0 auto; }
 body.zoom-3 .diary-entry { margin-bottom: 16px; }
 
 /* ══ ARCHIVE OVERLAY ══ */
@@ -203,10 +196,9 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
 
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
-  .nav-title { font-size: 22px; }
-  .nav-center { position: static; transform: none; margin-left: auto; }
-  .nav-sep { margin: 0 8px; }
-  .zoom-controls .zoom-btn { font-size: 14px; }
+  .nav-title { font-size: 18px; }
+  .nav-mid { display: none; }
+  .nav-comma { margin: 0 6px; }
   .diary-date { left: 20px; font-size: 11px; }
   .archive-close { top: 16px; right: 20px; }
   body.zoom-2 .diary-feed, body.zoom-3 .diary-feed { max-width: 100%; }
@@ -220,17 +212,16 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
     <a href="/" class="nav-logo">Vieren</a>
     <span class="nav-title">Photo Diary</span>
   </div>
-  <div class="nav-center">
-    <div class="zoom-controls">
-      <button class="zoom-btn" id="zoomIn">+</button>
-      <span class="zoom-sep">/</span>
-      <button class="zoom-btn" id="zoomOut">&minus;</button>
-    </div>
-    <span class="nav-sep">+</span>
+  <div class="nav-mid">
+    <button class="zoom-btn" id="zoomIn">+</button>
+    <span class="zoom-sep">/</span>
+    <button class="zoom-btn" id="zoomOut">&minus;</button>
+  </div>
+  <div class="nav-right">
     <a href="/">portfolio</a>
-    <span class="nav-sep">+</span>
+    <span class="nav-comma">,</span>
     <button id="archiveToggle">archive</button>
-    <span class="nav-sep">+</span>
+    <span class="nav-comma">,</span>
     <a href="mailto:richard@vieren.studio">contact</a>
   </div>
 </nav>
@@ -258,14 +249,14 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
   var currentZoom = 1;
   var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-  // Zoom
+  // Zoom: + makes bigger (lower number), - makes smaller (higher number)
   function setZoom(level) {
     document.body.classList.remove('zoom-' + currentZoom);
     currentZoom = Math.max(1, Math.min(3, level));
     document.body.classList.add('zoom-' + currentZoom);
   }
-  zoomInBtn.addEventListener('click', function() { setZoom(currentZoom + 1); });
-  zoomOutBtn.addEventListener('click', function() { setZoom(currentZoom - 1); });
+  zoomInBtn.addEventListener('click', function() { setZoom(currentZoom - 1); });
+  zoomOutBtn.addEventListener('click', function() { setZoom(currentZoom + 1); });
 
   function formatDate(dateStr) {
     var d = new Date(dateStr + 'T00:00:00');
@@ -285,7 +276,6 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
 
     if (!entries.length) {
       feed.innerHTML = '<div class="diary-empty">Nothing here yet.</div>';
-      dateEl.classList.remove('visible');
       return;
     }
     entries.forEach(function(entry) {
@@ -307,7 +297,6 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
       obs.forEach(function(e) {
         if (e.isIntersecting) {
           dateEl.textContent = e.target.dataset.date;
-          dateEl.classList.add('visible');
         }
       });
     }, { rootMargin: '-50% 0px -50% 0px' });
