@@ -58,54 +58,23 @@ nav {
   display: block;
 }
 
-/* Date overlay — fixed to left side while entry is in view */
-.entry-overlay {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 40px;
-  pointer-events: none;
-}
+/* Date overlay — sticky within each entry */
 .entry-date {
-  font-family: 'Jost', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: .14em;
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0 40px;
+  font-family: 'Podium', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-}
-.entry-location {
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: .06em;
-  margin-top: 2px;
-}
-.entry-next {
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  cursor: pointer;
-  pointer-events: auto;
-  transition: color .3s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.entry-next:hover {
-  color: rgba(255,255,255,0.9);
-}
-.entry-next svg {
-  width: 16px;
-  height: 16px;
+  color: rgba(255,255,255,0.75);
+  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+  pointer-events: none;
+  height: 0;
+  overflow: visible;
 }
 
 /* ══ EMPTY STATE ══ */
@@ -119,7 +88,7 @@ nav {
 
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
-  .entry-overlay { padding: 16px 20px; }
+  .entry-date { padding: 0 20px; font-size: 12px; }
 }
 </style>
 </head>
@@ -142,8 +111,8 @@ nav {
         feed.innerHTML = '<div class="diary-empty">Nothing here yet.</div>';
         return;
       }
-      entries.forEach(function(entry, idx) {
-        feed.appendChild(createEntry(entry, idx, entries.length));
+      entries.forEach(function(entry) {
+        feed.appendChild(createEntry(entry));
       });
     });
 
@@ -153,28 +122,15 @@ nav {
     return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
   }
 
-  function createEntry(entry, idx, total) {
+  function createEntry(entry) {
     var el = document.createElement('div');
     el.className = 'diary-entry';
-    el.id = 'entry-' + idx;
 
-    // Overlay with date + next arrow
-    var overlay = document.createElement('div');
-    overlay.className = 'entry-overlay';
-
-    var left = '<div><div class="entry-date">' + formatDate(entry.date) + '</div>';
-    if (entry.location) {
-      left += '<div class="entry-location">' + entry.location + '</div>';
-    }
-    left += '</div>';
-
-    var right = '';
-    if (idx < total - 1) {
-      right = '<div class="entry-next" onclick="document.getElementById(\'entry-' + (idx + 1) + '\').scrollIntoView({behavior:\'smooth\'})">Next <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>';
-    }
-
-    overlay.innerHTML = left + right;
-    el.appendChild(overlay);
+    // Sticky date label
+    var date = document.createElement('div');
+    date.className = 'entry-date';
+    date.textContent = formatDate(entry.date);
+    el.appendChild(date);
 
     // Photos — full bleed, stacked
     var photos = entry.photos || [];
