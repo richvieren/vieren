@@ -18,6 +18,7 @@
 :root {
   --bg: #0a0a0a;
   --t1: #EEE8D8;
+  --t3: #9a9a8a;
   --t4: #6a6a5a;
 }
 
@@ -43,6 +44,94 @@ nav {
   font-family: 'Podium', sans-serif; font-weight: 900;
   font-size: 20px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
 }
+.nav-links {
+  display: flex; gap: 28px; align-items: center;
+}
+.nav-links a, .nav-links button {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 400;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #fff; background: none; border: none; cursor: pointer;
+  transition: opacity .3s;
+}
+.nav-links a:hover, .nav-links button:hover { opacity: 0.6; }
+
+/* ══ ARCHIVE DROPDOWN ══ */
+.archive-wrap { position: relative; }
+.archive-dropdown {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 98;
+  background: rgba(10,10,10,0.95);
+  display: none; align-items: center; justify-content: center;
+  mix-blend-mode: normal;
+}
+.archive-dropdown.open { display: flex; }
+.archive-inner {
+  text-align: center;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.archive-year {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 32px; letter-spacing: .1em;
+  color: var(--t1);
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+.archive-year:first-child { margin-top: 0; }
+.archive-months {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px;
+  margin-bottom: 8px;
+}
+.archive-month {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px; font-weight: 300;
+  letter-spacing: .06em;
+  color: var(--t3);
+  background: none; border: none; cursor: pointer;
+  padding: 6px 0;
+  transition: color .3s;
+}
+.archive-month:hover { color: var(--t1); }
+.archive-month.active { color: var(--t1); font-weight: 500; }
+.archive-all {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 400;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--t4);
+  background: none; border: none; cursor: pointer;
+  margin-top: 32px; padding: 8px 0;
+  transition: color .3s;
+}
+.archive-all:hover { color: var(--t1); }
+.archive-close {
+  position: absolute; top: 24px; right: 40px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 400;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #fff; background: none; border: none; cursor: pointer;
+}
+
+/* ══ INTRO ══ */
+.diary-intro {
+  padding: 120px 40px 60px;
+  text-align: center;
+}
+.diary-intro h1 {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: clamp(28px, 5vw, 48px);
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--t1);
+  margin-bottom: 12px;
+}
+.diary-intro p {
+  font-size: 14px;
+  color: var(--t3);
+  letter-spacing: .04em;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
 
 /* ══ FIXED DATE ══ */
 .diary-date {
@@ -60,33 +149,29 @@ nav {
   text-shadow: 0 1px 12px rgba(0,0,0,0.6);
   mix-blend-mode: difference;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s;
 }
+.diary-date.visible { opacity: 1; }
 
 /* ══ DIARY ENTRIES ══ */
-.diary-feed {
-  width: 100%;
-}
-.diary-entry {
-  position: relative;
-  width: 100%;
-}
-.diary-entry img {
-  width: 100%;
-  display: block;
-}
+.diary-feed { width: 100%; }
+.diary-entry { position: relative; width: 100%; }
+.diary-entry img { width: 100%; display: block; }
 
 /* ══ EMPTY STATE ══ */
 .diary-empty {
-  text-align: center;
-  padding: 200px 40px;
-  color: var(--t4);
-  font-size: 14px;
-  letter-spacing: .04em;
+  text-align: center; padding: 200px 40px;
+  color: var(--t4); font-size: 14px; letter-spacing: .04em;
 }
 
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
+  .nav-links { gap: 16px; }
+  .nav-links a, .nav-links button { font-size: 11px; }
+  .diary-intro { padding: 90px 20px 40px; }
   .diary-date { left: 20px; font-size: 12px; }
+  .archive-close { top: 16px; right: 20px; }
 }
 </style>
 </head>
@@ -94,7 +179,23 @@ nav {
 
 <nav>
   <a href="/" class="nav-logo">Vieren</a>
+  <div class="nav-links">
+    <a href="/">portfolio</a>
+    <button id="archiveToggle">archive</button>
+    <a href="mailto:richard@vieren.studio">contact</a>
+  </div>
 </nav>
+
+<!-- Archive overlay -->
+<div class="archive-dropdown" id="archiveDropdown">
+  <button class="archive-close" id="archiveClose">close</button>
+  <div class="archive-inner" id="archiveInner"></div>
+</div>
+
+<div class="diary-intro">
+  <h1>shit photos / great memories</h1>
+  <p>a photo dump for life, behind the scenes, building in public.</p>
+</div>
 
 <div class="diary-date" id="diaryDate"></div>
 <div class="diary-feed" id="diaryFeed"></div>
@@ -103,6 +204,12 @@ nav {
 (function() {
   var feed = document.getElementById('diaryFeed');
   var dateEl = document.getElementById('diaryDate');
+  var archiveToggle = document.getElementById('archiveToggle');
+  var archiveDropdown = document.getElementById('archiveDropdown');
+  var archiveClose = document.getElementById('archiveClose');
+  var archiveInner = document.getElementById('archiveInner');
+  var allEntries = [];
+  var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   function formatDate(dateStr) {
     var d = new Date(dateStr + 'T00:00:00');
@@ -110,47 +217,128 @@ nav {
     return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
   }
 
+  function getYearMonth(dateStr) {
+    var parts = dateStr.split('-');
+    return { year: parts[0], month: parseInt(parts[1], 10) };
+  }
+
+  function renderEntries(entries) {
+    feed.innerHTML = '';
+    if (!entries.length) {
+      feed.innerHTML = '<div class="diary-empty">Nothing here yet.</div>';
+      dateEl.classList.remove('visible');
+      return;
+    }
+    entries.forEach(function(entry) {
+      var el = document.createElement('div');
+      el.className = 'diary-entry';
+      el.dataset.date = formatDate(entry.date);
+      (entry.photos || []).forEach(function(p) {
+        var img = document.createElement('img');
+        img.src = 'image/diary/' + entry.date + '/' + p;
+        img.alt = '';
+        img.loading = 'lazy';
+        el.appendChild(img);
+      });
+      feed.appendChild(el);
+    });
+    setupObserver();
+  }
+
+  function setupObserver() {
+    dateEl.textContent = '';
+    dateEl.classList.remove('visible');
+
+    var observer = new IntersectionObserver(function(obs) {
+      obs.forEach(function(e) {
+        if (e.isIntersecting) {
+          dateEl.textContent = e.target.dataset.date;
+          dateEl.classList.add('visible');
+        }
+      });
+    }, { rootMargin: '-50% 0px -50% 0px' });
+
+    document.querySelectorAll('.diary-entry').forEach(function(el) {
+      observer.observe(el);
+    });
+
+    // Show date once user scrolls past intro
+    var introObs = new IntersectionObserver(function(obs) {
+      obs.forEach(function(e) {
+        if (e.isIntersecting) {
+          dateEl.classList.remove('visible');
+        }
+      });
+    });
+    var intro = document.querySelector('.diary-intro');
+    if (intro) introObs.observe(intro);
+  }
+
+  function buildArchive() {
+    // Group by year > month
+    var years = {};
+    allEntries.forEach(function(entry) {
+      var ym = getYearMonth(entry.date);
+      if (!years[ym.year]) years[ym.year] = {};
+      years[ym.year][ym.month] = true;
+    });
+
+    var html = '';
+    var sortedYears = Object.keys(years).sort().reverse();
+    sortedYears.forEach(function(year) {
+      html += '<div class="archive-year">' + year + '</div><div class="archive-months">';
+      var sortedMonths = Object.keys(years[year]).map(Number).sort().reverse();
+      sortedMonths.forEach(function(m) {
+        html += '<button class="archive-month" data-year="' + year + '" data-month="' + m + '">' + monthNames[m - 1] + '</button>';
+      });
+      html += '</div>';
+    });
+    html += '<button class="archive-all">show all</button>';
+    archiveInner.innerHTML = html;
+
+    // Month click handlers
+    archiveInner.querySelectorAll('.archive-month').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var y = btn.dataset.year;
+        var m = parseInt(btn.dataset.month, 10);
+        var filtered = allEntries.filter(function(entry) {
+          var ym = getYearMonth(entry.date);
+          return ym.year === y && ym.month === m;
+        });
+        renderEntries(filtered);
+        closeArchive();
+        window.scrollTo({ top: document.querySelector('.diary-intro').offsetHeight, behavior: 'smooth' });
+      });
+    });
+
+    // Show all
+    archiveInner.querySelector('.archive-all').addEventListener('click', function() {
+      renderEntries(allEntries);
+      closeArchive();
+    });
+  }
+
+  function openArchive() { archiveDropdown.classList.add('open'); }
+  function closeArchive() { archiveDropdown.classList.remove('open'); }
+
+  archiveToggle.addEventListener('click', function() {
+    archiveDropdown.classList.contains('open') ? closeArchive() : openArchive();
+  });
+  archiveClose.addEventListener('click', closeArchive);
+  archiveDropdown.addEventListener('click', function(e) {
+    if (e.target === archiveDropdown) closeArchive();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeArchive();
+  });
+
+  // Load data
   fetch('diary.json')
     .then(function(r) { return r.json(); })
     .then(function(entries) {
-      if (!entries.length) {
-        feed.innerHTML = '<div class="diary-empty">Nothing here yet.</div>';
-        return;
-      }
-
-      // Build entries
-      entries.forEach(function(entry) {
-        var el = document.createElement('div');
-        el.className = 'diary-entry';
-        el.dataset.date = formatDate(entry.date);
-
-        var photos = entry.photos || [];
-        photos.forEach(function(p) {
-          var img = document.createElement('img');
-          img.src = 'image/diary/' + entry.date + '/' + p;
-          img.alt = '';
-          img.loading = 'lazy';
-          el.appendChild(img);
-        });
-
-        feed.appendChild(el);
-      });
-
-      // Set initial date
-      dateEl.textContent = entries[0] ? formatDate(entries[0].date) : '';
-
-      // Observe entries to swap date
-      var observer = new IntersectionObserver(function(obs) {
-        obs.forEach(function(e) {
-          if (e.isIntersecting) {
-            dateEl.textContent = e.target.dataset.date;
-          }
-        });
-      }, { rootMargin: '-50% 0px -50% 0px' });
-
-      document.querySelectorAll('.diary-entry').forEach(function(el) {
-        observer.observe(el);
-      });
+      allEntries = entries;
+      renderEntries(entries);
+      buildArchive();
     });
 })();
 </script>
