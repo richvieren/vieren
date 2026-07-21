@@ -55,7 +55,7 @@ nav {
 }
 .nav-title {
   font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
-  font-size: 28px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
+  font-size: 20px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
   line-height: 1;
 }
 .nav-center {
@@ -81,7 +81,7 @@ nav {
   position: fixed; top: 20px; left: 50%; z-index: 98;
   transform: translateX(-50%);
   margin-left: -180px;
-  display: flex; gap: 8px; align-items: center;
+  display: flex; gap: 2px; align-items: center;
   mix-blend-mode: difference;
 }
 .zoom-btn {
@@ -103,10 +103,10 @@ nav {
   transform: translateY(-50%);
   z-index: 50;
   font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 12px;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: .06em;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.7);
   text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   mix-blend-mode: difference;
   pointer-events: none;
@@ -261,8 +261,9 @@ body.zoom-3 .diary-entry { margin-bottom: 8px; }
 
   // Zoom
   function setZoom(level) {
+    document.body.classList.remove('zoom-' + currentZoom);
     currentZoom = Math.max(1, Math.min(3, level));
-    document.body.className = 'zoom-' + currentZoom;
+    document.body.classList.add('zoom-' + currentZoom);
   }
   zoomInBtn.addEventListener('click', function() { setZoom(currentZoom + 1); });
   zoomOutBtn.addEventListener('click', function() { setZoom(currentZoom - 1); });
