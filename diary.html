@@ -18,7 +18,6 @@
 :root {
   --bg: #0a0a0a;
   --t1: #EEE8D8;
-  --t3: #9a9a8a;
   --t4: #6a6a5a;
 }
 
@@ -45,6 +44,24 @@ nav {
   font-size: 20px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
 }
 
+/* ══ FIXED DATE ══ */
+.diary-date {
+  position: fixed;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  z-index: 50;
+  font-family: 'Podium', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
 /* ══ DIARY ENTRIES ══ */
 .diary-feed {
   width: 100%;
@@ -58,25 +75,6 @@ nav {
   display: block;
 }
 
-/* Date overlay — sticky within each entry */
-.entry-date {
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  padding: 0 40px;
-  font-family: 'Podium', sans-serif;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
-  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
-  pointer-events: none;
-  height: 0;
-  overflow: visible;
-}
-
 /* ══ EMPTY STATE ══ */
 .diary-empty {
   text-align: center;
@@ -88,7 +86,7 @@ nav {
 
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
-  .entry-date { padding: 0 20px; font-size: 12px; }
+  .diary-date { left: 20px; font-size: 12px; }
 }
 </style>
 </head>
@@ -98,11 +96,19 @@ nav {
   <a href="/" class="nav-logo">Vieren</a>
 </nav>
 
+<div class="diary-date" id="diaryDate"></div>
 <div class="diary-feed" id="diaryFeed"></div>
 
 <script>
 (function() {
   var feed = document.getElementById('diaryFeed');
+  var dateEl = document.getElementById('diaryDate');
+
+  function formatDate(dateStr) {
+    var d = new Date(dateStr + 'T00:00:00');
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  }
 
   fetch('diary.json')
     .then(function(r) { return r.json(); })
@@ -111,39 +117,41 @@ nav {
         feed.innerHTML = '<div class="diary-empty">Nothing here yet.</div>';
         return;
       }
+
+      // Build entries
       entries.forEach(function(entry) {
-        feed.appendChild(createEntry(entry));
+        var el = document.createElement('div');
+        el.className = 'diary-entry';
+        el.dataset.date = formatDate(entry.date);
+
+        var photos = entry.photos || [];
+        photos.forEach(function(p) {
+          var img = document.createElement('img');
+          img.src = 'image/diary/' + entry.date + '/' + p;
+          img.alt = '';
+          img.loading = 'lazy';
+          el.appendChild(img);
+        });
+
+        feed.appendChild(el);
+      });
+
+      // Set initial date
+      dateEl.textContent = entries[0] ? formatDate(entries[0].date) : '';
+
+      // Observe entries to swap date
+      var observer = new IntersectionObserver(function(obs) {
+        obs.forEach(function(e) {
+          if (e.isIntersecting) {
+            dateEl.textContent = e.target.dataset.date;
+          }
+        });
+      }, { rootMargin: '-50% 0px -50% 0px' });
+
+      document.querySelectorAll('.diary-entry').forEach(function(el) {
+        observer.observe(el);
       });
     });
-
-  function formatDate(dateStr) {
-    var d = new Date(dateStr + 'T00:00:00');
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-  }
-
-  function createEntry(entry) {
-    var el = document.createElement('div');
-    el.className = 'diary-entry';
-
-    // Sticky date label
-    var date = document.createElement('div');
-    date.className = 'entry-date';
-    date.textContent = formatDate(entry.date);
-    el.appendChild(date);
-
-    // Photos — full bleed, stacked
-    var photos = entry.photos || [];
-    photos.forEach(function(p) {
-      var img = document.createElement('img');
-      img.src = 'image/diary/' + entry.date + '/' + p;
-      img.alt = '';
-      img.loading = 'lazy';
-      el.appendChild(img);
-    });
-
-    return el;
-  }
 })();
 </script>
 </body>
