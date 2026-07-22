@@ -46,9 +46,12 @@ nav {
 
 /* ══ HERO ══ */
 .cd-hero {
-  width: 100%; height: 55vh; overflow: hidden; position: relative;
+  width: 100%; height: 55vh; overflow: hidden;
+  position: fixed; top: 0; left: 0; z-index: 0;
 }
 .cd-hero img { width: 100%; height: 100%; object-fit: cover; }
+.cd-hero-spacer { height: 55vh; }
+.cd-content { position: relative; z-index: 1; background: var(--bg); }
 
 /* Portrait */
 .cd-portrait-wrap {
@@ -215,10 +218,12 @@ footer {
   <a href="mailto:hello@vieren.co" class="nav-cta">Get In Touch</a>
 </nav>
 
-<!-- Hero -->
+<!-- Hero (fixed behind content) -->
 <div class="cd-hero">
   <img src="image/casestudies/ac-banner.png" alt="Anticitizen — Become Ungovernable">
 </div>
+<div class="cd-hero-spacer"></div>
+<div class="cd-content">
 
 <!-- Portrait -->
 <div class="cd-portrait-wrap">
@@ -335,6 +340,8 @@ footer {
   <span>Vieren Studio</span>
   <span>Cape Town, South Africa</span>
 </footer>
+
+</div><!-- /cd-content -->
 
 </body>
 </html>
