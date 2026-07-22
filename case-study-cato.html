@@ -48,7 +48,11 @@ nav {
 .cd-hero {
   width: 100%; height: 55vh; overflow: hidden; position: relative;
 }
-.cd-hero img { width: 100%; height: 100%; object-fit: cover; }
+.cd-hero img {
+  width: 100%; height: 130%; object-fit: cover;
+  position: absolute; top: -15%; left: 0;
+  will-change: transform;
+}
 
 /* Portrait — large, overlaps hero and bleeds into title */
 .cd-portrait-wrap {
@@ -365,5 +369,14 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <span class="fr">Cape Town, South Africa</span>
 </footer>
 
+<script>
+(function() {
+  var img = document.querySelector('.cd-hero img');
+  window.addEventListener('scroll', function() {
+    var y = window.pageYOffset;
+    img.style.transform = 'translateY(' + y * 0.4 + 'px)';
+  });
+})();
+</script>
 </body>
 </html>
