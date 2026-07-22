@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anticitizen — Case Study — Vieren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Podium'; src: url('fonts/podium-sharp.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --bg: #2C2E2C;
+  --s1: #242624;
+  --s2: #363836;
+  --t1: #EEE8D8;
+  --t2: #EEE8D8;
+  --t3: #9a9a8a;
+  --t4: #6a6a5a;
+  --ac: #FF9F00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--t2); font-family: 'Jost', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 24px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(to bottom, rgba(36,38,36,.9) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: var(--t1); letter-spacing: .02em; text-transform: uppercase;
+}
+.nav-cta {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3); padding: 10px 24px;
+  transition: all .3s;
+}
+.nav-cta:hover { background: var(--t1); color: var(--bg); }
+
+/* ══ HERO ══ */
+.cd-hero {
+  width: 100%; height: 55vh; overflow: hidden; position: relative;
+}
+.cd-hero img { width: 100%; height: 100%; object-fit: cover; }
+.cd-hero-placeholder {
+  width: 100%; height: 100%;
+  background: var(--s1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
+}
+
+/* Title */
+.cd-title-block { text-align: center; padding: 60px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+.cd-title {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
+  color: var(--t1); line-height: .9; margin-bottom: 40px; letter-spacing: .02em;
+}
+
+/* Value props */
+.cd-props {
+  display: flex; justify-content: center; gap: clamp(40px, 8vw, 120px);
+  padding: 0 40px 48px; max-width: 900px; margin: 0 auto;
+}
+.cd-prop { text-align: center; }
+.cd-prop-label {
+  font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ac); line-height: 1.5;
+}
+
+/* Intro */
+.cd-intro {
+  max-width: 800px; margin: 0 auto; padding: 40px 40px 80px; text-align: center;
+}
+.cd-intro p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.6; color: var(--t2);
+}
+.cd-intro p + p { margin-top: 20px; }
+
+/* Two-column */
+.cd-twocol { background: var(--s2); padding: 80px 40px; }
+.cd-twocol-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.cd-twocol p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8;
+  color: var(--t2); text-align: justify;
+}
+.cd-twocol p + p { margin-top: 16px; }
+.cd-twocol strong {
+  display: block; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--t1); margin-bottom: 12px; margin-top: 24px;
+}
+.cd-twocol strong:first-child { margin-top: 0; }
+
+/* Features */
+.cd-features { background: var(--s1); padding: 100px 40px; }
+.cd-features-header { text-align: center; max-width: 700px; margin: 0 auto 80px; }
+.cd-features-header h2 {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px); color: var(--t2); margin-bottom: 16px;
+}
+.cd-feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  max-width: 1100px; margin: 0 auto; align-items: center;
+  padding: 40px 0; border-top: 1px solid rgba(255,255,255,.06);
+}
+.cd-feature-row:nth-child(even) .cd-feature-visual { order: -1; }
+.cd-feature-text h3 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(28px, 3.5vw, 44px); color: var(--t1);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.cd-feature-text p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8; color: var(--t3);
+}
+.cd-feature-text p + p { margin-top: 12px; }
+.cd-feature-visual {
+  width: 100%; aspect-ratio: 4/3; background: var(--s2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
+  overflow: hidden;
+}
+
+/* Stats */
+.cd-stats { background: var(--s2); padding: 100px 40px; }
+.cd-stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  text-align: center;
+}
+.cd-stat-num {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1); margin-bottom: 8px;
+}
+.cd-stat-label {
+  font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--t3);
+}
+
+/* Results */
+.cd-results { background: var(--bg); padding: 100px 40px; text-align: center; }
+.cd-results h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.cd-results-subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 32px); color: var(--t3); margin-bottom: 60px;
+}
+.cd-results-stats {
+  max-width: 680px; margin: 0 auto; text-align: center;
+}
+.cd-results-stats p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.6; color: var(--t2);
+}
+.cd-results-stats p + p { margin-top: 16px; }
+
+/* CTA */
+.cd-cta { background: var(--s1); padding: 100px 40px; text-align: center; }
+.cd-cta h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(24px, 3vw, 40px); color: var(--t1);
+  max-width: 700px; margin: 0 auto 32px; line-height: 1.3;
+}
+.cd-cta a {
+  display: inline-block; font-size: 11px; font-weight: 400;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3);
+  padding: 14px 36px; transition: all .3s;
+}
+.cd-cta a:hover { background: var(--t1); color: var(--bg); }
+
+/* Footer */
+footer {
+  display: flex; justify-content: space-between; padding: 24px 40px;
+  font-size: 11px; color: var(--t4); letter-spacing: .06em;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+@media (max-width: 900px) {
+  .cd-twocol-inner { grid-template-columns: 1fr; }
+  .cd-feature-row { grid-template-columns: 1fr; }
+  .cd-feature-row:nth-child(even) .cd-feature-visual { order: 0; }
+  .cd-props { flex-direction: column; gap: 16px; }
+  .cd-stats-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Vieren</a>
+  <a href="mailto:hello@vieren.co" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- Hero -->
+<div class="cd-hero">
+  <div class="cd-hero-placeholder">banner image — 2400 × 800px</div>
+</div>
+
+<!-- Title -->
+<div class="cd-title-block">
+  <h1 class="cd-title">Anticitizen</h1>
+</div>
+
+<!-- Value props -->
+<div class="cd-props">
+  <div class="cd-prop"><div class="cd-prop-label">Batch<br>Production</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">Content<br>Multiplication</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">Distribution<br>Strategy</div></div>
+</div>
+
+<!-- Intro -->
+<div class="cd-intro">
+  <p>I've known Leon for fifteen years. We met through Bam Margera, and then we worked at festivals together all over the world. Now he runs Anticitizen, a membership platform that helps people get second passports, offshore banking, and legal tax structures. Tagline: "Become Ungovernable."</p>
+  <p>Leon figured out how to hack the algorithm with talking heads. He's been doing it successfully for a while. He contacted me to turn each winning video into hundreds of variations.</p>
+</div>
+
+<!-- Two-column overview -->
+<div class="cd-twocol">
+  <div class="cd-twocol-inner">
+    <div>
+      <p>Anticitizen runs on content volume. When Leon finds a talking head that hits, the play is to squeeze every possible version out of that video before the format goes cold. The question was never "does the formula work." The question was how to multiply a single recording session into enough content to feed multiple channels for weeks.</p>
+    </div>
+    <div>
+      <strong>The Challenge</strong>
+      <p>A talking head that works is worth more than one upload. Every time you post the same video, the algorithm has already seen it. But if you can change the structure, the hook, the soundtrack, and the graphics, each variation registers as new content. The challenge: build a production system that turns one script into hundreds of unique variations without Leon recording every single one from scratch.</p>
+      <strong>The Approach</strong>
+      <p>We recorded ten versions of every talking head. Same core message, different delivery every time. Then we cut each version into interchangeable segments: 10 intros, 10 bodies, 10 call-to-actions.</p>
+      <p>10 × 10 × 10. One thousand possible structural combinations from a single script.</p>
+      <p>Now layer on 35 different title hooks on screen. 10 different audio tracks. Different graphic treatments. We landed on 525 variations per viral video. From one recording session.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section class="cd-features">
+  <div class="cd-features-header"><h2>What We Built</h2></div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Recording System</h3>
+      <p>Ten versions per talking head. Same script, different delivery every time. Each version recorded with the intent to be chopped into segments that mix and match with segments from every other version. The whole system falls apart if the segments don't cut together cleanly, so every take had to work as a standalone and as a building block.</p>
+    </div>
+    <div class="cd-feature-visual">image placeholder</div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Chopping Block</h3>
+      <p>Every take got cut into three interchangeable segments: intro, body, CTA. Thirty raw clips per talking head. The intro from version two works with the body from version six and the CTA from version nine. Swap the on-screen title hook, change the audio track, switch the graphic treatment. 525 unique videos. Each one structured differently enough that every platform treats it as original content.</p>
+    </div>
+    <div class="cd-feature-visual">image placeholder</div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Carousel Factory</h3>
+      <p>On top of the talking heads, we generated 400 UGC-style carousels across eight narrative categories. Each batch of 50 had its own angle. CTA distribution: 40% soft, 40% medium, 20% hard. All formatted to plug straight into paid ad campaigns.</p>
+    </div>
+    <div class="cd-feature-visual">image placeholder</div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>Distribution</h3>
+      <p>525 variations per video plus 400 carousels is an overdose of content. None of it goes on Leon's main brand account. We warmed up close to fifty new TikTok accounts in the Anticitizen niche and started posting five to ten times a day per account. The compositions are different enough to not trigger TikTok's duplicate detection, and because the content is strong, brand new accounts pull hundreds of thousands of views right out of the gate. I did the consultancy to map this whole channel infrastructure and make sure the volume had somewhere to go.</p>
+    </div>
+    <div class="cd-feature-visual">image placeholder</div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="cd-stats">
+  <div class="cd-stats-inner">
+    <div>
+      <div class="cd-stat-num">525</div>
+      <div class="cd-stat-label">Variations per talking head</div>
+    </div>
+    <div>
+      <div class="cd-stat-num">~50</div>
+      <div class="cd-stat-label">TikTok accounts</div>
+    </div>
+    <div>
+      <div class="cd-stat-num">$0.14–$0.20</div>
+      <div class="cd-stat-label">Organic CPM</div>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="cd-results">
+  <h2>The Results</h2>
+  <div class="cd-results-subtitle">in numbers</div>
+  <div class="cd-results-stats">
+    <p>525 unique video variations per talking head. 400 ad carousels across eight categories. Close to fifty TikTok accounts warmed up in the Anticitizen niche, posting five to ten times a day. Brand new accounts hitting hundreds of thousands of views. Organic CPM between $0.14 and $0.20.</p>
+    <p>A production system that turns one recording session into weeks of content across the entire channel infrastructure.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cd-cta">
+  <h2>I build content systems for founders who have a format that works and need to scale it without living behind the camera.</h2>
+  <a href="mailto:hello@vieren.co">Get In Touch</a>
+</section>
+
+<footer>
+  <span>Vieren Studio</span>
+  <span>Cape Town, South Africa</span>
+</footer>
+
+</body>
+</html>
