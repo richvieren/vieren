@@ -304,15 +304,15 @@ footer {
 <section class="cd-stats">
   <div class="cd-stats-inner">
     <div>
-      <div class="cd-stat-num">525</div>
+      <div class="cd-stat-num" data-count="525">0</div>
       <div class="cd-stat-label">Variations per talking head</div>
     </div>
     <div>
-      <div class="cd-stat-num">~50</div>
+      <div class="cd-stat-num" data-count="50">0</div>
       <div class="cd-stat-label">TikTok accounts</div>
     </div>
     <div>
-      <div class="cd-stat-num">$0.14–$0.20</div>
+      <div class="cd-stat-num" data-prefix="$" data-count="0.14" data-suffix="–$0.20" data-decimals="2">$0.00</div>
       <div class="cd-stat-label">Organic CPM</div>
     </div>
   </div>
@@ -340,11 +340,38 @@ footer {
 
 <script>
 (function() {
+  // Parallax
   var img = document.querySelector('.cd-hero img');
   window.addEventListener('scroll', function() {
-    var y = window.pageYOffset;
-    img.style.transform = 'translateY(' + y * 0.4 + 'px)';
+    img.style.transform = 'translateY(' + window.pageYOffset * 0.4 + 'px)';
   });
+
+  // Count-up on scroll
+  var counted = false;
+  var stats = document.querySelector('.cd-stats');
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('.cd-stat-num[data-count]').forEach(function(el) {
+        var target = parseFloat(el.dataset.count);
+        var decimals = parseInt(el.dataset.decimals) || 0;
+        var prefix = el.dataset.prefix || '';
+        var suffix = el.dataset.suffix || '';
+        var duration = 1500;
+        var start = performance.now();
+
+        function tick(now) {
+          var progress = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = eased * target;
+          el.textContent = prefix + (decimals ? current.toFixed(decimals) : Math.round(current)) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+  }, { threshold: 0.5 });
+  observer.observe(stats);
 })();
 </script>
 </body>
