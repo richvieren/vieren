@@ -46,9 +46,12 @@ nav {
 
 /* ══ HERO ══ */
 .cd-hero {
-  width: 100%; height: 55vh; overflow: hidden; position: relative;
+  width: 100%; height: 55vh;
+  background-image: url('image/casestudies/ac-banner.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
-.cd-hero img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Portrait */
 .cd-portrait-wrap {
@@ -215,10 +218,8 @@ footer {
   <a href="mailto:hello@vieren.co" class="nav-cta">Get In Touch</a>
 </nav>
 
-<!-- Hero (fixed behind content) -->
-<div class="cd-hero">
-  <img src="image/casestudies/ac-banner.png" alt="Anticitizen — Become Ungovernable">
-</div>
+<!-- Hero -->
+<div class="cd-hero" role="img" aria-label="Anticitizen — Become Ungovernable"></div>
 <!-- Portrait -->
 <div class="cd-portrait-wrap">
   <img class="cd-portrait" src="image/casestudies/ac-profilepic.jpg" alt="Leon — Anticitizen">
