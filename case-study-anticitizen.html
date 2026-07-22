@@ -46,12 +46,12 @@ nav {
 
 /* ══ HERO ══ */
 .cd-hero {
-  width: 100%; height: 55vh;
-  background-image: url('image/casestudies/ac-banner.png');
-  background-size: 100% auto;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  width: 100%; height: 55vh; overflow: hidden; position: relative;
+}
+.cd-hero img {
+  width: 100%; height: 130%; object-fit: cover;
+  position: absolute; top: 0; left: 0;
+  will-change: transform;
 }
 
 /* Portrait */
@@ -220,7 +220,9 @@ footer {
 </nav>
 
 <!-- Hero -->
-<div class="cd-hero" role="img" aria-label="Anticitizen — Become Ungovernable"></div>
+<div class="cd-hero">
+  <img src="image/casestudies/ac-banner.png" alt="Anticitizen — Become Ungovernable">
+</div>
 <!-- Portrait -->
 <div class="cd-portrait-wrap">
   <img class="cd-portrait" src="image/casestudies/ac-profilepic.jpg" alt="Leon — Anticitizen">
@@ -337,5 +339,14 @@ footer {
   <span>Cape Town, South Africa</span>
 </footer>
 
+<script>
+(function() {
+  var img = document.querySelector('.cd-hero img');
+  window.addEventListener('scroll', function() {
+    var y = window.pageYOffset;
+    img.style.transform = 'translateY(' + y * 0.4 + 'px)';
+  });
+})();
+</script>
 </body>
 </html>
