@@ -49,15 +49,20 @@ nav {
   width: 100%; height: 55vh; overflow: hidden; position: relative;
 }
 .cd-hero img { width: 100%; height: 100%; object-fit: cover; }
-.cd-hero-placeholder {
-  width: 100%; height: 100%;
-  background: var(--s1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
+
+/* Portrait */
+.cd-portrait-wrap {
+  display: flex; justify-content: center;
+  margin-top: -220px; position: relative; z-index: 2;
+  margin-bottom: -80px;
+}
+.cd-portrait {
+  width: 420px; height: 560px; object-fit: cover;
+  box-shadow: 0 12px 60px rgba(0,0,0,.5);
 }
 
 /* Title */
-.cd-title-block { text-align: center; padding: 60px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+.cd-title-block { text-align: center; padding: 40px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 .cd-title {
   font-family: 'Instrument Serif', serif; font-weight: 400;
   font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
@@ -198,6 +203,8 @@ footer {
 }
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
+  .cd-portrait { width: 260px; height: 347px; }
+  .cd-portrait-wrap { margin-top: -160px; margin-bottom: -100px; }
 }
 </style>
 </head>
@@ -210,7 +217,12 @@ footer {
 
 <!-- Hero -->
 <div class="cd-hero">
-  <div class="cd-hero-placeholder">banner image — 2400 × 800px</div>
+  <img src="image/casestudies/ac-banner.png" alt="Anticitizen — Become Ungovernable">
+</div>
+
+<!-- Portrait -->
+<div class="cd-portrait-wrap">
+  <img class="cd-portrait" src="image/casestudies/ac-profilepic.jpg" alt="Leon — Anticitizen">
 </div>
 
 <!-- Title -->
