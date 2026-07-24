@@ -86,6 +86,7 @@ nav {
   transition: opacity .3s;
 }
 .nav-right a:hover, .nav-right button:hover { opacity: 0.5; }
+.nav-right button.active { opacity: 1; font-weight: 500; }
 .nav-comma {
   font-size: 13px; color: rgba(255,255,255,0.4);
   margin: 0 8px;
@@ -218,9 +219,17 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
     <button class="zoom-btn" id="zoomOut">&minus;</button>
   </div>
   <div class="nav-right">
-    <a href="/">portfolio</a>
+    <button class="cat-btn active" data-cat="all">all</button>
+    <span class="nav-comma">,</span>
+    <button class="cat-btn" data-cat="bts">bts</button>
+    <span class="nav-comma">,</span>
+    <button class="cat-btn" data-cat="wolf-children">wolf children</button>
+    <span class="nav-comma">,</span>
+    <button class="cat-btn" data-cat="vieren">vieren</button>
     <span class="nav-comma">,</span>
     <button id="archiveToggle">archive</button>
+    <span class="nav-comma">,</span>
+    <a href="/">portfolio</a>
     <span class="nav-comma">,</span>
     <a href="mailto:richard@vieren.studio">contact</a>
   </div>
@@ -245,11 +254,15 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
   var archiveInner = document.getElementById('archiveInner');
   var zoomInBtn = document.getElementById('zoomIn');
   var zoomOutBtn = document.getElementById('zoomOut');
+  var catBtns = document.querySelectorAll('.cat-btn');
   var allEntries = [];
   var currentZoom = 1;
+  var activeCategory = 'all';
+  var activeMonth = null;
+  var activeYear = null;
   var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-  // Zoom: + makes bigger (lower number), - makes smaller (higher number)
+  // Zoom
   function setZoom(level) {
     document.body.classList.remove('zoom-' + currentZoom);
     currentZoom = Math.max(1, Math.min(3, level));
@@ -269,6 +282,49 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
     return { year: parts[0], month: parseInt(parts[1], 10) };
   }
 
+  // Check if entry matches a tag (entry-level or per-photo)
+  function entryHasTag(entry, tag) {
+    if (tag === 'all') return true;
+    // Entry-level tags
+    if (entry.tags && entry.tags.indexOf(tag) !== -1) return true;
+    // Per-photo tags (when photos are objects)
+    var photos = entry.photos || [];
+    for (var i = 0; i < photos.length; i++) {
+      if (typeof photos[i] === 'object' && photos[i].tags && photos[i].tags.indexOf(tag) !== -1) return true;
+    }
+    return false;
+  }
+
+  // Get photo filenames, filtering by tag if per-photo tags exist
+  function getPhotos(entry, tag) {
+    var photos = entry.photos || [];
+    var result = [];
+    for (var i = 0; i < photos.length; i++) {
+      if (typeof photos[i] === 'string') {
+        result.push(photos[i]);
+      } else if (typeof photos[i] === 'object') {
+        if (tag === 'all' || !photos[i].tags || photos[i].tags.indexOf(tag) !== -1) {
+          result.push(photos[i].file);
+        }
+      }
+    }
+    return result;
+  }
+
+  function applyFilters() {
+    var filtered = allEntries.filter(function(entry) {
+      // Category filter
+      if (!entryHasTag(entry, activeCategory)) return false;
+      // Month filter
+      if (activeYear && activeMonth !== null) {
+        var ym = getYearMonth(entry.date);
+        if (ym.year !== activeYear || ym.month !== activeMonth) return false;
+      }
+      return true;
+    });
+    renderEntries(filtered);
+  }
+
   var entryObserver;
   function renderEntries(entries) {
     feed.innerHTML = '';
@@ -279,10 +335,13 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
       return;
     }
     entries.forEach(function(entry) {
+      var photos = getPhotos(entry, activeCategory);
+      if (!photos.length) return;
+
       var el = document.createElement('div');
       el.className = 'diary-entry';
       el.dataset.date = formatDate(entry.date);
-      (entry.photos || []).forEach(function(p) {
+      photos.forEach(function(p) {
         var img = document.createElement('img');
         img.src = 'image/diary/' + entry.date + '/' + p;
         img.alt = '';
@@ -306,6 +365,17 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
     });
   }
 
+  // Category buttons
+  catBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      catBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCategory = btn.dataset.cat;
+      applyFilters();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
   // Archive
   function buildArchive() {
     var years = {};
@@ -328,20 +398,18 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
 
     archiveInner.querySelectorAll('.archive-month').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        var y = btn.dataset.year;
-        var m = parseInt(btn.dataset.month, 10);
-        var filtered = allEntries.filter(function(entry) {
-          var ym = getYearMonth(entry.date);
-          return ym.year === y && ym.month === m;
-        });
-        renderEntries(filtered);
+        activeYear = btn.dataset.year;
+        activeMonth = parseInt(btn.dataset.month, 10);
+        applyFilters();
         closeArchive();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
 
     archiveInner.querySelector('.archive-all').addEventListener('click', function() {
-      renderEntries(allEntries);
+      activeYear = null;
+      activeMonth = null;
+      applyFilters();
       closeArchive();
     });
   }
