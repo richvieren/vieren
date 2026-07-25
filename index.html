@@ -99,90 +99,167 @@ nav {
 /* ══ HERO ══ */
 .hero {
   height: 100vh; position: relative;
-  display: flex; align-items: center; justify-content: center;
   background: var(--s1); overflow: hidden;
 }
-/* Viewfinder brackets */
-.vf { position: absolute; }
-.vf-tl { top: 60px; left: 60px; width: 40px; height: 40px; border-top: 2px solid rgba(255,255,255,.4); border-left: 2px solid rgba(255,255,255,.4); }
-.vf-tr { top: 60px; right: 60px; width: 40px; height: 40px; border-top: 2px solid rgba(255,255,255,.4); border-right: 2px solid rgba(255,255,255,.4); }
-.vf-bl { bottom: 60px; left: 60px; width: 40px; height: 40px; border-bottom: 2px solid rgba(255,255,255,.4); border-left: 2px solid rgba(255,255,255,.4); }
-.vf-br { bottom: 60px; right: 60px; width: 40px; height: 40px; border-bottom: 2px solid rgba(255,255,255,.4); border-right: 2px solid rgba(255,255,255,.4); }
-/* Crosshairs */
-.ch-h { position: absolute; top: 50%; left: 0; right: 0; height: 0; border-top: 1px dashed rgba(255,255,255,.12); }
-.ch-v { position: absolute; left: 50%; top: 0; bottom: 0; width: 0; border-left: 1px dashed rgba(255,255,255,.12); }
-/* Center brackets */
-.cb { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 280px; height: 180px; }
-.cb::before, .cb::after { content: ''; position: absolute; width: 24px; height: 24px; }
-.cb::before { top: 0; left: 0; border-top: 1px solid rgba(255,255,255,.3); border-left: 1px solid rgba(255,255,255,.3); }
-.cb::after { top: 0; right: 0; border-top: 1px solid rgba(255,255,255,.3); border-right: 1px solid rgba(255,255,255,.3); }
-.cb-b::before, .cb-b::after { content: ''; position: absolute; width: 24px; height: 24px; }
-.cb-b::before { bottom: 0; left: 0; border-bottom: 1px solid rgba(255,255,255,.3); border-left: 1px solid rgba(255,255,255,.3); }
-.cb-b::after { bottom: 0; right: 0; border-bottom: 1px solid rgba(255,255,255,.3); border-right: 1px solid rgba(255,255,255,.3); }
-/* Timestamp */
-.ts {
-  position: absolute; bottom: 60px; left: 60px;
-  font-size: 12px; font-weight: 400; color: rgba(255,255,255,.5);
-  font-family: 'Inter', monospace; letter-spacing: .04em;
-  border-left: 1px solid rgba(255,255,255,.3); padding-left: 10px;
+/* Video layers */
+.hero-videos { position: absolute; inset: 0; }
+.hero-video {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity .6s ease;
 }
-.ts .time { font-size: 13px; margin-bottom: 2px; }
-/* Waveform */
-.waveform {
-  position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: flex-end; gap: 2px; height: 24px;
+.hero-video.active { opacity: 1; }
+.hero-video video {
+  width: 100%; height: 100%; object-fit: cover;
 }
-.waveform span { width: 2px; background: rgba(255,255,255,.25); display: block; }
-/* Film strip */
-.filmstrip {
-  position: absolute; bottom: 60px; right: 60px;
-  display: flex; gap: 2px;
+/* Gradient overlay for legibility */
+.hero::after {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top,
+    rgba(0,0,0,.7) 0%,
+    rgba(0,0,0,.15) 40%,
+    rgba(0,0,0,.25) 100%
+  );
+  pointer-events: none;
 }
-.filmstrip span { width: 4px; height: 20px; background: rgba(255,255,255,.2); display: block; }
-
-.hero-center {
-  text-align: center; position: relative; z-index: 10;
+/* Brand info — left-aligned, vertically centered */
+.hero-info {
+  position: absolute; top: 50%; left: 48px; z-index: 10;
+  transform: translateY(-50%);
 }
-.ascii-logo {
-  font-family: 'Courier New', monospace;
-  font-size: clamp(6px, 1.8vw, 16px);
-  line-height: 1.1;
-  margin: 0 auto 8px;
-  display: inline-block;
-}
-.hero-tagline {
-  font-family: 'Courier New', monospace;
-  font-size: clamp(9px, 1.2vw, 13px);
-  letter-spacing: .12em;
-  color: #9a9a8a;
-  margin-bottom: 8px;
-}
-.hero-coords {
-  font-family: 'Courier New', monospace;
-  font-size: clamp(8px, 1vw, 11px);
-  letter-spacing: .08em;
-  color: #6a6a5a;
-}
-.hero-title {
+.hero-info-name {
   font-family: 'Podium', sans-serif; font-weight: 900;
-  font-size: clamp(48px, 10vw, 140px);
-  line-height: .88; text-transform: uppercase; color: var(--t1);
-  letter-spacing: -.02em; margin-bottom: 20px;
+  font-size: 16px;
+  text-transform: uppercase; color: var(--t1);
+  letter-spacing: .06em; line-height: 1;
+  margin-bottom: 6px;
 }
-.hero-sub {
-  font-size: 13px; font-weight: 400; letter-spacing: .28em;
-  text-transform: uppercase; color: rgba(255,255,255,.5);
+.hero-info-tagline {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 11px; letter-spacing: .10em;
+  text-transform: uppercase; color: rgba(255,255,255,.45);
 }
-/* Video background */
-.hero-video-bg {
-  position: absolute; inset: 0; overflow: hidden;
+/* Right info — vertically centered */
+.hero-meta {
+  position: absolute; top: 50%; right: 48px; z-index: 10;
+  transform: translateY(-50%);
+  text-align: right;
 }
-.hero-video-bg iframe {
-  position: absolute; top: 50%; left: 50%;
-  width: 100vw; height: 56.25vw;
-  min-height: 100vh; min-width: 177.78vh;
-  transform: translate(-50%, -50%);
-  border: 0; pointer-events: none;
+.hero-meta-project {
+  font-family: 'Jost', sans-serif; font-weight: 500;
+  font-size: 15px; color: var(--t1); margin-bottom: 4px;
+}
+.hero-meta-type {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(255,255,255,.45);
+  margin-bottom: 2px;
+}
+.hero-meta-year {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 11px; color: rgba(255,255,255,.35);
+}
+/* Tab row — left, ~25% from bottom */
+.hero-tabs {
+  position: absolute; bottom: 25%; left: 48px; z-index: 10;
+  display: flex; flex-direction: row; align-items: center; gap: 8px;
+}
+.hero-tab {
+  position: relative; cursor: pointer;
+  padding: 0; background: none; border: none;
+}
+.hero-tab-label {
+  position: relative; z-index: 2;
+  font-family: 'Jost', sans-serif; font-weight: 400;
+  font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.4);
+  padding: 6px 12px;
+  transition: color .3s;
+  white-space: nowrap;
+  display: block;
+}
+.hero-tab.active .hero-tab-label { color: rgba(255,255,255,.95); }
+.hero-tab:hover .hero-tab-label { color: rgba(255,255,255,.7); }
+/* Progress fill — sits BEHIND the label as background */
+.hero-tab-progress {
+  position: absolute; inset: 0; z-index: 1;
+  background: transparent;
+  overflow: hidden;
+}
+.hero-tab-fill {
+  height: 100%; width: 0%;
+  background: rgba(255,255,255,.12);
+  transition: none;
+}
+/* Hover thumbnail — below the tab, left-aligned */
+.hero-tab-thumb {
+  position: absolute; top: 100%; left: 0;
+  width: 160px; height: 90px;
+  margin-top: 8px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.hero-tab:not(.active):hover .hero-tab-thumb {
+  opacity: 1;
+}
+.hero-tab-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+/* ══ HERO MOBILE ══ */
+@media (max-width: 768px) {
+  .hero-info {
+    top: auto; bottom: 140px; left: 24px;
+    transform: none;
+  }
+  .hero-info-name { font-size: 14px; }
+  .hero-meta {
+    top: auto; bottom: 90px; left: 24px; right: auto;
+    transform: none;
+    text-align: left;
+  }
+  .hero-meta-project { font-size: 13px; }
+  .hero-tabs {
+    bottom: 24px; left: 24px; right: 24px;
+    gap: 4px;
+  }
+  .hero-tab-label {
+    font-size: 0;
+    padding: 8px 0;
+    width: 12px; height: 12px;
+  }
+  .hero-tab-progress {
+    position: static;
+    width: 0; height: 2px;
+  }
+  .hero-tab.active .hero-tab-progress {
+    width: 40px;
+  }
+  /* Dot indicators on mobile */
+  .hero-tab::before {
+    content: '';
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.4);
+    display: block;
+    flex-shrink: 0;
+    transition: background .3s, border-color .3s;
+  }
+  .hero-tab.active::before {
+    background: rgba(255,255,255,.8);
+    border-color: rgba(255,255,255,.8);
+  }
+  /* Progress bar becomes horizontal bar after dot */
+  .hero-tab-progress {
+    width: 0; height: 2px;
+    transition: width .3s;
+  }
+  .hero-tab.active .hero-tab-progress {
+    width: 60px;
+    margin-left: 4px;
+  }
+  .hero-tab-thumb { display: none; }
 }
 
 /* ══ WHO WE ARE ══ */
@@ -894,9 +971,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   .proj-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  nav, .hero, .who, .what, .addressing, .work, .deck, .diary-section, footer { padding-left: 20px; padding-right: 20px; }
-  .vf-tl, .vf-tr, .vf-bl, .vf-br { display: none; }
-  .ts, .waveform, .filmstrip { display: none; }
+  nav, .who, .what, .addressing, .work, .deck, .diary-section, footer { padding-left: 20px; padding-right: 20px; }
 }
 </style>
 </head>
@@ -908,12 +983,28 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </nav>
 
 <!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="hero-video-bg"><iframe src="https://player.vimeo.com/video/1212450087?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-  <div class="vf vf-tl"></div><div class="vf vf-tr"></div><div class="vf vf-bl"></div><div class="vf vf-br"></div>
-  <div class="ts"><div class="time" id="clock">00:00:00</div><div id="date-display">16 Apr 2026</div></div>
-  <div class="waveform" id="waveform"></div>
-  <div class="filmstrip"><span></span><span></span><span></span><span></span><span></span></div>
+<section class="hero" id="hero">
+  <div class="hero-videos" id="heroVideos">
+    <!-- Generated by JS from HERO_SECTIONS config -->
+  </div>
+
+  <!-- Left: brand identity -->
+  <div class="hero-info">
+    <div class="hero-info-name" id="heroName"></div>
+    <div class="hero-info-tagline" id="heroTagline"></div>
+  </div>
+
+  <!-- Right: what's playing -->
+  <div class="hero-meta">
+    <div class="hero-meta-type" id="heroType"></div>
+    <div class="hero-meta-project" id="heroProject"></div>
+    <div class="hero-meta-year" id="heroYear"></div>
+  </div>
+
+  <!-- Tab row -->
+  <div class="hero-tabs" id="heroTabs">
+    <!-- Generated by JS from HERO_SECTIONS config -->
+  </div>
 </section>
 
 <!-- ══ WHO WE ARE ══ -->
@@ -1385,16 +1476,181 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </footer>
 
 <script>
-// Live clock
-function tick() {
-  const d = new Date();
-  document.getElementById('clock').textContent = d.toLocaleTimeString('en-US',{hour12:true,hour:'2-digit',minute:'2-digit',second:'2-digit'});
-}
-tick(); setInterval(tick, 1000);
+// ══ HERO REEL CONTROLLER ══
+// Edit this array to add/remove/reorder sections.
+const HERO_SECTIONS = [
+  {
+    id: 'vdv',
+    name: 'Van der Vieren',
+    tagline: 'Photography',
+    video: 'hero/vdv.mp4',
+    poster: 'hero/vdv.jpg',
+    project: 'Cape Town Series',
+    type: 'PHOTO FILM',
+    year: '2025',
+  },
+  {
+    id: 'lore',
+    name: 'LORE',
+    tagline: 'Social content for startups',
+    video: 'hero/lore.mp4',
+    poster: 'hero/lore.jpg',
+    project: 'Lovable Launch',
+    type: 'SOCIAL CAMPAIGN',
+    year: '2026',
+  },
+  {
+    id: 'vtcn',
+    name: 'VTCN',
+    tagline: 'Total chaos network',
+    video: 'hero/vtcn.mp4',
+    poster: 'hero/vtcn.jpg',
+    project: 'Wizardcore',
+    type: 'VIDEO DIARY',
+    year: '2026',
+  },
+  {
+    id: 'beastmode',
+    name: 'BEASTMODE',
+    tagline: 'Bulk',
+    video: 'hero/beastmode.mp4',
+    poster: 'hero/beastmode.jpg',
+    project: 'Face Swap Engine',
+    type: 'AI CONTENT',
+    year: '2026',
+  },
+];
 
-// Waveform bars
-const wf = document.getElementById('waveform');
-for(let i=0;i<40;i++){const s=document.createElement('span');s.style.height=Math.random()*18+4+'px';wf.appendChild(s);}
+(function() {
+  const videosEl = document.getElementById('heroVideos');
+  const tabsEl = document.getElementById('heroTabs');
+  const nameEl = document.getElementById('heroName');
+  const taglineEl = document.getElementById('heroTagline');
+  const projectEl = document.getElementById('heroProject');
+  const typeEl = document.getElementById('heroType');
+  const yearEl = document.getElementById('heroYear');
+
+  let activeIdx = 0;
+  let videos = [];
+  let tabs = [];
+  let fills = [];
+  let paused = false;
+
+  // Build DOM from config
+  HERO_SECTIONS.forEach((sec, i) => {
+    // Video layer
+    const layer = document.createElement('div');
+    layer.className = 'hero-video' + (i === 0 ? ' active' : '');
+    const vid = document.createElement('video');
+    vid.src = sec.video;
+    vid.poster = sec.poster;
+    vid.muted = true;
+    vid.playsInline = true;
+    vid.preload = i === 0 ? 'auto' : 'metadata';
+    vid.loop = false;
+    layer.appendChild(vid);
+    videosEl.appendChild(layer);
+    videos.push({ layer, vid });
+
+    // Tab
+    const tab = document.createElement('button');
+    tab.className = 'hero-tab' + (i === 0 ? ' active' : '');
+
+    // Hover thumbnail
+    const thumb = document.createElement('div');
+    thumb.className = 'hero-tab-thumb';
+    const thumbImg = document.createElement('img');
+    thumbImg.src = sec.poster;
+    thumbImg.alt = sec.name;
+    thumb.appendChild(thumbImg);
+    tab.appendChild(thumb);
+
+    // Label
+    const label = document.createElement('span');
+    label.className = 'hero-tab-label';
+    label.textContent = sec.name;
+    tab.appendChild(label);
+
+    // Progress bar
+    const progress = document.createElement('div');
+    progress.className = 'hero-tab-progress';
+    const fill = document.createElement('div');
+    fill.className = 'hero-tab-fill';
+    progress.appendChild(fill);
+    tab.appendChild(progress);
+
+    tab.addEventListener('click', () => switchTo(i));
+    tabsEl.appendChild(tab);
+    tabs.push(tab);
+    fills.push(fill);
+  });
+
+  function updateInfo(idx) {
+    const sec = HERO_SECTIONS[idx];
+    nameEl.textContent = sec.name;
+    taglineEl.textContent = sec.tagline;
+    projectEl.textContent = sec.project;
+    typeEl.textContent = sec.type;
+    yearEl.textContent = sec.year;
+  }
+
+  function switchTo(idx) {
+    if (idx === activeIdx) return;
+    // Pause old
+    videos[activeIdx].vid.pause();
+    videos[activeIdx].layer.classList.remove('active');
+    tabs[activeIdx].classList.remove('active');
+    fills[activeIdx].style.width = '0%';
+
+    activeIdx = idx;
+
+    // Activate new
+    videos[activeIdx].layer.classList.add('active');
+    tabs[activeIdx].classList.add('active');
+    videos[activeIdx].vid.currentTime = 0;
+    videos[activeIdx].vid.play().catch(() => {});
+    updateInfo(activeIdx);
+  }
+
+  // Progress bar updates
+  videos.forEach(({ vid }, i) => {
+    vid.addEventListener('timeupdate', () => {
+      if (i !== activeIdx) return;
+      if (vid.duration) {
+        const pct = (vid.currentTime / vid.duration) * 100;
+        fills[i].style.width = pct + '%';
+      }
+    });
+
+    vid.addEventListener('ended', () => {
+      if (i !== activeIdx || paused) return;
+      // Auto-advance
+      const next = (activeIdx + 1) % HERO_SECTIONS.length;
+      switchTo(next);
+    });
+  });
+
+  // Touch swipe support for mobile
+  let touchStartX = 0;
+  const hero = document.getElementById('hero');
+  hero.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  hero.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) {
+        switchTo((activeIdx + 1) % HERO_SECTIONS.length);
+      } else {
+        switchTo((activeIdx - 1 + HERO_SECTIONS.length) % HERO_SECTIONS.length);
+      }
+    }
+  }, { passive: true });
+
+  // Start first video
+  updateInfo(0);
+  videos[0].vid.play().catch(() => {});
+})();
 
 // Continuous orbit with scroll acceleration
 (function() {
