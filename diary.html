@@ -171,6 +171,26 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
 }
 .archive-month:hover { color: var(--t1); }
 .archive-month.active { color: var(--t1); font-weight: 500; }
+.archive-categories {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-bottom: 40px;
+}
+.cat-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px; font-weight: 300;
+  letter-spacing: .06em;
+  color: var(--t3);
+  background: none; border: none; cursor: pointer;
+  padding: 6px 0;
+  transition: color .3s;
+}
+.cat-btn:hover { color: var(--t1); }
+.cat-btn.active { color: var(--t1); font-weight: 500; }
+.cat-sep {
+  font-size: 13px; color: rgba(255,255,255,0.2);
+  margin: 0 10px;
+  font-weight: 300;
+}
 .archive-all {
   font-family: 'Jost', sans-serif;
   font-size: 13px; font-weight: 400;
@@ -219,14 +239,6 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
     <button class="zoom-btn" id="zoomOut">&minus;</button>
   </div>
   <div class="nav-right">
-    <button class="cat-btn active" data-cat="all">all</button>
-    <span class="nav-comma">,</span>
-    <button class="cat-btn" data-cat="bts">bts</button>
-    <span class="nav-comma">,</span>
-    <button class="cat-btn" data-cat="wolf-children">wolf children</button>
-    <span class="nav-comma">,</span>
-    <button class="cat-btn" data-cat="vieren">vieren</button>
-    <span class="nav-comma">,</span>
     <button id="archiveToggle">archive</button>
     <span class="nav-comma">,</span>
     <a href="/">portfolio</a>
@@ -238,7 +250,17 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
 <!-- Archive overlay -->
 <div class="archive-dropdown" id="archiveDropdown">
   <button class="archive-close" id="archiveClose">close</button>
-  <div class="archive-inner" id="archiveInner"></div>
+  <div class="archive-inner" id="archiveInner">
+    <div class="archive-categories">
+      <button class="cat-btn active" data-cat="all">all</button>
+      <span class="cat-sep">,</span>
+      <button class="cat-btn" data-cat="bts">bts</button>
+      <span class="cat-sep">,</span>
+      <button class="cat-btn" data-cat="wolf-children">wolf children</button>
+      <span class="cat-sep">,</span>
+      <button class="cat-btn" data-cat="vieren">vieren</button>
+    </div>
+  </div>
 </div>
 
 <div class="diary-date" id="diaryDate"></div>
@@ -394,9 +416,15 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
       html += '</div>';
     });
     html += '<button class="archive-all">show all</button>';
-    archiveInner.innerHTML = html;
+    // Preserve category buttons, replace only the date listing
+    var dateList = archiveInner.querySelector('.archive-dates');
+    if (dateList) dateList.remove();
+    var dateDiv = document.createElement('div');
+    dateDiv.className = 'archive-dates';
+    dateDiv.innerHTML = html;
+    archiveInner.appendChild(dateDiv);
 
-    archiveInner.querySelectorAll('.archive-month').forEach(function(btn) {
+    dateDiv.querySelectorAll('.archive-month').forEach(function(btn) {
       btn.addEventListener('click', function() {
         activeYear = btn.dataset.year;
         activeMonth = parseInt(btn.dataset.month, 10);
@@ -406,7 +434,7 @@ body.zoom-3 .diary-entry { margin-bottom: 16px; }
       });
     });
 
-    archiveInner.querySelector('.archive-all').addEventListener('click', function() {
+    dateDiv.querySelector('.archive-all').addEventListener('click', function() {
       activeYear = null;
       activeMonth = null;
       applyFilters();
