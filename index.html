@@ -853,8 +853,8 @@ nav {
 }
 .diary-slide {
   flex: 0 0 auto;
-  width: clamp(100px, 13vw, 177px);
-  height: clamp(150px, 19.4vw, 264px);
+  width: clamp(180px, 22vw, 340px);
+  height: clamp(270px, 33vw, 510px);
   overflow: hidden;
   position: relative;
 }
@@ -1770,19 +1770,18 @@ const HERO_SECTIONS = [
         return;
       }
 
-      // Build slides — all photos from all entries
+      // Build slides — first photo per day (click through to diary for full set)
       entries.forEach((entry, i) => {
         if (!entry.photos || !entry.photos.length) return;
-        entry.photos.forEach(photo => {
-          const slide = document.createElement('div');
-          slide.className = 'diary-slide';
-          const img = document.createElement('img');
-          img.src = 'image/diary-thumbs/' + entry.date + '/' + photo;
-          img.alt = '';
-          img.loading = 'lazy';
-          slide.appendChild(img);
-          track.appendChild(slide);
-        });
+        const photo = typeof entry.photos[0] === 'object' ? entry.photos[0].file : entry.photos[0];
+        const slide = document.createElement('div');
+        slide.className = 'diary-slide';
+        const img = document.createElement('img');
+        img.src = 'image/diary-thumbs/' + entry.date + '/' + photo;
+        img.alt = '';
+        img.loading = 'lazy';
+        slide.appendChild(img);
+        track.appendChild(slide);
       });
 
       // Generate sprocket holes — 41 per row like reference
@@ -1813,9 +1812,9 @@ const HERO_SECTIONS = [
       const total = slides.length;
 
       function getVisibleCount() {
-        if (window.innerWidth <= 600) return 2.5;
-        if (window.innerWidth <= 900) return 4;
-        return 6;
+        if (window.innerWidth <= 600) return 1.5;
+        if (window.innerWidth <= 900) return 2.5;
+        return 4;
       }
 
       function maxPos() {
