@@ -269,6 +269,7 @@ nav {
   position: relative;
   min-height: 80vh;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
 }
 .who .pill {
   display: inline-block; padding: 8px 20px;
@@ -513,6 +514,11 @@ nav {
 .proj-showcase-row:hover .ps-name {
   color: var(--t1);
 }
+.proj-showcase-row .ps-year-inline,
+.proj-showcase-row .ps-cat-inline,
+.proj-showcase-row-img {
+  display: none;
+}
 .proj-showcase-row .ps-year {
   font-size: 12px;
   color: var(--t3);
@@ -553,6 +559,39 @@ nav {
   }
   .proj-showcase-media {
     display: none;
+  }
+  .proj-showcase-right {
+    display: none;
+  }
+  .proj-showcase-row {
+    position: relative;
+    padding: 14px 0;
+  }
+  .proj-showcase-row .ps-year-inline {
+    display: inline;
+    font-size: 12px;
+    color: var(--t3);
+    margin-left: auto;
+  }
+  .proj-showcase-row .ps-cat-inline {
+    display: inline;
+    font-size: 10px;
+    color: var(--t4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-left: 8px;
+  }
+  .proj-showcase-row-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    margin-top: 10px;
+    display: block;
+  }
+  .proj-showcase-row-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -857,6 +896,8 @@ nav {
 
 @media (max-width: 600px) {
   .diary-top { padding: 16px 20px; }
+  .diary-section { padding-left: 0 !important; padding-right: 0 !important; }
+  .diary-strip-border { margin: 0; }
 }
 
 /* ══ DECK CTA ══ */
@@ -971,7 +1012,11 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   .proj-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  nav, .who, .what, .addressing, .work, .deck, .diary-section, footer { padding-left: 20px; padding-right: 20px; }
+  nav, .who, .what, .addressing, .work, .deck, footer { padding-left: 20px; padding-right: 20px; }
+  .proj-showcase { padding-left: 20px; padding-right: 20px; }
+  .feat-info { padding: 28px 20px; }
+  .feat-info h3 { font-size: 24px; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
 }
 </style>
 </head>
@@ -1182,12 +1227,12 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="proj-showcase-grid">
     <!-- Left: number + name -->
     <div class="proj-showcase-left">
-      <div class="proj-showcase-row" data-media="nevernotshipping/wolfchildren.jpg" data-idx="0"><span class="ps-num">01.</span><span class="ps-name">WOLF CHILDREN</span></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/apex.jpg" data-idx="1"><span class="ps-num">02.</span><span class="ps-name">APEX OS</span></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/lockinseason.jpg" data-idx="2"><span class="ps-num">03.</span><span class="ps-name">LOCK IN SEASON</span></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/bedtime.jpg" data-idx="3"><span class="ps-num">04.</span><span class="ps-name">BEDTIME</span></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/meridians.jpg" data-idx="4"><span class="ps-num">05.</span><span class="ps-name">MERIDIANS</span></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/csc.jpg" data-idx="5"><span class="ps-num">06.</span><span class="ps-name">COUNTING SHEEP CLUB (Coming Soon)</span></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/wolfchildren.jpg" data-idx="0"><span class="ps-num">01.</span><span class="ps-name">WOLF CHILDREN</span><span class="ps-year-inline">2018</span><span class="ps-cat-inline">BOOK</span><div class="proj-showcase-row-img"><img src="nevernotshipping/wolfchildren.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/apex.jpg" data-idx="1"><span class="ps-num">02.</span><span class="ps-name">APEX OS</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">FITNESS</span><div class="proj-showcase-row-img"><img src="nevernotshipping/apex.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/lockinseason.jpg" data-idx="2"><span class="ps-num">03.</span><span class="ps-name">LOCK IN SEASON</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">COMMUNITY</span><div class="proj-showcase-row-img"><img src="nevernotshipping/lockinseason.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/bedtime.jpg" data-idx="3"><span class="ps-num">04.</span><span class="ps-name">BEDTIME</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">WEB APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/bedtime.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/meridians.jpg" data-idx="4"><span class="ps-num">05.</span><span class="ps-name">MERIDIANS</span><span class="ps-year-inline">2026</span><span class="ps-cat-inline">RELOCATION APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/meridians.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/csc.jpg" data-idx="5"><span class="ps-num">06.</span><span class="ps-name">COUNTING SHEEP CLUB</span><span class="ps-year-inline">2026</span><span class="ps-cat-inline">APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/csc.jpg" alt="" loading="lazy"></div></div>
     </div>
     <!-- Center: image -->
     <div class="proj-showcase-media">
@@ -1321,7 +1366,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <!-- ══ WALL OF LOVE ══ -->
 <section style="padding:120px 40px;max-width:1400px;margin:0 auto;text-align:center;">
   <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(255,255,255,.2);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--t2);margin-bottom:32px;">I'm Kind Of A Big Deal</span>
-  <style>#tweet-wall twitter-widget,#tweet-wall .twitter-tweet-rendered{margin:0!important;}</style>
+  <style>#tweet-wall twitter-widget,#tweet-wall .twitter-tweet-rendered{margin:0!important;}@media(max-width:768px){#tweet-wall{columns:1!important;}}</style>
   <div id="tweet-wall" style="columns:3;column-gap:10px;max-width:1200px;margin:0 auto;">
     <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/fluxgravitas/status/2059154387692630134"></a></blockquote></div>
     <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/blossomcodes_/status/2059935267188883871"></a></blockquote></div>
@@ -1426,8 +1471,8 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </a>
 </section>
 
-<!-- ══ RETAINER ══ -->
-<section style="padding:80px 40px;max-width:1000px;margin:0 auto;">
+<!-- ══ RETAINER ══ (hidden — take offline for now) -->
+<section style="display:none;padding:80px 40px;max-width:1000px;margin:0 auto;">
   <div style="border:1px solid var(--sg);border-radius:16px;padding:48px;background:var(--s1);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;flex-wrap:wrap;gap:12px;">
       <h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(28px,4vw,42px);text-transform:uppercase;color:var(--t1);letter-spacing:.02em;">Creative Retainer</h2>
