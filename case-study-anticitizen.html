@@ -140,7 +140,10 @@ nav {
   overflow: hidden;
 }
 .cd-feature-visual.has-img { aspect-ratio: auto; background: none; }
-.cd-feature-visual.has-img img { width: 100%; height: auto; display: block; }
+.cd-feature-visual.has-img img,
+.cd-feature-visual.has-img video { width: 100%; height: auto; display: block; }
+/* row with an oversized visual */
+.cd-feature-row.visual-lg { max-width: 1320px; grid-template-columns: 1fr 1.6fr; }
 
 /* Stats */
 .cd-stats { background: var(--s2); padding: 100px 40px; }
@@ -203,6 +206,7 @@ footer {
 @media (max-width: 900px) {
   .cd-twocol-inner { grid-template-columns: 1fr; }
   .cd-feature-row { grid-template-columns: 1fr; }
+  .cd-feature-row.visual-lg { grid-template-columns: 1fr; max-width: 1100px; }
   .cd-feature-row:nth-child(even) .cd-feature-visual { order: 0; }
   .cd-props { flex-direction: column; gap: 16px; }
   .cd-stats-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -277,7 +281,7 @@ footer {
     <div class="cd-feature-visual">image placeholder</div>
   </div>
 
-  <div class="cd-feature-row">
+  <div class="cd-feature-row visual-lg">
     <div class="cd-feature-text">
       <h3>The Chopping Block</h3>
       <p>Every take got cut into three interchangeable segments: intro, body, CTA. Thirty raw clips per talking head. The intro from version two works with the body from version six and the CTA from version nine. Swap the on-screen title hook, change the audio track, switch the graphic treatment. 525 unique videos. Each one structured differently enough that every platform treats it as original content.</p>
@@ -290,7 +294,7 @@ footer {
       <h3>The Carousel Factory</h3>
       <p>On top of the talking heads, we generated 400 UGC-style carousels across eight narrative categories. Each batch of 50 had its own angle. CTA distribution: 40% soft, 40% medium, 20% hard. All formatted to plug straight into paid ad campaigns.</p>
     </div>
-    <div class="cd-feature-visual">image placeholder</div>
+    <div class="cd-feature-visual has-img"><video src="image/casestudies/ac-carousel.mp4" width="720" height="404" autoplay muted loop playsinline preload="metadata" aria-label="Grid of UGC-style carousel designs scrolling"></video></div>
   </div>
 
   <div class="cd-feature-row">
