@@ -111,14 +111,6 @@ nav {
 }
 .cd-twocol strong:first-child { margin-top: 0; }
 
-/* Chopping block diagram */
-.cd-diagram { background: var(--s2); padding: 0 40px 80px; }
-.cd-diagram-inner { max-width: 1100px; margin: 0 auto; }
-.cd-diagram img {
-  width: 100%; height: auto; display: block;
-  border-radius: 6px; border: 1px solid rgba(238,232,216,.08);
-}
-
 /* Features */
 .cd-features { background: var(--s1); padding: 100px 40px; }
 .cd-features-header { text-align: center; max-width: 700px; margin: 0 auto 80px; }
@@ -147,6 +139,8 @@ nav {
   font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
   overflow: hidden;
 }
+.cd-feature-visual.has-img { aspect-ratio: auto; background: none; }
+.cd-feature-visual.has-img img { width: 100%; height: auto; display: block; }
 
 /* Stats */
 .cd-stats { background: var(--s2); padding: 100px 40px; }
@@ -208,9 +202,6 @@ footer {
 
 @media (max-width: 900px) {
   .cd-twocol-inner { grid-template-columns: 1fr; }
-  .cd-diagram { padding: 0 0 60px; }
-  .cd-diagram-inner { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 0 20px; }
-  .cd-diagram img { min-width: 680px; border-radius: 4px; }
   .cd-feature-row { grid-template-columns: 1fr; }
   .cd-feature-row:nth-child(even) .cd-feature-visual { order: 0; }
   .cd-props { flex-direction: column; gap: 16px; }
@@ -274,13 +265,6 @@ footer {
   </div>
 </div>
 
-<!-- Chopping block -->
-<div class="cd-diagram">
-  <div class="cd-diagram-inner">
-    <img src="image/casestudies/ac-choppingblock.webp" alt="The chopping block: 10 intros × 10 bodies × 10 CTAs = 1,000 structural combinations, plus 35 title hooks and 10 audio tracks" loading="lazy" width="1499" height="921">
-  </div>
-</div>
-
 <!-- Features -->
 <section class="cd-features">
   <div class="cd-features-header"><h2>What We Built</h2></div>
@@ -298,7 +282,7 @@ footer {
       <h3>The Chopping Block</h3>
       <p>Every take got cut into three interchangeable segments: intro, body, CTA. Thirty raw clips per talking head. The intro from version two works with the body from version six and the CTA from version nine. Swap the on-screen title hook, change the audio track, switch the graphic treatment. 525 unique videos. Each one structured differently enough that every platform treats it as original content.</p>
     </div>
-    <div class="cd-feature-visual">image placeholder</div>
+    <div class="cd-feature-visual has-img"><img src="image/casestudies/ac-choppingblock.webp" alt="10 intros x 10 bodies x 10 CTAs = 1,000 structural combinations, plus 35 title hooks and 10 audio tracks" loading="lazy" width="1499" height="921"></div>
   </div>
 
   <div class="cd-feature-row">
@@ -314,7 +298,7 @@ footer {
       <h3>Distribution</h3>
       <p>525 variations per video plus 400 carousels is an overdose of content. None of it goes on Leon's main brand account. We warmed up close to fifty new TikTok accounts in the Anticitizen niche and started posting five to ten times a day per account. The compositions are different enough to not trigger TikTok's duplicate detection, and because the content is strong, brand new accounts pull hundreds of thousands of views right out of the gate. I did the consultancy to map this whole channel infrastructure and make sure the volume had somewhere to go.</p>
     </div>
-    <div class="cd-feature-visual">image placeholder</div>
+    <div class="cd-feature-visual has-img"><img src="image/casestudies/ac-distribution.webp" alt="Distribute across 50 niche accounts, posting 5-10 times daily, achieving $0.14 CPM and hundreds of thousands of views on brand-new accounts" loading="lazy" width="1661" height="947"></div>
   </div>
 </section>
 
