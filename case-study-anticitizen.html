@@ -111,6 +111,14 @@ nav {
 }
 .cd-twocol strong:first-child { margin-top: 0; }
 
+/* Chopping block diagram */
+.cd-diagram { background: var(--s2); padding: 0 40px 80px; }
+.cd-diagram-inner { max-width: 1100px; margin: 0 auto; }
+.cd-diagram img {
+  width: 100%; height: auto; display: block;
+  border-radius: 6px; border: 1px solid rgba(238,232,216,.08);
+}
+
 /* Features */
 .cd-features { background: var(--s1); padding: 100px 40px; }
 .cd-features-header { text-align: center; max-width: 700px; margin: 0 auto 80px; }
@@ -200,6 +208,9 @@ footer {
 
 @media (max-width: 900px) {
   .cd-twocol-inner { grid-template-columns: 1fr; }
+  .cd-diagram { padding: 0 0 60px; }
+  .cd-diagram-inner { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 0 20px; }
+  .cd-diagram img { min-width: 680px; border-radius: 4px; }
   .cd-feature-row { grid-template-columns: 1fr; }
   .cd-feature-row:nth-child(even) .cd-feature-visual { order: 0; }
   .cd-props { flex-direction: column; gap: 16px; }
@@ -260,6 +271,13 @@ footer {
       <p>10 × 10 × 10. One thousand possible structural combinations from a single script.</p>
       <p>Now layer on 35 different title hooks on screen. 10 different audio tracks. Different graphic treatments. We landed on 525 variations per viral video. From one recording session.</p>
     </div>
+  </div>
+</div>
+
+<!-- Chopping block -->
+<div class="cd-diagram">
+  <div class="cd-diagram-inner">
+    <img src="image/casestudies/ac-choppingblock.webp" alt="The chopping block: 10 intros × 10 bodies × 10 CTAs = 1,000 structural combinations, plus 35 title hooks and 10 audio tracks" loading="lazy" width="1499" height="921">
   </div>
 </div>
 
