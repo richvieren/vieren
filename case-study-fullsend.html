@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Send — Case Study — Vieren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Podium'; src: url('fonts/podium-sharp.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --bg: #2C2E2C;
+  --s1: #242624;
+  --s2: #363836;
+  --t1: #EEE8D8;
+  --t2: #EEE8D8;
+  --t3: #9a9a8a;
+  --t4: #6a6a5a;
+  --ac: #FF9F00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--t2); font-family: 'Jost', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 24px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(to bottom, rgba(36,38,36,.9) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: var(--t1); letter-spacing: .02em; text-transform: uppercase;
+}
+.nav-cta {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3); padding: 10px 24px;
+  transition: all .3s;
+}
+.nav-cta:hover { background: var(--t1); color: var(--bg); }
+
+/* ══ HERO ══ */
+.cd-hero {
+  width: 100%; height: 55vh; overflow: hidden; position: relative;
+}
+.cd-hero img {
+  width: 100%; height: 130%; object-fit: cover;
+  position: absolute; top: -15%; left: 0;
+  will-change: transform;
+}
+
+/* Portrait */
+.cd-portrait-wrap {
+  display: flex; justify-content: center;
+  margin-top: -220px; position: relative; z-index: 2;
+  margin-bottom: -80px;
+}
+.cd-portrait {
+  width: 420px; height: 560px; object-fit: cover;
+  box-shadow: 0 12px 60px rgba(0,0,0,.5);
+}
+
+/* Title */
+.cd-title-block { text-align: center; padding: 40px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+.cd-title {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
+  color: var(--t1); line-height: .9; margin-bottom: 40px; letter-spacing: .02em;
+}
+
+/* Value props */
+.cd-props {
+  display: flex; justify-content: center; gap: clamp(40px, 8vw, 120px);
+  padding: 0 40px 48px; max-width: 900px; margin: 0 auto;
+}
+.cd-prop { text-align: center; }
+.cd-prop-label {
+  font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ac); line-height: 1.5;
+}
+
+/* Intro */
+.cd-intro {
+  max-width: 800px; margin: 0 auto; padding: 40px 40px 80px; text-align: center;
+}
+.cd-intro p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.6; color: var(--t2);
+}
+.cd-intro p + p { margin-top: 20px; }
+
+/* Two-column */
+.cd-twocol { background: var(--s2); padding: 80px 40px; }
+.cd-twocol-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.cd-twocol p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8;
+  color: var(--t2);
+}
+.cd-twocol p + p { margin-top: 16px; }
+.cd-twocol strong {
+  display: block; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--t1); margin-bottom: 12px; margin-top: 24px;
+}
+.cd-twocol strong:first-child { margin-top: 0; }
+
+/* Features */
+.cd-features { background: var(--s1); padding: 100px 40px; }
+.cd-features-header { text-align: center; max-width: 700px; margin: 0 auto 80px; }
+.cd-features-header h2 {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px); color: var(--t2); margin-bottom: 16px;
+}
+.cd-feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  max-width: 1100px; margin: 0 auto; align-items: center;
+  padding: 40px 0; border-top: 1px solid rgba(255,255,255,.06);
+}
+.cd-feature-row:nth-child(even) .cd-feature-visual { order: -1; }
+.cd-feature-text h3 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(28px, 3.5vw, 44px); color: var(--t1);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.cd-feature-text p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8; color: var(--t3);
+}
+.cd-feature-text p + p { margin-top: 12px; }
+.cd-feature-visual {
+  width: 100%; aspect-ratio: 4/3; background: var(--s2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--t4);
+  overflow: hidden;
+}
+.cd-feature-visual.has-img { aspect-ratio: auto; background: none; }
+.cd-feature-visual.has-img img,
+.cd-feature-visual.has-img video { width: 100%; height: auto; display: block; }
+/* row with an oversized visual */
+.cd-feature-row.visual-lg { max-width: 1320px; grid-template-columns: 1fr 1.6fr; }
+
+/* Stats */
+.cd-stats { background: var(--s2); padding: 100px 40px; }
+.cd-stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  text-align: center;
+}
+.cd-stat-num {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1); margin-bottom: 8px;
+}
+.cd-stat-label {
+  font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--t3);
+}
+
+/* Results */
+.cd-results { background: var(--bg); padding: 100px 40px; text-align: center; }
+.cd-results h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.cd-results-subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 32px); color: var(--t3); margin-bottom: 60px;
+}
+.cd-results-stats {
+  max-width: 680px; margin: 0 auto; text-align: center;
+}
+.cd-results-stats p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.6; color: var(--t2);
+}
+.cd-results-stats p + p { margin-top: 16px; }
+
+/* CTA */
+.cd-cta { background: var(--s1); padding: 100px 40px; text-align: center; }
+.cd-cta h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(24px, 3vw, 40px); color: var(--t1);
+  max-width: 700px; margin: 0 auto 32px; line-height: 1.3;
+}
+.cd-cta a {
+  display: inline-block; font-size: 11px; font-weight: 400;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3);
+  padding: 14px 36px; transition: all .3s;
+}
+.cd-cta a:hover { background: var(--t1); color: var(--bg); }
+
+/* Footer */
+footer {
+  display: flex; justify-content: space-between; padding: 24px 40px;
+  font-size: 11px; color: var(--t4); letter-spacing: .06em;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+@media (max-width: 900px) {
+  .cd-twocol-inner { grid-template-columns: 1fr; }
+  .cd-feature-row { grid-template-columns: 1fr; }
+  .cd-feature-row.visual-lg { grid-template-columns: 1fr; max-width: 1100px; }
+  .cd-feature-row:nth-child(even) .cd-feature-visual { order: 0; }
+  .cd-props { flex-direction: column; gap: 16px; }
+  .cd-stats-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .cd-portrait { width: 260px; height: 347px; }
+  .cd-portrait-wrap { margin-top: -160px; margin-bottom: -100px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Vieren</a>
+  <a href="mailto:hello@vieren.co" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- Hero -->
+<!-- IMAGE SLOT: wide banner. Suggest a contact-sheet style grid of your own
+     photos, or a still from one of the finished slideshows. -->
+<div class="cd-hero">
+  <img src="image/casestudies/fs-banner.webp" alt="Full Send — photos in, finished posts out">
+</div>
+<!-- Portrait -->
+<!-- IMAGE SLOT: portrait. Your own, since this one is yours. -->
+<div class="cd-portrait-wrap">
+  <img class="cd-portrait" src="image/casestudies/fs-profilepic.webp" alt="Richard van der Vieren">
+</div>
+
+<!-- Title -->
+<div class="cd-title-block">
+  <h1 class="cd-title">Full Send</h1>
+</div>
+
+<!-- Value props -->
+<div class="cd-props">
+  <div class="cd-prop"><div class="cd-prop-label">Slideshow<br>Automation</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">Motion<br>Templates</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">Daily<br>Publishing</div></div>
+</div>
+
+<!-- Intro -->
+<div class="cd-intro">
+  <p>I love making the photos. The shoot, the edit, the moment a frame finally lands. What comes after is where I stall. Writing the caption, building the slideshow, cutting a version for every platform that wants a different shape. A small pile of effort between finished work and anyone seeing it, and for years that pile won.</p>
+  <p>So the work stacked up in folders. Good work, sitting on a drive.</p>
+  <p>Full Send is the thing I built to get out of my own way. I edit my photos, export them to a folder, and point the pipeline at it. I have posted daily since [DATE].</p>
+</div>
+
+<!-- Two-column overview -->
+<div class="cd-twocol">
+  <div class="cd-twocol-inner">
+    <div>
+      <p>This one had no client. I built it for myself, so there was nobody to negotiate the brief down with. I did that for years.</p>
+      <strong>The Challenge</strong>
+      <p>You know the folder. Last month&rsquo;s shoot, edited, exported, sitting there. You meant to post it. Then the caption needed writing, the square crop needed making, the vertical version needed something to fill the empty space, and it was easier to go and shoot something new. The work is finished. It just never leaves your drive.</p>
+    </div>
+    <div>
+      <strong>The Approach</strong>
+      <p>Take the part I avoid and remove it. Not speed it up. Remove it.</p>
+      <p>One folder of exported photos goes in. Finished video comes out, in every aspect ratio I publish to, on motion templates I designed rather than whatever a preset library offers.</p>
+      <p>I would know it worked if I was still using it in a month.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section class="cd-features">
+  <div class="cd-features-header"><h2>What I Built</h2></div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Folder</h3>
+      <p>The entire interface is a folder of photos. I export where I always export, and that directory is the input. Nothing to import, no timeline to open.</p>
+    </div>
+    <!-- IMAGE SLOT: a Finder window of an export folder, or the panel's folder picker -->
+    <div class="cd-feature-visual has-img"><img src="image/casestudies/fs-folder.webp" alt="A folder of exported photos as the only input" loading="lazy" width="1600" height="900"></div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>Sixteen Motion Templates</h3>
+      <p>Sixteen custom motion templates, each a different way of moving through a set of photos. A globe of images turning on its axis. A grid that pans and drifts. Cards scattered in 3D space, scaling as they pass the camera.</p>
+      <p>Built rather than licensed, so nothing looks like the template pack everyone else posts from.</p>
+    </div>
+    <!-- IMAGE SLOT: video. A grid of several templates rendering the same photo set. -->
+    <div class="cd-feature-visual has-img"><video src="image/casestudies/fs-templates.mp4" width="1200" height="675" autoplay muted loop playsinline preload="metadata" aria-label="Sixteen motion templates rendering the same set of photos"></video></div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>Every Shape at Once</h3>
+      <p>Vertical for stories and reels, square for the grid, wide for YouTube, four-five because it takes the most room in a feed. One command renders all of them, cropping per ratio, so a portrait frame in a wide render is composed rather than squashed.</p>
+    </div>
+    <!-- IMAGE SLOT: the same render in 9:16 / 1:1 / 16:9 / 4:5 side by side -->
+    <div class="cd-feature-visual has-img"><img src="image/casestudies/fs-ratios.webp" alt="One render, five shapes: 9:16, 4:5, 1:1, 3:4 and 16:9, each cropped rather than squashed" loading="lazy" width="1024" height="572"></div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>Ten Different Edits</h3>
+      <p>Ask for ten and you get ten different edits, not one edit ten times. Each pulls its own selection, and the picker favours photos it has used least, so the same three frames stop leading every post. Every variation carries its seed, so a keeper rebuilds exactly.</p>
+    </div>
+    <!-- IMAGE SLOT: a contact sheet of several variations from one run -->
+    <div class="cd-feature-visual has-img"><img src="image/casestudies/fs-variations.webp" alt="Ten asks, ten edits: one folder, ten different selections, each with its own seed" loading="lazy" width="1024" height="572"></div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>Where It Goes</h3>
+      <p>A render is only finished once it leaves the machine. Each brand I run has its own accounts wired up, so output routes to the right ones without me picking every time.</p>
+      <p>Before anything is created the panel writes a plan. Which post, which accounts, which file. I read it, and nothing moves until I say so.</p>
+      <p>Everything lands as a draft in the scheduler, waiting on me. Nothing publishes itself. Scheduling runs on my own server, so the accounts and the tokens stay mine.</p>
+    </div>
+    <!-- IMAGE SLOT: the publish plan on screen, drafts queued in the scheduler -->
+    <div class="cd-feature-visual has-img"><img src="image/casestudies/fs-publish.webp" alt="A publish plan under review, and the drafts it queued" loading="lazy" width="1024" height="572"></div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Panel</h3>
+      <p>A browser panel on top of it, because a tool that needs a terminal is a tool I would stop opening. Pick the folder, tick the templates and ratios, hit render. It prints the command it runs, which matters the day something breaks.</p>
+    </div>
+    <!-- IMAGE SLOT: replace with the video walkthrough when it exists. -->
+    <div class="cd-feature-visual has-img"><img src="image/casestudies/fs-panel.webp" alt="The control panel: choose your photos, make the videos, approve what goes out" loading="lazy" width="1024" height="572"></div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="cd-stats">
+  <div class="cd-stats-inner">
+    <div>
+      <div class="cd-stat-num" data-count="800">0</div>
+      <div class="cd-stat-label">Videos from one folder</div>
+    </div>
+    <div>
+      <div class="cd-stat-num" data-count="16">0</div>
+      <div class="cd-stat-label">Custom motion templates</div>
+    </div>
+    <div>
+      <div class="cd-stat-num" data-count="5">0</div>
+      <div class="cd-stat-label">Aspect ratios, every render</div>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="cd-results">
+  <h2>The Results</h2>
+  <div class="cd-results-subtitle">in practice</div>
+  <div class="cd-results-stats">
+    <p>The decision about whether to post is gone, and that decision was always what killed it. Shoot, edit, export, point it at the folder. I have posted daily since [DATE], from work that used to reach nobody.</p>
+    <p class="closer">The photos were always finished. Now they leave the drive.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cd-cta">
+  <h2>I build internal tools for photographers and studios whose workflow does not fit the software everyone else is using.</h2>
+  <a href="mailto:hello@vieren.co">Get In Touch</a>
+</section>
+
+<footer>
+  <span>Vieren Studio</span>
+  <span>Cape Town, South Africa</span>
+</footer>
+
+<script>
+(function() {
+  // Parallax
+  var img = document.querySelector('.cd-hero img');
+  window.addEventListener('scroll', function() {
+    img.style.transform = 'translateY(' + window.pageYOffset * 0.4 + 'px)';
+  });
+
+  // Count-up on scroll
+  var counted = false;
+  var stats = document.querySelector('.cd-stats');
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('.cd-stat-num[data-count]').forEach(function(el) {
+        var target = parseFloat(el.dataset.count);
+        var decimals = parseInt(el.dataset.decimals) || 0;
+        var prefix = el.dataset.prefix || '';
+        var suffix = el.dataset.suffix || '';
+        var duration = 1500;
+        var start = performance.now();
+
+        function tick(now) {
+          var progress = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = eased * target;
+          el.textContent = prefix + (decimals ? current.toFixed(decimals) : Math.round(current)) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+  }, { threshold: 0.5 });
+  observer.observe(stats);
+})();
+</script>
+</body>
+</html>
