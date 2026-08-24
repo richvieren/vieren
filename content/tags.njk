@@ -1,0 +1,38 @@
+---
+layout: base.njk
+pagination:
+  data: collections.postsByTag
+  size: 1
+  alias: group
+eleventyComputed:
+  title: "{{ group.tag }}"
+  metaTitle: "{{ group.tag }} — Articles — Vieren"
+  description: "Articles tagged {{ group.tag }}."
+  permalink: "tag/{{ group.tag | slug }}/index.html"
+---
+<div class="wrap">
+
+  <header class="list-hero">
+    <a class="eyebrow" style="text-decoration:none" href="/articles/">Articles</a>
+    <h1>{{ group.tag }}</h1>
+    <p>{{ group.posts.length }} article{% if group.posts.length != 1 %}s{% endif %} tagged &ldquo;{{ group.tag }}&rdquo;.</p>
+  </header>
+
+  <div class="post-list">
+    {% for post in group.posts %}
+    <a class="post-item" href="{{ post.url | pub }}">
+      <span class="meta">
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      </span>
+      <h2>{{ post.data.title }}</h2>
+      {% if post.data.subtitle %}<p>{{ post.data.subtitle }}</p>
+      {% elif post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="art-foot">
+    <a class="back" href="/articles/">← All articles</a>
+  </div>
+
+</div>

@@ -1,0 +1,25 @@
+---
+permalink: feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Vieren — Articles</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ "/articles/feed.xml" | absolute }}" rel="self"/>
+  <link href="{{ site.url }}/articles/"/>
+  <updated>{% if collections.posts.length %}{{ collections.posts[0].date | dateToRfc3339 }}{% endif %}</updated>
+  <id>{{ site.url }}/articles/</id>
+  <author>
+    <name>{{ site.author }}</name>
+  </author>
+  {%- for post in collections.posts %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ post.url | pub | absolute }}"/>
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ post.url | pub | absolute }}</id>
+    <content type="html">{{ post.templateContent | htmlToAbsoluteUrls(post.url | pub | absolute) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

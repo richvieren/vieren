@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ metaTitle or (title + " — Vieren") }}</title>
+<meta name="description" content="{{ description or site.description }}">
+<link rel="canonical" href="{{ canonical or (page.url | pub | absolute) }}">
+{% if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
+<meta property="og:type" content="{{ ogType or 'website' }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description or site.description }}">
+<meta property="og:url" content="{{ page.url | pub | absolute }}">
+<meta property="og:image" content="{{ (image or site.defaultOgImage) | absolute }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png">
+<link rel="alternate" type="application/rss+xml" title="Vieren — Articles" href="/articles/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Podium'; src: url('/fonts/podium-sharp.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('/fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --bg: #2C2E2C;
+  --s1: #242624;
+  --s2: #363836;
+  --card: #EEE8D8;
+  --t1: #EEE8D8;
+  --t2: #EEE8D8;
+  --t3: #9a9a8a;
+  --t4: #6a6a5a;
+  --ac: #FF9F00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--t2);
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+a { color: inherit; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 24px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(to bottom, rgba(36,38,36,.9) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: var(--t1); letter-spacing: .02em;
+  text-transform: uppercase; text-decoration: none;
+}
+.nav-cta {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3); padding: 10px 24px;
+  text-decoration: none; transition: all .3s;
+}
+.nav-cta:hover { background: var(--t1); color: var(--bg); }
+
+/* ══ SHARED ══ */
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 40px; }
+.eyebrow {
+  font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ac);
+}
+.meta {
+  font-family: 'Archivo', sans-serif; font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--t4);
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--t3);
+  border: 1px solid rgba(238,232,216,.18); padding: 5px 12px; border-radius: 100px;
+  text-decoration: none; transition: all .25s;
+}
+.tag:hover { border-color: var(--ac); color: var(--ac); }
+
+/* ══ LISTING ══ */
+.list-hero { padding: 180px 0 60px; }
+.list-hero h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 8vw, 92px); color: var(--t1);
+  text-transform: uppercase; line-height: .95; margin: 16px 0 20px;
+}
+.list-hero p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 24px);
+  color: var(--t3); line-height: 1.6; max-width: 560px;
+}
+.list-tags { margin-top: 32px; }
+.post-list { border-top: 1px solid rgba(255,255,255,.08); }
+.post-item {
+  display: block; text-decoration: none;
+  padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+  transition: opacity .25s;
+}
+.post-item:hover { opacity: .62; }
+.post-item h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(24px, 3.2vw, 34px); color: var(--t1);
+  line-height: 1.15; margin: 10px 0 8px;
+}
+.post-item p {
+  font-family: 'Archivo', sans-serif; font-size: 14px;
+  line-height: 1.75; color: var(--t3); max-width: 620px;
+}
+.post-item .meta { margin-top: 12px; }
+.empty {
+  font-family: 'Archivo', sans-serif; font-size: 14px; color: var(--t3);
+  padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* ══ ARTICLE ══ */
+.art-head { padding: 180px 0 0; }
+.art-head h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 6vw, 68px); color: var(--t1);
+  line-height: 1.06; margin: 16px 0 20px;
+}
+.art-sub {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(19px, 2.4vw, 26px); color: var(--t3); line-height: 1.5;
+}
+.art-meta {
+  display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center;
+  margin-top: 28px; padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.art-hero { margin: 48px 0 0; }
+.art-hero img { width: 100%; height: auto; display: block; border-radius: 4px; }
+
+.art-body { padding-top: 48px; font-size: 17px; line-height: 1.8; color: var(--t2); }
+.art-body > * + * { margin-top: 24px; }
+.art-body h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 36px); color: var(--t1);
+  line-height: 1.2; margin-top: 56px;
+}
+.art-body h3 {
+  font-family: 'Archivo', sans-serif; font-weight: 700;
+  font-size: 15px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--t1); margin-top: 44px;
+}
+.art-body a { color: var(--ac); text-decoration: underline; text-underline-offset: 3px; }
+.art-body a:hover { color: var(--t1); }
+.art-body strong { font-weight: 500; color: var(--t1); }
+.art-body em { font-style: italic; }
+.art-body ul, .art-body ol { padding-left: 22px; }
+.art-body li + li { margin-top: 10px; }
+.art-body blockquote {
+  border-left: 2px solid var(--ac); padding: 4px 0 4px 24px;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: 21px; line-height: 1.55; color: var(--t1);
+}
+.art-body blockquote p + p { margin-top: 14px; }
+.art-body img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.art-body figure figcaption {
+  font-family: 'Archivo', sans-serif; font-size: 12px; color: var(--t4);
+  text-align: center; margin-top: 12px;
+}
+.art-body hr { border: 0; border-top: 1px solid rgba(255,255,255,.1); margin: 48px 0; }
+.art-body code {
+  font-family: ui-monospace, Menlo, monospace; font-size: 14px;
+  background: var(--s1); padding: 2px 6px; border-radius: 3px; color: var(--card);
+}
+.art-body pre {
+  background: var(--s1); padding: 20px; border-radius: 4px;
+  overflow-x: auto; font-size: 13px; line-height: 1.6;
+}
+.art-body pre code { background: none; padding: 0; }
+.art-body table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.art-body th, .art-body td {
+  text-align: left; padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.art-body th { font-family: 'Archivo', sans-serif; font-weight: 600; color: var(--t1); }
+
+.art-foot {
+  margin-top: 64px; padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center;
+}
+.art-source {
+  font-family: 'Archivo', sans-serif; font-size: 13px; color: var(--t4);
+  margin-top: 20px; line-height: 1.7;
+}
+.art-source a { color: var(--t3); }
+.back {
+  font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--t3);
+  text-decoration: none;
+}
+.back:hover { color: var(--ac); }
+
+/* ══ FOOTER ══ */
+footer {
+  display: flex; justify-content: space-between; gap: 12px; padding: 24px 40px;
+  font-size: 11px; color: var(--t4); letter-spacing: .06em;
+  border-top: 1px solid rgba(255,255,255,.06); margin-top: 100px;
+}
+footer a { color: var(--t4); text-decoration: none; }
+footer a:hover { color: var(--t1); }
+
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .wrap { padding: 0 24px; }
+  .list-hero, .art-head { padding-top: 130px; }
+  .art-body { font-size: 16px; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Vieren</a>
+  <a href="/intake" class="nav-cta">Start A Project</a>
+</nav>
+
+{{ content | safe }}
+
+<footer>
+  <span>Vieren Studio</span>
+  <span><a href="/articles/">Articles</a> · <a href="/articles/feed.xml">RSS</a></span>
+  <span>Cape Town, South Africa</span>
+</footer>
+
+</body>
+</html>

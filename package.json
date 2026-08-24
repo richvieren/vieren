@@ -1,0 +1,23 @@
+{
+  "name": "vieren-studio",
+  "version": "1.0.0",
+  "description": "vieren.studio — static site + Eleventy articles",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve --port=8080",
+    "new": "node scripts/new-article.mjs",
+    "img": "node scripts/article-image.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richvieren/vieren.git"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-plugin-rss": "^3.0.0",
+    "luxon": "^3.7.2"
+  }
+}

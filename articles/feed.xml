@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Vieren — Articles</title>
+  <subtitle>Notes on building companies, film, and the systems behind them.</subtitle>
+  <link href="https://vieren.studio/articles/feed.xml" rel="self"/>
+  <link href="https://vieren.studio/articles/"/>
+  <updated></updated>
+  <id>https://vieren.studio/articles/</id>
+  <author>
+    <name>Richard van der Vieren</name>
+  </author>
+</feed>

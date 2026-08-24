@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://vieren.studio/sitemap.xml
+Sitemap: https://vieren.studio/articles/sitemap.xml
