@@ -1370,7 +1370,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ ARTICLES ══ -->
 <style>
-.arts-section { background: var(--sg); padding: 100px 40px; display: none; }
+.arts-section { background: var(--card); padding: 100px 40px; display: none; }
 .arts-inner { max-width: 1200px; margin: 0 auto; }
 .arts-top {
   display: flex; justify-content: space-between; align-items: flex-end;
@@ -1379,16 +1379,16 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .arts-title {
   font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
   font-size: clamp(36px, 6vw, 72px); text-transform: uppercase;
-  letter-spacing: .02em; color: var(--t1); line-height: 1;
+  letter-spacing: .02em; color: #1c1512; line-height: 1;
 }
 .arts-all {
   font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
   letter-spacing: .18em; text-transform: uppercase; color: var(--t3);
   text-decoration: none; padding-bottom: 6px; transition: color .25s;
 }
-.arts-all:hover { color: var(--ac); }
-/* --t3/--t4 are too dark on the sage ground — go tonal instead */
-.arts-section .arts-all { color: rgba(238,232,216,.62); }
+.arts-all:hover { color: #1c1512; }
+/* dark-on-light: #1c1512 is the site convention for cream sections */
+.arts-section .arts-all { color: rgba(28,21,18,.62); }
 .arts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 /* Degrade cleanly below three posts instead of leaving dead columns.
    Desktop only — these outrank the mobile collapse rule on specificity. */
@@ -1398,22 +1398,22 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 }
 .art-card {
   display: block; text-decoration: none; color: inherit;
-  border-top: 1px solid rgba(238,232,216,.28); padding-top: 24px;
+  border-top: 1px solid rgba(28,21,18,.22); padding-top: 24px;
   transition: opacity .25s;
 }
 .art-card:hover { opacity: .6; }
 .art-card .am {
   font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 600;
-  letter-spacing: .16em; text-transform: uppercase; color: rgba(238,232,216,.55);
+  letter-spacing: .16em; text-transform: uppercase; color: rgba(28,21,18,.55);
 }
 .art-card h3 {
   font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
   font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15;
-  color: var(--t1); margin: 12px 0 10px;
+  color: #1c1512; margin: 12px 0 10px;
 }
 .art-card p {
   font-family: 'Jost', sans-serif; font-weight: 300;
-  font-size: 14px; line-height: 1.7; color: rgba(238,232,216,.72);
+  font-size: 14px; line-height: 1.7; color: rgba(28,21,18,.72);
 }
 @media (max-width: 900px) { .arts-grid { grid-template-columns: 1fr; gap: 32px; } }
 @media (max-width: 600px) { .arts-section { padding: 70px 20px; } }
