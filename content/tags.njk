@@ -10,7 +10,7 @@ eleventyComputed:
   description: "Articles tagged {{ group.tag }}."
   permalink: "tag/{{ group.tag | slug }}/index.html"
 ---
-<div class="wrap">
+<div class="wrap wrap-wide">
 
   <header class="list-hero">
     <a class="eyebrow" style="text-decoration:none" href="/articles/">Articles</a>
@@ -18,15 +18,11 @@ eleventyComputed:
     <p>{{ group.posts.length }} article{% if group.posts.length != 1 %}s{% endif %} tagged &ldquo;{{ group.tag }}&rdquo;.</p>
   </header>
 
-  <div class="post-list">
+  <div class="post-grid">
     {% for post in group.posts %}
-    <a class="post-item" href="{{ post.url | pub }}">
-      <span class="meta">
-        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
-      </span>
+    <a class="post-card" href="{{ post.url | pub }}">
       <h2>{{ post.data.title }}</h2>
-      {% if post.data.subtitle %}<p>{{ post.data.subtitle }}</p>
-      {% elif post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
+      <span class="pm">{{ post.templateContent | readingTime }} min read   {{ post.date | shortDate }}</span>
     </a>
     {% endfor %}
   </div>

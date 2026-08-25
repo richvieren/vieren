@@ -45,6 +45,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("isoDate", (d) =>
     DateTime.fromJSDate(d, { zone: "utc" }).toFormat("yyyy-LL-dd")
   );
+  eleventyConfig.addFilter("shortDate", (d) =>
+    DateTime.fromJSDate(d, { zone: "utc" }).toFormat("LLL d")
+  );
   // Output lands in /articles/, but Eleventy's page.url is relative to that
   // output root. `pub` restores the real public path; `absolute` makes it a
   // full URL. Always run page.url through `pub` before `absolute`.

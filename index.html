@@ -17,7 +17,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Podium';
@@ -1397,23 +1397,21 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   .arts-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; }
 }
 .art-card {
-  display: block; text-decoration: none; color: inherit;
-  border-top: 1px solid rgba(28,21,18,.22); padding-top: 24px;
-  transition: opacity .25s;
+  display: flex; flex-direction: column; justify-content: space-between;
+  text-decoration: none; color: inherit; min-height: 200px;
+  border: 1px solid rgba(28,21,18,.16); padding: 32px;
+  transition: border-color .25s, background .25s;
 }
-.art-card:hover { opacity: .6; }
-.art-card .am {
-  font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 600;
-  letter-spacing: .16em; text-transform: uppercase; color: rgba(28,21,18,.55);
-}
+.art-card:hover { border-color: rgba(28,21,18,.42); background: rgba(28,21,18,.03); }
 .art-card h3 {
-  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
-  font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15;
-  color: #1c1512; margin: 12px 0 10px;
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.02em;
+  font-size: clamp(21px, 2vw, 26px); line-height: 1.22;
+  color: #1c1512; margin: 0 0 24px;
 }
-.art-card p {
-  font-family: 'Jost', sans-serif; font-weight: 300;
-  font-size: 14px; line-height: 1.7; color: rgba(28,21,18,.72);
+.art-card .am {
+  font-family: 'IBM Plex Mono', monospace; font-weight: 400;
+  font-size: 12px; letter-spacing: 0; color: rgba(28,21,18,.5);
+  white-space: pre;   /* keep the gap between 'min read' and the date */
 }
 @media (max-width: 900px) { .arts-grid { grid-template-columns: 1fr; gap: 32px; } }
 @media (max-width: 600px) { .arts-section { padding: 70px 20px; } }
@@ -1441,20 +1439,13 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
         var a = document.createElement('a');
         a.className = 'art-card';
         a.href = post.url;
-        var meta = document.createElement('span');
-        meta.className = 'am';
-        meta.textContent = post.tags && post.tags.length
-          ? post.dateLabel + ' · ' + post.tags[0]
-          : post.dateLabel;
         var h = document.createElement('h3');
         h.textContent = post.title;
-        a.appendChild(meta);
+        var meta = document.createElement('span');
+        meta.className = 'am';
+        meta.textContent = post.readingTime + ' min read   ' + post.dateShort;
         a.appendChild(h);
-        if (post.blurb) {
-          var p = document.createElement('p');
-          p.textContent = post.blurb;
-          a.appendChild(p);
-        }
+        a.appendChild(meta);
         grid.appendChild(a);
       });
       grid.setAttribute('data-count', String(Math.min(posts.length, 3)));

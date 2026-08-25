@@ -5,38 +5,42 @@ title: Articles
 metaTitle: Articles — Vieren
 description: Notes on building companies, film, content systems, and the machinery behind them.
 ---
-<div class="wrap">
+<div class="wrap wrap-wide">
 
   <header class="list-hero">
     <span class="eyebrow">Vieren</span>
     <h1>Articles</h1>
-    <p>{{ description }}</p>
+    <p>{{ collections.posts.length }} {% if collections.posts.length == 1 %}note{% else %}notes{% endif %} on building companies, film, content systems, and the machinery behind them.</p>
+  </header>
+
+  {% if collections.posts.length %}
+    {% set featured = collections.posts[0] %}
+    <a class="featured" href="{{ featured.url | pub }}">
+      <span class="feat-eyebrow">Featured</span>
+      <h2>{{ featured.data.title }}</h2>
+      <p>{{ featured.data.subtitle or featured.data.description }}</p>
+      <span class="feat-meta">{{ featured.templateContent | readingTime }} min read   {{ featured.date | shortDate }}</span>
+    </a>
 
     {% if collections.tagList.length %}
-    <div class="tags list-tags">
+    <div class="list-tags">
       {% for entry in collections.tagList %}
       <a class="tag" href="/articles/tag/{{ entry.tag | slug }}/">{{ entry.tag }} ({{ entry.count }})</a>
       {% endfor %}
     </div>
     {% endif %}
-  </header>
 
-  <div class="post-list">
-    {% for post in collections.posts %}
-    <a class="post-item" href="{{ post.url | pub }}">
-      <span class="meta">
-        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
-      </span>
-      <h2>{{ post.data.title }}</h2>
-      {% if post.data.subtitle %}<p>{{ post.data.subtitle }}</p>
-      {% elif post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
-      {% if post.data.tags and post.data.tags.length %}
-      <span class="meta">{{ post.data.tags | join(" · ") }}</span>
-      {% endif %}
-    </a>
-    {% else %}
+    <span class="grid-label">All articles</span>
+    <div class="post-grid">
+      {% for post in collections.posts %}
+      <a class="post-card" href="{{ post.url | pub }}">
+        <h2>{{ post.data.title }}</h2>
+        <span class="pm">{{ post.templateContent | readingTime }} min read   {{ post.date | shortDate }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  {% else %}
     <p class="empty">No articles published yet.</p>
-    {% endfor %}
-  </div>
+  {% endif %}
 
 </div>

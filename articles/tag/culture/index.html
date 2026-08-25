@@ -81,38 +81,81 @@ nav {
 .tag:hover { border-color: var(--ac); color: var(--ac); }
 
 /* ══ LISTING ══ */
-.list-hero { padding: 180px 0 60px; }
+.wrap-wide { max-width: 1180px; }
+.list-hero { padding: 180px 0 48px; }
 .list-hero h1 {
   font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
   font-size: clamp(48px, 8vw, 92px); color: var(--t1);
-  text-transform: uppercase; line-height: .95; margin: 16px 0 20px;
+  line-height: .95; margin: 16px 0 20px;
 }
 .list-hero p {
-  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 24px);
-  color: var(--t3); line-height: 1.6; max-width: 560px;
-}
-.list-tags { margin-top: 32px; }
-.post-list { border-top: 1px solid rgba(255,255,255,.08); }
-.post-item {
-  display: block; text-decoration: none;
-  padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,.08);
-  transition: opacity .25s;
-}
-.post-item:hover { opacity: .62; }
-.post-item h2 {
-  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
-  font-size: clamp(24px, 3.2vw, 34px); color: var(--t1);
-  line-height: 1.15; margin: 10px 0 8px;
-}
-.post-item p {
   font-family: 'IBM Plex Mono', monospace; font-size: 14px;
-  line-height: 1.75; color: var(--t3); max-width: 620px;
+  color: var(--t3); line-height: 1.8; max-width: 640px;
 }
-.post-item .meta { margin-top: 12px; }
+
+/* Featured panel */
+.featured {
+  display: block; text-decoration: none;
+  border: 1px solid rgba(238,232,216,.16); padding: clamp(28px, 4vw, 56px);
+  background: rgba(238,232,216,.025);
+  transition: border-color .25s, background .25s;
+}
+.featured:hover { border-color: rgba(238,232,216,.4); background: rgba(238,232,216,.05); }
+.feat-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ac);
+}
+.featured h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.03em;
+  font-size: clamp(30px, 4.4vw, 52px); line-height: 1.08;
+  color: var(--t1); margin: 22px 0 20px;
+}
+.featured p {
+  font-family: 'IBM Plex Mono', monospace; font-size: 14px;
+  line-height: 1.85; color: var(--t3); max-width: 720px;
+}
+.feat-meta {
+  display: block; margin-top: 26px; white-space: pre;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--t4);
+}
+
+/* Filter pills — rectangles with counts */
+.list-tags { margin: 56px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.list-tags .tag {
+  border-radius: 0; border: 1px solid rgba(238,232,216,.16);
+  font-family: 'IBM Plex Mono', monospace; font-weight: 400;
+  font-size: 12px; letter-spacing: .1em; padding: 11px 18px; color: var(--t3);
+}
+.list-tags .tag:hover { border-color: var(--ac); color: var(--ac); }
+
+.grid-label {
+  display: block; margin: 56px 0 20px;
+  padding-bottom: 18px; border-bottom: 1px solid rgba(238,232,216,.12);
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ac);
+}
+.post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post-card {
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 210px; text-decoration: none;
+  border: 1px solid rgba(238,232,216,.16); padding: 30px;
+  transition: border-color .25s, background .25s;
+}
+.post-card:hover { border-color: rgba(238,232,216,.42); background: rgba(238,232,216,.04); }
+.post-card h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.02em;
+  font-size: clamp(21px, 2vw, 26px); line-height: 1.22;
+  color: var(--t1); margin: 0 0 24px;
+}
+.post-card .pm {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  color: var(--t4); white-space: pre;
+}
 .empty {
   font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--t3);
-  padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+  border: 1px solid rgba(238,232,216,.16); padding: 40px;
 }
+@media (max-width: 900px) { .post-grid { grid-template-columns: 1fr; } }
 
 /* ══ ARTICLE ══ */
 .art-head { padding: 180px 0 0; }
@@ -221,7 +264,7 @@ footer a:hover { color: var(--t1); }
   <a href="/intake" class="nav-cta">Start A Project</a>
 </nav>
 
-<div class="wrap">
+<div class="wrap wrap-wide">
 
   <header class="list-hero">
     <a class="eyebrow" style="text-decoration:none" href="/articles/">Articles</a>
@@ -229,14 +272,11 @@ footer a:hover { color: var(--t1); }
     <p>1 article tagged &ldquo;Culture&rdquo;.</p>
   </header>
 
-  <div class="post-list">
+  <div class="post-grid">
     
-    <a class="post-item" href="/articles/the-degeneracy-economy/">
-      <span class="meta">
-        <time datetime="2026-05-23">23 May 2026</time>
-      </span>
+    <a class="post-card" href="/articles/the-degeneracy-economy/">
       <h2>The Degeneracy Economy</h2>
-      <p>134 people paid $199 to join a program that throws them out if they do not ship in 30 days. The same psychology that runs the casino can be aimed at yourself.</p>
+      <span class="pm">4 min read   May 23</span>
     </a>
     
   </div>

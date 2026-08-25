@@ -11,7 +11,9 @@ eleventyExcludeFromCollections: true
       "url": {{ (post.url | pub) | dump | safe }},
       "date": {{ (post.date | isoDate) | dump | safe }},
       "dateLabel": {{ (post.date | readableDate) | dump | safe }},
+      "dateShort": {{ (post.date | shortDate) | dump | safe }},
       "blurb": {{ (post.data.subtitle or post.data.description or "") | dump | safe }},
+      "readingTime": {{ (post.templateContent | readingTime) | dump | safe }},
       "tags": {{ (post.data.tags or []) | dump | safe }}
     }{% if not loop.last %},{% endif %}
     {%- endfor %}
