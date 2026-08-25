@@ -1,0 +1,19 @@
+---
+permalink: articles.json
+eleventyExcludeFromCollections: true
+---
+{
+  "updated": {{ (collections.posts[0].date | isoDate if collections.posts.length else "") | dump | safe }},
+  "posts": [
+    {%- for post in collections.posts %}
+    {
+      "title": {{ post.data.title | dump | safe }},
+      "url": {{ (post.url | pub) | dump | safe }},
+      "date": {{ (post.date | isoDate) | dump | safe }},
+      "dateLabel": {{ (post.date | readableDate) | dump | safe }},
+      "blurb": {{ (post.data.subtitle or post.data.description or "") | dump | safe }},
+      "tags": {{ (post.data.tags or []) | dump | safe }}
+    }{% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}

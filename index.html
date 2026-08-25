@@ -1368,6 +1368,102 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
 </section>
 
+<!-- ══ ARTICLES ══ -->
+<style>
+.arts-section { background: var(--sg); padding: 100px 40px; display: none; }
+.arts-inner { max-width: 1200px; margin: 0 auto; }
+.arts-top {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 24px; margin-bottom: 56px; flex-wrap: wrap;
+}
+.arts-title {
+  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
+  font-size: clamp(36px, 6vw, 72px); text-transform: uppercase;
+  letter-spacing: .02em; color: var(--t1); line-height: 1;
+}
+.arts-all {
+  font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--t3);
+  text-decoration: none; padding-bottom: 6px; transition: color .25s;
+}
+.arts-all:hover { color: var(--ac); }
+/* --t3/--t4 are too dark on the sage ground — go tonal instead */
+.arts-section .arts-all { color: rgba(238,232,216,.62); }
+.arts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+/* Degrade cleanly below three posts instead of leaving dead columns.
+   Desktop only — these outrank the mobile collapse rule on specificity. */
+@media (min-width: 901px) {
+  .arts-grid[data-count="1"] { grid-template-columns: minmax(0, 560px); }
+  .arts-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; }
+}
+.art-card {
+  display: block; text-decoration: none; color: inherit;
+  border-top: 1px solid rgba(238,232,216,.28); padding-top: 24px;
+  transition: opacity .25s;
+}
+.art-card:hover { opacity: .6; }
+.art-card .am {
+  font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: rgba(238,232,216,.55);
+}
+.art-card h3 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
+  font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15;
+  color: var(--t1); margin: 12px 0 10px;
+}
+.art-card p {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 14px; line-height: 1.7; color: rgba(238,232,216,.72);
+}
+@media (max-width: 900px) { .arts-grid { grid-template-columns: 1fr; gap: 32px; } }
+@media (max-width: 600px) { .arts-section { padding: 70px 20px; } }
+</style>
+<section class="arts-section" id="artsSection">
+  <div class="arts-inner">
+    <div class="arts-top">
+      <span class="arts-title">Articles.</span>
+      <a href="/articles/" class="arts-all">All articles →</a>
+    </div>
+    <div class="arts-grid" id="artsGrid"></div>
+  </div>
+</section>
+<script>
+(function () {
+  var grid = document.getElementById('artsGrid');
+  var sec = document.getElementById('artsSection');
+  if (!grid || !sec) return;
+  fetch('/articles/articles.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var posts = (data && data.posts) || [];
+      if (!posts.length) return;            // never show an empty section
+      posts.slice(0, 3).forEach(function (post) {
+        var a = document.createElement('a');
+        a.className = 'art-card';
+        a.href = post.url;
+        var meta = document.createElement('span');
+        meta.className = 'am';
+        meta.textContent = post.tags && post.tags.length
+          ? post.dateLabel + ' · ' + post.tags[0]
+          : post.dateLabel;
+        var h = document.createElement('h3');
+        h.textContent = post.title;
+        a.appendChild(meta);
+        a.appendChild(h);
+        if (post.blurb) {
+          var p = document.createElement('p');
+          p.textContent = post.blurb;
+          a.appendChild(p);
+        }
+        grid.appendChild(a);
+      });
+      grid.setAttribute('data-count', String(Math.min(posts.length, 3)));
+      sec.style.display = 'block';
+    })
+    .catch(function () { /* leave the section hidden */ });
+})();
+</script>
+
 <!-- ══ WALL OF LOVE ══ -->
 <section style="padding:120px 40px;max-width:1400px;margin:0 auto;text-align:center;">
   <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(255,255,255,.2);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--t2);margin-bottom:32px;">I'm Kind Of A Big Deal</span>

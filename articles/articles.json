@@ -1,0 +1,29 @@
+{
+  "updated": "2026-05-23",
+  "posts": [
+    {
+      "title": "The Degeneracy Economy",
+      "url": "/articles/the-degeneracy-economy/",
+      "date": "2026-05-23",
+      "dateLabel": "23 May 2026",
+      "blurb": "134 people paid $199 to join a program that throws them out if they do not ship in 30 days. The same psychology that runs the casino can be aimed at yourself.",
+      "tags": ["Culture","Founders"]
+    },
+    {
+      "title": "Your Brain Is Training Itself to Avoid Hard Things",
+      "url": "/articles/your-brain-is-training-itself-to-avoid-hard-things/",
+      "date": "2026-05-15",
+      "dateLabel": "15 May 2026",
+      "blurb": "Procrastination is not laziness or bad time management. It is emotion regulation, and every time you avoid, you strengthen the circuit.",
+      "tags": ["Psychology","Founders"]
+    },
+    {
+      "title": "Distribution Ate Everything",
+      "url": "/articles/distribution-ate-everything/",
+      "date": "2026-04-28",
+      "dateLabel": "28 April 2026",
+      "blurb": "OpenAI paid hundreds of millions for a podcast. Production costs are collapsing to zero, but nobody can print new eyeballs.",
+      "tags": ["Distribution","Founders"]
+    }
+  ]
+}
