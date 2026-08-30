@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 13 rules from Reality Transurfing that rewired my whole life — Vieren</title>
+<meta name="description" content="Effort was never the variable. Thirteen rules from Vadim Zeland&#39;s Reality Transurfing, and the mechanical reason the thing you want most keeps sliding away from you.">
+<link rel="canonical" href="https://vieren.studio/articles/13-rules-reality-transurfing/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="The 13 rules from Reality Transurfing that rewired my whole life">
+<meta property="og:description" content="Effort was never the variable. Thirteen rules from Vadim Zeland&#39;s Reality Transurfing, and the mechanical reason the thing you want most keeps sliding away from you.">
+<meta property="og:url" content="https://vieren.studio/articles/13-rules-reality-transurfing/">
+<meta property="og:image" content="https://vieren.studio/ogimage.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png">
+<link rel="alternate" type="application/rss+xml" title="Vieren — Articles" href="/articles/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Podium'; src: url('/fonts/podium-sharp.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('/fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --bg: #2C2E2C;
+  --s1: #242624;
+  --s2: #363836;
+  --card: #EEE8D8;
+  --t1: #EEE8D8;
+  --t2: #EEE8D8;
+  --t3: #9a9a8a;
+  --t4: #6a6a5a;
+  --ac: #FF9F00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--t2);
+  font-family: 'IBM Plex Mono', monospace; font-weight: 300;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+a { color: inherit; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 24px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(to bottom, rgba(36,38,36,.9) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: var(--t1); letter-spacing: .02em;
+  text-transform: uppercase; text-decoration: none;
+}
+.nav-cta {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3); padding: 10px 24px;
+  text-decoration: none; transition: all .3s;
+}
+.nav-cta:hover { background: var(--t1); color: var(--bg); }
+
+/* ══ SHARED ══ */
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 40px; }
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ac);
+}
+.meta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--t4);
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--t3);
+  border: 1px solid rgba(238,232,216,.18); padding: 5px 12px; border-radius: 100px;
+  text-decoration: none; transition: all .25s;
+}
+.tag:hover { border-color: var(--ac); color: var(--ac); }
+
+/* ══ LISTING ══ */
+.wrap-wide { max-width: 1180px; }
+.list-hero { padding: 180px 0 48px; }
+.list-hero h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
+  font-size: clamp(48px, 8vw, 92px); color: var(--t1);
+  line-height: .95; margin: 16px 0 20px;
+}
+.list-hero p {
+  font-family: 'IBM Plex Mono', monospace; font-size: 14px;
+  color: var(--t3); line-height: 1.8; max-width: 640px;
+}
+
+/* Featured panel */
+.featured {
+  display: block; text-decoration: none;
+  border: 1px solid rgba(238,232,216,.16); padding: clamp(28px, 4vw, 56px);
+  background: rgba(238,232,216,.025);
+  transition: border-color .25s, background .25s;
+}
+.featured:hover { border-color: rgba(238,232,216,.4); background: rgba(238,232,216,.05); }
+.feat-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ac);
+}
+.featured h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.03em;
+  font-size: clamp(30px, 4.4vw, 52px); line-height: 1.08;
+  color: var(--t1); margin: 22px 0 20px;
+}
+.featured p {
+  font-family: 'IBM Plex Mono', monospace; font-size: 14px;
+  line-height: 1.85; color: var(--t3); max-width: 720px;
+}
+.feat-meta {
+  display: block; margin-top: 26px; white-space: pre;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--t4);
+}
+
+/* Filter pills — rectangles with counts */
+.list-tags { margin: 56px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.list-tags .tag {
+  border-radius: 0; border: 1px solid rgba(238,232,216,.16);
+  font-family: 'IBM Plex Mono', monospace; font-weight: 400;
+  font-size: 12px; letter-spacing: .1em; padding: 11px 18px; color: var(--t3);
+}
+.list-tags .tag:hover { border-color: var(--ac); color: var(--ac); }
+
+.grid-label {
+  display: block; margin: 56px 0 20px;
+  padding-bottom: 18px; border-bottom: 1px solid rgba(238,232,216,.12);
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ac);
+}
+.post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.post-card {
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 210px; text-decoration: none;
+  border: 1px solid rgba(238,232,216,.16); padding: 30px;
+  transition: border-color .25s, background .25s;
+}
+.post-card:hover { border-color: rgba(238,232,216,.42); background: rgba(238,232,216,.04); }
+.post-card h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.02em;
+  font-size: clamp(21px, 2vw, 26px); line-height: 1.22;
+  color: var(--t1); margin: 0 0 24px;
+}
+.post-card .pm {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  color: var(--t4); white-space: pre;
+}
+.empty {
+  font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--t3);
+  border: 1px solid rgba(238,232,216,.16); padding: 40px;
+}
+@media (max-width: 900px) { .post-grid { grid-template-columns: 1fr; } }
+
+/* ══ ARTICLE ══ */
+.art-head { padding: 180px 0 0; }
+.art-head h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
+  font-size: clamp(36px, 6vw, 68px); color: var(--t1);
+  line-height: 1.06; margin: 16px 0 20px;
+}
+.art-sub {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(19px, 2.4vw, 26px); color: var(--t3); line-height: 1.5;
+}
+.art-meta {
+  display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center;
+  margin-top: 28px; padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.art-hero { margin: 48px 0 0; }
+.art-hero img { width: 100%; height: auto; display: block; border-radius: 4px; }
+
+.art-body { padding-top: 48px; font-size: 15px; line-height: 1.85; color: var(--t2); }
+.art-body > * + * { margin-top: 24px; }
+.art-body h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.04em;
+  font-size: clamp(26px, 3.4vw, 36px); color: var(--t1);
+  line-height: 1.2; margin-top: 56px;
+}
+.art-body h3 {
+  font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+  font-size: 15px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--t1); margin-top: 44px;
+}
+.art-body a { color: var(--ac); text-decoration: underline; text-underline-offset: 3px; }
+.art-body a:hover { color: var(--t1); }
+.art-body strong { font-weight: 500; color: var(--t1); }
+.art-body em { font-style: italic; }
+.art-body ul, .art-body ol { padding-left: 22px; }
+.art-body li + li { margin-top: 10px; }
+.art-body blockquote {
+  border-left: 2px solid var(--ac); padding: 4px 0 4px 24px;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: 21px; line-height: 1.55; color: var(--t1);
+}
+.art-body blockquote p + p { margin-top: 14px; }
+.art-body img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.art-body figure figcaption {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--t4);
+  text-align: center; margin-top: 12px;
+}
+.art-body hr { border: 0; border-top: 1px solid rgba(255,255,255,.1); margin: 48px 0; }
+.art-body code {
+  font-family: ui-monospace, Menlo, monospace; font-size: 14px;
+  background: var(--s1); padding: 2px 6px; border-radius: 3px; color: var(--card);
+}
+.art-body pre {
+  background: var(--s1); padding: 20px; border-radius: 4px;
+  overflow-x: auto; font-size: 13px; line-height: 1.6;
+}
+.art-body pre code { background: none; padding: 0; }
+.art-body table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.art-body th, .art-body td {
+  text-align: left; padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.art-body th { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--t1); }
+
+.art-foot {
+  margin-top: 64px; padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center;
+}
+.art-source {
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--t4);
+  margin-top: 20px; line-height: 1.7;
+}
+.art-source a { color: var(--t3); }
+.back {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--t3);
+  text-decoration: none;
+}
+.back:hover { color: var(--ac); }
+
+/* ══ FOOTER ══ */
+footer {
+  display: flex; justify-content: space-between; gap: 12px; padding: 24px 40px;
+  font-size: 11px; color: var(--t4); letter-spacing: .06em;
+  border-top: 1px solid rgba(255,255,255,.06); margin-top: 100px;
+}
+footer a { color: var(--t4); text-decoration: none; }
+footer a:hover { color: var(--t1); }
+
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .wrap { padding: 0 24px; }
+  .list-hero, .art-head { padding-top: 130px; }
+  .art-body { font-size: 16px; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Vieren</a>
+  <a href="/intake" class="nav-cta">Start A Project</a>
+</nav>
+
+<article class="wrap">
+
+  <header class="art-head">
+    <a class="eyebrow" style="text-decoration:none" href="/articles/tag/psychology/">Psychology</a>
+    <h1>The 13 rules from Reality Transurfing that rewired my whole life</h1>
+    <p class="art-sub">Eleven years with the effort dial turned as far as it goes, in a direction I never chose.</p>
+
+    <div class="art-meta">
+      <span class="meta">
+        <time datetime="2026-08-30">30 August 2026</time>
+      </span>
+      <span class="meta">12 min read</span>
+      
+      <span class="tags">
+        <a class="tag" href="/articles/tag/psychology/">Psychology</a><a class="tag" href="/articles/tag/founders/">Founders</a>
+      </span>
+      
+    </div>
+
+    
+  </header>
+
+  <div class="art-body">
+    <p>Effort was never the variable, and you have known this for years.</p>
+<p>You have watched people out-work you and finish exactly where they started, and you have watched people who visibly try less walk away with the whole board. Luck, timing, connections: those are the three explanations available to someone who does not want to look any further, and you have used all of them.</p>
+<p>I am not standing above you on this. I spent eleven years with the effort dial turned as far as it goes, making better work every single year in a direction I had never once chosen on purpose. I was out-working people and finishing exactly where I started, except I had nicer photos to show for it.</p>
+<p>The book that moved me is called Reality Transurfing. A Russian named Vadim Zeland wrote it, and it holds the most precise description of self-sabotage I have found anywhere. It explains, mechanically, why the thing you want most is the thing that keeps sliding away from you, and it does that without a single line of the motivational scaffolding the cover leads you to expect.</p>
+<p>I have read it multiple times.</p>
+<p>So here are the thirteen ideas in it.</p>
+<p>This will take a while. It is not the kind of thing you skim in a queue and forget by lunch. Bookmark it, read it with something to write on, and come back to it every now and then.</p>
+<p>Let's begin.</p>
+<h2>I. Your mind is a transmitter and reality tunes to the signal</h2>
+<blockquote>
+<p>The eradiation of mental energy induces the materialization of the variation.</p>
+</blockquote>
+<p>Zeland's model holds that every possible version of your life already exists, sitting there like branches on a tree, and you do not construct the branch you end up on. You tune to it.</p>
+<p>The transmitter is your own running commentary, the one nobody supervises. Whatever it broadcasts all day is what selects the branch.</p>
+<p>You can leave the metaphysics alone and still run the experiment. Spend one day writing down what your internal monologue says about your work, your money, and your body. Most people find the results genuinely unpleasant, because they have been transmitting the same three complaints for a decade while calling it realism.</p>
+<p>His conclusion: You cannot rewrite the branch you are standing on. You change what you transmit, and you step onto a different one.</p>
+<h2>II. Some things feed on your attention and cannot tell love from hate</h2>
+<p>When enough people think about the same thing, Zeland says that thing becomes a structure with an appetite. He calls them pendulums. They have no consciousness and exactly one purpose, which is to draw energy out of whoever feeds them.</p>
+<blockquote>
+<p>In order to get rid of a pendulum, first, you need to admit that it exists and it has a right to do so. You have to calm down and lose interest towards it i.e. ignore it. By doing so you will deprive it of your mental energy.</p>
+</blockquote>
+<p>The structure has no preference between your love and your hate. Fighting one feeds it precisely as well as joining it does. Both taste the same going down.</p>
+<p>The competitor you check every morning before your own numbers is a pendulum. The argument you have sworn off twice and replied to four times is a pendulum. The niche you post in, chosen by whoever happened to be winning the month you started, is a pendulum wearing your career like a coat.</p>
+<p>Strip the branding and it is all the same dopamine loop with a different skin.</p>
+<p>You cannot beat one, and you cannot outrun one. You can only bore it, and boredom is the hardest thing on earth to fake, because the structure is built to read your pulse.</p>
+<h2>III. Momentum is fragile and most people kill it in the first four seconds</h2>
+<blockquote>
+<p>By accepting and transmitting the negative energy you create your individual hell. By accepting and transmitting the positive energy you create your individual heaven.</p>
+</blockquote>
+<p>The third rule concerns what Zeland calls the Wave of Luck, and the unglamorous claim underneath it is that a run of good outcomes only builds from a first success you actually let yourself register.</p>
+<p>Ambitious people are constitutionally incapable of this. The win lands, they give it four seconds, and they are back inside whatever is broken.</p>
+<p>His instruction here is almost embarrassingly domestic. Close your mind to bad news and open it to good. Nurse the small changes. Those are the early signal of the wave, and treating them with contempt is how you kill it before it forms.</p>
+<h2>IV. Wanting it too much is the mechanism that removes it</h2>
+<blockquote>
+<p>In order to get in balance with the outside world, have freedom from pendulums and freely fulfill your desires — one needs to reduce the importance.</p>
+</blockquote>
+<p>This is the engine of the whole book and the rule everyone who reads it quotes back to me.</p>
+<p>Care about something too much and you create what Zeland calls excess potential, a pressure difference between that thing and everything around it. Equilibrium forces then move to level the pressure, and they level it against you, because you are the one holding the imbalance. The correction always arrives in the shape opposite to the intent that produced it.</p>
+<p>You have watched this run in both directions without having a name for it. The round you desperately needed never closed. The client you were relaxed about signed on the first call. The message you rewrote nine times arrived reading exactly like a message somebody rewrote nine times.</p>
+<blockquote>
+<p>The grip is the problem. Not the goal.</p>
+</blockquote>
+<p>Effort tightens the grip, which is why turning it up has never once fixed this for you.</p>
+<h2>V. React to the disaster and you get written into it</h2>
+<blockquote>
+<p>Do not let any negative information into your layer of the world, intentionally ignore it, deprive it of attention and don't engage with interest.</p>
+</blockquote>
+<p>Zeland calls this induced transition. Respond emotionally to a bad event and you move onto the line of life where that class of event is ordinary. You begin as a spectator to somebody else's catastrophe and end up cast in your own.</p>
+<p>The layer of the world you live in is assembled from what you let in, which is a smaller and stranger quantity than what exists.</p>
+<p>He is careful to separate this from avoidance. You do not fight the thing and you do not flee it. You go empty in its direction, and it stops finding you interesting.</p>
+<h2>VI. The body files its report before the mind builds its case</h2>
+<blockquote>
+<p>It is necessary to listen to the state of spiritual discomfort. If you have to persuade yourself, then the Soul says &quot;no&quot;.</p>
+</blockquote>
+<p>Here is where the chapter title comes from, and it contains the single most useful sentence in the book.</p>
+<p>Zeland's claim is that some part of you can see branches you have not stepped onto yet, and it reports back in a register the mind barely registers. A vague comfort, or a vague weight. It arrives as a temperature rather than an argument.</p>
+<p>The mind is loud and the weight is quiet, which is why almost nobody catches it. The test, though, is clean, and it is falsifiable inside sixty seconds.</p>
+<p>If you had to talk yourself into it, that is your answer.</p>
+<p>Run it against the last three large decisions you made. You already know which one it flags.</p>
+<h2>VII. Everything should be done in the easiest way available to you</h2>
+<blockquote>
+<p>In accordance with the principle of moving with the current, everything should be done in the easiest and simplest way.</p>
+</blockquote>
+<p>Zeland lays out the two failure modes plainly. Drift like a paper boat and beg the world for outcomes, or row against the current and convert your life into a permanent war with everything in it.</p>
+<p>His third option reads as heresy to anyone who built an identity on effort. Do not ask, do not demand, do not fight. Decide, then move, and take the path of least resistance the entire way.</p>
+<p>The correct solution is almost always the simple one sitting on the surface. A mind under stress will reliably reach past it for something more complicated, because complicated feels like it deserves the reward more.</p>
+<p>He attaches one instruction for the road. Watch for signs. A line of life gives you the feeling that something is off before it turns, and that feeling arrives well before the evidence does.</p>
+<h2>VIII. Deciding and wanting are different organs</h2>
+<blockquote>
+<p>Our wishes are realized by the External Intention, i.e. intention to own, our deep belief and concentration on how the goal is realized by itself.</p>
+</blockquote>
+<p>Zeland splits intention in two, and the distinction explains why most goal-setting dies on contact.</p>
+<p>Internal intention is the determination to act. That is you, pushing the world.</p>
+<p>External intention is the determination to own, which is a settled certainty about how circumstances arrange themselves around something already yours.</p>
+<p>He defines it as clarity without words, knowledge without faith, confidence without hesitation. It never arrives as an act of will. It shows up on the day the soul and the mind stop arguing about whether you are permitted to have the thing.</p>
+<p>Which means the work is not more force. It is clearing out the excess potential and the pendulums that keep the argument running.</p>
+<h2>IX. You are running a slideshow and you did not choose the slides</h2>
+<blockquote>
+<p>Create yourself a positive slide pleasant to your soul and mind. Do not look at the slide as a picture, but live in it, at least virtually.</p>
+</blockquote>
+<p>A slide is a distorted picture of reality you carry around with you. Zeland's point is that you already have dozens and consented to none of them.</p>
+<p>Negative slides form when you care too much what other people see. They work as a magnifying glass held over your own worst features, and a slide carrying enough importance will drag you onto the branch where the picture is accurate.</p>
+<p>The instruction is to build one deliberately and inhabit it rather than admire it. Add detail over time. Visit often.</p>
+<p>One rule comes attached, and it is the one people break immediately. The slide has to be yours. A copy of someone else's dream will not hold, because no part of you wants it.</p>
+<p>Which is most vision boards on this website, incidentally. Same wound, bigger mirror.</p>
+<h2>X. Visualise the stage, never the finish</h2>
+<blockquote>
+<p>Visualization in Transurfing is a vision of the process of realizing the current stage on the way to the goal.</p>
+</blockquote>
+<p>Every manifestation book tells you to picture the outcome. Zeland says the opposite, and this is precisely where he separates from the crowd he keeps getting shelved next to.</p>
+<p>You are not moved by the goal. You are moved by the visualisation of the process of moving toward it, at the stage you occupy right now.</p>
+<p>So you break the path into stages and put your attention on the current one only. Picture it happening. Get interested in its mechanics. The end state is none of your business today.</p>
+<p>He adds the part requiring patience. You will not be able to see how the goal gets done for a long time. Keep the slide running anyway. On the day it stops seeming impossible, meaning it has entered your comfort zone, the route appears.</p>
+<h2>XI. Charisma is the sound of a mind at peace with its own soul</h2>
+<blockquote>
+<p>Your Soul Fraile is the Holy Grail within you. In order to tune your mind to your Soul Fraile, you need to convince yourself that your soul is worthy of love in the first place.</p>
+</blockquote>
+<p>Every soul has star sectors, the branches where you are entirely yourself. Reaching them requires you to stop running someone else's scenario, which is harder than it sounds, because the scenario is usually invisible from the inside.</p>
+<p>The soul fraile is the specific set of attributes that make you you, buried under whatever the mind stacked on top. When the mind tunes to it, Zeland says you get a shine. That is his word, and it is his entire explanation for charisma. Harmony between soul and mind, visible from the outside, with no technique involved.</p>
+<p>Pendulums work against this around the clock, because they need you measuring yourself against a standard. Discontent, envy, fear and resentment are their preferred food, and a person at home in themselves produces none of it.</p>
+<h2>XII. Your goal, your door, or somebody else's</h2>
+<blockquote>
+<p>Happiness comes during the journey to Your Goal through Your Door. Your Goal is something that gives you real pleasure, something that gives a feeling of joy, a feeling of a feast of life. Your Door is the path towards your goal on which you feel fascinated and inspired.</p>
+</blockquote>
+<p>The last rule is worth the price of the book and almost nobody quotes it, because it is not fun.</p>
+<p>Zeland's claim is that happiness exists on the line you are on now or it does not exist at all. The idea that you fight through obstacles to earn it later is a story pendulums tell, because a person postponing their life is a person permanently available for work.</p>
+<p>Then the two tests, which are brutal in their simplicity.</p>
+<p>If you want the goal in order to prove something, to yourself or to anyone else, it is not your goal.</p>
+<p>If your mind has decided and your soul is uncomfortable, it is not your goal.</p>
+<p>Somebody else's goal always feels like violence done to yourself, dressed as duty. It arrives wearing prestige, or fashion, or the appeal of being difficult to reach. Reaching it produces emptiness rather than joy, which is the cruel part, because by then you have spent the years.</p>
+<p>I spent over a decade behind a camera. Campaigns for Samsung, Red Bull, Levis. I built an agency and hid behind the brand and the lenses and never once put my own face forward. The work speaks for itself, I said, which was true, and was the most convenient sentence available to me for about eleven years.</p>
+<p>High standard. Real skill. Somebody else's door.</p>
+<h2>XIII. The world is a mirror and it answers slowly</h2>
+<blockquote>
+<p>The thoughts that we transmit inconspicuously transfer us (our material reality, our destiny) to the lines and sectors of the Space of Variations which literally correspond to our thoughts.</p>
+</blockquote>
+<p>I use the mirror version of this, because a transmitter is an abstraction and a mirror is something you have stood in front of.</p>
+<p>You hold the image. Reality holds the reflection. Everything that comes back to you is a report on what you have been showing it. What you asked for does not enter into it.</p>
+<p>The reflection arrives late. Weeks, sometimes years. Most people change the image once, look up, find the old reflection still hanging there, and decide the whole idea is nonsense. Then they go back to broadcasting the same three complaints and the mirror goes back to confirming them.</p>
+<p>It also has no taste. Your gripping goes in. So does your envy, and the part of you that has made peace with being overlooked. All of it comes back at the same flat resolution, and a man reading an accurate reflection will almost always call it bad luck.</p>
+<p>Mine was accurate for a decade and I misread every frame of it. The phone rang. The invoices cleared. I read that as proof I was on the right line. What the mirror was actually reporting was a man who had arranged his whole working life so that nobody would ever have to ask him what he thought.</p>
+<h2>What changes</h2>
+<p>You will not become detached. Zeland is explicit that emotionlessness is not the goal, and a person performing serenity is only feeding a different pendulum.</p>
+<p>What changes is resolution. You catch the grip while you are still gripping. The thing eating your mornings loses its hold the moment you can name it. And the question of whose goal you are carrying stops being philosophical, because the answer shows up in your chest before your mind has finished building its case.</p>
+<p>Take one hour this week. Write down the five things you are chasing hardest, and beside each one write the name of the person who would be impressed. Where a name arrives faster than the goal does, you are looking at somebody else's door, and you have probably been paying rent on it for years.</p>
+<p>Then change what you are holding up, and be patient with what comes back.</p>
+<p>Rich</p>
+
+  </div>
+
+  
+
+  <div class="art-foot">
+    <a class="back" href="/articles/">← All articles</a>
+    <a class="nav-cta" href="/intake">Start A Project</a>
+  </div>
+
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The 13 rules from Reality Transurfing that rewired my whole life",
+  "alternativeHeadline": "Eleven years with the effort dial turned as far as it goes, in a direction I never chose.",
+  "description": "Effort was never the variable. Thirteen rules from Vadim Zeland's Reality Transurfing, and the mechanical reason the thing you want most keeps sliding away from you.",
+  "image": ["https://vieren.studio/ogimage.png"],
+  "datePublished": "2026-08-30",
+  "dateModified": "2026-08-30",
+  "author": { "@type": "Person", "name": "Richard van der Vieren", "url": "https://vieren.studio" },
+  "publisher": { "@type": "Organization", "name": "Vieren Studio", "url": "https://vieren.studio" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vieren.studio/articles/13-rules-reality-transurfing/" },
+  "keywords": "Psychology, Founders"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vieren.studio" },
+    { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://vieren.studio/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "The 13 rules from Reality Transurfing that rewired my whole life", "item": "https://vieren.studio/articles/13-rules-reality-transurfing/" }
+  ]
+}
+</script>
+
+
+<footer>
+  <span>Vieren Studio</span>
+  <span><a href="/articles/">Articles</a> · <a href="/articles/feed.xml">RSS</a></span>
+  <span>Cape Town, South Africa</span>
+</footer>
+
+</body>
+</html>
