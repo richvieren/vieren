@@ -6,6 +6,8 @@ tags:
   - "Psychology"
   - "Founders"
 subtitle: "Eleven years with the effort dial turned as far as it goes, in a direction I never chose."
+image: "/image/articles/13-rules-reality-transurfing/portali.webp"
+imageAlt: "Reality Transurfing article banner"
 draft: false
 ---
 
@@ -27,6 +29,8 @@ Let's begin.
 
 ## I. Your mind is a transmitter and reality tunes to the signal
 
+![The space of variations as branching lines of life](/image/articles/13-rules-reality-transurfing/1field.webp)
+
 > The eradiation of mental energy induces the materialization of the variation.
 
 Zeland's model holds that every possible version of your life already exists, sitting there like branches on a tree, and you do not construct the branch you end up on. You tune to it.
@@ -38,6 +42,8 @@ You can leave the metaphysics alone and still run the experiment. Spend one day 
 His conclusion: You cannot rewrite the branch you are standing on. You change what you transmit, and you step onto a different one.
 
 ## II. Some things feed on your attention and cannot tell love from hate
+
+![A pendulum, the structure that feeds on attention](/image/articles/13-rules-reality-transurfing/pendululum.webp)
 
 When enough people think about the same thing, Zeland says that thing becomes a structure with an appetite. He calls them pendulums. They have no consciousness and exactly one purpose, which is to draw energy out of whoever feeds them.
 
@@ -63,6 +69,8 @@ His instruction here is almost embarrassingly domestic. Close your mind to bad n
 
 ## IV. Wanting it too much is the mechanism that removes it
 
+![Equilibrium forces levelling an excess potential](/image/articles/13-rules-reality-transurfing/forces.webp)
+
 > In order to get in balance with the outside world, have freedom from pendulums and freely fulfill your desires — one needs to reduce the importance.
 
 This is the engine of the whole book and the rule everyone who reads it quotes back to me.
@@ -76,6 +84,8 @@ You have watched this run in both directions without having a name for it. The r
 Effort tightens the grip, which is why turning it up has never once fixed this for you.
 
 ## V. React to the disaster and you get written into it
+
+![Induced transition, being written into someone else's disaster](/image/articles/13-rules-reality-transurfing/v2disaster.webp)
 
 > Do not let any negative information into your layer of the world, intentionally ignore it, deprive it of attention and don't engage with interest.
 
@@ -141,6 +151,8 @@ Which is most vision boards on this website, incidentally. Same wound, bigger mi
 
 ## X. Visualise the stage, never the finish
 
+![Visualising the current stage rather than the finish](/image/articles/13-rules-reality-transurfing/jatoch.webp)
+
 > Visualization in Transurfing is a vision of the process of realizing the current stage on the way to the goal.
 
 Every manifestation book tells you to picture the outcome. Zeland says the opposite, and this is precisely where he separates from the crowd he keeps getting shelved next to.
@@ -183,6 +195,8 @@ High standard. Real skill. Somebody else's door.
 
 ## XIII. The world is a mirror and it answers slowly
 
+![The world as a mirror that answers slowly](/image/articles/13-rules-reality-transurfing/13-mirror.webp)
+
 > The thoughts that we transmit inconspicuously transfer us (our material reality, our destiny) to the lines and sectors of the Space of Variations which literally correspond to our thoughts.
 
 I use the mirror version of this, because a transmitter is an abstraction and a mirror is something you have stood in front of.
@@ -206,3 +220,5 @@ Take one hour this week. Write down the five things you are chasing hardest, and
 Then change what you are holding up, and be patient with what comes back.
 
 Rich
+
+![Closing image](/image/articles/13-rules-reality-transurfing/outro.webp)
