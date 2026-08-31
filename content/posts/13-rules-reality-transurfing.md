@@ -45,17 +45,25 @@ His conclusion: You cannot rewrite the branch you are standing on. You change wh
 
 ![A pendulum, the structure that feeds on attention](/image/articles/13-rules-reality-transurfing/pendululum.webp)
 
-When enough people think about the same thing, Zeland says that thing becomes a structure with an appetite. He calls them pendulums. They have no consciousness and exactly one purpose, which is to draw energy out of whoever feeds them.
-
 > In order to get rid of a pendulum, first, you need to admit that it exists and it has a right to do so. You have to calm down and lose interest towards it i.e. ignore it. By doing so you will deprive it of your mental energy.
 
-The structure has no preference between your love and your hate. Fighting one feeds it precisely as well as joining it does. Both taste the same going down.
+When a lot of people think in the same direction, Zeland says the thinking condenses into a structure. He calls it a pendulum. The older word is egregore. It is the soul of anything that has collected followers: a religion, a political party, a company, a family, a nation, a football crowd on a Saturday afternoon. Money is one. The new iPhone is one.
 
-The competitor you check every morning before your own numbers is a pendulum. The argument you have sworn off twice and replied to four times is a pendulum. The niche you post in, chosen by whoever happened to be winning the month you started, is a pendulum wearing your career like a coat.
+A pendulum has no consciousness and no plan. It has an appetite. Its only purpose is to draw energy out of the people who created it, and its strength is the size of that crowd. When followers leave it weakens, and if enough of them leave it dissipates.
 
-Strip the branding and it is all the same dopamine loop with a different skin.
+Most are destructive, because draining people is the whole function. Zeland names war, economic crisis and criminal gangs. To that list you can add the ladder you are climbing because climbing is expected, the milestones you are hitting on schedule, and the approval you open your phone to check.
 
-You cannot beat one, and you cannot outrun one. You can only bore it, and boredom is the hardest thing on earth to fake, because the structure is built to read your pulse.
+It does not care whether you love it or hate it. March for it or march against it, you are swinging it, and both taste the same going down.
+
+Its method is knocking you off balance, because a person in balance is no use to it. So it works through fear, through guilt, through inferiority, and through the feeling that something matters enormously and you are already behind on it. Once you are swinging at its frequency it has what it came for.
+
+While you are giving it energy you are also transmitting, and transmitting is selecting, so you drift toward the version of your life holding more of the thing you were trying to get away from. This is why what you hate starts following you around.
+
+It needs a them, as well. We are right and they are wrong, and anyone who declined to join gets recruited or attacked.
+
+You cannot fight one, because fighting is feeding. There are two exits. Lose interest: admit the thing exists, grant that it has every right to, and step outside it as an observer rather than a participant. Or break its script by doing something it did not plan for, at the moment it is waiting for your line.
+
+Not all of them are bad. Sport is a pendulum. So is a healthy lifestyle. The question is not how to escape every one. It is which ones you agreed to feed, and whether you agreed on purpose.
 
 ## III. Momentum is fragile and most people kill it in the first four seconds
 
@@ -161,7 +169,7 @@ You are not moved by the goal. You are moved by the visualisation of the process
 
 So you break the path into stages and put your attention on the current one only. Picture it happening. Get interested in its mechanics. The end state is none of your business today.
 
-He adds the part requiring patience. You will not be able to see how the goal gets done for a long time. Keep the slide running anyway. On the day it stops seeming impossible, meaning it has entered your comfort zone, the route appears.
+He adds one instruction that requires patience. You will not be able to see how the goal gets done for a long time. Keep the slide running anyway. On the day it stops seeming impossible, meaning it has entered your comfort zone, the route appears.
 
 ## XI. Charisma is the sound of a mind at peace with its own soul
 
@@ -205,7 +213,7 @@ You hold the image. Reality holds the reflection. Everything that comes back to 
 
 The reflection arrives late. Weeks, sometimes years. Most people change the image once, look up, find the old reflection still hanging there, and decide the whole idea is nonsense. Then they go back to broadcasting the same three complaints and the mirror goes back to confirming them.
 
-It also has no taste. Your gripping goes in. So does your envy, and the part of you that has made peace with being overlooked. All of it comes back at the same flat resolution, and a man reading an accurate reflection will almost always call it bad luck.
+It also has no taste. Your gripping goes in. So does your envy, and whatever in you has made peace with being overlooked. All of it comes back at the same flat resolution, and a man reading an accurate reflection will almost always call it bad luck.
 
 Mine was accurate for a decade and I misread every frame of it. The phone rang. The invoices cleared. I read that as proof I was on the right line. What the mirror was actually reporting was a man who had arranged his whole working life so that nobody would ever have to ask him what he thought.
 
