@@ -109,7 +109,7 @@ He is careful to separate this from avoidance. You do not fight the thing and yo
 
 Here is where the chapter title comes from, and it contains the single most useful sentence in the book.
 
-Zeland's claim is that some part of you can see branches you have not stepped onto yet, and it reports back in a register the mind barely registers. A vague comfort, or a vague weight. It arrives as a temperature rather than an argument.
+Zeland's claim is that something in you can see branches you have not stepped onto yet, and it reports back in a register the mind barely registers. A vague comfort, or a vague weight. It arrives as a temperature rather than an argument.
 
 The mind is loud and the weight is quiet, which is why almost nobody catches it. The test, though, is clean, and it is falsifiable inside sixty seconds.
 
@@ -153,7 +153,7 @@ Negative slides form when you care too much what other people see. They work as 
 
 The instruction is to build one deliberately and inhabit it rather than admire it. Add detail over time. Visit often.
 
-One rule comes attached, and it is the one people break immediately. The slide has to be yours. A copy of someone else's dream will not hold, because no part of you wants it.
+One rule comes attached, and it is the one people break immediately. The slide has to be yours. A copy of someone else's dream will not hold, because nothing in you wants it.
 
 Which is most vision boards on this website, incidentally. Same wound, bigger mirror.
 
@@ -195,7 +195,7 @@ If you want the goal in order to prove something, to yourself or to anyone else,
 
 If your mind has decided and your soul is uncomfortable, it is not your goal.
 
-Somebody else's goal always feels like violence done to yourself, dressed as duty. It arrives wearing prestige, or fashion, or the appeal of being difficult to reach. Reaching it produces emptiness rather than joy, which is the cruel part, because by then you have spent the years.
+Somebody else's goal always feels like violence done to yourself, dressed as duty. It arrives wearing prestige, or fashion, or the appeal of being difficult to reach. Reaching it produces emptiness rather than joy, which is the cruelty of it, because by then you have spent the years.
 
 I spent over a decade behind a camera. Campaigns for Samsung, Red Bull, Levis. I built an agency and hid behind the brand and the lenses and never once put my own face forward. The work speaks for itself, I said, which was true, and was the most convenient sentence available to me for about eleven years.
 
