@@ -105,50 +105,8 @@ for dir in image/diary/*/; do
   done
 done
 
-# ── Step 5: Build diary.json (uses thumbnails for strip) ──
-entries=()
-total=0
-
-for dir in $(ls -d image/diary/*/ 2>/dev/null | sort -r); do
-  date=$(basename "$dir")
-  # Skip thumbs dir
-  [ "$date" = "diary-thumbs" ] && continue
-  photos=$(ls "$dir"*.jpg "$dir"*.jpeg "$dir"*.png "$dir"*.webp 2>/dev/null | sed "s|$dir||")
-
-  if [ -z "$photos" ]; then
-    continue
-  fi
-
-  photo_json=""
-  first=true
-  while IFS= read -r photo; do
-    if [ "$first" = true ]; then
-      first=false
-    else
-      photo_json="$photo_json, "
-    fi
-    photo_json="$photo_json\"$photo\""
-    total=$((total + 1))
-  done <<< "$photos"
-
-  entries+=("  { \"date\": \"$date\", \"photos\": [$photo_json] }")
-done
-
-if [ ${#entries[@]} -eq 0 ]; then
-  echo "[]" > diary.json
-  echo "No photos found. diary.json cleared."
-  exit 0
-fi
-
-echo "[" > diary.json
-for i in "${!entries[@]}"; do
-  if [ $i -lt $((${#entries[@]} - 1)) ]; then
-    echo "${entries[$i]}," >> diary.json
-  else
-    echo "${entries[$i]}" >> diary.json
-  fi
-done
-echo "]" >> diary.json
-
+# ── diary.json is now manually maintained (supports tags/categories) ──
+# Claude updates diary.json directly when adding new entries.
 echo ""
-echo "diary.json updated: ${#entries[@]} dates, $total photos."
+echo "diary.json is manually maintained. Update it via Claude Code."
+echo "Done."
