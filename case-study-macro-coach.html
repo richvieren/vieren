@@ -45,7 +45,11 @@ nav {
 .nav-cta:hover { background: var(--t1); color: var(--bg); }
 
 /* Title */
-.cd-title-block { text-align: center; padding: 160px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+/* Hero */
+.cd-hero { width: 100%; height: 55vh; overflow: hidden; }
+.cd-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.cd-title-block { text-align: center; padding: 60px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 .cd-title {
   font-family: 'Instrument Serif', serif; font-weight: 400;
   font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
@@ -212,7 +216,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 }
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
-  .cd-title-block { padding-top: 120px; }
+  .cd-title-block { padding-top: 40px; }
 }
 </style>
 </head>
@@ -224,6 +228,11 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </nav>
 
 <!-- Title -->
+<!-- Hero -->
+<div class="cd-hero">
+  <img src="image/cs-macro-hero.jpg" alt="Raw steak with fork and knife">
+</div>
+
 <div class="cd-title-block">
   <h1 class="cd-title">Macro Coach</h1>
 </div>
