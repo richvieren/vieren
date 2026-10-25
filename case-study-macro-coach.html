@@ -46,11 +46,16 @@ nav {
 
 /* Title */
 /* Hero */
-.cd-hero { width: 100%; height: 55vh; overflow: hidden; }
-.cd-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cd-hero { width: 100%; height: 55vh; overflow: hidden; position: relative; }
+.cd-hero img {
+  width: 100%; height: 130%; object-fit: cover;
+  position: absolute; top: -15%; left: 0;
+  will-change: transform;
+}
 
 /* Portrait: overlaps the bottom of the hero */
-.cd-portrait-wrap { display: flex; justify-content: center; margin-top: -220px; position: relative; z-index: 2; }
+.cd-portrait-wrap { display: flex; justify-content: center; margin-top: -220px; position: relative; z-index: 2;
+  margin-bottom: -80px; }
 .cd-portrait { width: 420px; height: 560px; object-fit: cover; box-shadow: 0 12px 60px rgba(0,0,0,.5); }
 
 .cd-title-block { text-align: center; padding: 40px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
@@ -221,7 +226,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
   .cd-portrait { width: 260px; height: 347px; }
-  .cd-portrait-wrap { margin-top: -160px; }
+  .cd-portrait-wrap { margin-top: -160px; margin-bottom: -100px; }
   .cd-title-block { padding-top: 40px; }
 }
 </style>
@@ -371,5 +376,14 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <span class="fr">Cape Town, South Africa</span>
 </footer>
 
+<script>
+(function() {
+  var img = document.querySelector('.cd-hero img');
+  window.addEventListener('scroll', function() {
+    var y = window.pageYOffset;
+    img.style.transform = 'translateY(' + y * 0.4 + 'px)';
+  });
+})();
+</script>
 </body>
 </html>
