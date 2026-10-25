@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Macro Coach — Case Study — Vieren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Podium'; src: url('fonts/podium-sharp.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --bg: #2C2E2C;
+  --s1: #242624;
+  --s2: #363836;
+  --t1: #EEE8D8;
+  --t2: #EEE8D8;
+  --t3: #9a9a8a;
+  --t4: #6a6a5a;
+  --ac: #FF9F00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--t2); font-family: 'Jost', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 24px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(to bottom, rgba(36,38,36,.9) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: var(--t1); letter-spacing: .02em; text-transform: uppercase;
+}
+.nav-cta {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3); padding: 10px 24px;
+  transition: all .3s;
+}
+.nav-cta:hover { background: var(--t1); color: var(--bg); }
+
+/* Title */
+.cd-title-block { text-align: center; padding: 160px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+.cd-title {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
+  color: var(--t1); line-height: .9; margin-bottom: 40px; letter-spacing: .02em;
+}
+
+/* Value props */
+.cd-props {
+  display: flex; justify-content: center; gap: clamp(40px, 8vw, 120px);
+  padding: 0 40px 48px; max-width: 900px; margin: 0 auto;
+}
+.cd-prop { text-align: center; }
+.cd-prop-label {
+  font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ac); line-height: 1.5;
+}
+
+/* Intro */
+.cd-intro {
+  max-width: 800px; margin: 0 auto; padding: 40px 40px 80px; text-align: center;
+}
+.cd-intro p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.6; color: var(--t2);
+}
+
+/* Two-column */
+.cd-twocol { background: var(--s2); padding: 80px 40px; }
+.cd-twocol-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.cd-twocol p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8;
+  color: var(--t2); text-align: justify;
+}
+.cd-twocol p + p { margin-top: 16px; }
+.cd-twocol strong {
+  display: block; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--t1); margin-bottom: 12px; margin-top: 24px;
+}
+.cd-twocol strong:first-child { margin-top: 0; }
+
+/* Features */
+.cd-features { background: var(--s1); padding: 100px 40px; }
+.cd-features-header { text-align: center; max-width: 700px; margin: 0 auto 80px; }
+.cd-features-header h2 {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px); color: var(--t2); margin-bottom: 16px;
+}
+.cd-feature-row {
+  display: grid; grid-template-columns: 1fr; gap: 40px;
+  max-width: 760px; margin: 0 auto; align-items: start;
+  padding: 40px 0; border-top: 1px solid rgba(255,255,255,.06);
+}
+.cd-feature-text h3 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(28px, 3.5vw, 44px); color: var(--t1);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.cd-feature-text p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8; color: var(--t3);
+}
+.cd-feature-text p + p { margin-top: 16px; }
+
+/* Ledger file list and stack list */
+.mc-list { list-style: none; margin-top: 24px; }
+.mc-list li {
+  display: grid; grid-template-columns: 170px 1fr; gap: 20px;
+  padding: 12px 0; border-top: 1px solid rgba(255,255,255,.06);
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.6; color: var(--t3);
+}
+.mc-list li:last-child { border-bottom: 1px solid rgba(255,255,255,.06); }
+.mc-list li b { font-weight: 600; color: var(--t1); }
+
+/* Day-type table */
+.mc-table-wrap { overflow-x: auto; margin-top: 24px; }
+.mc-table { width: 100%; border-collapse: collapse; font-family: 'Archivo', sans-serif; font-size: 14px; color: var(--t2); }
+.mc-table th {
+  text-align: left; font-weight: 600; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--t3); padding: 10px 12px 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.12); white-space: nowrap;
+}
+.mc-table td { padding: 14px 12px 14px 0; border-bottom: 1px solid rgba(255,255,255,.06); vertical-align: top; line-height: 1.5; }
+.mc-table td:first-child { color: var(--t1); font-weight: 600; }
+
+/* Comparison */
+.cd-compare { background: var(--s1); padding: 100px 40px; }
+.cd-compare-inner { max-width: 1100px; margin: 0 auto; }
+.cd-compare h2 {
+  font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(20px, 2.5vw, 28px); color: var(--t2); text-align: center; margin-bottom: 48px;
+}
+.cd-compare-wrap { overflow-x: auto; }
+.cd-compare table { width: 100%; min-width: 760px; border-collapse: collapse; font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.6; }
+.cd-compare th {
+  text-align: left; font-weight: 600; font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--t3); padding: 14px 18px 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); vertical-align: bottom;
+}
+.cd-compare th.us { color: var(--ac); }
+.cd-compare td { padding: 18px 18px 18px 0; border-bottom: 1px solid rgba(255,255,255,.06); vertical-align: top; color: var(--t3); }
+.cd-compare td:first-child { color: var(--t1); font-weight: 600; width: 20%; }
+.cd-compare td.us { color: var(--t1); }
+
+/* Results */
+.cd-results { background: var(--bg); padding: 100px 40px; text-align: center; }
+.cd-results h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.cd-results-subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 32px); color: var(--t3); margin-bottom: 60px;
+}
+.cd-results-stats {
+  max-width: 680px; margin: 0 auto; text-align: center;
+}
+.cd-results-stats p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.6; color: var(--t2);
+}
+.cd-results-stats .closer {
+  color: var(--t1); margin-top: 24px;
+}
+
+/* Stack */
+.cd-stack { background: var(--s2); padding: 100px 40px; }
+.cd-stack-inner { max-width: 760px; margin: 0 auto; }
+.cd-stack h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+
+/* CTA */
+.cd-cta { background: var(--s1); padding: 100px 40px; text-align: center; }
+.cd-cta h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(24px, 3vw, 40px); color: var(--t1);
+  max-width: 700px; margin: 0 auto 32px; line-height: 1.3;
+}
+.cd-cta a {
+  display: inline-block; padding: 14px 32px; border: 1px solid var(--ac);
+  color: var(--ac); font-family: 'Archivo', sans-serif; font-size: 12px;
+  letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+  transition: all .3s;
+}
+.cd-cta a:hover { background: var(--ac); color: var(--bg); }
+
+/* Footer */
+footer {
+  padding: 32px 40px; border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer .fl { font-size: 13px; color: var(--t4); }
+footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cd-twocol-inner { grid-template-columns: 1fr; }
+  .cd-props { flex-direction: column; gap: 16px; }
+  .mc-list li { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .cd-title-block { padding-top: 120px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Vieren</a>
+  <a href="mailto:hello@vieren.studio" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- Title -->
+<div class="cd-title-block">
+  <h1 class="cd-title">Macro Coach</h1>
+</div>
+
+<!-- Value props -->
+<div class="cd-props">
+  <div class="cd-prop"><div class="cd-prop-label">Chat<br>Interface</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">Plain-Text<br>Data</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">Daily<br>Dashboards</div></div>
+</div>
+
+<!-- Intro -->
+<div class="cd-intro">
+  <p>Tracking what you eat sounds easy. In practice you open an app, search for the food, pick a portion size, guess how much oil went in the pan, and do it all again at the next meal. I'm cutting body fat to get visible abs, so I count protein, fat and carbs. Those three are called macros. The maths is what makes it hard. All day you ask yourself how much protein and how many carbs you still need to hit today's targets, and you work it out by hand. So I built an AI coach that lives inside a chat. I tell it what I ate, like "350g potatoes". If it doesn't know a food yet, I send a photo of the label and it reads the nutrition values. It keeps the running total for the day, so at any point I can ask what I still need to hit my targets. It does the maths, tells me how much of the food I have at home to eat to get there, and sends back a dashboard of the day.</p>
+</div>
+
+<!-- Two-column overview -->
+<div class="cd-twocol">
+  <div class="cd-twocol-inner">
+    <div>
+      <strong>The Challenge</strong>
+      <p>A traditional macro app is a ledger. It stores what you ate, and that is where its job ends.</p>
+      <p>Look at what that leaves you doing. After every meal you open the app, enter the food or find it in a list, and work out what is left of your day. The app holds the numbers but you still do the heavy lifting.</p>
+      <p>These apps are rigid too, forgot to weigh the raw chicken? Now you have to go look up the values of cooked chicken and add all that too.</p>
+      <p>Different macro's for certain days (hike day, strength training, etc.)? Good luck.</p>
+      <p>Not to mention just trying to figure out and calculate how much potatoes you should still eat to reach your carbs of the day...</p>
+    </div>
+    <div>
+      <strong>The Approach</strong>
+      <p>The fix is smaller than it sounds. Keep the data in plain files on disk, and let an AI agent work on top of them. An agent is an AI assistant that carries out tasks, like adding a row to a file, instead of only answering questions.</p>
+      <p>I send a message, a row lands in a CSV (a spreadsheet saved as plain text), and an image comes back. Because the files stay readable in any text editor, the agent can change later without taking my data with it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison -->
+<section class="cd-compare">
+  <div class="cd-compare-inner">
+    <h2>Three ways to track your macros</h2>
+    <div class="cd-compare-wrap">
+      <table>
+        <thead><tr><th></th><th>Traditional macro app</th><th>Human nutrition coach</th><th class="us">Macro Coach</th></tr></thead>
+        <tbody>
+          <tr><td>Cost</td><td>Low</td><td>Highest</td><td class="us">A chat and a folder of files</td></tr>
+          <tr><td>Feedback</td><td>Instant, but only a total</td><td>Twice a month, on a call</td><td class="us">Same day, with every message and a daily dashboard</td></tr>
+          <tr><td>Interaction</td><td>Forms and lists</td><td>Scheduled calls</td><td class="us">Chat: ask anything, any time</td></tr>
+          <tr><td>What to eat next</td><td>You work it out</td><td>Goes over at the next call</td><td class="us">Ask it how much of the food you have at home to eat</td></tr>
+          <tr><td>Your rules and day type</td><td>Retyped at every meal, one fixed target</td><td>Agreed on the calls</td><td class="us">Remembered once, targets change by day type</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="cd-features">
+  <div class="cd-features-header"><h2>What I Built</h2></div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Brain</h3>
+      <p>The agent is a Grok Bot called Macro Coach. It reads plain language and photos. When I write "350g potatoes", it logs 350g of potatoes. When a food is new, I photograph the label and it reads the nutrition values. When a food is missing from my usual list, it looks the macros up in USDA FoodData Central, a public food database.</p>
+      <p>It also keeps my rules: no oil, fruit in the morning, mince weighed raw, a generous protein dinner, South African brands. Once I state a rule, I do not repeat it. One message does the whole job: the row goes into the log, and the day's dashboard redraws before the coach replies.</p>
+    </div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Targets</h3>
+      <p>The same calories on a rest day and on a hike day make no sense. So the coach sorts every day into a type, and the type sets the targets.</p>
+      <div class="mc-table-wrap">
+        <table class="mc-table">
+          <thead><tr><th>Day</th><th>Trigger</th><th>kcal</th><th>Protein / Fat / Carbs (g)</th></tr></thead>
+          <tbody>
+            <tr><td>Rest</td><td>No training, low steps</td><td>2,350</td><td>170 / ~60 / ~280</td></tr>
+            <tr><td>Normal</td><td>A lift, or 10 to 14k steps</td><td>2,550</td><td>170 / ~60 / ~330</td></tr>
+            <tr><td>Hike</td><td>18k+ steps, a proper hike, or 30+ floors</td><td>2,850</td><td>170 / ~60 / ~405</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Protein stays fixed at 170 g. Activity calories go to carbs. The weekly average weight, Saturday to Friday, decides whether anything changes.</p>
+      <p>The plan runs from about 77.8 kg down to about 72 to 73 kg, then maintenance, then a lean bulk.</p>
+    </div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>Health Sync</h3>
+      <p>The steps come from my phone. An iPhone Shortcut sends my Apple Health steps and floors to a webhook, a web address that receives data from another app. It runs every night and on demand, and no watch is involved. When steps clear 18k, the day type flips to a hike day, and that allows me some more carbs.</p>
+    </div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Dashboard</h3>
+      <p>Every day the coach sends back a clean black card with the numbers that matter: calories and macros against today’s targets, steps and floors, and where weight is heading. Same data powers the weekly overview and a micronutrient view that shows how close you got to the recommended daily amounts — no digging through menus, just one image you can glance at or drop into a story.</p>
+    </div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Overlay</h3>
+      <p>Because Grok Bot can generate images too, the same day's numbers become shareable graphics: bold brutalist panels with fat type, glass or solid cards, that drop onto a photo as a transparent layer. Stories size, feed size, whatever the platform wants. From there it's a short step to animated versions for Reels, TikTok, or any other video.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="cd-results">
+  <h2>The Results</h2>
+  <div class="cd-results-stats">
+    <p>What you get is not another generic calorie app. It is a coach that already knows your goals, rules, your foods, your day types, and how you like the numbers presented. Chat in, dashboard out.</p>
+    <p class="closer">Same pattern works for anything else you want personalized: a tracker, a weekly scorecard, a widget that only makes sense for you. The product is the personalization, not a one-size-fits-all template.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cd-cta">
+  <h2>I build hyper personalised systems like this for founders.</h2>
+  <a href="mailto:hello@vieren.studio">Get In Touch</a>
+</section>
+
+<footer>
+  <span class="fl">Vieren Studio</span>
+  <span class="fr">Cape Town, South Africa</span>
+</footer>
+
+</body>
+</html>
