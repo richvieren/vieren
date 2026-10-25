@@ -864,7 +864,7 @@ nav {
   object-fit: cover;
   display: block;
 }
-/* Camera date-back stamp — orange, inside the frame, bottom right */
+/* Camera date-back stamp — white, inside the frame, bottom right */
 .diary-date-stamp {
   position: absolute;
   right: 6%;
@@ -874,8 +874,8 @@ nav {
   font-size: clamp(9px, 1.05vw, 15px);
   letter-spacing: .14em;
   font-variant-numeric: tabular-nums;
-  color: #ff8a1c;
-  text-shadow: 0 1px 2px rgba(0,0,0,.55), 0 0 3px rgba(255,120,20,.95), 0 0 9px rgba(255,90,0,.6);
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.7), 0 0 8px rgba(0,0,0,.35);
   pointer-events: none;
 }
 /* Frame counter — BELOW bottom sprockets, upside down, full width */
@@ -1898,7 +1898,7 @@ const HERO_SECTIONS = [
         const stamp = document.createElement('span');
         stamp.className = 'diary-date-stamp';
         const dp = entry.date.split('-');
-        stamp.textContent = "'" + dp[0].slice(2) + ' ' + dp[1] + ' ' + dp[2];
+        stamp.textContent = dp[0] + ' ' + dp[1] + ' ' + dp[2];
         slide.appendChild(stamp);
         track.appendChild(slide);
       });
