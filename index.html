@@ -1834,6 +1834,9 @@ const HERO_SECTIONS = [
         return;
       }
 
+      // Newest date first, whatever order diary.json is in
+      entries.sort((a, b) => b.date.localeCompare(a.date));
+
       // Build slides — first photo per day (click through to diary for full set)
       entries.forEach((entry, i) => {
         if (!entry.photos || !entry.photos.length) return;
