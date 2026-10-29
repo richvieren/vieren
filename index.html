@@ -1021,7 +1021,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .vid-overlay.hidden { display: none; }
 
 /* ══ FILM BAR ══ */
-.film-bar { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 10px; margin-top: -28px; }
+.film-bar { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 10px; margin-top: -28px; }
 .film-thumb { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 6px; min-width: 0; opacity: .55; transition: opacity .2s; }
 .film-thumb:hover, .film-thumb.active { opacity: 1; }
 .film-thumb:focus-visible { outline: 2px solid #1c1512; outline-offset: 3px; }
@@ -1464,6 +1464,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     <button type="button" class="film-thumb" data-vid="521862213" data-name="ING" data-year="2018"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1080798065-7218f9e7337ebcf618295bae25dd8badad0631f67625dbc8550a3ee1452f7370-d_640')"></span><span class="film-thumb-name">ING</span><span class="film-thumb-year">2018</span></button>
     <button type="button" class="film-thumb" data-vid="375977494" data-name="KNTXT Antwerp" data-year="2019"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1081025822-163f75fde5d04b66bcff4f922d079309499d656adfcd5dc0f3ea5cfe81690612-d_640')"></span><span class="film-thumb-name">KNTXT Antwerp</span><span class="film-thumb-year">2019</span></button>
     <button type="button" class="film-thumb" data-vid="336290895" data-name="Rampage" data-year="2019"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/783098155-721f8b27db428d1139e3cbe35f0899e9af178e16a750357f8f42294b8d671859-d_640')"></span><span class="film-thumb-name">Rampage</span><span class="film-thumb-year">2019</span></button>
+    <button type="button" class="film-thumb" data-vid="196546146" data-name="Breakdance Drill II" data-year="2016" data-desc="A massive breakdance choreography with world champ bboy crews."><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/609057045-44616a673f4a60e79fcb798497a14f06933b79fae803eb80f7a228126b04d9b1-d_640')"></span><span class="film-thumb-name">Breakdance Drill II</span><span class="film-thumb-year">2016</span></button>
     <button type="button" class="film-thumb" data-vid="1055234" data-name="Flaming Sausages" data-year="2008"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/20976059-5f4cafa111b3480a25024f278c4c12321da9042ba2275bf111b4cfe4424404d1-d_640')"></span><span class="film-thumb-name">Flaming Sausages</span><span class="film-thumb-year">2008</span></button>
   </div>
 
@@ -1488,7 +1489,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     }
     player.src = 'https://player.vimeo.com/video/' + b.dataset.vid + '?autoplay=1&title=0&byline=0&portrait=0&color=FF9F00';
     title.textContent = b.dataset.name || b.dataset.year;
-    desc.textContent = '';
+    desc.textContent = b.dataset.desc || '';
     date.textContent = b.dataset.year;
     tag.style.display = 'none';
   });
