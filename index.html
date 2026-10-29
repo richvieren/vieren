@@ -1036,11 +1036,14 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 /* ══ SHORT FORM ══ */
 .sf-carousel {
+  position: relative;
   display: flex; gap: 20px;
   overflow-x: auto; overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0 0 20px;
+  padding: 0 0 110px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
 }
 .sf-carousel::-webkit-scrollbar { display: none; }
 .sf-card {
@@ -1440,7 +1443,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </script>
 
 <!-- ══ SHORT FORM ══ -->
-<section style="padding:120px 0 100px;text-align:center;">
+<section style="padding:120px 0 40px;text-align:center;">
   <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(255,255,255,.2);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--t2);margin-bottom:32px;">Short Form</span>
   <div class="sf-carousel" id="sfCarousel">
     <div class="sf-card"><iframe src="https://player.vimeo.com/video/1094996108?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
@@ -1470,6 +1473,19 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   el.addEventListener('touchstart', pause, { passive: true });
   el.addEventListener('touchend', resumeSoon, { passive: true });
   el.addEventListener('touchcancel', resumeSoon, { passive: true });
+  // Arc: cards drop and tilt the further they sit from the centre
+  const cards = Array.from(el.children);
+  function arc() {
+    const mid = el.scrollLeft + el.clientWidth / 2;
+    const half = el.clientWidth / 2;
+    cards.forEach(function(c) {
+      const d = Math.max(-1.4, Math.min(1.4, (c.offsetLeft + c.offsetWidth / 2 - mid) / half));
+      c.style.transform = 'translateY(' + (d * d * 70) + 'px) rotate(' + (d * 7) + 'deg)';
+    });
+  }
+  el.addEventListener('scroll', arc, { passive: true });
+  window.addEventListener('resize', arc);
+  arc();
   function autoScroll() {
     const halfWidth = el.scrollWidth / 2;
     if (!paused) {
