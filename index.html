@@ -1055,6 +1055,8 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   background: var(--s2);
 }
 
+@media (max-width: 600px) { .sf-card { flex-basis: 200px; } .sf-carousel { gap: 14px; padding-bottom: 60px; } }
+
 /* ══ RESPONSIVE ══ */
 @media (max-width: 900px) {
   .what { grid-template-columns: 1fr; }
@@ -1477,7 +1479,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   const cards = Array.from(el.children);
   function arc() {
     const mid = el.scrollLeft + el.clientWidth / 2;
-    const half = el.clientWidth / 2;
+    const half = Math.max(el.clientWidth / 2, 640);
     cards.forEach(function(c) {
       const d = Math.max(-1.4, Math.min(1.4, (c.offsetLeft + c.offsetWidth / 2 - mid) / half));
       c.style.transform = 'translateY(' + (d * d * 70) + 'px) rotate(' + (d * 7) + 'deg)';
