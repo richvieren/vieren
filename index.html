@@ -1019,6 +1019,20 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .vid-overlay .play-circle svg { margin-left: 3px; }
 .vid-overlay.hidden { display: none; }
 
+/* ══ FILM BAR ══ */
+.film-bar { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 10px; margin-top: -28px; }
+.film-thumb { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 6px; min-width: 0; opacity: .55; transition: opacity .2s; }
+.film-thumb:hover, .film-thumb.active { opacity: 1; }
+.film-thumb:focus-visible { outline: 2px solid #1c1512; outline-offset: 3px; }
+.film-thumb-img { display: block; aspect-ratio: 16/9; border-radius: 6px; background: #b8b3a7 center/cover no-repeat; }
+.film-thumb.active .film-thumb-img { box-shadow: 0 0 0 2px #1c1512; }
+.film-thumb-name { font-size: 11px; line-height: 1.3; color: #1c1512; }
+.film-thumb-year { font-size: 10px; color: rgba(28,21,18,.5); margin-top: -4px; }
+@media (max-width: 900px) {
+  .film-bar { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; margin-top: -20px; }
+  .film-thumb { flex: 0 0 38%; scroll-snap-align: start; }
+}
+
 /* ══ RESPONSIVE ══ */
 @media (max-width: 900px) {
   .what { grid-template-columns: 1fr; }
@@ -1237,99 +1251,24 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
 </section>
 
-<!-- ══ PROJECT SHOWCASE ══ -->
-<section class="proj-showcase">
-  <div class="proj-showcase-header">
-    <h2>NEVER NOT SHIPPING.</h2>
-    <span>/06</span>
-  </div>
-  <p style="font-family:'Archivo',sans-serif;font-size:clamp(14px,1.6vw,18px);color:var(--t3);line-height:1.5;margin-top:0;margin-bottom:36px;max-width:500px;">My own concepts, shipped over the years.</p>
-  <div class="proj-showcase-grid">
-    <!-- Left: number + name -->
-    <div class="proj-showcase-left">
-      <div class="proj-showcase-row" data-media="nevernotshipping/wolfchildren.jpg" data-idx="0"><span class="ps-num">01.</span><span class="ps-name">WOLF CHILDREN</span><span class="ps-year-inline">2018</span><span class="ps-cat-inline">BOOK</span><div class="proj-showcase-row-img"><img src="nevernotshipping/wolfchildren.jpg" alt="" loading="lazy"></div></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/apex.jpg" data-idx="1"><span class="ps-num">02.</span><span class="ps-name">APEX OS</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">FITNESS</span><div class="proj-showcase-row-img"><img src="nevernotshipping/apex.jpg" alt="" loading="lazy"></div></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/lockinseason.jpg" data-idx="2"><span class="ps-num">03.</span><span class="ps-name">LOCK IN SEASON</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">COMMUNITY</span><div class="proj-showcase-row-img"><img src="nevernotshipping/lockinseason.jpg" alt="" loading="lazy"></div></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/bedtime.jpg" data-idx="3"><span class="ps-num">04.</span><span class="ps-name">BEDTIME</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">WEB APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/bedtime.jpg" alt="" loading="lazy"></div></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/meridians.jpg" data-idx="4"><span class="ps-num">05.</span><span class="ps-name">MERIDIANS</span><span class="ps-year-inline">2026</span><span class="ps-cat-inline">RELOCATION APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/meridians.jpg" alt="" loading="lazy"></div></div>
-      <div class="proj-showcase-row" data-media="nevernotshipping/csc.jpg" data-idx="5"><span class="ps-num">06.</span><span class="ps-name">COUNTING SHEEP CLUB</span><span class="ps-year-inline">2026</span><span class="ps-cat-inline">APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/csc.jpg" alt="" loading="lazy"></div></div>
-    </div>
-    <!-- Center: image -->
-    <div class="proj-showcase-media">
-      <div class="proj-showcase-media-inner" id="showcase-media"></div>
-    </div>
-    <!-- Right: year + category -->
-    <div class="proj-showcase-right">
-      <div class="proj-showcase-row" data-idx="0"><span class="ps-year">2018</span><span class="ps-cat">BOOK</span></div>
-      <div class="proj-showcase-row" data-idx="1"><span class="ps-year">2025</span><span class="ps-cat">FITNESS</span></div>
-      <div class="proj-showcase-row" data-idx="2"><span class="ps-year">2025</span><span class="ps-cat">COMMUNITY</span></div>
-      <div class="proj-showcase-row" data-idx="3"><span class="ps-year">2025</span><span class="ps-cat">WEB APP</span></div>
-      <div class="proj-showcase-row" data-idx="4"><span class="ps-year">2026</span><span class="ps-cat">RELOCATION APP</span></div>
-      <div class="proj-showcase-row" data-idx="5"><span class="ps-year">2026</span><span class="ps-cat">APP</span></div>
+<!-- ══ PHOTO DIARY ══ -->
+<section class="diary-section" id="diarySection">
+  <div class="diary-top">
+    <span style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#1c1512;line-height:1;">PHOTO DIARY.</span>
+    <div class="diary-nav">
+      <button id="diaryPrev">Prev</button>
+      <button id="diaryNext">Next</button>
     </div>
   </div>
+  <a href="diary.html" class="diary-strip-wrap">
+    <div class="diary-strip-border">
+      <div class="diary-sprockets" id="sprocketsTop"></div>
+      <div class="diary-slider-track" id="diaryTrack"></div>
+      <div class="diary-sprockets diary-sprockets-bot" id="sprocketsBot"></div>
+      <div class="diary-frame-counter" id="diaryCounter"></div>
+    </div>
+  </a>
 </section>
-
-<script>
-(function() {
-  var mediaBox = document.getElementById('showcase-media');
-  var leftRows = document.querySelectorAll('.proj-showcase-left .proj-showcase-row');
-  var rightRows = document.querySelectorAll('.proj-showcase-right .proj-showcase-row');
-  var allRows = document.querySelectorAll('.proj-showcase-row');
-  var currentIdx = 0;
-  var paused = false;
-  var interval;
-  var total = leftRows.length;
-
-  function showMedia(idx) {
-    allRows.forEach(function(r) {
-      r.style.opacity = r.getAttribute('data-idx') === String(idx) ? '1' : '0.4';
-    });
-    var src = leftRows[idx];
-    if (!src) return;
-    var media = src.getAttribute('data-media');
-    if (!media) { mediaBox.innerHTML = ''; return; }
-    var isVideo = media.endsWith('.mp4') || media.endsWith('.webm');
-    if (isVideo) {
-      mediaBox.innerHTML = '<video src="' + media + '" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>';
-    } else {
-      mediaBox.innerHTML = '<img src="' + media + '" alt="" style="width:100%;height:100%;object-fit:cover;">';
-    }
-  }
-
-  function startRotation() {
-    interval = setInterval(function() {
-      if (paused) return;
-      currentIdx = (currentIdx + 1) % total;
-      showMedia(currentIdx);
-    }, 200);
-  }
-
-  // Start rotating immediately
-  showMedia(0);
-  startRotation();
-
-  // Hover: pause and lock to that project
-  function onHover(idx) {
-    paused = true;
-    currentIdx = idx;
-    showMedia(idx);
-  }
-
-  function onLeave() {
-    paused = false;
-  }
-
-  leftRows.forEach(function(row, i) {
-    row.addEventListener('mouseenter', function() { onHover(i); });
-    row.addEventListener('mouseleave', onLeave);
-  });
-  rightRows.forEach(function(row, i) {
-    row.addEventListener('mouseenter', function() { onHover(i); });
-    row.addEventListener('mouseleave', onLeave);
-  });
-})();
-</script>
 
 <!-- ══ CASE STUDIES ══ -->
 <section class="cases-section">
@@ -1499,38 +1438,153 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(28,21,18,0.5);line-height:1.7;margin-bottom:48px;">Some personal favorites of the past two decades.</p>
 
   <div class="feat">
-    <div class="feat-img brackets brackets-b" style="padding:0;overflow:hidden"><iframe src="https://player.vimeo.com/video/1136626687?background=1&autoplay=1&loop=1&muted=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay"></iframe></div>
+    <div class="feat-img brackets brackets-b" style="padding:0;overflow:hidden"><iframe id="filmPlayer" src="https://player.vimeo.com/video/1136626687?background=1&autoplay=1&loop=1&muted=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay; fullscreen"></iframe></div>
     <div class="feat-info">
-      <h3>Wolf Children: A Film About Presence</h3>
-      <p>We produced a book trailer that became a cultural moment for parents rethinking screen time. Shot across 3 countries in 10 days.</p>
+      <h3 id="filmTitle">Wolf Children: A Film About Presence</h3>
+      <p id="filmDesc">We produced a book trailer that became a cultural moment for parents rethinking screen time. Shot across 3 countries in 10 days.</p>
       <div class="meta">
-        <span class="date">Jan 2025 - 2026</span>
-        <span class="feat-tag tag-brand">Brand Film</span>
+        <span class="date" id="filmDate">Jan 2025 - 2026</span>
+        <span class="feat-tag tag-brand" id="filmTag">Brand Film</span>
       </div>
     </div>
   </div>
 
+  <div class="film-bar" id="filmBar">
+    <button type="button" class="film-thumb active" data-vid="1136626687" data-name="Wolf Children" data-year="2025"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/2084030582-a7e9cbf34fe9144f90f147493bebb0b0fedb406cbf84441957f601693004196e-d_640')"></span><span class="film-thumb-name">Wolf Children</span><span class="film-thumb-year">2025</span></button>
+    <button type="button" class="film-thumb" data-vid="1148316457" data-name="" data-year="2026"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/2110686745-92728afac6c9bc02ebf383074693f83ac42a1017d01402ab5caa4b7497c4affa-d_640')"></span><span class="film-thumb-name">2026</span><span class="film-thumb-year">2026</span></button>
+    <button type="button" class="film-thumb" data-vid="1033450404" data-name="Monster Energy - Lacondeguy" data-year="2025"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1954573662-85bb49e1cd47c6400aa10db0708630564f84c98438e4c224ed26b5d8b3b9c3c5-d_640')"></span><span class="film-thumb-name">Monster Energy - Lacondeguy</span><span class="film-thumb-year">2025</span></button>
+    <button type="button" class="film-thumb" data-vid="1021759372" data-name="Pumpkin" data-year="2024"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1940586398-0d9e5c1c51d683f710d10f463c609fef4ed760410ac2796fb3ea4f28e01497f6-d_640')"></span><span class="film-thumb-name">Pumpkin</span><span class="film-thumb-year">2024</span></button>
+    <button type="button" class="film-thumb" data-vid="1016204970" data-name="Samsung" data-year="2021"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1934287767-18dee3c5da5a444f7d61733783eab9641728119a689ed22b56afeba199c92c98-d_640')"></span><span class="film-thumb-name">Samsung</span><span class="film-thumb-year">2021</span></button>
+    <button type="button" class="film-thumb" data-vid="1016141421" data-name="Oscar &amp; The Wolf" data-year="2022"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1934229053-5e86e6f1cefed2a0040f022c2bc82cf8e502fa4c4aa3445cb6c29d4b2a8c521c-d_640')"></span><span class="film-thumb-name">Oscar &amp; The Wolf</span><span class="film-thumb-year">2022</span></button>
+    <button type="button" class="film-thumb" data-vid="831567912" data-name="Fujifilm" data-year="2021"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1677029603-5484db3944dd398e3998a6a4e1dd401b891d74c6e9d879d752d0be3051fe8afd-d_640')"></span><span class="film-thumb-name">Fujifilm</span><span class="film-thumb-year">2021</span></button>
+    <button type="button" class="film-thumb" data-vid="521862213" data-name="ING" data-year="2018"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1080798065-7218f9e7337ebcf618295bae25dd8badad0631f67625dbc8550a3ee1452f7370-d_640')"></span><span class="film-thumb-name">ING</span><span class="film-thumb-year">2018</span></button>
+    <button type="button" class="film-thumb" data-vid="375977494" data-name="KNTXT Antwerp" data-year="2019"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/1081025822-163f75fde5d04b66bcff4f922d079309499d656adfcd5dc0f3ea5cfe81690612-d_640')"></span><span class="film-thumb-name">KNTXT Antwerp</span><span class="film-thumb-year">2019</span></button>
+    <button type="button" class="film-thumb" data-vid="336290895" data-name="Rampage" data-year="2019"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/783098155-721f8b27db428d1139e3cbe35f0899e9af178e16a750357f8f42294b8d671859-d_640')"></span><span class="film-thumb-name">Rampage</span><span class="film-thumb-year">2019</span></button>
+    <button type="button" class="film-thumb" data-vid="1055234" data-name="Flaming Sausages" data-year="2008"><span class="film-thumb-img" style="background-image:url('https://i.vimeocdn.com/video/20976059-5f4cafa111b3480a25024f278c4c12321da9042ba2275bf111b4cfe4424404d1-d_640')"></span><span class="film-thumb-name">Flaming Sausages</span><span class="film-thumb-year">2008</span></button>
+  </div>
+
   </div>
 </section>
 
-<!-- ══ PHOTO DIARY ══ -->
-<section class="diary-section" id="diarySection">
-  <div class="diary-top">
-    <span style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#1c1512;line-height:1;">PHOTO DIARY.</span>
-    <div class="diary-nav">
-      <button id="diaryPrev">Prev</button>
-      <button id="diaryNext">Next</button>
+<script>
+(function() {
+  var bar = document.getElementById('filmBar');
+  if (!bar) return;
+  var player = document.getElementById('filmPlayer');
+  var title = document.getElementById('filmTitle'), desc = document.getElementById('filmDesc');
+  var date = document.getElementById('filmDate'), tag = document.getElementById('filmTag');
+  var orig = { src: player.src, title: title.textContent, desc: desc.textContent, date: date.textContent };
+  bar.addEventListener('click', function(e) {
+    var b = e.target.closest('.film-thumb');
+    if (!b) return;
+    bar.querySelectorAll('.film-thumb').forEach(function(t) { t.classList.toggle('active', t === b); });
+    if (b === bar.firstElementChild) {
+      player.src = orig.src; title.textContent = orig.title; desc.textContent = orig.desc; date.textContent = orig.date; tag.style.display = '';
+      return;
+    }
+    player.src = 'https://player.vimeo.com/video/' + b.dataset.vid + '?autoplay=1&title=0&byline=0&portrait=0&color=FF9F00';
+    title.textContent = b.dataset.name || b.dataset.year;
+    desc.textContent = '';
+    date.textContent = b.dataset.year;
+    tag.style.display = 'none';
+  });
+})();
+</script>
+
+
+<!-- ══ PROJECT SHOWCASE ══ -->
+<section class="proj-showcase">
+  <div class="proj-showcase-header">
+    <h2>NEVER NOT SHIPPING.</h2>
+    <span>/06</span>
+  </div>
+  <p style="font-family:'Archivo',sans-serif;font-size:clamp(14px,1.6vw,18px);color:var(--t3);line-height:1.5;margin-top:0;margin-bottom:36px;max-width:500px;">My own concepts, shipped over the years.</p>
+  <div class="proj-showcase-grid">
+    <!-- Left: number + name -->
+    <div class="proj-showcase-left">
+      <div class="proj-showcase-row" data-media="nevernotshipping/wolfchildren.jpg" data-idx="0"><span class="ps-num">01.</span><span class="ps-name">WOLF CHILDREN</span><span class="ps-year-inline">2018</span><span class="ps-cat-inline">BOOK</span><div class="proj-showcase-row-img"><img src="nevernotshipping/wolfchildren.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/apex.jpg" data-idx="1"><span class="ps-num">02.</span><span class="ps-name">APEX OS</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">FITNESS</span><div class="proj-showcase-row-img"><img src="nevernotshipping/apex.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/lockinseason.jpg" data-idx="2"><span class="ps-num">03.</span><span class="ps-name">LOCK IN SEASON</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">COMMUNITY</span><div class="proj-showcase-row-img"><img src="nevernotshipping/lockinseason.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/bedtime.jpg" data-idx="3"><span class="ps-num">04.</span><span class="ps-name">BEDTIME</span><span class="ps-year-inline">2025</span><span class="ps-cat-inline">WEB APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/bedtime.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/meridians.jpg" data-idx="4"><span class="ps-num">05.</span><span class="ps-name">MERIDIANS</span><span class="ps-year-inline">2026</span><span class="ps-cat-inline">RELOCATION APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/meridians.jpg" alt="" loading="lazy"></div></div>
+      <div class="proj-showcase-row" data-media="nevernotshipping/csc.jpg" data-idx="5"><span class="ps-num">06.</span><span class="ps-name">COUNTING SHEEP CLUB</span><span class="ps-year-inline">2026</span><span class="ps-cat-inline">APP</span><div class="proj-showcase-row-img"><img src="nevernotshipping/csc.jpg" alt="" loading="lazy"></div></div>
+    </div>
+    <!-- Center: image -->
+    <div class="proj-showcase-media">
+      <div class="proj-showcase-media-inner" id="showcase-media"></div>
+    </div>
+    <!-- Right: year + category -->
+    <div class="proj-showcase-right">
+      <div class="proj-showcase-row" data-idx="0"><span class="ps-year">2018</span><span class="ps-cat">BOOK</span></div>
+      <div class="proj-showcase-row" data-idx="1"><span class="ps-year">2025</span><span class="ps-cat">FITNESS</span></div>
+      <div class="proj-showcase-row" data-idx="2"><span class="ps-year">2025</span><span class="ps-cat">COMMUNITY</span></div>
+      <div class="proj-showcase-row" data-idx="3"><span class="ps-year">2025</span><span class="ps-cat">WEB APP</span></div>
+      <div class="proj-showcase-row" data-idx="4"><span class="ps-year">2026</span><span class="ps-cat">RELOCATION APP</span></div>
+      <div class="proj-showcase-row" data-idx="5"><span class="ps-year">2026</span><span class="ps-cat">APP</span></div>
     </div>
   </div>
-  <a href="diary.html" class="diary-strip-wrap">
-    <div class="diary-strip-border">
-      <div class="diary-sprockets" id="sprocketsTop"></div>
-      <div class="diary-slider-track" id="diaryTrack"></div>
-      <div class="diary-sprockets diary-sprockets-bot" id="sprocketsBot"></div>
-      <div class="diary-frame-counter" id="diaryCounter"></div>
-    </div>
-  </a>
 </section>
+
+<script>
+(function() {
+  var mediaBox = document.getElementById('showcase-media');
+  var leftRows = document.querySelectorAll('.proj-showcase-left .proj-showcase-row');
+  var rightRows = document.querySelectorAll('.proj-showcase-right .proj-showcase-row');
+  var allRows = document.querySelectorAll('.proj-showcase-row');
+  var currentIdx = 0;
+  var paused = false;
+  var interval;
+  var total = leftRows.length;
+
+  function showMedia(idx) {
+    allRows.forEach(function(r) {
+      r.style.opacity = r.getAttribute('data-idx') === String(idx) ? '1' : '0.4';
+    });
+    var src = leftRows[idx];
+    if (!src) return;
+    var media = src.getAttribute('data-media');
+    if (!media) { mediaBox.innerHTML = ''; return; }
+    var isVideo = media.endsWith('.mp4') || media.endsWith('.webm');
+    if (isVideo) {
+      mediaBox.innerHTML = '<video src="' + media + '" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>';
+    } else {
+      mediaBox.innerHTML = '<img src="' + media + '" alt="" style="width:100%;height:100%;object-fit:cover;">';
+    }
+  }
+
+  function startRotation() {
+    interval = setInterval(function() {
+      if (paused) return;
+      currentIdx = (currentIdx + 1) % total;
+      showMedia(currentIdx);
+    }, 200);
+  }
+
+  // Start rotating immediately
+  showMedia(0);
+  startRotation();
+
+  // Hover: pause and lock to that project
+  function onHover(idx) {
+    paused = true;
+    currentIdx = idx;
+    showMedia(idx);
+  }
+
+  function onLeave() {
+    paused = false;
+  }
+
+  leftRows.forEach(function(row, i) {
+    row.addEventListener('mouseenter', function() { onHover(i); });
+    row.addEventListener('mouseleave', onLeave);
+  });
+  rightRows.forEach(function(row, i) {
+    row.addEventListener('mouseenter', function() { onHover(i); });
+    row.addEventListener('mouseleave', onLeave);
+  });
+})();
+</script>
 
 <!-- ══ RETAINER ══ (hidden — take offline for now) -->
 <section style="display:none;padding:80px 40px;max-width:1000px;margin:0 auto;">
