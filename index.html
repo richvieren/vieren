@@ -1034,6 +1034,24 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   .film-thumb { flex: 0 0 38%; scroll-snap-align: start; }
 }
 
+/* ══ SHORT FORM ══ */
+.sf-carousel {
+  display: flex; gap: 20px;
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 0 20px;
+}
+.sf-carousel::-webkit-scrollbar { display: none; }
+.sf-card {
+  flex: 0 0 280px;
+  aspect-ratio: 9/16;
+  border: 3px solid var(--ac);
+  overflow: hidden;
+  position: relative;
+  background: var(--s2);
+}
+
 /* ══ RESPONSIVE ══ */
 @media (max-width: 900px) {
   .what { grid-template-columns: 1fr; }
@@ -1421,19 +1439,48 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 })();
 </script>
 
-<!-- ══ WALL OF LOVE ══ -->
-<section style="padding:120px 40px;max-width:1400px;margin:0 auto;text-align:center;">
-  <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(255,255,255,.2);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--t2);margin-bottom:32px;">I'm Kind Of A Big Deal</span>
-  <style>#tweet-wall twitter-widget,#tweet-wall .twitter-tweet-rendered{margin:0!important;}@media(max-width:768px){#tweet-wall{columns:1!important;}}</style>
-  <div id="tweet-wall" style="columns:3;column-gap:10px;max-width:1200px;margin:0 auto;">
-    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/fluxgravitas/status/2059154387692630134"></a></blockquote></div>
-    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/blossomcodes_/status/2059935267188883871"></a></blockquote></div>
-    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/SoyMsrcc/status/2059333122509181017"></a></blockquote></div>
-    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/Hidenout3/status/2059322178495975831"></a></blockquote></div>
-    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/Voidalist/status/2059066626704621822"></a></blockquote></div>
-    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/AndreasPitzer/status/2063636656993837366"></a></blockquote></div>
+<!-- ══ SHORT FORM ══ -->
+<section style="padding:120px 0 100px;text-align:center;">
+  <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(255,255,255,.2);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--t2);margin-bottom:32px;">Short Form</span>
+  <div class="sf-carousel" id="sfCarousel">
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1094996108?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1135111015?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1135103105?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1133486488?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1014229966?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1195133349?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1195385113?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
   </div>
 </section>
+
+<script>
+// Infinite auto-scrolling short form carousel (from lore.mov)
+(function() {
+  const el = document.getElementById('sfCarousel');
+  if (!el) return;
+  Array.from(el.children).forEach(card => el.appendChild(card.cloneNode(true)));
+  const speed = 0.5;
+  let paused = false;
+  let resumeTimer;
+  function pause() { paused = true; clearTimeout(resumeTimer); }
+  function resumeSoon() { clearTimeout(resumeTimer); resumeTimer = setTimeout(function() { paused = false; }, 1500); }
+  el.addEventListener('pointerdown', pause);
+  el.addEventListener('pointerup', resumeSoon);
+  el.addEventListener('pointercancel', resumeSoon);
+  el.addEventListener('touchstart', pause, { passive: true });
+  el.addEventListener('touchend', resumeSoon, { passive: true });
+  el.addEventListener('touchcancel', resumeSoon, { passive: true });
+  function autoScroll() {
+    const halfWidth = el.scrollWidth / 2;
+    if (!paused) {
+      el.scrollLeft += speed;
+      if (el.scrollLeft >= halfWidth) el.scrollLeft -= halfWidth;
+    }
+    requestAnimationFrame(autoScroll);
+  }
+  setTimeout(autoScroll, 1000);
+})();
+</script>
 
 <!-- ══ WORK ══ -->
 <section class="work" style="background:#c9c5ba;max-width:100%;padding:100px 40px;">
@@ -1624,6 +1671,20 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       </div>
       <a href="mailto:hello@vieren.studio" style="display:inline-block;padding:14px 36px;background:var(--ac);border-radius:100px;font-size:13px;font-weight:400;letter-spacing:.06em;color:var(--bg);transition:all .3s;">Let's talk</a>
     </div>
+  </div>
+</section>
+
+<!-- ══ WALL OF LOVE ══ -->
+<section style="padding:120px 40px;background:var(--ac);text-align:center;">
+  <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(28,21,18,.3);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:#1c1512;margin-bottom:32px;">I'm Kind Of A Big Deal</span>
+  <style>#tweet-wall twitter-widget,#tweet-wall .twitter-tweet-rendered{margin:0!important;}@media(max-width:768px){#tweet-wall{columns:1!important;}}</style>
+  <div id="tweet-wall" style="columns:3;column-gap:10px;max-width:1200px;margin:0 auto;">
+    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/fluxgravitas/status/2059154387692630134"></a></blockquote></div>
+    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/blossomcodes_/status/2059935267188883871"></a></blockquote></div>
+    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/SoyMsrcc/status/2059333122509181017"></a></blockquote></div>
+    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/Hidenout3/status/2059322178495975831"></a></blockquote></div>
+    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/Voidalist/status/2059066626704621822"></a></blockquote></div>
+    <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/AndreasPitzer/status/2063636656993837366"></a></blockquote></div>
   </div>
 </section>
 
