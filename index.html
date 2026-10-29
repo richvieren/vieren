@@ -1054,7 +1054,10 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   background: var(--s2);
 }
 
-.sf-head { max-width: 1480px; margin: 0 auto; padding: 0 40px; }
+.sf-head { max-width: 1480px; margin: 0 auto 48px; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
+.sf-all { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--t3); transition: color .3s; }
+.sf-all:hover { color: var(--t1); }
+.sf-link { position: absolute; inset: 0; z-index: 1; }
 @media (max-width: 600px) { .sf-head { padding: 0 20px; } .sf-card { flex-basis: 200px; } .sf-carousel { gap: 14px; padding-bottom: 60px; } }
 
 /* ══ RESPONSIVE ══ */
@@ -1446,21 +1449,15 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ SHORT FORM ══ -->
 <section style="padding:120px 0 40px;">
-  <div class="sf-head"><h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;margin-bottom:48px;">SHORT FORM.</h2></div>
+  <div class="sf-head"><h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;">SHORT FORM.</h2><a href="shortform.html" class="sf-all">See all</a></div>
   <div class="sf-carousel" id="sfCarousel">
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1135111015?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1094996108?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1135103105?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1133486488?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1014229966?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1195133349?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1195385113?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1221599247?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1146300426?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1082805537?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1014345011?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1014233428?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
-    <div class="sf-card"><iframe src="https://player.vimeo.com/video/422227769?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1135111015?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1094996108?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1135103105?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1133486488?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1014229966?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1195133349?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
+    <div class="sf-card"><iframe src="https://player.vimeo.com/video/1195385113?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
   </div>
 </section>
 
@@ -1475,7 +1472,9 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   let resumeTimer;
   function pause() { paused = true; clearTimeout(resumeTimer); }
   function resumeSoon() { clearTimeout(resumeTimer); resumeTimer = setTimeout(function() { paused = false; }, 1500); }
-  el.addEventListener('pointerdown', pause);
+  let downX = 0;
+  el.addEventListener('pointerdown', function(e) { downX = e.clientX; pause(); });
+  el.addEventListener('click', function(e) { if (Math.abs(e.clientX - downX) > 6) e.preventDefault(); });
   el.addEventListener('pointerup', resumeSoon);
   el.addEventListener('pointercancel', resumeSoon);
   el.addEventListener('touchstart', pause, { passive: true });

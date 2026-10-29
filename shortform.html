@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Short Form — Vieren</title>
+<meta name="description" content="Short form videos by Vieren.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Podium';
+  src: url('fonts/podium-sharp.otf') format('opentype');
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Dharma Gothic';
+  src: url('fonts/dharma-gothic-heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --t1: #EEE8D8;
+  --t3: #9a9a8a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 20px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  mix-blend-mode: difference;
+}
+.nav-left { display: flex; align-items: baseline; gap: 12px; }
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
+}
+.nav-title {
+  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
+  font-size: 22px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
+  line-height: 1;
+}
+.nav-right { display: flex; align-items: center; }
+.nav-right a {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 300; letter-spacing: .06em;
+  color: #fff; transition: opacity .3s;
+}
+.nav-right a:hover { opacity: 0.5; }
+.nav-comma { font-size: 13px; color: rgba(255,255,255,0.4); margin: 0 8px; }
+
+/* ══ GRID ══ */
+.sf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  padding: 90px 40px 60px;
+}
+.sf-item {
+  all: unset; cursor: pointer;
+  position: relative; display: block;
+  aspect-ratio: 9/16; overflow: hidden;
+  background: #161616;
+}
+.sf-item:focus-visible { outline: 2px solid var(--t1); outline-offset: 3px; }
+.sf-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .3s; }
+.sf-item:hover img { opacity: .8; }
+.sf-item iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .sf-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 70px 6px 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">Vieren</a>
+    <span class="nav-title">Short Form</span>
+  </div>
+  <div class="nav-right">
+    <a href="/">portfolio</a>
+    <span class="nav-comma">,</span>
+    <a href="mailto:richard@vieren.studio">contact</a>
+  </div>
+</nav>
+
+<main class="sf-grid" id="sfGrid">
+  <button type="button" class="sf-item" data-vid="1135111015" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2080335707-5b6e6a6e8a6eed75484320f1782986bff3b2f3f92b0a0f329d1465435d85c96e-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1094996108" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2028694735-acb66042fbc71c7136dbd8c29f9732493633336b2ac06de625f6901ae62373ca-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1135103105" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2080324928-ccc866651c29b9b5eb3d26ba6981788e465895aee17a511edabb4d20e19a7a85-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1133486488" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2078095904-c6274d303459ee247d5901e29d81293d969998765219090f3f3b9c040fae2f73-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1014229966" aria-label="Play video"><img src="https://i.vimeocdn.com/video/1932303451-9529baf1b8323d9c962d6833d0c01784e9982842a2061e8b32ed5da53b1c6136-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1195133349" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2160943684-1bdbd5a17ff34ee4cbb44905cc795d54b0066f922bd9bc145abf40daa1492494-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1195385113" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2161245919-db8d56801649cdcfc615ccff7f4bf3724c6a1600da03fe86e549f11a31c397f7-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1221599247" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2194346436-2fa658bbf92c99234dd6e9d74737d1842d33e5a207100b85a729287f3cdea9c1-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1146300426" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2095689675-bc740d2b65f8a23e45c15fc7156c50dd300b8e5f750393ab15ed1c98e630fbcc-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1082805537" aria-label="Play video"><img src="https://i.vimeocdn.com/video/2013872859-8c3213080cb45656143a2ccb18f71d14daa5623238c29fb67a4eea7d221c9add-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1014345011" aria-label="Play video"><img src="https://i.vimeocdn.com/video/1932779108-d1bb1ac31e5a15bf19375d1ea9e4906ac55a24bd53bd31333de867bee16be1df-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="1014233428" aria-label="Play video"><img src="https://i.vimeocdn.com/video/1932311931-4864caa59500f770d7f41d7525f634c0df443e845f1798fc6e96dee8e69f8b02-d_540x960" alt="" loading="lazy"></button>
+  <button type="button" class="sf-item" data-vid="422227769" aria-label="Play video"><img src="https://i.vimeocdn.com/video/898163382-de327b21d110cfe0e687139829aafcfb4c6a0c1f8db785da372a6de86ffefff0-d_540x960" alt="" loading="lazy"></button>
+</main>
+
+<script>
+// Click a thumbnail to play it in place; only one plays at a time
+(function() {
+  var grid = document.getElementById('sfGrid');
+  var current = null;
+  grid.addEventListener('click', function(e) {
+    var item = e.target.closest('.sf-item');
+    if (!item || item === current) return;
+    if (current) {
+      current.querySelector('iframe').remove();
+      current.querySelector('img').style.display = '';
+    }
+    var f = document.createElement('iframe');
+    f.src = 'https://player.vimeo.com/video/' + item.dataset.vid + '?autoplay=1&title=0&byline=0&portrait=0&color=FF9F00';
+    f.allow = 'autoplay; fullscreen; picture-in-picture';
+    item.querySelector('img').style.display = 'none';
+    item.appendChild(f);
+    current = item;
+  });
+})();
+</script>
+
+</body>
+</html>
