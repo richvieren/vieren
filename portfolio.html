@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — Vieren</title>
+<meta name="description" content="Photography portfolio by Vieren.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Podium';
+  src: url('fonts/podium-sharp.otf') format('opentype');
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Dharma Gothic';
+  src: url('fonts/dharma-gothic-heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --t1: #EEE8D8;
+  --t3: #9a9a8a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 20px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  mix-blend-mode: difference;
+}
+.nav-left { display: flex; align-items: baseline; gap: 12px; }
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
+}
+.nav-title {
+  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
+  font-size: 22px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
+  line-height: 1;
+}
+.nav-right { display: flex; align-items: center; }
+.nav-right a {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 300; letter-spacing: .06em;
+  color: #fff; transition: opacity .3s;
+}
+.nav-right a:hover { opacity: 0.5; }
+.nav-comma { font-size: 13px; color: rgba(255,255,255,0.4); margin: 0 8px; }
+
+/* ══ MASONRY ══ */
+.pf-masonry { columns: 4 260px; column-gap: 10px; padding: 90px 40px 60px; }
+.pf-masonry img { width: 100%; height: auto; display: block; margin-bottom: 10px; break-inside: avoid; }
+
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .pf-masonry { columns: 2; column-gap: 6px; padding: 70px 6px 40px; }
+  .pf-masonry img { margin-bottom: 6px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">Vieren</a>
+    <span class="nav-title">Portfolio</span>
+  </div>
+  <div class="nav-right">
+    <a href="/">portfolio</a>
+    <span class="nav-comma">,</span>
+    <a href="mailto:richard@vieren.studio">contact</a>
+  </div>
+</nav>
+
+<main class="pf-masonry" id="pfMasonry"></main>
+
+<script>
+// Every diary photo tagged "portfolio", newest first
+(function() {
+  var grid = document.getElementById('pfMasonry');
+  fetch('diary.json')
+    .then(function(r) { return r.json(); })
+    .then(function(entries) {
+      entries.sort(function(a, b) { return b.date.localeCompare(a.date); });
+      entries.forEach(function(e) {
+        var entryTagged = (e.tags || []).indexOf('portfolio') !== -1;
+        (e.photos || []).forEach(function(p) {
+          var file = typeof p === 'object' ? p.file : p;
+          var tagged = entryTagged || (typeof p === 'object' && (p.tags || []).indexOf('portfolio') !== -1);
+          if (!tagged) return;
+          var img = document.createElement('img');
+          img.src = 'image/diary/' + e.date + '/' + file;
+          img.alt = '';
+          img.loading = 'lazy';
+          grid.appendChild(img);
+        });
+      });
+    });
+})();
+</script>
+
+</body>
+</html>

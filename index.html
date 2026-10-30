@@ -1447,6 +1447,56 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 })();
 </script>
 
+<!-- ══ PORTFOLIO ══ -->
+<style>
+.pf-section { padding: 120px 0 0; display: none; }
+.pf-masonry { max-width: 1480px; margin: 0 auto; padding: 0 40px; columns: 3; column-gap: 12px; }
+.pf-item { display: block; break-inside: avoid; margin-bottom: 12px; }
+.pf-item img { width: 100%; height: auto; display: block; transition: opacity .3s; }
+.pf-item:hover img { opacity: .85; }
+@media (max-width: 900px) { .pf-masonry { columns: 2; } }
+@media (max-width: 600px) { .pf-section { padding-top: 80px; } .pf-masonry { padding: 0 20px; column-gap: 8px; } .pf-item { margin-bottom: 8px; } }
+</style>
+<section class="pf-section" id="pfSection">
+  <div class="sf-head"><h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;">PORTFOLIO.</h2><a href="portfolio.html" class="sf-all">See all</a></div>
+  <div class="pf-masonry" id="pfMasonry"></div>
+</section>
+<script>
+// Portfolio: every diary photo tagged "portfolio", newest first
+(function () {
+  var grid = document.getElementById('pfMasonry');
+  var sec = document.getElementById('pfSection');
+  if (!grid || !sec) return;
+  fetch('diary.json')
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (entries) {
+      var shots = [];
+      entries.slice().sort(function (a, b) { return b.date.localeCompare(a.date); }).forEach(function (e) {
+        var entryTagged = (e.tags || []).indexOf('portfolio') !== -1;
+        (e.photos || []).forEach(function (p) {
+          var file = typeof p === 'object' ? p.file : p;
+          var tagged = entryTagged || (typeof p === 'object' && (p.tags || []).indexOf('portfolio') !== -1);
+          if (tagged) shots.push('image/diary/' + e.date + '/' + file);
+        });
+      });
+      if (!shots.length) return;            // never show an empty section
+      shots.slice(0, 12).forEach(function (src) {
+        var a = document.createElement('a');
+        a.className = 'pf-item';
+        a.href = 'portfolio.html';
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        img.loading = 'lazy';
+        a.appendChild(img);
+        grid.appendChild(a);
+      });
+      sec.style.display = 'block';
+    })
+    .catch(function () { /* leave the section hidden */ });
+})();
+</script>
+
 <!-- ══ SHORT FORM ══ -->
 <section style="padding:120px 0 40px;">
   <div class="sf-head"><h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;">SHORT FORM.</h2><a href="shortform.html" class="sf-all">See all</a></div>
