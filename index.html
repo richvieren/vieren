@@ -1453,14 +1453,14 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <style>
 .pf-section { background: #eae7df; padding: 100px 40px 120px; display: none; }
 .pf-inner { max-width: 1400px; margin: 0 auto; }
-.pf-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 64px; }
+.pf-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 150px; }   /* room for the scribble, which reaches above the polaroid and drifts 70px with the parallax */
 .pf-title { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(36px,6vw,72px); text-transform: uppercase; letter-spacing: 0.02em; color: #1c1512; line-height: 1; }
 .pf-tagline { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(12px,1.1vw,13px); color: rgba(28,21,18,0.5); line-height: 1.4; margin: 12px 0 0; max-width: 30em; }
 .pf-all { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(28,21,18,.55); transition: color .3s; padding-top: 12px; white-space: nowrap; }
 .pf-all:hover { color: #1c1512; }
 .pf-body { position: relative; display: grid; place-items: center; }
 /* Handwritten "check out my best photos" sits behind the centred polaroid */
-.pf-scribble { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1000px, 100%); height: auto; pointer-events: none; }
+.pf-scribble { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1250px, 100%); height: auto; pointer-events: none; will-change: transform; }
 /* Instax frame PNG (439x665) over the photo; the photo fills the frame's transparent window */
 .pf-polaroid { position: relative; z-index: 1; display: block; width: 100%; max-width: 440px; aspect-ratio: 439 / 665; }
 .pf-polaroid img.pf-photo { position: absolute; left: 8.9%; top: 10.8%; width: 82.7%; height: 69.5%;   /* ~2px past the window so the scribble cannot show through its soft edge */
@@ -1497,6 +1497,24 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   var sec = document.getElementById('pfSection');
   var photo = document.getElementById('pfPhoto');
   if (!sec || !photo) return;
+
+  // Parallax: the scribble trails the polaroid by up to 70px either way while the section crosses the screen
+  function parallax() {
+    var scrib = sec.querySelector('.pf-scribble');
+    if (!scrib || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = sec.getBoundingClientRect();
+      var p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      p = Math.max(-1, Math.min(1, p));
+      scrib.style.transform = 'translate(-50%, calc(-50% + ' + (-p * 70).toFixed(1) + 'px))';
+    }
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+
   fetch('diary.json')
     .then(function (r) { return r.ok ? r.json() : []; })
     .then(function (entries) {
@@ -1512,6 +1530,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       if (!src) return;                     // never show an empty section
       photo.src = src;
       sec.style.display = 'block';
+      parallax();
     })
     .catch(function () { /* leave the section hidden */ });
 })();
