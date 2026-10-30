@@ -1364,8 +1364,8 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ ARTICLES ══ -->
 <style>
-.arts-section { background: var(--card); padding: 100px 40px; display: none; }
-.arts-inner { max-width: 1200px; margin: 0 auto; }
+.arts-section { background: var(--ac); padding: 100px 40px; display: none; }
+.arts-inner { max-width: 1400px; margin: 0 auto; }   /* same left edge as Photo Portfolio / Short Form / Film titles */
 .arts-top {
   display: flex; justify-content: space-between; align-items: flex-end;
   gap: 24px; margin-bottom: 56px; flex-wrap: wrap;
@@ -1393,10 +1393,10 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .art-card {
   display: flex; flex-direction: column; justify-content: space-between;
   text-decoration: none; color: inherit; min-height: 200px;
-  border: 1px solid rgba(28,21,18,.16); padding: 32px;
+  background: #fff; border: 1px solid rgba(28,21,18,.16); padding: 32px;
   transition: border-color .25s, background .25s;
 }
-.art-card:hover { border-color: rgba(28,21,18,.42); background: rgba(28,21,18,.03); }
+.art-card:hover { border-color: rgba(28,21,18,.42); }
 .art-card h3 {
   font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.02em;
   font-size: clamp(21px, 2vw, 26px); line-height: 1.22;
