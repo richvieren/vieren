@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.css">
 <style>
 @font-face {
   font-family: 'Podium';
@@ -147,6 +148,17 @@ nav {
         });
       });
     });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+// Eased wheel scroll like the reference (Lenis); off when the visitor asks for reduced motion
+(function() {
+  if (!window.Lenis || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var lenis = new Lenis();
+  function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
 })();
 </script>
 
