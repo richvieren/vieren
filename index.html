@@ -1235,6 +1235,8 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .manifesto-num{font-family:'Archivo',sans-serif;font-size:clamp(80px,12vw,160px);font-weight:900;color:rgba(0,0,0,.25);line-height:.85;flex-shrink:0;letter-spacing:-.04em;white-space:nowrap;min-width:fit-content;}
 .manifesto-text{flex:1;padding-top:clamp(8px,1.5vw,24px);}
 @media(max-width:600px){.manifesto-row{flex-direction:column;gap:12px;}.manifesto-num{font-size:64px;}}
+/* Desktop: the [1] block only as tall as its glyph, so no empty square under the text */
+@media(min-width:601px){.manifesto-num{aspect-ratio:auto !important;}.manifesto-section{padding-bottom:48px !important;}}
 </style>
 
 <!-- ══ PROJECTS ══ -->
@@ -1262,7 +1264,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </section>
 
 <!-- ══ MANIFESTO ══ -->
-<section style="background:#c1bab2;padding:100px 40px;">
+<section class="manifesto-section" style="background:#c1bab2;padding:100px 40px;">
   <div class="manifesto-row">
     <div class="manifesto-num" style="aspect-ratio:1/1;width:100%;max-width:500px;border-radius:4px;">[1]</div>
     <div class="manifesto-text">
