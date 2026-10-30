@@ -1447,50 +1447,67 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 })();
 </script>
 
-<!-- ══ PORTFOLIO ══ -->
+<!-- ══ PHOTO PORTFOLIO ══ -->
 <style>
-.pf-section { padding: 120px 0 0; display: none; }
-.pf-masonry { max-width: 1480px; margin: 0 auto; padding: 0 40px; columns: 3; column-gap: 12px; }
-.pf-item { display: block; break-inside: avoid; margin-bottom: 12px; }
-.pf-item img { width: 100%; height: auto; display: block; transition: opacity .3s; }
-.pf-item:hover img { opacity: .85; }
-@media (max-width: 900px) { .pf-masonry { columns: 2; } }
-@media (max-width: 600px) { .pf-section { padding-top: 80px; } .pf-masonry { padding: 0 20px; column-gap: 8px; } .pf-item { margin-bottom: 8px; } }
+.pf-section { background: #eae7df; padding: 100px 40px 120px; display: none; }
+.pf-inner { max-width: 1400px; margin: 0 auto; }
+.pf-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 64px; }
+.pf-title { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(36px,6vw,72px); text-transform: uppercase; letter-spacing: 0.02em; color: #1c1512; line-height: 1; }
+.pf-tagline { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(12px,1.1vw,13px); color: rgba(28,21,18,0.5); line-height: 1.4; margin: 12px 0 0; max-width: 30em; }
+.pf-all { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(28,21,18,.55); transition: color .3s; padding-top: 12px; white-space: nowrap; }
+.pf-all:hover { color: #1c1512; }
+.pf-body { display: grid; grid-template-columns: minmax(0, 440px) 1fr; gap: 40px; align-items: center; }
+/* Instax frame PNG (439x665) over the photo; the photo fills the frame's transparent window */
+.pf-polaroid { position: relative; display: block; width: 100%; aspect-ratio: 439 / 665; }
+.pf-polaroid img.pf-photo { position: absolute; left: 9.34%; top: 11.13%; width: 81.78%; height: 68.87%; object-fit: cover; display: block; }
+.pf-polaroid img.pf-frame { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.pf-polaroid:hover .pf-photo { filter: brightness(.94); }
+.pf-side { min-height: 1px; }
+@media (max-width: 700px) {
+  .pf-section { padding: 70px 20px 80px; }
+  .pf-head { margin-bottom: 40px; }
+  .pf-body { grid-template-columns: 1fr; justify-items: center; }
+  .pf-polaroid { max-width: 320px; }
+}
 </style>
 <section class="pf-section" id="pfSection">
-  <div class="sf-head"><h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;">PORTFOLIO.</h2><a href="portfolio.html" class="sf-all">See all</a></div>
-  <div class="pf-masonry" id="pfMasonry"></div>
+  <div class="pf-inner">
+    <div class="pf-head">
+      <div>
+        <h2 class="pf-title">PHOTO PORTFOLIO.</h2>
+        <p class="pf-tagline">A selection of my best photos. I will be in Cape Town over the next few months and I'm opening a few slots per month if you want to shoot!</p>
+      </div>
+      <a href="portfolio.html" class="pf-all">See all</a>
+    </div>
+    <div class="pf-body">
+      <a href="portfolio.html" class="pf-polaroid" id="pfPolaroid" aria-label="See the photo portfolio">
+        <img class="pf-photo" id="pfPhoto" src="" alt="" loading="lazy">
+        <img class="pf-frame" src="image/instax-frame.png" alt="">
+      </a>
+      <div class="pf-side"></div>
+    </div>
+  </div>
 </section>
 <script>
-// Portfolio: every diary photo tagged "portfolio", newest first
+// Photo portfolio: newest diary photo tagged "portfolio" goes in the instax frame
 (function () {
-  var grid = document.getElementById('pfMasonry');
   var sec = document.getElementById('pfSection');
-  if (!grid || !sec) return;
+  var photo = document.getElementById('pfPhoto');
+  if (!sec || !photo) return;
   fetch('diary.json')
     .then(function (r) { return r.ok ? r.json() : []; })
     .then(function (entries) {
-      var shots = [];
-      entries.slice().sort(function (a, b) { return b.date.localeCompare(a.date); }).forEach(function (e) {
+      var src = null;
+      entries.slice().sort(function (a, b) { return b.date.localeCompare(a.date); }).some(function (e) {
         var entryTagged = (e.tags || []).indexOf('portfolio') !== -1;
-        (e.photos || []).forEach(function (p) {
-          var file = typeof p === 'object' ? p.file : p;
+        return (e.photos || []).some(function (p) {
           var tagged = entryTagged || (typeof p === 'object' && (p.tags || []).indexOf('portfolio') !== -1);
-          if (tagged) shots.push('image/diary/' + e.date + '/' + file);
+          if (tagged) src = 'image/diary/' + e.date + '/' + (typeof p === 'object' ? p.file : p);
+          return tagged;
         });
       });
-      if (!shots.length) return;            // never show an empty section
-      shots.slice(0, 12).forEach(function (src) {
-        var a = document.createElement('a');
-        a.className = 'pf-item';
-        a.href = 'portfolio.html';
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = '';
-        img.loading = 'lazy';
-        a.appendChild(img);
-        grid.appendChild(a);
-      });
+      if (!src) return;                     // never show an empty section
+      photo.src = src;
       sec.style.display = 'block';
     })
     .catch(function () { /* leave the section hidden */ });
