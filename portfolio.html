@@ -16,6 +16,12 @@
   font-display: swap;
 }
 @font-face {
+  font-family: 'Instrument Serif';
+  src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Dharma Gothic';
   src: url('fonts/dharma-gothic-heavy.ttf') format('truetype');
   font-weight: 800;
@@ -23,9 +29,8 @@
 }
 
 :root {
-  --bg: #0a0a0a;
-  --t1: #EEE8D8;
-  --t3: #9a9a8a;
+  --bg: #eae7df;
+  --t1: #1c1512;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -51,11 +56,6 @@ nav {
   font-family: 'Podium', sans-serif; font-weight: 900;
   font-size: 20px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
 }
-.nav-title {
-  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
-  font-size: 22px; color: #fff; letter-spacing: .02em; text-transform: uppercase;
-  line-height: 1;
-}
 .nav-right { display: flex; align-items: center; }
 .nav-right a {
   font-family: 'Jost', sans-serif;
@@ -65,14 +65,42 @@ nav {
 .nav-right a:hover { opacity: 0.5; }
 .nav-comma { font-size: 13px; color: rgba(255,255,255,0.4); margin: 0 8px; }
 
-/* ══ MASONRY ══ */
-.pf-masonry { columns: 4 260px; column-gap: 10px; padding: 90px 40px 60px; }
-.pf-masonry img { width: 100%; height: auto; display: block; margin-bottom: 10px; break-inside: avoid; }
+/* ══ SPLIT: fixed intro left, photo stream right (after mainlyphotography.com/projects/un-ordinary) ══ */
+.pf-intro {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 40vw;
+  padding: 0 40px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.pf-title {
+  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
+  font-size: clamp(72px, 9vw, 140px); line-height: .88;
+  text-transform: uppercase; letter-spacing: .01em;
+}
+.pf-tagline {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(16px, 1.3vw, 19px); line-height: 1.4;
+  color: rgba(28,21,18,0.7); max-width: 22em; margin-top: 28px;
+}
+.pf-contact {
+  align-self: flex-start; margin-top: 28px;
+  font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+  border-bottom: 1px solid rgba(28,21,18,.35); padding-bottom: 3px; transition: opacity .3s;
+}
+.pf-contact:hover { opacity: .5; }
 
-@media (max-width: 600px) {
+/* Photos stack edge to edge on the right; widths vary so the left edges stagger */
+.pf-stream { margin-left: 45vw; display: flex; flex-direction: column; align-items: flex-end; }
+.pf-stream img { display: block; height: auto; width: 50vw; }
+.pf-stream img:nth-child(5n+2) { width: 36vw; }
+.pf-stream img:nth-child(5n+3) { width: 45vw; }
+.pf-stream img:nth-child(5n+4) { width: 41vw; }
+.pf-stream img:nth-child(5n+5) { width: 55vw; }
+
+@media (max-width: 700px) {
   nav { padding: 16px 20px; }
-  .pf-masonry { columns: 2; column-gap: 6px; padding: 70px 6px 40px; }
-  .pf-masonry img { margin-bottom: 6px; }
+  .pf-intro { position: static; width: auto; padding: 100px 20px 40px; }
+  .pf-stream { margin-left: 0; }
+  .pf-stream img, .pf-stream img:nth-child(n) { width: 100%; }
 }
 </style>
 </head>
@@ -81,7 +109,6 @@ nav {
 <nav>
   <div class="nav-left">
     <a href="/" class="nav-logo">Vieren</a>
-    <span class="nav-title">Photo Portfolio</span>
   </div>
   <div class="nav-right">
     <a href="/">portfolio</a>
@@ -90,12 +117,18 @@ nav {
   </div>
 </nav>
 
-<main class="pf-masonry" id="pfMasonry"></main>
+<header class="pf-intro">
+  <h1 class="pf-title">Photo<br>Portfolio.</h1>
+  <p class="pf-tagline">A selection of my best photos. I will be in Cape Town over the next few months and I'm opening a few slots per month if you want to shoot!</p>
+  <a class="pf-contact" href="mailto:richard@vieren.studio">richard@vieren.studio</a>
+</header>
+
+<main class="pf-stream" id="pfStream"></main>
 
 <script>
 // Every diary photo tagged "portfolio", newest first
 (function() {
-  var grid = document.getElementById('pfMasonry');
+  var grid = document.getElementById('pfStream');
   fetch('diary.json')
     .then(function(r) { return r.json(); })
     .then(function(entries) {
