@@ -803,6 +803,8 @@ nav {
 .diary-nav {
   display: flex;
   gap: 24px;
+  align-self: flex-end;      /* sit on the film strip, not mid-header */
+  margin-bottom: -16px;      /* 12px above the strip */
 }
 .diary-nav button {
   background: none;
@@ -1462,7 +1464,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 /* Handwritten "check out my best photos" sits behind the centred polaroid */
 .pf-scribble { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1250px, 100%); height: auto; pointer-events: none; will-change: transform; }
 /* Instax frame PNG (439x665) over the photo; the photo fills the frame's transparent window */
-.pf-polaroid { position: relative; z-index: 1; display: block; width: 100%; max-width: 440px; aspect-ratio: 439 / 665; }
+.pf-polaroid { position: relative; z-index: 1; display: block; will-change: transform; width: 100%; max-width: 440px; aspect-ratio: 439 / 665; }
 .pf-polaroid img.pf-photo { position: absolute; left: 8.9%; top: 10.8%; width: 82.7%; height: 69.5%;   /* ~2px past the window so the scribble cannot show through its soft edge */
   object-fit: cover; display: block; }
 .pf-polaroid img.pf-frame { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
@@ -1498,17 +1500,19 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   var photo = document.getElementById('pfPhoto');
   if (!sec || !photo) return;
 
-  // Parallax: the scribble trails the polaroid by up to 70px either way while the section crosses the screen
+  // Parallax: while the section crosses the screen the polaroid runs ahead (up to 150px) and the scribble trails (up to 60px)
   function parallax() {
     var scrib = sec.querySelector('.pf-scribble');
-    if (!scrib || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var pol = document.getElementById('pfPolaroid');
+    if (!scrib || !pol || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var ticking = false;
     function update() {
       ticking = false;
       var r = sec.getBoundingClientRect();
       var p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
       p = Math.max(-1, Math.min(1, p));
-      scrib.style.transform = 'translate(-50%, calc(-50% + ' + (-p * 70).toFixed(1) + 'px))';
+      scrib.style.transform = 'translate(-50%, calc(-50% + ' + (-p * 60).toFixed(1) + 'px))';
+      pol.style.transform = 'translateY(' + (p * 150).toFixed(1) + 'px)';
     }
     addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     addEventListener('resize', update);
