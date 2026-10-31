@@ -1,0 +1,57 @@
+# Photo diary from the phone: the "Add to diary" iPhone shortcut uploads photos plus one
+# <stamp>.json into inbox/. This files them into the diary, publishes the site and, when the
+# shortcut said so, schedules the Eden post. Steps: .github/scripts/diary_inbox.py, eden_post.py
+name: Diary inbox
+
+on:
+  push:
+    branches: [master]
+    paths: ['inbox/*.json']   # the JSON goes up last, after every photo of the upload
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: diary-inbox
+  cancel-in-progress: false
+
+jobs:
+  file:
+    runs-on: ubuntu-latest
+    env:
+      EDEN_JOBS: eden-jobs.jsonl   # in the workspace so hashFiles can see it; never committed (git add names its paths)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow==11.0.0
+
+      - name: File photos into the diary
+        run: python .github/scripts/diary_inbox.py
+
+      - name: Commit and push
+        id: push
+        run: |
+          git config user.name "diary-inbox"
+          git config user.email "diary-inbox@users.noreply.github.com"
+          git add -A inbox image/diary image/diary-thumbs diary.json
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -m "Diary: photos from the phone"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "pushed=1" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild GitHub Pages
+        if: steps.push.outputs.pushed == '1' && github.ref_name == 'master'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
+
+      - name: Schedule Eden post
+        if: steps.push.outputs.pushed == '1' && github.ref_name == 'master' && hashFiles(env.EDEN_JOBS) != ''
+        env:
+          EDEN_API_KEY: ${{ secrets.EDEN_API_KEY }}
+        run: python .github/scripts/eden_post.py
