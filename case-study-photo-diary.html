@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo Diary — Case Study — Vieren</title>
+<meta name="description" content="How one folder of photos feeds the vieren.studio photo diary and five social platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Podium'; src: url('fonts/podium-sharp.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --bg: #2C2E2C;
+  --s1: #242624;
+  --s2: #363836;
+  --t1: #EEE8D8;
+  --t2: #EEE8D8;
+  --t3: #9a9a8a;
+  --t4: #6a6a5a;
+  --ac: #FF9F00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--t2); font-family: 'Jost', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  padding: 24px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(to bottom, rgba(36,38,36,.9) 0%, transparent 100%);
+}
+.nav-logo {
+  font-family: 'Podium', sans-serif; font-weight: 900;
+  font-size: 20px; color: var(--t1); letter-spacing: .02em; text-transform: uppercase;
+}
+.nav-cta {
+  font-size: 11px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.3); padding: 10px 24px;
+  transition: all .3s;
+}
+.nav-cta:hover { background: var(--t1); color: var(--bg); }
+
+/* Title */
+/* Hero */
+.cd-hero { width: 100%; height: 55vh; overflow: hidden; position: relative; }
+.cd-hero img {
+  width: 100%; height: 130%; object-fit: cover;
+  position: absolute; top: -15%; left: 0;
+  will-change: transform;
+}
+
+/* Portrait: overlaps the bottom of the hero */
+.cd-portrait-wrap { display: flex; justify-content: center; margin-top: -220px; position: relative; z-index: 2;
+  margin-bottom: -80px; }
+.cd-portrait { width: 420px; height: 560px; object-fit: cover; box-shadow: 0 12px 60px rgba(0,0,0,.5); }
+
+.cd-title-block { text-align: center; padding: 40px 40px 0; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+.cd-title {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
+  color: var(--t1); line-height: .9; margin-bottom: 40px; letter-spacing: .02em;
+}
+
+/* Value props */
+.cd-props {
+  display: flex; justify-content: center; gap: clamp(40px, 8vw, 120px);
+  padding: 0 40px 48px; max-width: 900px; margin: 0 auto;
+}
+.cd-prop { text-align: center; }
+.cd-prop-label {
+  font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ac); line-height: 1.5;
+}
+
+/* Intro */
+.cd-intro {
+  max-width: 800px; margin: 0 auto; padding: 40px 40px 80px; text-align: center;
+}
+.cd-intro p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.6; color: var(--t2);
+}
+
+/* Two-column */
+.cd-twocol { background: var(--s2); padding: 80px 40px; }
+.cd-twocol-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.cd-twocol p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8;
+  color: var(--t2); text-align: justify;
+}
+.cd-twocol p + p { margin-top: 16px; }
+.cd-twocol strong {
+  display: block; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--t1); margin-bottom: 12px; margin-top: 24px;
+}
+.cd-twocol strong:first-child { margin-top: 0; }
+
+/* Features */
+.cd-features { background: var(--s1); padding: 100px 40px; }
+.cd-features-header { text-align: center; max-width: 700px; margin: 0 auto 80px; }
+.cd-features-header h2 {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px); color: var(--t2); margin-bottom: 16px;
+}
+.cd-feature-row {
+  display: grid; grid-template-columns: 1fr; gap: 40px;
+  max-width: 760px; margin: 0 auto; align-items: start;
+  padding: 40px 0; border-top: 1px solid rgba(255,255,255,.06);
+}
+.cd-feature-text h3 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(28px, 3.5vw, 44px); color: var(--t1);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.cd-feature-text p {
+  font-family: 'Archivo', sans-serif; font-size: 14px; line-height: 1.8; color: var(--t3);
+}
+.cd-feature-text p + p { margin-top: 16px; }
+
+/* Results */
+.cd-results { background: var(--bg); padding: 100px 40px; text-align: center; }
+.cd-results h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.cd-results-subtitle {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(20px, 2.5vw, 32px); color: var(--t3); margin-bottom: 60px;
+}
+.cd-results-stats {
+  max-width: 680px; margin: 0 auto; text-align: center;
+}
+.cd-results-stats p {
+  font-family: 'Instrument Serif', serif; font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.6; color: var(--t2);
+}
+.cd-results-stats .closer {
+  color: var(--t1); margin-top: 24px;
+}
+
+/* Stack */
+.cd-stack { background: var(--s2); padding: 100px 40px; }
+.cd-stack-inner { max-width: 760px; margin: 0 auto; }
+.cd-stack h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); color: var(--t1);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+
+/* Newsletter signup */
+.cd-signup { padding: 80px 40px; display: flex; justify-content: center; }
+.cd-signup > div { width: 100%; max-width: 520px; }
+
+/* CTA */
+.cd-cta { background: var(--s1); padding: 100px 40px; text-align: center; }
+.cd-cta h2 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(24px, 3vw, 40px); color: var(--t1);
+  max-width: 700px; margin: 0 auto 32px; line-height: 1.3;
+}
+.cd-cta a {
+  display: inline-block; padding: 14px 32px; border: 1px solid var(--ac);
+  color: var(--ac); font-family: 'Archivo', sans-serif; font-size: 12px;
+  letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+  transition: all .3s;
+}
+.cd-cta a:hover { background: var(--ac); color: var(--bg); }
+
+/* Footer */
+footer {
+  padding: 32px 40px; border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer .fl { font-size: 13px; color: var(--t4); }
+footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cd-twocol-inner { grid-template-columns: 1fr; }
+  .cd-props { flex-direction: column; gap: 16px; }
+}
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .cd-portrait { width: 260px; height: 347px; }
+  .cd-portrait-wrap { margin-top: -160px; margin-bottom: -100px; }
+  .cd-title-block { padding-top: 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Vieren</a>
+  <a href="mailto:hello@vieren.studio" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- Hero -->
+<div class="cd-hero">
+  <img src="image/diary/2026-05-27/RV000955.jpg" alt="Notebook, pen, lenses and a microphone on a wooden table">
+</div>
+
+<!-- Portrait -->
+<div class="cd-portrait-wrap">
+  <img class="cd-portrait" src="image/casestudies/pd-portrait.jpg" alt="The photo diary page on vieren.studio">
+</div>
+
+<div class="cd-title-block">
+  <h1 class="cd-title">Photo Diary</h1>
+</div>
+
+<!-- Value props -->
+<div class="cd-props">
+  <div class="cd-prop"><div class="cd-prop-label">One<br>Folder</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">One<br>Caption</div></div>
+  <div class="cd-prop"><div class="cd-prop-label">Five<br>Platforms</div></div>
+</div>
+
+<!-- Intro -->
+<div class="cd-intro">
+  <p>I keep a photo diary on this site. Some days it gets one frame, some days seven. Every photo came with the same chores: resize it for the web, make a thumbnail, file it under the right date, push the site, then open every social app and post it all over again. So I handed the chores to an agent. I drop the photos in a folder and give it the date, a tag and my caption. The photo lands in the diary, and the same post goes out to Threads, LinkedIn, X, Substack and Facebook.</p>
+</div>
+
+<!-- Two-column overview -->
+<div class="cd-twocol">
+  <div class="cd-twocol-inner">
+    <div>
+      <strong>The Challenge</strong>
+      <p>Taking the photo is the easy bit. The admin after it is what kills a daily habit.</p>
+      <p>Every platform has its own rules too. Substack Notes reject a post with more than six images. X takes four. A caption over 280 characters gets split into a thread on X and Threads, and the photo silently falls off the first post. You find out after it's live.</p>
+    </div>
+    <div>
+      <strong>The Approach</strong>
+      <p>The website is the home of the work, so the website goes first. Every photo is filed there, and the socials take their copy from the live site.</p>
+      <p>An agent (an AI assistant that carries out tasks instead of only answering questions) follows a written procedure, the same steps in the same order every time. My job is three things: the date, the tag and the caption. The agent never writes a caption. It posts mine word for word.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section class="cd-features">
+  <div class="cd-features-header"><h2>How It Works</h2></div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Folder</h3>
+      <p>Photos go into a folder named after the day, or into one called unsorted. A script reads the date each photo was taken from the camera data, moves it to the right day, removes duplicates and makes a 400 px thumbnail.</p>
+    </div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Diary</h3>
+      <p>Each day is one line in a small data file: the date, the tags and the photos. The diary page and the film strip on the homepage both read from that file, so one edit updates both.</p>
+      <p>Five tags sort the diary: bts, wolf-children, vieren, off-the-grid and portfolio. A photo tagged portfolio also goes into the portfolio on the homepage and on the portfolio page.</p>
+    </div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Socials</h3>
+      <p>The agent waits until every new photo loads from the live site. Then it hands them to Eden, my scheduler, takes the next free slot and schedules one post for Threads, LinkedIn, X, Substack and Facebook.</p>
+      <p>The platform rules are handled before they bite. Only the first six photos go out, X gets four of them, and a long caption is split by hand so the photo stays on the first post. Add the word "story" and each photo also goes to Instagram Stories.</p>
+    </div>
+  </div>
+
+  <div class="cd-feature-row">
+    <div class="cd-feature-text">
+      <h3>The Guardrails</h3>
+      <p>Every post carries a key made from the date and the number of photos. Run the same day twice and Eden returns the first post instead of making a duplicate.</p>
+      <p>Nothing goes out on the spot. Every post takes a scheduled slot, and the agent reads it back to check it shows as scheduled on all five platforms. When a step fails, it stops and shows me the error.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="cd-results">
+  <h2>The Results</h2>
+  <div class="cd-results-stats">
+    <p>Photos go into a folder. The diary, the homepage and five feeds come out the other side, with my caption on every one of them.</p>
+    <p class="closer">The same setup fits anything you publish often: one folder, one written procedure, every channel at once.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cd-cta">
+  <h2>I build hyper personalised systems like this for founders.</h2>
+  <a href="mailto:hello@vieren.studio">Get In Touch</a>
+</section>
+
+<footer>
+  <span class="fl">Vieren Studio</span>
+  <span class="fr">Cape Town, South Africa</span>
+</footer>
+
+<script>
+(function() {
+  var img = document.querySelector('.cd-hero img');
+  window.addEventListener('scroll', function() {
+    var y = window.pageYOffset;
+    img.style.transform = 'translateY(' + y * 0.4 + 'px)';
+  });
+})();
+</script>
+</body>
+</html>
