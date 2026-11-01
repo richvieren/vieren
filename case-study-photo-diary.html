@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photo Diary — Case Study — Vieren</title>
+<title>Photo Diary | Case Study | Vieren</title>
 <meta name="description" content="How one folder of photos feeds the vieren.studio photo diary and five social platforms.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -226,7 +226,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- Intro -->
 <div class="cd-intro">
-  <p>I keep a photo diary on this site. Some days it gets one frame, some days seven. Every photo came with the same chores: resize it for the web, make a thumbnail, file it under the right date, push the site, then open every social app and post it all over again. So I handed the chores to an agent. I drop the photos in a folder and give it the date, a tag and my caption. The photo lands in the diary, and the same post goes out to Threads, LinkedIn, X, Substack and Facebook.</p>
+  <p>I keep a photo diary on this site. Some days I add one frame, some days seven. Every photo came with the same chores: resize it for the web, make a small preview image, file it under the right date, publish the site, then open every social app and post it again. So I gave the chores to an agent, an AI assistant that carries out tasks for you. I drop the photos in a folder and give it the date, a tag and my caption. It puts the photo in the diary and posts it to Threads, LinkedIn, X, Substack and Facebook.</p>
 </div>
 
 <!-- Two-column overview -->
@@ -234,13 +234,13 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="cd-twocol-inner">
     <div>
       <strong>The Challenge</strong>
-      <p>Taking the photo is the easy bit. The admin after it is what kills a daily habit.</p>
-      <p>Every platform has its own rules too. Substack Notes reject a post with more than six images. X takes four. A caption over 280 characters gets split into a thread on X and Threads, and the photo silently falls off the first post. You find out after it's live.</p>
+      <p>A daily photo comes with a pile of admin, and every platform adds its own rules on top.</p>
+      <p>Substack Notes reject a post with more than six images. X takes four. When a caption runs past 280 characters, Eden, the scheduler I use, splits it into a thread on X and Threads and posts the thread without the photo. Nothing warns you.</p>
     </div>
     <div>
       <strong>The Approach</strong>
-      <p>The website is the home of the work, so the website goes first. Every photo is filed there, and the socials take their copy from the live site.</p>
-      <p>An agent (an AI assistant that carries out tasks instead of only answering questions) follows a written procedure, the same steps in the same order every time. My job is three things: the date, the tag and the caption. The agent never writes a caption. It posts mine word for word.</p>
+      <p>The website is the home of the work, so it goes first. The agent files every photo on the site, and the social posts use the photos from the live site.</p>
+      <p>I wrote the steps down once, and the agent runs them in the same order every time. I give it the date, the tag and the caption, and it posts my caption word for word.</p>
     </div>
   </div>
 </div>
@@ -252,31 +252,31 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="cd-feature-row">
     <div class="cd-feature-text">
       <h3>The Folder</h3>
-      <p>Photos go into a folder named after the day, or into one called unsorted. A script reads the date each photo was taken from the camera data, moves it to the right day, removes duplicates and makes a 400 px thumbnail.</p>
+      <p>Photos go into a folder named after the day, or into one called unsorted. A script reads the date each photo was taken from the camera data, moves it to the right day, removes duplicates and makes a 400 px preview image.</p>
     </div>
   </div>
 
   <div class="cd-feature-row">
     <div class="cd-feature-text">
       <h3>The Diary</h3>
-      <p>Each day is one line in a small data file: the date, the tags and the photos. The diary page and the film strip on the homepage both read from that file, so one edit updates both.</p>
-      <p>Five tags sort the diary: bts, wolf-children, vieren, off-the-grid and portfolio. A photo tagged portfolio also goes into the portfolio on the homepage and on the portfolio page.</p>
+      <p>Each day is one line in a small data file with the date, the tags and the photos. The diary page and the film strip on the homepage both read from that file, so the agent edits one file and both pages change.</p>
+      <p>I give each photo one or two of five tags: bts, wolf-children, vieren, off-the-grid and portfolio. A photo tagged portfolio also goes into the portfolio on the homepage and on the portfolio page.</p>
     </div>
   </div>
 
   <div class="cd-feature-row">
     <div class="cd-feature-text">
       <h3>The Socials</h3>
-      <p>The agent waits until every new photo loads from the live site. Then it hands them to Eden, my scheduler, takes the next free slot and schedules one post for Threads, LinkedIn, X, Substack and Facebook.</p>
-      <p>The platform rules are handled before they bite. Only the first six photos go out, X gets four of them, and a long caption is split by hand so the photo stays on the first post. Add the word "story" and each photo also goes to Instagram Stories.</p>
+      <p>The agent waits until every new photo loads from the live site. Then it hands them to Eden, takes the next free slot and schedules one post for Threads, LinkedIn, X, Substack and Facebook.</p>
+      <p>It also works around each platform's limits. It sends the first six photos, gives X four of them, and splits a long caption itself so the photo goes on the first post of the thread. When I add the word "story", each photo also goes to Instagram Stories.</p>
     </div>
   </div>
 
   <div class="cd-feature-row">
     <div class="cd-feature-text">
       <h3>The Guardrails</h3>
-      <p>Every post carries a key made from the date and the number of photos. Run the same day twice and Eden returns the first post instead of making a duplicate.</p>
-      <p>Nothing goes out on the spot. Every post takes a scheduled slot, and the agent reads it back to check it shows as scheduled on all five platforms. When a step fails, it stops and shows me the error.</p>
+      <p>Every post gets a label made from the date and the number of photos. If the agent runs the same day twice, Eden sees the label and returns the post it already has, so the same photo never goes out twice.</p>
+      <p>Posts wait for a scheduled slot. After scheduling, the agent reads the post back and checks that it shows as scheduled on all five platforms. When a step fails, it stops and shows me the error.</p>
     </div>
   </div>
 </section>
@@ -285,8 +285,8 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <section class="cd-results">
   <h2>The Results</h2>
   <div class="cd-results-stats">
-    <p>Photos go into a folder. The diary, the homepage and five feeds come out the other side, with my caption on every one of them.</p>
-    <p class="closer">The same setup fits anything you publish often: one folder, one written procedure, every channel at once.</p>
+    <p>From one folder and one caption, the agent updates the diary, the homepage and five social feeds.</p>
+    <p class="closer">You can use the same setup for anything you publish often.</p>
   </div>
 </section>
 
