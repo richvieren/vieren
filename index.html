@@ -1472,15 +1472,21 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 /* Handwritten "check out my best photos" sits behind the centred polaroid */
 .pf-scribble { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1250px, 100%); height: auto; pointer-events: none; will-change: transform; }
 /* Instax frame PNG (439x665) over the photo; the photo fills the frame's transparent window */
-.pf-polaroid { position: relative; z-index: 1; display: block; will-change: transform; width: 100%; max-width: 330px; aspect-ratio: 439 / 665; }
+.pf-polaroid { position: relative; z-index: 2; display: block; will-change: transform; width: 100%; max-width: 330px; aspect-ratio: 439 / 665; }
 .pf-polaroid img.pf-photo { position: absolute; left: 8.9%; top: 10.8%; width: 82.7%; height: 69.5%;   /* ~2px past the window so the scribble cannot show through its soft edge */
   object-fit: cover; display: block; }
 .pf-polaroid img.pf-frame { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 .pf-polaroid:hover .pf-photo { filter: brightness(.94); }
+/* Ten small prints float over the scribble, Halcyon style. Fill one by setting its img src; an empty src shows the grey placeholder */
+.pf-float { position: absolute; z-index: 1; width: clamp(90px, 9.5vw, 136px); aspect-ratio: 146 / 191; background: #d6d2c8;
+  border: 8px solid #fbfaf7; box-shadow: 0 4px 18px rgba(28,21,18,.18); will-change: transform; pointer-events: none; }
+.pf-float img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pf-float img[src=""] { display: none; }
 @media (max-width: 700px) {
   .pf-section { padding: 70px 20px 80px; }
   .pf-head { margin-bottom: 40px; }
   .pf-polaroid { max-width: 320px; }
+  .pf-float { display: none; }
 }
 </style>
 <section class="pf-section" id="pfSection">
@@ -1494,6 +1500,16 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
     </div>
     <div class="pf-body">
       <img class="pf-scribble" src="image/check-out-my-favorite-photos.png" alt="Check out my favorite photos" loading="lazy">
+      <div class="pf-float" style="left:2%;top:-150px" data-speed="40"><img src="" alt=""></div>
+      <div class="pf-float" style="left:15%;top:10px" data-speed="-30"><img src="" alt=""></div>
+      <div class="pf-float" style="left:4%;top:200px" data-speed="60"><img src="" alt=""></div>
+      <div class="pf-float" style="left:22%;top:300px" data-speed="-50"><img src="" alt=""></div>
+      <div class="pf-float" style="left:9%;top:430px" data-speed="25"><img src="" alt=""></div>
+      <div class="pf-float" style="left:80%;top:-170px" data-speed="-40"><img src="" alt=""></div>
+      <div class="pf-float" style="left:68%;top:-30px" data-speed="30"><img src="" alt=""></div>
+      <div class="pf-float" style="left:87%;top:150px" data-speed="-60"><img src="" alt=""></div>
+      <div class="pf-float" style="left:70%;top:280px" data-speed="50"><img src="" alt=""></div>
+      <div class="pf-float" style="left:84%;top:420px" data-speed="-25"><img src="" alt=""></div>
       <a href="portfolio.html" class="pf-polaroid" id="pfPolaroid" aria-label="See the photo portfolio">
         <img class="pf-photo" id="pfPhoto" src="" alt="" loading="lazy">
         <img class="pf-frame" src="image/instax-frame.png" alt="">
@@ -1512,6 +1528,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   function parallax() {
     var scrib = sec.querySelector('.pf-scribble');
     var pol = document.getElementById('pfPolaroid');
+    var floats = Array.prototype.slice.call(sec.querySelectorAll('.pf-float'));
     if (!scrib || !pol || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var ticking = false;
     function update() {
@@ -1521,6 +1538,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       p = Math.max(-1, Math.min(1, p));
       scrib.style.transform = 'translate(-50%, calc(-50% + ' + (-p * 90).toFixed(1) + 'px))';
       pol.style.transform = 'translateY(' + (p * 220).toFixed(1) + 'px)';
+      floats.forEach(function (f) { f.style.transform = 'translateY(' + (p * f.dataset.speed).toFixed(1) + 'px)'; });
     }
     addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     addEventListener('resize', update);
