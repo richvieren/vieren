@@ -3,7 +3,8 @@
 The iPhone shortcut "Add to diary" uploads into inbox/:
   <stamp>-<n>__<YYYY-MM-DD>.jpg   one per photo (metadata already stripped on the phone,
                                   the date taken is carried in the name)
-  <stamp>.json                    {"tags": "a,b", "eden": "yes"|"no", "caption": "..."}
+  <stamp>.json                    {"tags": "a,b", "eden": "yes"|"no", "caption": "...",
+                                   "platforms": "threads,instagram-story,..."}
 
 For every <stamp>.json this script:
   1. resizes each photo to 2048px long edge, saves it to image/diary/<date>/<stamp>-<n>.jpg
@@ -26,6 +27,8 @@ ROOT = Path(__file__).resolve().parents[2]
 INBOX = ROOT / "inbox"
 DIARY_JSON = ROOT / "diary.json"
 TAGS = {"bts", "wolf-children", "vieren", "off-the-grid", "portfolio"}
+# The names the shortcut's "Which socials?" list sends; eden_post.py maps them to Eden
+PLATFORMS = {"instagram-story", "instagram", "threads", "linkedin", "twitter", "substack", "facebook"}
 LONG_EDGE = 2048
 THUMB_WIDTH = 400
 PHOTO_RE = re.compile(r"^(?P<stamp>.+)-(?P<n>\d+)__(?P<date>\d{4}-\d{2}-\d{2})\.jpe?g$", re.I)
@@ -99,11 +102,17 @@ def main():
 
         eden = str(meta.get("eden", "")).strip().lower() in {"yes", "true", "1"}
         caption = str(meta.get("caption", "")).strip()
-        if eden and not caption:
+        platforms = [x.strip() for x in str(meta.get("platforms", "")).replace("\n", ",").split(",") if x.strip()]
+        bad = [x for x in platforms if x not in PLATFORMS]
+        if eden and bad:
+            sys.exit(f"{meta_path.name}: platforms must be from {sorted(PLATFORMS)}, got {bad}")
+        story_only = platforms == ["instagram-story"]  # Instagram drops the caption on a Story
+        if eden and not caption and not story_only:
             print(f"{stamp}: Eden asked but no caption given, so no Eden post")
         elif eden and jobs_path:
             with open(jobs_path, "a") as f:
-                f.write(json.dumps({"key": f"diary-{stamp}", "caption": caption, "photos": posted}) + "\n")
+                f.write(json.dumps({"key": f"diary-{stamp}", "caption": caption, "photos": posted,
+                                    "platforms": platforms}) + "\n")
 
     if done:
         write_diary(entries)
