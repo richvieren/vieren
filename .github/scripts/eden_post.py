@@ -115,8 +115,15 @@ def main():
             report(eden, job["key"], eden.tool("eden_schedule_post", args), slot)
             used = slot["epoch"]
         if "instagram-story" in picked:
-            # SOP step 9: one Story per photo, Instagram alone, exactly one image, next free slot each
-            for i, m in enumerate(media, 1):
+            # SOP step 9: one Story per photo, Instagram alone, exactly one image, next free slot each.
+            # "stories" = the rendered Story images (image/stories/), same order as photos; older jobs reuse the photos
+            story_media = media
+            if job.get("stories"):
+                story_media = []
+                for path in job["stories"][:6]:
+                    wait_live(SITE + path)
+                    story_media.append(eden.tool("eden_import_scheduling_media", {"url": SITE + path})["asset"])
+            for i, m in enumerate(story_media, 1):
                 sched, slot = free_slot(eden, used)
                 args = {"scheduleId": sched["id"], "platforms": ["instagram"], "text": job["caption"],
                         "media": [m], "scheduledFor": slot["epoch"], "idempotencyKey": f"{job['key']}-story-{i}",

@@ -37,7 +37,7 @@ jobs:
         run: |
           git config user.name "diary-inbox"
           git config user.email "diary-inbox@users.noreply.github.com"
-          git add -A inbox image/diary image/diary-thumbs diary.json
+          git add -A inbox image/diary image/diary-thumbs image/stories diary.json
           if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
           git commit -m "Diary: photos from the phone"
           git pull --rebase origin "${GITHUB_REF_NAME}"
