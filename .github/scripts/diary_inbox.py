@@ -26,7 +26,7 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[2]
 INBOX = ROOT / "inbox"
 DIARY_JSON = ROOT / "diary.json"
-TAGS = {"bts", "wolf-children", "vieren", "off-the-grid", "portfolio"}
+TAGS = {"bts", "wolf-children", "field-notes", "six-pack-sidequest", "portfolio"}
 # The names the shortcut's "Which socials?" list sends; eden_post.py maps them to Eden
 PLATFORMS = {"instagram-story", "instagram", "threads", "linkedin", "twitter", "substack", "facebook"}
 LONG_EDGE = 2048
