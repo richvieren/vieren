@@ -1,5 +1,6 @@
 [
-  { "date": "2026-11-04", "tags": ["vieren"], "photos": ["20261104-154856-1.jpg", {"file": "20261104-160902-1.jpg", "tags": ["wolf-children", "off-the-grid"]}, {"file": "20261104-160902-2.jpg", "tags": ["wolf-children", "off-the-grid"]}] },
+  { "date": "2026-11-04", "tags": ["wolf-children", "off-the-grid"], "photos": ["20261104-160902-1.jpg", "20261104-160902-2.jpg"] },
+  { "date": "2026-11-04", "tags": ["vieren"], "photos": ["20261104-154856-1.jpg"] },
   { "date": "2026-10-25", "tags": ["wolf-children"], "photos": ["RV005825.jpg"] },
   { "date": "2026-10-24", "tags": ["vieren"], "photos": ["RV005806.jpg"] },
   { "date": "2026-10-23", "tags": ["wolf-children"], "photos": ["RV005786.jpg"] },

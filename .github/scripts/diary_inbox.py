@@ -44,13 +44,9 @@ def write_diary(entries):
 
 
 def add_to_diary(entries, date, tags, files):
-    entry = next((e for e in entries if e["date"] == date), None)
-    if entry is None:
-        entries.append({"date": date, "tags": tags, "photos": list(files)})
-        return
-    for f in files:
-        # A day that already has other tags keeps them; the new photo carries its own
-        entry["photos"].append(f if sorted(entry.get("tags", [])) == sorted(tags) else {"file": f, "tags": tags})
+    # One share = one session = one entry, even when the date already has one (2026-11-04).
+    # Insert in front: the sort is stable, so the newest session of a date comes first.
+    entries.insert(0, {"date": date, "tags": tags, "photos": list(files)})
 
 
 def save_photo(src, date, name):
