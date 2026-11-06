@@ -92,16 +92,24 @@ nav {
 /* Photos stack edge to edge on the right; widths vary so the left edges stagger */
 .pf-stream { margin-left: 45vw; display: flex; flex-direction: column; align-items: flex-end; }
 .pf-stream img { display: block; height: auto; width: 50vw; }
-.pf-stream img:nth-child(5n+2) { width: 36vw; }
-.pf-stream img:nth-child(5n+3) { width: 45vw; }
-.pf-stream img:nth-child(5n+4) { width: 41vw; }
-.pf-stream img:nth-child(5n+5) { width: 55vw; }
+/* Width follows the photo's place in its set (w1-w4), so every loop copy has the same heights */
+.pf-stream img.w1 { width: 36vw; }
+.pf-stream img.w2 { width: 45vw; }
+.pf-stream img.w3 { width: 41vw; }
+.pf-stream img.w4 { width: 55vw; }
+
+/* Desktop: the page stays still and the photo column loops without end, like the reference */
+@media (min-width: 701px) {
+  html, body { height: 100%; overflow: hidden; }
+  .pf-stream { position: fixed; top: 0; right: 0; width: 55vw; margin-left: 0; will-change: transform; }
+}
 
 @media (max-width: 700px) {
   nav { padding: 16px 20px; }
   .pf-intro { position: static; width: auto; padding: 100px 20px 40px; }
   .pf-stream { margin-left: 0; }
   .pf-stream img, .pf-stream img:nth-child(n) { width: 100%; }
+  .pf-stream .pf-clone { display: none; }
 }
 </style>
 </head>
@@ -127,35 +135,88 @@ nav {
 <main class="pf-stream" id="pfStream"></main>
 
 <script>
-// Every diary photo tagged "portfolio", newest first
+// Every diary photo tagged "portfolio", newest first, then the older work listed in portfolio.json (image/portfolio/)
+var desktop = matchMedia('(min-width: 701px)');
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function() {
   var grid = document.getElementById('pfStream');
-  fetch('diary.json')
-    .then(function(r) { return r.json(); })
-    .then(function(entries) {
-      entries.sort(function(a, b) { return b.date.localeCompare(a.date); });
-      entries.forEach(function(e) {
-        var entryTagged = (e.tags || []).indexOf('portfolio') !== -1;
-        (e.photos || []).forEach(function(p) {
-          var file = typeof p === 'object' ? p.file : p;
-          var tagged = entryTagged || (typeof p === 'object' && (p.tags || []).indexOf('portfolio') !== -1);
-          if (!tagged) return;
-          var img = document.createElement('img');
-          img.src = 'image/diary/' + e.date + '/' + file;
-          img.alt = '';
-          img.loading = 'lazy';
-          grid.appendChild(img);
-        });
+  var srcs = [];
+  Promise.all([
+    fetch('diary.json').then(function(r) { return r.json(); }),
+    fetch('portfolio.json').then(function(r) { return r.json(); }).catch(function() { return []; })
+  ]).then(function(res) {
+    var entries = res[0];
+    entries.sort(function(a, b) { return b.date.localeCompare(a.date); });
+    entries.forEach(function(e) {
+      var entryTagged = (e.tags || []).indexOf('portfolio') !== -1;
+      (e.photos || []).forEach(function(p) {
+        var file = typeof p === 'object' ? p.file : p;
+        var tagged = entryTagged || (typeof p === 'object' && (p.tags || []).indexOf('portfolio') !== -1);
+        if (tagged) srcs.push('image/diary/' + e.date + '/' + file);
       });
     });
+    res[1].forEach(function(file) { srcs.push('image/portfolio/' + file); });
+    // Three copies: the loop always has photos above and below the screen. Copies 2 and 3 hide on phones
+    for (var copy = 0; copy < 3; copy++) {
+      srcs.forEach(function(src, i) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        img.className = 'w' + (i % 5);
+        if (copy) { img.classList.add('pf-clone'); img.setAttribute('aria-hidden', 'true'); }
+        else if (!desktop.matches) img.loading = 'lazy';
+        grid.appendChild(img);
+      });
+    }
+    loop(grid, srcs.length);
+  });
 })();
+
+// Wheel, keys and touch move the column; it eases toward the target and wraps after one full set of photos
+function loop(grid, n) {
+  if (!n) return;
+  var target = 0, current = 0, setH = 0, touchY = null;
+  function measure() { setH = grid.children[n].offsetTop - grid.children[0].offsetTop; }
+  grid.addEventListener('load', measure, true);
+  addEventListener('resize', measure);
+  measure();
+  addEventListener('wheel', function(e) {
+    if (!desktop.matches) return;
+    e.preventDefault();
+    target += e.deltaMode === 1 ? e.deltaY * 40 : e.deltaY;
+  }, { passive: false });
+  addEventListener('keydown', function(e) {
+    if (!desktop.matches) return;
+    var step = { ArrowDown: 120, ArrowUp: -120, PageDown: innerHeight * .9, PageUp: -innerHeight * .9, ' ': innerHeight * .9 }[e.key];
+    if (step) { e.preventDefault(); target += step; }
+  });
+  addEventListener('touchstart', function(e) { touchY = e.touches[0].clientY; }, { passive: true });
+  addEventListener('touchmove', function(e) {
+    if (!desktop.matches || touchY === null) return;
+    e.preventDefault();
+    target += (touchY - e.touches[0].clientY) * 1.5;
+    touchY = e.touches[0].clientY;
+  }, { passive: false });
+  function raf() {
+    if (desktop.matches && setH > 0) {
+      current = reduced ? target : current + (target - current) * .08;
+      // Wrap into the middle copy so photos sit above and below the viewport in both directions
+      var y = ((current % setH) + setH) % setH + setH;
+      grid.style.transform = 'translate3d(0,' + (-y).toFixed(2) + 'px,0)';
+    } else {
+      grid.style.transform = '';
+    }
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
-// Eased wheel scroll like the reference (Lenis); off when the visitor asks for reduced motion
+// Eased page scroll on phones only (desktop runs the photo loop); off when the visitor asks for reduced motion
 (function() {
-  if (!window.Lenis || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.Lenis || reduced || desktop.matches) return;
   var lenis = new Lenis();
   function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
