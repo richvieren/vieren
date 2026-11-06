@@ -80,6 +80,8 @@ nav {
   font-size: 6.2vw; line-height: .88;
   text-transform: uppercase; letter-spacing: .01em;
 }
+/* The second-row P uses letter version B, so it differs from the P in "Photo" */
+.pf-title .poy-b { font-feature-settings: "ss02" 1; }
 .pf-tagline {
   font-family: 'Instrument Serif', serif; font-style: italic;
   font-size: clamp(16px, 1.3vw, 19px); line-height: 1.4;
@@ -127,7 +129,7 @@ nav {
 </nav>
 
 <header class="pf-intro">
-  <h1 class="pf-title">Photo<br>Portfolio.</h1>
+  <h1 class="pf-title">Photo<br><span class="poy-b">P</span>ortfolio.</h1>
   <p class="pf-tagline">A selection of my best photos. I will be in Cape Town over the next few months and I'm opening a few slots per month if you want to shoot!</p>
   <a class="pf-contact" href="mailto:richard@vieren.studio">richard@vieren.studio</a>
 </header>
