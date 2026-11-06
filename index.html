@@ -1025,6 +1025,10 @@ footer {
 }
 footer .fl { font-size: 13px; color: var(--t4); }
 footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); }
+/* Page links in the footer; "footer nav" resets the fixed top-nav rules */
+footer nav.fpages { position: static; padding: 0; z-index: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
+footer .fpages a { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); transition: color .3s; }
+footer .fpages a:hover { color: var(--t1); }
 
 /* ══ VIDEO OVERLAY ══ */
 .vid-wrap { position: relative; width: 100%; height: 100%; }
@@ -1416,93 +1420,6 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   </div>
 </section>
 
-<!-- ══ ARTICLES ══ -->
-<style>
-.arts-section { background: var(--bg); padding: 100px 40px; display: none; }
-.arts-inner { max-width: 1400px; margin: 0 auto; }   /* same left edge as Photo Portfolio / Short Form / Film titles */
-.arts-top {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  gap: 24px; margin-bottom: 56px; flex-wrap: wrap;
-}
-.arts-title {
-  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none;
-  font-size: clamp(36px, 6vw, 72px); text-transform: uppercase;
-  letter-spacing: .02em; color: var(--t1); line-height: 1;
-}
-.arts-all {
-  font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--t3);
-  text-decoration: none; padding-bottom: 6px; transition: color .25s;
-}
-.arts-all:hover { color: var(--t1); }
-/* Articles sits on the dark background, so the link is cream */
-.arts-section .arts-all { color: rgba(237,225,211,.62); }
-.arts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-/* Degrade cleanly below three posts instead of leaving dead columns.
-   Desktop only — these outrank the mobile collapse rule on specificity. */
-@media (min-width: 901px) {
-  .arts-grid[data-count="1"] { grid-template-columns: minmax(0, 560px); }
-  .arts-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; }
-}
-.art-card {
-  display: flex; flex-direction: column; justify-content: space-between;
-  text-decoration: none; color: inherit; min-height: 200px;
-  background: #fff; border: 1px solid rgba(33,33,33,.16); padding: 32px;
-  transition: border-color .25s, background .25s;
-}
-.art-card:hover { border-color: rgba(33,33,33,.42); }
-.art-card h3 {
-  font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.02em;
-  font-size: clamp(21px, 2vw, 26px); line-height: 1.22;
-  color: #212121; margin: 0 0 24px;
-}
-.art-card .am {
-  font-family: 'IBM Plex Mono', monospace; font-weight: 400;
-  font-size: 12px; letter-spacing: 0; color: rgba(33,33,33,.5);
-  white-space: pre;   /* keep the gap between 'min read' and the date */
-}
-@media (max-width: 900px) { .arts-grid { grid-template-columns: 1fr; gap: 32px; } }
-@media (max-width: 600px) { .arts-section { padding: 70px 20px; } }
-</style>
-<section class="arts-section" id="artsSection">
-  <div class="arts-inner">
-    <div class="arts-top">
-      <span class="arts-title">Articles.</span>
-      <a href="/articles/" class="arts-all">All articles →</a>
-    </div>
-    <div class="arts-grid" id="artsGrid"></div>
-  </div>
-</section>
-<script>
-(function () {
-  var grid = document.getElementById('artsGrid');
-  var sec = document.getElementById('artsSection');
-  if (!grid || !sec) return;
-  fetch('/articles/articles.json')
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (data) {
-      var posts = (data && data.posts) || [];
-      if (!posts.length) return;            // never show an empty section
-      posts.slice(0, 3).forEach(function (post) {
-        var a = document.createElement('a');
-        a.className = 'art-card';
-        a.href = post.url;
-        var h = document.createElement('h3');
-        h.textContent = post.title;
-        var meta = document.createElement('span');
-        meta.className = 'am';
-        meta.textContent = post.readingTime + ' min read   ' + post.dateShort;
-        a.appendChild(h);
-        a.appendChild(meta);
-        grid.appendChild(a);
-      });
-      grid.setAttribute('data-count', String(Math.min(posts.length, 3)));
-      sec.style.display = 'block';
-    })
-    .catch(function () { /* leave the section hidden */ });
-})();
-</script>
-
 <!-- ══ PHOTO PORTFOLIO ══ -->
 <style>
 .pf-section { background: #ede1d3; padding: 100px 40px 120px; display: none; }
@@ -1890,6 +1807,13 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <footer>
   <span class="fl">Vieren &copy; 2026</span>
+  <nav class="fpages" aria-label="Pages">
+    <a href="portfolio.html">Portfolio</a>
+    <a href="diary.html">Photo Diary</a>
+    <a href="shortform.html">Short Form</a>
+    <a href="/articles/">Articles</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
   <span class="fr">Belgium &middot; South Africa</span>
 </footer>
 
