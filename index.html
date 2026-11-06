@@ -69,7 +69,7 @@
   --t2: #EDE1D3;
   --t3: #a69c90;
   --t4: #6e675f;
-  --ac: #EE2324;
+  --ac: #AA1F23;
   --sg: #aa1f23;
 }
 
@@ -637,7 +637,7 @@ nav {
   overflow: hidden;
   transition: max-height 1.4s cubic-bezier(.25,.1,.25,1), padding 1.4s cubic-bezier(.25,.1,.25,1);
   padding: 0 40px;
-  background: var(--ac);
+  background: #EDE1D3;
 }
 .timeline-section .timeline-line {
   max-width: 900px;
@@ -966,7 +966,7 @@ nav {
 
 /* ══ CASE STUDIES ══ */
 .cases-section {
-  background: var(--ac); padding: 100px 40px;
+  background: #EDE1D3; padding: 100px 40px;
 }
 .cases-header {
   max-width: 1200px; margin: 0 auto 60px;
@@ -1038,11 +1038,11 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .vid-overlay:hover { background: rgba(33,33,33,.4); }
 .vid-overlay .play-circle {
   width: 72px; height: 72px; border-radius: 50%;
-  border: 2px solid rgba(238,35,36,.5); background: rgba(238,35,36,.12);
+  border: 2px solid rgba(170,31,35,.5); background: rgba(170,31,35,.12);
   display: flex; align-items: center; justify-content: center;
   transition: all .3s;
 }
-.vid-overlay:hover .play-circle { border-color: var(--ac); background: rgba(238,35,36,.2); }
+.vid-overlay:hover .play-circle { border-color: var(--ac); background: rgba(170,31,35,.2); }
 .vid-overlay .play-circle svg { margin-left: 3px; }
 .vid-overlay.hidden { display: none; }
 
@@ -1418,7 +1418,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ ARTICLES ══ -->
 <style>
-.arts-section { background: var(--ac); padding: 100px 40px; display: none; }
+.arts-section { background: var(--bg); padding: 100px 40px; display: none; }
 .arts-inner { max-width: 1400px; margin: 0 auto; }   /* same left edge as Photo Portfolio / Short Form / Film titles */
 .arts-top {
   display: flex; justify-content: space-between; align-items: flex-end;
@@ -1427,16 +1427,16 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .arts-title {
   font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none;
   font-size: clamp(36px, 6vw, 72px); text-transform: uppercase;
-  letter-spacing: .02em; color: #212121; line-height: 1;
+  letter-spacing: .02em; color: var(--t1); line-height: 1;
 }
 .arts-all {
   font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
   letter-spacing: .18em; text-transform: uppercase; color: var(--t3);
   text-decoration: none; padding-bottom: 6px; transition: color .25s;
 }
-.arts-all:hover { color: #212121; }
-/* dark-on-light: #212121 is the site convention for cream sections */
-.arts-section .arts-all { color: rgba(33,33,33,.62); }
+.arts-all:hover { color: var(--t1); }
+/* Articles sits on the dark background, so the link is cream */
+.arts-section .arts-all { color: rgba(237,225,211,.62); }
 .arts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 /* Degrade cleanly below three posts instead of leaving dead columns.
    Desktop only — these outrank the mobile collapse rule on specificity. */
@@ -1864,7 +1864,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </section>
 
 <!-- ══ WALL OF LOVE ══ -->
-<section style="padding:120px 40px;background:var(--ac);text-align:center;">
+<section style="padding:120px 40px;background:#EDE1D3;text-align:center;">
   <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(33,33,33,.3);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:#212121;margin-bottom:32px;">I'm Kind Of A Big Deal</span>
   <style>#tweet-wall twitter-widget,#tweet-wall .twitter-tweet-rendered{margin:0!important;}@media(max-width:768px){#tweet-wall{columns:1!important;}}</style>
   <div id="tweet-wall" style="columns:3;column-gap:10px;max-width:1200px;margin:0 auto;">
