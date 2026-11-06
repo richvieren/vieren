@@ -38,6 +38,14 @@
   font-display: swap;
 }
 @font-face {
+  font-family: 'Portrait Of You';
+  src: url('fonts/PortraitOfYou-Regular.woff2') format('woff2'),
+       url('fonts/PortraitOfYou-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Instrument Serif';
   src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype');
   font-weight: 400;
@@ -312,10 +320,10 @@ nav {
   text-transform: uppercase; color: var(--t2); margin-bottom: 32px;
 }
 .what-headline {
-  font-family: 'Dharma Gothic', sans-serif;
+  font-family: 'Portrait Of You', sans-serif; font-synthesis: none;
   font-size: clamp(36px, 6vw, 72px);
   line-height: 1; color: var(--t2); margin-bottom: 28px;
-  text-transform: uppercase; letter-spacing: 0.02em; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.02em; font-weight: 400;
 }
 .what-headline em { font-style: italic; color: var(--ac); }
 .what-body { font-size: 15px; color: var(--t3); line-height: 1.8; margin-bottom: 36px; max-width: 480px; }
@@ -459,10 +467,10 @@ nav {
   margin-bottom: 8px;
 }
 .proj-showcase-header h2 {
-  font-family: 'Dharma Gothic', sans-serif;
+  font-family: 'Portrait Of You', sans-serif; font-synthesis: none;
   font-size: clamp(36px, 6vw, 72px);
   color: var(--t1);
-  font-weight: 800;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1;
@@ -948,7 +956,7 @@ nav {
   max-width: 1200px; margin: 0 auto 60px;
 }
 .cases-header h2 {
-  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none;
   font-size: clamp(36px, 6vw, 72px); line-height: 1;
   text-transform: uppercase; color: #000; margin-bottom: 16px;
 }
@@ -1155,7 +1163,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ TIMELINE ══ -->
 <section class="timeline-section" id="timeline">
-  <h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:.02em;color:#000;text-align:center;margin-bottom:48px;">The Origin Story.</h2>
+  <h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:.02em;color:#000;text-align:center;margin-bottom:48px;">The Origin Story.</h2>
   <div class="timeline-line">
     <!-- 1: left -->
     <div class="timeline-entry">
@@ -1286,7 +1294,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <section class="diary-section" id="diarySection">
   <div class="diary-top">
     <div>
-      <span style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#1c1512;line-height:1;">PHOTO DIARY.</span>
+      <span style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#1c1512;line-height:1;">PHOTO DIARY.</span>
       <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(16px,1.5vw,20px);color:rgba(28,21,18,0.5);line-height:1.4;margin:12px 0 0;max-width:24em;">Field notes, adventures, friends, behind the scenes... updated (almost) daily.</p>
     </div>
     <div class="diary-nav">
@@ -1357,7 +1365,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ ADDRESSING ══ -->
 <section class="addressing">
-  <h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;margin-bottom:12px;">WRITING + YAPPING + SHOOTING.</h2>
+  <h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;margin-bottom:12px;">WRITING + YAPPING + SHOOTING.</h2>
   <p style="font-family:'Instrument Serif',serif;font-size:clamp(16px,2vw,22px);color:var(--t3);font-style:italic;margin-bottom:48px;">Documenting the journey.</p>
   <div class="case-cards">
     <div class="case-card">
@@ -1381,7 +1389,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   gap: 24px; margin-bottom: 56px; flex-wrap: wrap;
 }
 .arts-title {
-  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none;
   font-size: clamp(36px, 6vw, 72px); text-transform: uppercase;
   letter-spacing: .02em; color: #1c1512; line-height: 1;
 }
@@ -1464,7 +1472,9 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .pf-section { background: #eae7df; padding: 100px 40px 120px; display: none; }
 .pf-inner { max-width: 1400px; margin: 0 auto; }
 .pf-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 210px; }   /* room for the scribble, which reaches above the polaroid and drifts 90px with the parallax */
-.pf-title { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(36px,6vw,72px); text-transform: uppercase; letter-spacing: 0.02em; color: #1c1512; line-height: 1; }
+.pf-title { font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(36px,6vw,72px); text-transform: uppercase; letter-spacing: 0.02em; color: #1c1512; line-height: 1; }
+/* The second P uses letter version B, so it differs from the P in PHOTO (same as portfolio.html) */
+.pf-title .poy-b { font-feature-settings: "ss02" 1; }
 .pf-tagline { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(12px,1.1vw,13px); color: rgba(28,21,18,0.5); line-height: 1.4; margin: 12px 0 0; max-width: 30em; }
 .pf-all { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(28,21,18,.55); transition: color .3s; padding-top: 12px; white-space: nowrap; }
 .pf-all:hover { color: #1c1512; }
@@ -1495,7 +1505,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
   <div class="pf-inner">
     <div class="pf-head">
       <div>
-        <h2 class="pf-title">PHOTO PORTFOLIO.</h2>
+        <h2 class="pf-title">PHOTO <span class="poy-b">P</span>ORTFOLIO.</h2>
         <p class="pf-tagline">A selection of my best photos. I will be in Cape Town over the next few months and I'm opening a few slots per month if you want to shoot!</p>
       </div>
       <a href="portfolio.html" class="pf-all">See all</a>
@@ -1565,7 +1575,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 
 <!-- ══ SHORT FORM ══ -->
 <section style="padding:120px 0 40px;">
-  <div class="sf-head"><h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;">SHORT FORM.</h2><a href="shortform.html" class="sf-all">See all</a></div>
+  <div class="sf-head"><h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;">SHORT FORM.</h2><a href="shortform.html" class="sf-all">See all</a></div>
   <div class="sf-carousel" id="sfCarousel">
     <div class="sf-card"><iframe src="https://player.vimeo.com/video/1135111015?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
     <div class="sf-card"><iframe src="https://player.vimeo.com/video/1094996108?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:316%;height:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:none;"></iframe><a href="shortform.html" class="sf-link" aria-label="See all short form"></a></div>
@@ -1624,7 +1634,7 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 <!-- ══ WORK ══ -->
 <section class="work" style="background:#c9c5ba;max-width:100%;padding:100px 40px;">
   <div style="max-width:1400px;margin:0 auto;">
-  <h2 style="font-family:'Dharma Gothic',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#1c1512;line-height:1;margin-bottom:12px;">SELECTED FILM WORK.</h2>
+  <h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#1c1512;line-height:1;margin-bottom:12px;">SELECTED FILM WORK.</h2>
   <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(28,21,18,0.5);line-height:1.7;margin-bottom:48px;">Some personal favorites of the past two decades.</p>
 
   <div class="feat">
