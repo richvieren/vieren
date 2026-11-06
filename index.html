@@ -1277,15 +1277,10 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .word-cycle-a{animation:wordcycle-a 4s infinite;}
 @keyframes wordcycle-a{0%,40%{opacity:1;transform:translateY(0)}45%,90%{opacity:0;transform:translateY(-8px)}95%,100%{opacity:1;transform:translateY(0)}}
 @keyframes wordcycle-b{0%,40%{opacity:0;transform:translateY(8px)}45%,90%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(8px)}}
-/* Cream-to-green gradient with grain, after Richard's reference. Phones run it top to bottom so the text sits on the dark part */
-.manifesto-section{position:relative;overflow:hidden;background:linear-gradient(90deg,#9aa07e 0%,#758060 15%,#546749 30%,#344d30 45%,#213a1d 60%,#183217 75%,#163015 100%);}
-.manifesto-section::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.6 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-.manifesto-row{position:relative;z-index:1;display:flex;align-items:flex-start;gap:clamp(24px,4vw,60px);max-width:1200px;margin:0 auto;}
+.manifesto-row{display:flex;align-items:flex-start;gap:clamp(24px,4vw,60px);max-width:1200px;margin:0 auto;}
 .manifesto-num{font-family:'Archivo',sans-serif;font-size:clamp(80px,12vw,160px);font-weight:900;color:rgba(0,0,0,.25);line-height:.85;flex-shrink:0;letter-spacing:-.04em;white-space:nowrap;min-width:fit-content;}
 .manifesto-text{flex:1;padding-top:clamp(8px,1.5vw,24px);}
-@media(max-width:600px){.manifesto-row{flex-direction:column;gap:12px;}.manifesto-num{font-size:64px;}
-  .manifesto-section{background:linear-gradient(180deg,#9aa07e 0%,#758060 15%,#546749 30%,#344d30 45%,#213a1d 60%,#183217 75%,#163015 100%);}}
+@media(max-width:600px){.manifesto-row{flex-direction:column;gap:12px;}.manifesto-num{font-size:64px;}}
 /* Desktop: the [1] block only as tall as its glyph, so no empty square under the text */
 @media(min-width:601px){.manifesto-num{aspect-ratio:auto !important;}.manifesto-section{padding-bottom:48px !important;}}
 </style>
@@ -1315,16 +1310,16 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 </section>
 
 <!-- ══ MANIFESTO ══ -->
-<section class="manifesto-section" style="padding:100px 40px;">
+<section class="manifesto-section" style="background:#c1bab2;padding:100px 40px;">
   <div class="manifesto-row">
     <div class="manifesto-num" style="aspect-ratio:1/1;width:100%;max-width:500px;border-radius:4px;">[1]</div>
     <div class="manifesto-text">
-      <p style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:var(--t1);font-weight:700;">
+      <p style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:#000;font-weight:700;">
         Vieren is a one man hybrid production studio, fusing high-end commercial work with a drive to explore the
         <span class="word-cycle"><span class="word-cycle-a">unconventional</span><span class="word-cycle-b">unhinged</span></span>
         through personal passion projects.
       </p>
-      <p style="font-family:'Archivo',sans-serif;font-size:clamp(15px,1.8vw,20px);line-height:1.35;color:rgba(238,232,216,.75);margin-top:28px;font-weight:500;">
+      <p style="font-family:'Archivo',sans-serif;font-size:clamp(15px,1.8vw,20px);line-height:1.35;color:rgba(0,0,0,.65);margin-top:28px;font-weight:500;">
         My projects are inaccessible to almost everyone, because it requires a rare overlap of deep technical skill and world-class creative craft.
       </p>
     </div>
