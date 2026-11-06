@@ -173,30 +173,24 @@ var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function loop(grid, n) {
   if (!n) return;
   var imgs = Array.prototype.slice.call(grid.children);
-  var target = 0, current = 0, touchY = null;
-  var MIN = .72, STEP = 2, RANGE = 4000, H = 0, L = 0, hs = [], table = [];
+  var target = 0, current = 0, last = 0, touchY = null;
+  var MIN = .72, H = 0, hs = [];
+  var anchor = 0, anchorTop = 0;  // the photo nearest the middle and its top edge on screen; the rest stack from it
   function scaleAt(y) {
     var d = Math.min(1, Math.abs(y - H / 2) / (H / 2));
     return MIN + (1 - MIN) * (1 + Math.cos(Math.PI * d)) / 2;
   }
-  // table[i]: screen distance from the middle after i*STEP px of column, each step shrunk by the scale where it lands
   function measure() {
     H = innerHeight;
     var W = grid.clientWidth;
-    L = 0;
     hs = imgs.slice(0, n).map(function(img) {
-      var h = img.naturalWidth ? W * img.naturalHeight / img.naturalWidth : W * 1.25;
-      L += h;
-      return h;
+      return img.naturalWidth ? W * img.naturalHeight / img.naturalWidth : W * 1.25;
     });
-    table = [0];
-    for (var i = 1, y = 0; i <= RANGE / STEP; i++) { y += scaleAt(H / 2 + y) * STEP; table.push(y); }
   }
-  // Column distance from the middle of the screen -> screen y (the curve is the same above and below)
-  function toScreen(dv) {
-    var a = Math.abs(dv), f = a / STEP, k = Math.floor(f), y;
-    y = k >= table.length - 1 ? table[table.length - 1] + (a - RANGE) * MIN : table[k] + (table[k + 1] - table[k]) * (f - k);
-    return H / 2 + (dv < 0 ? -y : y);
+  // Scale of a photo whose top (down) or bottom (up) edge is fixed: it must match the curve at its own centre
+  function solve(edge, h, down) {
+    for (var k = 0, s = 1; k < 8; k++) s = scaleAt(edge + (down ? 1 : -1) * s * h / 2);
+    return s;
   }
   grid.addEventListener('load', measure, true);
   addEventListener('resize', measure);
@@ -219,19 +213,41 @@ function loop(grid, n) {
     touchY = e.touches[0].clientY;
   }, { passive: false });
   function raf() {
-    if (desktop.matches && L > 0) {
+    if (desktop.matches && H > 0) {
       current = reduced ? target : current + (target - current) * .08;
-      // The three copies lie end to end around the wrapped position, so photos fill the screen in both directions
-      var mid = ((current % L) + L) % L + H / 2;
-      for (var c = 0; c < 3; c++) {
-        var b = (c - 1) * L;
-        for (var i = 0; i < n; i++) {
-          var img = imgs[c * n + i], top = toScreen(b - mid), bot = toScreen(b + hs[i] - mid);
-          img.style.visibility = bot < -50 || top > H + 50 ? 'hidden' : '';
-          img.style.transform = 'translate3d(0,' + top.toFixed(2) + 'px,0) scale(' + ((bot - top) / hs[i]).toFixed(4) + ')';
-          b += hs[i];
-        }
+      anchorTop -= current - last;
+      last = current;
+      // Stack down and up from the anchor. Index j counts photos from the anchor; the copy number keeps repeats apart
+      var placed = [], j, top, bot, s, idx;
+      function put(j, top, s) {
+        var abs = anchor + j, copy = 1 + Math.floor(abs / n), i = ((abs % n) + n) % n;
+        if (copy < 0 || copy > 2) return;
+        placed.push({ el: imgs[copy * n + i], j: j, top: top, s: s, h: hs[i] * s });
       }
+      s = solve(anchorTop, hs[anchor], true);
+      put(0, anchorTop, s);
+      for (j = 1, top = anchorTop + hs[anchor] * s; top < H + 50 && j < 3 * n; j++) {
+        idx = (((anchor + j) % n) + n) % n;
+        s = solve(top, hs[idx], true);
+        put(j, top, s);
+        top += hs[idx] * s;
+      }
+      for (j = -1, bot = anchorTop; bot > -50 && j > -3 * n; j--) {
+        idx = (((anchor + j) % n) + n) % n;
+        s = solve(bot, hs[idx], false);
+        put(j, bot - hs[idx] * s, s);
+        bot -= hs[idx] * s;
+      }
+      imgs.forEach(function(img) { img.style.visibility = 'hidden'; });
+      var best = placed[0];
+      placed.forEach(function(p) {
+        p.el.style.visibility = '';
+        p.el.style.transform = 'translate3d(0,' + p.top.toFixed(2) + 'px,0) scale(' + p.s.toFixed(4) + ')';
+        if (Math.abs(p.top + p.h / 2 - H / 2) < Math.abs(best.top + best.h / 2 - H / 2)) best = p;
+      });
+      // Hand the anchor to the photo now nearest the middle; the stack is the same, so nothing jumps
+      anchor = (((anchor + best.j) % n) + n) % n;
+      anchorTop = best.top;
     } else {
       imgs.forEach(function(img) { img.style.transform = ''; img.style.visibility = ''; });
     }
