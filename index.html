@@ -1479,8 +1479,11 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
 .pf-all { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(28,21,18,.55); transition: color .3s; padding-top: 12px; white-space: nowrap; }
 .pf-all:hover { color: #1c1512; }
 .pf-body { position: relative; display: grid; place-items: center; }
-/* Handwritten "check out my best photos" sits behind the centred polaroid */
-.pf-scribble { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1250px, 100%); height: auto; pointer-events: none; will-change: transform; }
+/* "Check out my favorite photos" in Portrait Of You sits behind the centred polaroid.
+   "MY FAVORITE" is about 7.06em wide, so it is 1250px wide at 177px, like the old PNG, and shrinks on smaller screens */
+.pf-scribble { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: max-content; pointer-events: none; will-change: transform;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: min(177px, calc((100vw - 80px) / 7.2));
+  line-height: .95; letter-spacing: .02em; text-transform: uppercase; text-align: center; color: #000; white-space: nowrap; }
 /* Instax frame PNG (439x665) over the photo; the photo fills the frame's transparent window */
 .pf-polaroid { position: relative; z-index: 2; display: block; will-change: transform; width: 100%; max-width: 330px; aspect-ratio: 439 / 665; }
 .pf-polaroid img.pf-photo { position: absolute; left: 8.9%; top: 10.8%; width: 82.7%; height: 69.5%;   /* ~2px past the window so the scribble cannot show through its soft edge */
@@ -1511,12 +1514,12 @@ footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; co
       <a href="portfolio.html" class="pf-all">See all</a>
     </div>
     <div class="pf-body">
-      <img class="pf-scribble" src="image/check-out-my-favorite-photos.png" alt="Check out my favorite photos" loading="lazy">
-      <div class="pf-float" style="left:5%;top:-120px" data-speed="70"><img src="" alt=""></div>
-      <div class="pf-float" style="left:18%;top:340px" data-speed="-45"><img src="" alt=""></div>
-      <div class="pf-float" style="left:77%;top:-60px" data-speed="35"><img src="" alt=""></div>
-      <div class="pf-float" style="left:89%;top:250px" data-speed="-85"><img src="" alt=""></div>
-      <div class="pf-float" style="left:63%;top:470px" data-speed="55"><img src="" alt=""></div>
+      <div class="pf-scribble">Check out<br>my favorite<br>photos</div>
+      <div class="pf-float" style="left:5%;top:-120px" data-speed="70"><img src="image/portfolio/thumb/aoki.jpg" alt="" loading="lazy"></div>
+      <div class="pf-float" style="left:18%;top:340px" data-speed="-45"><img src="image/portfolio/thumb/brdns.jpg" alt="" loading="lazy"></div>
+      <div class="pf-float" style="left:77%;top:-60px" data-speed="35"><img src="image/portfolio/thumb/h20.jpg" alt="" loading="lazy"></div>
+      <div class="pf-float" style="left:89%;top:250px" data-speed="-85"><img src="image/portfolio/thumb/orial.jpg" alt="" loading="lazy"></div>
+      <div class="pf-float" style="left:63%;top:470px" data-speed="55"><img src="image/portfolio/thumb/reiziger.jpg" alt="" loading="lazy"></div>
       <a href="portfolio.html" class="pf-polaroid" id="pfPolaroid" aria-label="See the photo portfolio">
         <img class="pf-photo" id="pfPhoto" src="" alt="" loading="lazy">
         <img class="pf-frame" src="image/instax-frame.png" alt="">
