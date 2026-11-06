@@ -23,9 +23,11 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Dharma Gothic';
-  src: url('fonts/dharma-gothic-heavy.ttf') format('truetype');
-  font-weight: 800;
+  font-family: 'Portrait Of You';
+  src: url('fonts/PortraitOfYou-Regular.woff2') format('woff2'),
+       url('fonts/PortraitOfYou-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -73,8 +75,9 @@ nav {
   display: flex; flex-direction: column; justify-content: center;
 }
 .pf-title {
-  font-family: 'Dharma Gothic', sans-serif; font-weight: 800;
-  font-size: clamp(72px, 9vw, 140px); line-height: .88;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none;
+  /* "PORTFOLIO." is about 5.4em wide in this font; 6.2vw keeps it inside the 40vw column */
+  font-size: 6.2vw; line-height: .88;
   text-transform: uppercase; letter-spacing: .01em;
 }
 .pf-tagline {
@@ -103,6 +106,7 @@ nav {
 @media (max-width: 700px) {
   nav { padding: 16px 20px; }
   .pf-intro { position: static; width: auto; padding: 100px 20px 40px; }
+  .pf-title { font-size: 15.5vw; }
   .pf-stream { margin-left: 0; }
   .pf-stream img, .pf-stream img:nth-child(n) { width: 100%; }
   .pf-stream .pf-clone { display: none; }
