@@ -89,19 +89,15 @@ nav {
 }
 .pf-contact:hover { opacity: .5; }
 
-/* Photos stack edge to edge on the right; widths vary so the left edges stagger */
+/* Photos stack edge to edge on the right; on desktop the scale makes the left edges stagger */
 .pf-stream { margin-left: 45vw; display: flex; flex-direction: column; align-items: flex-end; }
 .pf-stream img { display: block; height: auto; width: 50vw; }
-/* Width follows the photo's place in its set (w1-w4), so every loop copy has the same heights */
-.pf-stream img.w1 { width: 36vw; }
-.pf-stream img.w2 { width: 45vw; }
-.pf-stream img.w3 { width: 41vw; }
-.pf-stream img.w4 { width: 55vw; }
-
-/* Desktop: the page stays still and the photo column loops without end, like the reference */
+/* Desktop: the page stays still and the photo column loops without end, like the reference.
+   Each photo is full size in the middle of the screen and shrinks to 72% at the edges (set in the script) */
 @media (min-width: 701px) {
   html, body { height: 100%; overflow: hidden; }
-  .pf-stream { position: fixed; top: 0; right: 0; width: 55vw; margin-left: 0; will-change: transform; }
+  .pf-stream { position: fixed; top: 0; right: 0; width: 50vw; height: 100vh; margin-left: 0; }
+  .pf-stream img { position: absolute; top: 0; right: 0; width: 100%; transform-origin: 100% 0; will-change: transform; }
 }
 
 @media (max-width: 700px) {
@@ -158,12 +154,11 @@ var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     res[1].forEach(function(file) { srcs.push('image/portfolio/' + file); });
     // Three copies: the loop always has photos above and below the screen. Copies 2 and 3 hide on phones
     for (var copy = 0; copy < 3; copy++) {
-      srcs.forEach(function(src, i) {
+      srcs.forEach(function(src) {
         var img = document.createElement('img');
         img.src = src;
         img.alt = '';
-        img.className = 'w' + (i % 5);
-        if (copy) { img.classList.add('pf-clone'); img.setAttribute('aria-hidden', 'true'); }
+        if (copy) { img.className = 'pf-clone'; img.setAttribute('aria-hidden', 'true'); }
         else if (!desktop.matches) img.loading = 'lazy';
         grid.appendChild(img);
       });
@@ -172,11 +167,37 @@ var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
-// Wheel, keys and touch move the column; it eases toward the target and wraps after one full set of photos
+// Wheel, keys and touch move the column; it eases toward the target and wraps after one full set of photos.
+// Like the reference, a photo's scale follows where its centre sits on screen: 1 in the middle, 0.72 at the edges,
+// and the photos stay stacked edge to edge
 function loop(grid, n) {
   if (!n) return;
-  var target = 0, current = 0, setH = 0, touchY = null;
-  function measure() { setH = grid.children[n].offsetTop - grid.children[0].offsetTop; }
+  var imgs = Array.prototype.slice.call(grid.children);
+  var target = 0, current = 0, touchY = null;
+  var MIN = .72, STEP = 2, RANGE = 4000, H = 0, L = 0, hs = [], table = [];
+  function scaleAt(y) {
+    var d = Math.min(1, Math.abs(y - H / 2) / (H / 2));
+    return MIN + (1 - MIN) * (1 + Math.cos(Math.PI * d)) / 2;
+  }
+  // table[i]: screen distance from the middle after i*STEP px of column, each step shrunk by the scale where it lands
+  function measure() {
+    H = innerHeight;
+    var W = grid.clientWidth;
+    L = 0;
+    hs = imgs.slice(0, n).map(function(img) {
+      var h = img.naturalWidth ? W * img.naturalHeight / img.naturalWidth : W * 1.25;
+      L += h;
+      return h;
+    });
+    table = [0];
+    for (var i = 1, y = 0; i <= RANGE / STEP; i++) { y += scaleAt(H / 2 + y) * STEP; table.push(y); }
+  }
+  // Column distance from the middle of the screen -> screen y (the curve is the same above and below)
+  function toScreen(dv) {
+    var a = Math.abs(dv), f = a / STEP, k = Math.floor(f), y;
+    y = k >= table.length - 1 ? table[table.length - 1] + (a - RANGE) * MIN : table[k] + (table[k + 1] - table[k]) * (f - k);
+    return H / 2 + (dv < 0 ? -y : y);
+  }
   grid.addEventListener('load', measure, true);
   addEventListener('resize', measure);
   measure();
@@ -198,13 +219,21 @@ function loop(grid, n) {
     touchY = e.touches[0].clientY;
   }, { passive: false });
   function raf() {
-    if (desktop.matches && setH > 0) {
+    if (desktop.matches && L > 0) {
       current = reduced ? target : current + (target - current) * .08;
-      // Wrap into the middle copy so photos sit above and below the viewport in both directions
-      var y = ((current % setH) + setH) % setH + setH;
-      grid.style.transform = 'translate3d(0,' + (-y).toFixed(2) + 'px,0)';
+      // The three copies lie end to end around the wrapped position, so photos fill the screen in both directions
+      var mid = ((current % L) + L) % L + H / 2;
+      for (var c = 0; c < 3; c++) {
+        var b = (c - 1) * L;
+        for (var i = 0; i < n; i++) {
+          var img = imgs[c * n + i], top = toScreen(b - mid), bot = toScreen(b + hs[i] - mid);
+          img.style.visibility = bot < -50 || top > H + 50 ? 'hidden' : '';
+          img.style.transform = 'translate3d(0,' + top.toFixed(2) + 'px,0) scale(' + ((bot - top) / hs[i]).toFixed(4) + ')';
+          b += hs[i];
+        }
+      }
     } else {
-      grid.style.transform = '';
+      imgs.forEach(function(img) { img.style.transform = ''; img.style.visibility = ''; });
     }
     requestAnimationFrame(raf);
   }
