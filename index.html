@@ -282,12 +282,11 @@ nav {
   min-height: 80vh;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
+/* Labels: plain text in Portrait Of You, no pill shape */
 .who .pill {
-  display: inline-block; padding: 8px 20px;
-  border: 1px solid rgba(255,255,255,.2); border-radius: 100px;
-  font-size: 11px; font-weight: 400; letter-spacing: .18em;
+  display: inline-block; padding: 0; border: 0; border-radius: 0;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: 16px; letter-spacing: .04em;
   text-transform: uppercase; color: var(--t2); margin-bottom: 40px;
-  font-family: 'Portrait Of You', sans-serif; font-synthesis: none; font-size: 16px; letter-spacing: .04em;   /* hand font needs more size than the 11px label */
 }
 .who-text {
   font-family: 'Jost', sans-serif;
@@ -322,9 +321,8 @@ nav {
 .what .proj-item, .what .proj-item:first-child { border-color: rgba(33,33,33,.14); }
 .what-left {}
 .what-left .pill {
-  display: inline-block; padding: 8px 20px;
-  border: 1px solid rgba(33,33,33,.25); border-radius: 100px;
-  font-size: 11px; font-weight: 400; letter-spacing: .18em;
+  display: inline-block; padding: 0; border: 0; border-radius: 0;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: 16px; letter-spacing: .04em;
   text-transform: uppercase; color: var(--t2); margin-bottom: 32px;
 }
 .what-headline {
@@ -361,7 +359,6 @@ nav {
   padding-top: 12px;
 }
 .proj-name { display: flex; align-items: baseline; }
-.proj-num { font-family: 'Montserrat', sans-serif; font-size: 6px; font-weight: 700; color: var(--t4); margin-right: 4px; position: relative; top: -.6em; }
 .proj-title { font-size: 13px; color: var(--t3); font-weight: 300; text-transform: uppercase; letter-spacing: 0.04em; transition: color .3s; }
 .proj-caption { font-family: 'Podium', sans-serif; font-weight: 900; font-size: 11px; color: var(--t1); letter-spacing: -.02em; text-transform: uppercase; }
 .client-logos { display: flex; gap: 40px; align-items: center; opacity: .35; }
@@ -1273,7 +1270,13 @@ footer .fpages a:hover { color: var(--t1); }
 .word-cycle-a{animation:wordcycle-a 4s infinite;}
 @keyframes wordcycle-a{0%,40%{opacity:1;transform:translateY(0)}45%,90%{opacity:0;transform:translateY(-8px)}95%,100%{opacity:1;transform:translateY(0)}}
 @keyframes wordcycle-b{0%,40%{opacity:0;transform:translateY(8px)}45%,90%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(8px)}}
-.manifesto-row{max-width:960px;margin:0 auto;}   /* text only, centred block */
+.manifesto-row{max-width:960px;margin:0 auto;position:relative;z-index:1;will-change:transform;}   /* text only, centred block */
+/* Grunge edge, after the Wolf Children site: the Photo Diary's cream comes up over the red module with a torn, sprayed top.
+   image/grunge-edge.png is 1600x120, drawn at full width so it keeps its shape: 7.5vw tall. The red module clips its text,
+   and the text lags at 0.4x scroll speed once the module's bottom passes the bottom of the window, so the edge rides over it */
+.manifesto-section{position:relative;overflow:hidden;padding-bottom:calc(72px + 7.5vw) !important;}
+.manifesto-edge{position:absolute;left:0;right:0;bottom:-1px;height:calc(7.5vw + 1px);z-index:2;background:#EDE1D3;pointer-events:none;
+  -webkit-mask:url(image/grunge-edge.png) top / 100% 7.5vw no-repeat;mask:url(image/grunge-edge.png) top / 100% 7.5vw no-repeat;}
 </style>
 
 <!-- ══ PROJECTS ══ -->
@@ -1283,12 +1286,12 @@ footer .fpages a:hover { color: var(--t1); }
     <h2 class="what-headline">My service<br><em>stack.</em></h2>
     <p class="what-body">Some run under their own brand. Others I do under my own name.</p>
     <div class="proj-list">
-      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-num">01.</span><span class="proj-title">Strategy, Ideation & Distribution</span></span><span class="proj-caption">Vieren</span></div><div class="proj-item-desc">Brand positioning, content strategy, go-to-market, and distribution at scale. From zero to first revenue, then getting it in front of people who care.</div></div>
-      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-num">02.</span><span class="proj-title">AI & Automation Consultancy</span></span><span class="proj-caption">Vieren</span></div><div class="proj-item-desc">Building AI-powered systems that actually run your business. Automations, pipelines, and custom workflows designed to cut the busywork and let you focus on what moves the needle.</div></div>
-      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-num">03.</span><span class="proj-title">Photography</span></span><span class="proj-caption">Van der Vieren</span></div><div class="proj-item-desc">Editorial and commercial photography. Campaigns, portraits, product. 20+ years behind the lens.</div></div>
-      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-num">04.</span><span class="proj-title">Video Production</span></span><span class="proj-caption">Lore.mov</span></div><div class="proj-item-desc">Hero videos, founder content, ad creative, campaign films. Built for funded startups.</div></div>
-      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-num">05.</span><span class="proj-title">Slop Cannon</span></span><span class="proj-caption">VTCN</span></div><div class="proj-item-desc">All the AI video I make when nobody's paying me to behave. How unhinged do you want it? YES.</div></div>
-      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-num">06.</span><span class="proj-title">Bulk Content Production</span></span><span class="proj-caption">Bruteforce</span></div><div class="proj-item-desc">One edit, infinite variations. Bruteforce takes a single piece of content and generates hundreds of unique cuts for A/B testing and cross-platform repurposing. Feed it once, publish everywhere.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">Strategy, Ideation & Distribution</span></span><span class="proj-caption">Vieren</span></div><div class="proj-item-desc">Brand positioning, content strategy, go-to-market, and distribution at scale. From zero to first revenue, then getting it in front of people who care.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">AI & Automation Consultancy</span></span><span class="proj-caption">Vieren</span></div><div class="proj-item-desc">Building AI-powered systems that actually run your business. Automations, pipelines, and custom workflows designed to cut the busywork and let you focus on what moves the needle.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">Photography</span></span><span class="proj-caption">Van der Vieren</span></div><div class="proj-item-desc">Editorial and commercial photography. Campaigns, portraits, product. 20+ years behind the lens.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">Video Production</span></span><span class="proj-caption">Lore.mov</span></div><div class="proj-item-desc">Hero videos, founder content, ad creative, campaign films. Built for funded startups.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">Slop Cannon</span></span><span class="proj-caption">VTCN</span></div><div class="proj-item-desc">All the AI video I make when nobody's paying me to behave. How unhinged do you want it? YES.</div></div>
+      <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">Bulk Content Production</span></span><span class="proj-caption">Bruteforce</span></div><div class="proj-item-desc">One edit, infinite variations. Bruteforce takes a single piece of content and generates hundreds of unique cuts for A/B testing and cross-platform repurposing. Feed it once, publish everywhere.</div></div>
     </div>
   </div>
   <div class="what-right">
@@ -1314,7 +1317,28 @@ footer .fpages a:hover { color: var(--t1); }
       </p>
     </div>
   </div>
+  <div class="manifesto-edge" aria-hidden="true"></div>
 </section>
+<script>
+// Parallax: the manifesto text lags at 0.4x scroll speed once the module's bottom passes the bottom of the window, so the torn cream edge rides over it
+(function () {
+  var sec = document.querySelector('.manifesto-section'), row = sec && sec.querySelector('.manifesto-row');
+  if (!row) return;
+  var still = matchMedia('(prefers-reduced-motion: reduce)'), ticking = false;
+  function frame() {
+    ticking = false;
+    if (still.matches) { row.style.transform = ''; return; }
+    var r = sec.getBoundingClientRect(), h = innerHeight;
+    if (r.bottom < 0 || r.top > h) return;
+    var lag = Math.max(0, h - r.bottom) * 0.4;
+    row.style.transform = lag ? 'translate3d(0,' + lag.toFixed(1) + 'px,0)' : '';
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  frame();
+})();
+</script>
 
 <!-- ══ PHOTO DIARY ══ -->
 <section class="diary-section" id="diarySection">
@@ -1768,7 +1792,7 @@ footer .fpages a:hover { color: var(--t1); }
 
 <!-- ══ WALL OF LOVE ══ -->
 <section style="padding:120px 40px;background:#EDE1D3;text-align:center;">
-  <span class="pill" style="display:inline-block;padding:8px 20px;border:1px solid rgba(33,33,33,.3);border-radius:100px;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:#212121;margin-bottom:32px;">I'm Kind Of A Big Deal</span>
+  <span class="pill" style="display:inline-block;font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:#212121;margin-bottom:32px;">I'm Kind Of A Big Deal</span>
   <style>#tweet-wall twitter-widget,#tweet-wall .twitter-tweet-rendered{margin:0!important;}@media(max-width:768px){#tweet-wall{columns:1!important;}}</style>
   <div id="tweet-wall" style="columns:3;column-gap:10px;max-width:1200px;margin:0 auto;">
     <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/fluxgravitas/status/2059154387692630134"></a></blockquote></div>
