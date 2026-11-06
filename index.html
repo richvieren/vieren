@@ -17,7 +17,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Podium';
@@ -43,19 +43,6 @@
        url('fonts/PortraitOfYou-Regular.woff?v=2.6') format('woff');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('fonts/InstrumentSerif-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
   font-display: swap;
 }
 
@@ -300,6 +287,7 @@ nav {
   border: 1px solid rgba(255,255,255,.2); border-radius: 100px;
   font-size: 11px; font-weight: 400; letter-spacing: .18em;
   text-transform: uppercase; color: var(--t2); margin-bottom: 40px;
+  font-family: 'Portrait Of You', sans-serif; font-synthesis: none; font-size: 16px; letter-spacing: .04em;   /* hand font needs more size than the 11px label */
 }
 .who-text {
   font-family: 'Jost', sans-serif;
@@ -328,10 +316,14 @@ nav {
   display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
   max-width: 1400px; margin: 0 auto;
 }
+/* Cream module: the colour tokens switch to dark inside it; the shadow + clip carry the cream to the full screen width */
+.what { background: #EDE1D3; box-shadow: 0 0 0 100vmax #EDE1D3; clip-path: inset(0 -100vmax);
+  --t1: #212121; --t2: #212121; --t3: rgba(33,33,33,.68); --t4: rgba(33,33,33,.45); --s2: #ded2c4; }
+.what .proj-item, .what .proj-item:first-child { border-color: rgba(33,33,33,.14); }
 .what-left {}
 .what-left .pill {
   display: inline-block; padding: 8px 20px;
-  border: 1px solid rgba(255,255,255,.2); border-radius: 100px;
+  border: 1px solid rgba(33,33,33,.25); border-radius: 100px;
   font-size: 11px; font-weight: 400; letter-spacing: .18em;
   text-transform: uppercase; color: var(--t2); margin-bottom: 32px;
 }
@@ -1193,7 +1185,7 @@ footer .fpages a:hover { color: var(--t1); }
       <img src="clients/natgeo.png" alt="National Geographic">
     </div>
   </div>
-  <div class="who-text" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
+  <div class="who-text" style="font-family:'IBM Plex Mono', monospace;font-weight:400;font-size:clamp(16px,2vw,24px);line-height:1.6;margin-top:24px;">
     Spent over a decade documenting brands, artists, and athletes...<br>now also writing (and shipping) my own stories.
   </div>
   <div class="timeline-trigger" onclick="document.getElementById('timeline').classList.toggle('open');shockwave(event);">
@@ -1281,12 +1273,7 @@ footer .fpages a:hover { color: var(--t1); }
 .word-cycle-a{animation:wordcycle-a 4s infinite;}
 @keyframes wordcycle-a{0%,40%{opacity:1;transform:translateY(0)}45%,90%{opacity:0;transform:translateY(-8px)}95%,100%{opacity:1;transform:translateY(0)}}
 @keyframes wordcycle-b{0%,40%{opacity:0;transform:translateY(8px)}45%,90%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(8px)}}
-.manifesto-row{display:flex;align-items:flex-start;gap:clamp(24px,4vw,60px);max-width:1200px;margin:0 auto;}
-.manifesto-num{font-family:'Archivo',sans-serif;font-size:clamp(80px,12vw,160px);font-weight:900;color:rgba(0,0,0,.25);line-height:.85;flex-shrink:0;letter-spacing:-.04em;white-space:nowrap;min-width:fit-content;}
-.manifesto-text{flex:1;padding-top:clamp(8px,1.5vw,24px);}
-@media(max-width:600px){.manifesto-row{flex-direction:column;gap:12px;}.manifesto-num{font-size:64px;}}
-/* Desktop: the [1] block only as tall as its glyph, so no empty square under the text */
-@media(min-width:601px){.manifesto-num{aspect-ratio:auto !important;}.manifesto-section{padding-bottom:48px !important;}}
+.manifesto-row{max-width:960px;margin:0 auto;}   /* text only, centred block */
 </style>
 
 <!-- ══ PROJECTS ══ -->
@@ -1314,9 +1301,8 @@ footer .fpages a:hover { color: var(--t1); }
 </section>
 
 <!-- ══ MANIFESTO ══ -->
-<section class="manifesto-section" style="background:#aa1f23;padding:100px 40px;">
+<section class="manifesto-section" style="background:#aa1f23;padding:72px 40px;">
   <div class="manifesto-row">
-    <div class="manifesto-num" style="aspect-ratio:1/1;width:100%;max-width:500px;border-radius:4px;">[1]</div>
     <div class="manifesto-text">
       <p style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:var(--t1);font-weight:700;">
         Vieren is a one man hybrid production studio, fusing high-end commercial work with a drive to explore the
@@ -1335,7 +1321,7 @@ footer .fpages a:hover { color: var(--t1); }
   <div class="diary-top">
     <div>
       <span style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#212121;line-height:1;">PHOTO DIARY.</span>
-      <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(16px,1.5vw,20px);color:rgba(33,33,33,0.5);line-height:1.4;margin:12px 0 0;max-width:24em;">Field notes, adventures, friends, behind the scenes... updated (almost) daily.</p>
+      <p style="font-family:'IBM Plex Mono', monospace;font-style:italic;font-size:clamp(16px,1.5vw,20px);color:rgba(33,33,33,0.5);line-height:1.4;margin:12px 0 0;max-width:24em;">Field notes, adventures, friends, behind the scenes... updated (almost) daily.</p>
     </div>
     <div class="diary-nav">
       <button id="diaryPrev">Prev</button>
@@ -1406,7 +1392,7 @@ footer .fpages a:hover { color: var(--t1); }
 <!-- ══ ADDRESSING ══ -->
 <section class="addressing">
   <h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;margin-bottom:12px;">WRITING + YAPPING + SHOOTING.</h2>
-  <p style="font-family:'Instrument Serif',serif;font-size:clamp(16px,2vw,22px);color:var(--t3);font-style:italic;margin-bottom:48px;">Documenting the journey.</p>
+  <p style="font-family:'IBM Plex Mono', monospace;font-size:clamp(16px,2vw,22px);color:var(--t3);font-style:italic;margin-bottom:48px;">Documenting the journey.</p>
   <div class="case-cards">
     <div class="case-card">
       <a href="https://vieren.substack.com/" target="_blank" class="case-card-img brackets brackets-b" style="aspect-ratio:9/16;padding:0;overflow:hidden;"><img src="image/substackvieren.jpg" style="width:100%;height:100%;object-fit:cover;"></a>
@@ -1428,7 +1414,7 @@ footer .fpages a:hover { color: var(--t1); }
 .pf-title { font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(36px,6vw,72px); text-transform: uppercase; letter-spacing: 0.02em; color: #212121; line-height: 1; }
 /* The second P uses letter version B, so it differs from the P in PHOTO (same as portfolio.html) */
 .pf-title .poy-b { font-feature-settings: "ss02" 1; }
-.pf-tagline { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(12px,1.1vw,13px); color: rgba(33,33,33,0.5); line-height: 1.4; margin: 12px 0 0; max-width: 30em; }
+.pf-tagline { font-family: 'IBM Plex Mono', monospace; font-style: italic; font-size: clamp(12px,1.1vw,13px); color: rgba(33,33,33,0.5); line-height: 1.4; margin: 12px 0 0; max-width: 30em; }
 .pf-all { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(33,33,33,.55); transition: color .3s; padding-top: 12px; white-space: nowrap; }
 .pf-all:hover { color: #212121; }
 .pf-body { position: relative; display: grid; place-items: center; }
@@ -1592,7 +1578,7 @@ footer .fpages a:hover { color: var(--t1); }
 <section class="work" style="background:#ede1d3;max-width:100%;padding:100px 40px;">
   <div style="max-width:1400px;margin:0 auto;">
   <h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#212121;line-height:1;margin-bottom:12px;">SELECTED FILM WORK.</h2>
-  <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(33,33,33,0.5);line-height:1.7;margin-bottom:48px;">Some personal favorites of the past two decades.</p>
+  <p style="font-family:'IBM Plex Mono', monospace;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(33,33,33,0.5);line-height:1.7;margin-bottom:48px;">Some personal favorites of the past two decades.</p>
 
   <div class="feat">
     <div class="feat-img brackets brackets-b" style="padding:0;overflow:hidden"><iframe id="filmPlayer" src="https://player.vimeo.com/video/1136626687?background=1&autoplay=1&loop=1&muted=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay; fullscreen"></iframe></div>
