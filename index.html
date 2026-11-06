@@ -332,7 +332,9 @@ nav {
   text-transform: uppercase; letter-spacing: 0.02em; font-weight: 400;
 }
 .what-headline em { font-style: italic; color: inherit; }   /* one colour for the whole title */
-.what-body { font-size: 15px; color: var(--t3); line-height: 1.8; margin-bottom: 36px; max-width: 480px; }
+/* Module subtitles: one style for all, taken from the Automation Case Studies subtitle (Archivo, 14-18px, 60% of the text colour) */
+.mod-sub { font-family: 'Archivo', sans-serif; font-weight: 400; font-style: normal; font-size: clamp(14px, 1.6vw, 18px); line-height: 1.5; max-width: 500px; color: rgba(33,33,33,.6); }
+.mod-sub.on-dark { color: rgba(237,225,211,.6); }
 .proj-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
 .proj-item {
   display: block;
@@ -965,10 +967,6 @@ nav {
   font-size: clamp(36px, 6vw, 72px); line-height: 1;
   text-transform: uppercase; color: #000; margin-bottom: 16px;
 }
-.cases-header p {
-  font-family: 'Archivo', sans-serif; font-size: clamp(14px, 1.6vw, 18px);
-  color: rgba(0,0,0,.6); max-width: 500px;
-}
 .cases-subtitle {
   font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
   letter-spacing: .14em; text-transform: uppercase; color: rgba(0,0,0,.5);
@@ -1284,7 +1282,7 @@ footer .fpages a:hover { color: var(--t1); }
   <div class="what-left">
     <span class="pill">Services</span>
     <h2 class="what-headline">My service<br><em>stack.</em></h2>
-    <p class="what-body">Some run under their own brand. Others I do under my own name.</p>
+    <p class="mod-sub" style="margin-bottom:36px;">Some run under their own brand. Others I do under my own name.</p>
     <div class="proj-list">
       <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">Strategy, Ideation & Distribution</span></span><span class="proj-caption">Vieren</span></div><div class="proj-item-desc">Brand positioning, content strategy, go-to-market, and distribution at scale. From zero to first revenue, then getting it in front of people who care.</div></div>
       <div class="proj-item" onclick="this.classList.toggle('open')"><div class="proj-item-row"><span class="proj-name"><span class="proj-title">AI & Automation Consultancy</span></span><span class="proj-caption">Vieren</span></div><div class="proj-item-desc">Building AI-powered systems that actually run your business. Automations, pipelines, and custom workflows designed to cut the busywork and let you focus on what moves the needle.</div></div>
@@ -1345,7 +1343,7 @@ footer .fpages a:hover { color: var(--t1); }
   <div class="diary-top">
     <div>
       <span style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#212121;line-height:1;">PHOTO DIARY.</span>
-      <p style="font-family:'IBM Plex Mono', monospace;font-style:normal;font-size:clamp(16px,1.5vw,20px);color:rgba(33,33,33,0.5);line-height:1.4;margin:12px 0 0;max-width:24em;">Field notes, adventures, friends, behind the scenes... updated (almost) daily.</p>
+      <p class="mod-sub" style="margin-top:12px;">Field notes, adventures, friends, behind the scenes... updated (almost) daily.</p>
     </div>
     <div class="diary-nav">
       <button id="diaryPrev">Prev</button>
@@ -1366,7 +1364,7 @@ footer .fpages a:hover { color: var(--t1); }
 <section class="cases-section">
   <div class="cases-header">
     <h2>Automation case studies.</h2>
-    <p>Consultancy-based work for founders who need a creative operator, not another agency.</p>
+    <p class="mod-sub">Consultancy-based work for founders who need a creative operator, not another agency.</p>
   </div>
   <div class="cases-grid">
     <a href="case-study-photo-diary.html" class="case-study-card">
@@ -1416,7 +1414,7 @@ footer .fpages a:hover { color: var(--t1); }
 <!-- ══ ADDRESSING ══ -->
 <section class="addressing">
   <h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:var(--t1);line-height:1;margin-bottom:12px;">WRITING + YAPPING + SHOOTING.</h2>
-  <p style="font-family:'IBM Plex Mono', monospace;font-size:clamp(16px,2vw,22px);color:var(--t3);font-style:normal;margin-bottom:48px;">Documenting the journey.</p>
+  <p class="mod-sub on-dark" style="margin:0 auto 48px;">Documenting the journey.</p>
   <div class="case-cards">
     <div class="case-card">
       <a href="https://vieren.substack.com/" target="_blank" class="case-card-img brackets brackets-b" style="aspect-ratio:9/16;padding:0;overflow:hidden;"><img src="image/substackvieren.jpg" style="width:100%;height:100%;object-fit:cover;"></a>
@@ -1438,7 +1436,6 @@ footer .fpages a:hover { color: var(--t1); }
 .pf-title { font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(36px,6vw,72px); text-transform: uppercase; letter-spacing: 0.02em; color: #212121; line-height: 1; }
 /* The second P uses letter version B, so it differs from the P in PHOTO (same as portfolio.html) */
 .pf-title .poy-b { font-feature-settings: "ss02" 1; }
-.pf-tagline { font-family: 'IBM Plex Mono', monospace; font-style: normal; font-size: clamp(12px,1.1vw,13px); color: rgba(33,33,33,0.5); line-height: 1.4; margin: 12px 0 0; max-width: 30em; }
 .pf-all { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(33,33,33,.55); transition: color .3s; padding-top: 12px; white-space: nowrap; }
 .pf-all:hover { color: #212121; }
 .pf-body { position: relative; display: grid; place-items: center; }
@@ -1473,7 +1470,7 @@ footer .fpages a:hover { color: var(--t1); }
     <div class="pf-head">
       <div>
         <h2 class="pf-title">PHOTO <span class="poy-b">P</span>ORTFOLIO.</h2>
-        <p class="pf-tagline">A selection of my best photos. I will be in Cape Town over the next few months and I'm opening a few slots per month if you want to shoot!</p>
+        <p class="mod-sub" style="margin-top:12px;">A selection of my best photos. I will be in Cape Town over the next few months and I'm opening a few slots per month if you want to shoot!</p>
       </div>
       <a href="portfolio.html" class="pf-all">See all</a>
     </div>
@@ -1602,7 +1599,7 @@ footer .fpages a:hover { color: var(--t1); }
 <section class="work" style="background:#ede1d3;max-width:100%;padding:100px 40px;">
   <div style="max-width:1400px;margin:0 auto;">
   <h2 style="font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:clamp(36px,6vw,72px);text-transform:uppercase;letter-spacing:0.02em;color:#212121;line-height:1;margin-bottom:12px;">SELECTED FILM WORK.</h2>
-  <p style="font-family:'IBM Plex Mono', monospace;font-style:normal;font-size:clamp(18px,2.2vw,26px);color:rgba(33,33,33,0.5);line-height:1.7;margin-bottom:48px;">Some personal favorites of the past two decades.</p>
+  <p class="mod-sub" style="margin-bottom:48px;">Some personal favorites of the past two decades.</p>
 
   <div class="feat">
     <div class="feat-img brackets brackets-b" style="padding:0;overflow:hidden"><iframe id="filmPlayer" src="https://player.vimeo.com/video/1136626687?background=1&autoplay=1&loop=1&muted=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay; fullscreen"></iframe></div>
@@ -1666,7 +1663,7 @@ footer .fpages a:hover { color: var(--t1); }
     <h2>NEVER NOT SHIPPING.</h2>
     <span>/06</span>
   </div>
-  <p style="font-family:'Archivo',sans-serif;font-size:clamp(14px,1.6vw,18px);color:var(--t3);line-height:1.5;margin-top:0;margin-bottom:36px;max-width:500px;">My own concepts, shipped over the years.</p>
+  <p class="mod-sub on-dark" style="margin-bottom:36px;">My own concepts, shipped over the years.</p>
   <div class="proj-showcase-grid">
     <!-- Left: number + name -->
     <div class="proj-showcase-left">
