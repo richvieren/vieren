@@ -23,6 +23,7 @@ Contact: hello@vieren.studio
 ## Pages
 
 - [Home](https://vieren.studio/): the studio, services, case studies, film work
+- [About](https://vieren.studio/#about): who Richard Van der Vieren is, the book, Awesomeness, profile links
 - [Photo Portfolio](https://vieren.studio/portfolio.html): selected photos
 - [Photo Diary](https://vieren.studio/diary.html): daily frames from a Ricoh GR III
 - [Short Form](https://vieren.studio/shortform.html): short form videos
