@@ -1262,12 +1262,6 @@ footer .fpages a:hover { color: var(--t1); }
 </section>
 
 <style>
-.word-cycle{position:relative;display:inline-block;}
-.word-cycle-a,.word-cycle-b{display:inline-block;animation:wordcycle 4s infinite;}
-.word-cycle-b{position:absolute;left:0;top:0;animation:wordcycle-b 4s infinite;}
-.word-cycle-a{animation:wordcycle-a 4s infinite;}
-@keyframes wordcycle-a{0%,40%{opacity:1;transform:translateY(0)}45%,90%{opacity:0;transform:translateY(-8px)}95%,100%{opacity:1;transform:translateY(0)}}
-@keyframes wordcycle-b{0%,40%{opacity:0;transform:translateY(8px)}45%,90%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(8px)}}
 .manifesto-row{max-width:960px;margin:0 auto;position:relative;z-index:1;will-change:transform;}   /* text only, centred block */
 /* Grunge edge, after the Wolf Children site: the Photo Diary's cream comes up over the red module with a torn, sprayed top.
    image/grunge-edge.png is 1600x120, drawn at full width so it keeps its shape: 7.5vw tall. The red module clips its text,
@@ -1305,13 +1299,11 @@ footer .fpages a:hover { color: var(--t1); }
 <section class="manifesto-section" style="background:#aa1f23;padding:72px 40px;">
   <div class="manifesto-row">
     <div class="manifesto-text">
-      <p style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:var(--t1);font-weight:700;">
-        Vieren is a one man hybrid production studio, fusing high-end commercial work with a drive to explore the
-        <span class="word-cycle"><span class="word-cycle-a">unconventional</span><span class="word-cycle-b">unhinged</span></span>
-        through personal passion projects.
-      </p>
+      <h1 style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:var(--t1);font-weight:700;margin:0;">
+        Vieren is a one man hybrid production studio run by Richard Van der Vieren.
+      </h1>
       <p style="font-family:'Archivo',sans-serif;font-size:clamp(15px,1.8vw,20px);line-height:1.35;color:rgba(237,225,211,.75);margin-top:28px;font-weight:500;">
-        My projects are inaccessible to almost everyone, because it requires a rare overlap of deep technical skill and world-class creative craft.
+        He is fusing a rare overlap of deep technical skill and world-class creative craft.
       </p>
     </div>
   </div>
