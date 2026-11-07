@@ -9,7 +9,7 @@ Contact: hello@vieren.studio
 - Name: Richard Van der Vieren
 - Base: Cape Town, South Africa
 - Roles: photographer, filmmaker, author, builder of AI and automation tools
-- Author of the book Wolvenkinderen (Dutch, 2018, ISBN 9789090313849), also published in Slovak as Vlčie deti. The book helps parents trade screen time for outdoor adventures and open fire cooking: https://wolfchildren.co
+- Author of the book Wolvenkinderen (Dutch, 2018, ISBN 9789090313849), also published in Slovak as Vlčie deti (with Baša Števulová, ISBN 9788057052937). The book helps parents trade screen time for outdoor adventures and open fire cooking: https://wolfchildren.co
 - Curates the Vimeo channel Awesomeness, followed by 85,000 people: https://vimeo.com/channels/awesomeness
 
 ## Services
