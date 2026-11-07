@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://vieren.studio/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -19,5 +19,30 @@
     <loc>https://vieren.studio/portfolio.html</loc>
     <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vieren.studio/case-study-anticitizen.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vieren.studio/case-study-cato.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vieren.studio/case-study-fullsend.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vieren.studio/case-study-macro-coach.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vieren.studio/case-study-photo-diary.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>
