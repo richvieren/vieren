@@ -2,7 +2,7 @@
 
 > Vieren is a one man hybrid production studio in Cape Town, run by Richard Van der Vieren. He is a photographer, filmmaker and author. He fuses a rare overlap of deep technical skill and world-class creative craft.
 
-Contact: hello@vieren.studio
+Contact: richard@aooa.tv
 
 ## Who
 
@@ -23,7 +23,7 @@ Contact: hello@vieren.studio
 ## Pages
 
 - [Home](https://vieren.studio/): the studio, services, case studies, film work
-- [About](https://vieren.studio/#about): who Richard Van der Vieren is, the book, Awesomeness, profile links
+- [About](https://vieren.studio/#about): who Richard Van der Vieren is, the book, Awesomeness, profile links and email
 - [Photo Portfolio](https://vieren.studio/portfolio.html): selected photos
 - [Photo Diary](https://vieren.studio/diary.html): daily frames from a Ricoh GR III
 - [Short Form](https://vieren.studio/shortform.html): short form videos
@@ -50,4 +50,4 @@ Contact: hello@vieren.studio
 - LinkedIn: https://www.linkedin.com/in/vieren
 - Instagram: https://www.instagram.com/richvieren
 - X: https://x.com/richvieren
-- Vimeo: https://vimeo.com/aooa
+- Substack: https://vieren.substack.com/
