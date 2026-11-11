@@ -84,7 +84,7 @@ section { padding: 120px var(--gutter); }
 
 /* Steps: a real sequence, so numbered */
 .steps { margin-top: 64px; }
-.step { display: grid; grid-template-columns: 120px 260px 1fr; gap: 32px; padding: 36px 0; border-top: 1px solid var(--line-on-cream); align-items: baseline; }
+.step { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 36px 0; border-top: 1px solid var(--line-on-cream); align-items: baseline; }
 .step:last-child { border-bottom: 1px solid var(--line-on-cream); }
 .step-n { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: 56px; line-height: 1; color: var(--red); }
 .step h3 { font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: 22px; text-transform: uppercase; letter-spacing: .03em; line-height: 1.2; }
@@ -141,8 +141,6 @@ footer a { text-decoration: none; }
   .pillar:nth-child(3) { padding-left: 0; border-left: 0; }
   .pillar { padding-bottom: 32px; }
   .cases { grid-template-columns: 1fr 1fr; }
-  .step { grid-template-columns: 80px 1fr; }
-  .step p { grid-column: 2; }
   .about { grid-template-columns: 1fr; gap: 40px; }
   .about img { max-width: 420px; }
 }
@@ -153,8 +151,6 @@ footer a { text-decoration: none; }
   .pillars, .cases, .fit { grid-template-columns: 1fr; }
   .pillar, .pillar + .pillar { padding: 28px 0; border-left: 0; }
   .pillar + .pillar { border-top: 1px solid var(--line-on-dark); }
-  .step { grid-template-columns: 1fr; gap: 12px; }
-  .step p { grid-column: 1; }
   .compare th { font-size: 16px; }
   .compare td { font-size: 14px; padding-right: 12px; }
   .fit { gap: 48px; }
@@ -221,7 +217,7 @@ footer a { text-decoration: none; }
 <!-- What I do -->
 <section>
   <div class="wrap">
-    <h2 class="title" style="font-size:clamp(34.92px, 5.82vw, 69.84px);">What I do.</h2>
+    <h2 class="title" style="font-size:clamp(34.92px, 5.82vw, 69.84px); letter-spacing:-.05em;">What I do.</h2>
     <p class="sub">I come in as your fractional Head of Content, set the content and personal branding strategy and build the team inside your business, so everything it learns stays with you.</p>
     <div class="pillars">
       <div class="pillar">
