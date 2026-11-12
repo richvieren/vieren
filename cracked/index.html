@@ -91,6 +91,10 @@ section { padding: 120px var(--gutter); }
 .step h3 { font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: 22px; text-transform: uppercase; letter-spacing: .03em; line-height: 1.2; }
 .step p { font-size: 16px; line-height: 1.7; max-width: 640px; }
 .step p + p { margin-top: 10px; }
+.step-head { display: flex; flex-direction: column; gap: 6px; }
+.step-when { font-family: 'Jost', sans-serif; font-size: 16px; color: var(--muted-on-cream); }
+.step p.step-out { margin-top: 18px; }
+.step-out strong { font-weight: 600; color: var(--red); }
 
 /* Chain */
 .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 56px; font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(36px, 6vw, 84px); text-transform: uppercase; line-height: 1; }
@@ -130,9 +134,37 @@ section { padding: 120px var(--gutter); }
 .consult p { font-size: 16px; line-height: 1.7; color: var(--muted-on-dark); max-width: 560px; margin-top: 8px; }
 
 /* Apply */
-.apply { text-align: center; padding-top: 140px; padding-bottom: 140px; }
+.apply { text-align: center; padding-top: 140px; padding-bottom: 140px; overflow-x: clip; }
 .apply h2 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(56px, 10vw, 150px); line-height: .88; text-transform: uppercase; margin-bottom: 28px; }
 .apply .sub { margin: 0 auto 40px; }
+
+/* Card arc */
+.arc { display: flex; justify-content: center; align-items: flex-start; margin: 0 auto 88px; padding-bottom: 40px; }
+.arc-card { flex: 0 0 188px; margin: 0 -14px; padding: 7px 7px 0; background: #FBF7F1; border-radius: 22px; text-decoration: none; color: var(--dark);
+  box-shadow: 0 22px 44px rgba(26,26,26,.16), 0 3px 8px rgba(26,26,26,.08);
+  transform: translateY(var(--y)) rotate(var(--r)); transform-origin: 50% 120%;
+  transition: transform .9s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--i) * 45ms); position: relative; }
+.arc-card:nth-child(3), .arc-card:nth-child(4) { z-index: 2; }
+.arc-card:hover { transform: translateY(calc(var(--y) - 10px)) rotate(var(--r)); z-index: 3; transition-delay: 0s; transition-duration: .35s; }
+.arc-media { display: block; position: relative; aspect-ratio: 9/16; border-radius: 16px; overflow: hidden; background: #1a1a1a center/cover no-repeat; }
+.arc-media iframe { position: absolute; top: 50%; left: 50%; width: 316%; height: 100%; transform: translate(-50%,-50%); border: 0; pointer-events: none; }
+.arc-name { display: block; text-align: left; font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 600; padding: 11px 6px 13px; }
+.arc.closed .arc-card { transform: translateY(40px) rotate(0deg); }
+.arc.closed .arc-card:nth-child(1) { transform: translate(180%, 40px); }
+.arc.closed .arc-card:nth-child(2) { transform: translate(100%, 40px); }
+.arc.closed .arc-card:nth-child(3) { transform: translate(30%, 40px); }
+.arc.closed .arc-card:nth-child(4) { transform: translate(-30%, 40px); }
+.arc.closed .arc-card:nth-child(5) { transform: translate(-100%, 40px); }
+.arc.closed .arc-card:nth-child(6) { transform: translate(-180%, 40px); }
+@media (max-width: 1024px) { .arc-card { flex-basis: 150px; margin: 0 -12px; } }
+@media (max-width: 640px) {
+  .arc { margin-bottom: 56px; padding-bottom: 24px; }
+  .arc-card { flex-basis: 92px; margin: 0 -7px; padding: 4px 4px 0; border-radius: 14px; }
+  .arc-media { border-radius: 10px; }
+  .arc-name { font-size: 10px; padding: 7px 3px 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .arc-card:nth-child(1), .arc-card:nth-child(6) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .arc-card { transition: none; } }
 
 footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 24px var(--gutter); font-size: 12px; color: rgba(237,225,211,.4); border-top: 1px solid var(--line-on-dark); }
 footer a { text-decoration: none; }
@@ -231,7 +263,7 @@ footer a { text-decoration: none; }
       </div>
       <div class="pillar">
         <h3>Production</h3>
-        <p>I come from the camera. When a shoot matters, I direct it or shoot it myself. One recording session gets cut into weeks of posts.</p>
+        <p>I come from the camera. When a shoot matters, I direct it or shoot it myself. One recording session gets cut into weeks of posts. If you have no visual style yet, I build one: captions, colours, type and thumbnails.</p>
       </div>
       <div class="pillar">
         <h3>Systems</h3>
@@ -245,43 +277,66 @@ footer a { text-decoration: none; }
 <section class="cream">
   <div class="wrap">
     <h2 class="title">How it works.</h2>
-    <p class="sub">My job is handle marketing so you can focus on everything else.</p>
+    <p class="sub">You run the company. I run the content behind your name.</p>
     <p class="sub">Once we're aligned on the dynamics of your business and the goals, I'll take it from there. I'll keep you updated and let you know if I need something, but I operate very independently.</p>
     <p class="sub">Depending on what makes the most sense, I'll either do the work myself or delegate to my network of contractors and consultants.</p>
     <div class="steps">
       <div class="step">
         <div class="step-n">01</div>
-        <h3>Weeks one and two</h3>
+        <div class="step-head"><h3>Map it out</h3><span class="step-when">Weeks one and two</span></div>
         <div>
-          <p>I sit in on every channel, every edit, every number and every person on the team.</p>
-          <p>We find out where the hours go and which posts lead to booked calls. I give each step of a post one owner.</p>
+          <p>I go through every channel, every edit, every number and every person on your team.</p>
+          <p>We find where your deals come from today, who your content pulls in versus who you want to sell to, and what you like to make versus what drains you.</p>
+          <p class="step-out"><strong>Outcome:</strong> a roadmap that says where we start.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-n">02</div>
-        <h3>Weeks two to six</h3>
+        <div class="step-head"><h3>Set the goals</h3><span class="step-when">Week two</span></div>
         <div>
-          <p>I hire whoever is missing. Every candidate does a paid test on one of your real posts.</p>
-          <p>I set up the systems: one shoot into many posts, one folder into every platform, a tracked link on every post.</p>
+          <p>We turn the roadmap into one revenue goal and a short list of numbers under it: views, profile visits, site traffic, newsletter sign-ups and booked calls.</p>
+          <p>Every post gets its own tracked link, so each number traces back to a post. We keep the list short, so it adds no admin work.</p>
+          <p class="step-out"><strong>Outcome:</strong> one dashboard with a handful of numbers.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-n">03</div>
-        <h3>Every post</h3>
+        <div class="step-head"><h3>Build the look</h3><span class="step-when">Weeks two to four, only if you need it</span></div>
         <div>
-          <p>Each post gets its own link on your domain. We see the clicks, the booked calls and the sales. The team gets judged on those numbers.</p>
+          <p>If your content has no visual style yet, I make one: captions, colours, type, thumbnails, and the open and end cards.</p>
+          <p>Your team gets it as templates, so every post looks like you from the first frame.</p>
+          <p class="step-out"><strong>Outcome:</strong> a style kit your whole team works from.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-n">04</div>
-        <h3>When a post misses</h3>
+        <div class="step-head"><h3>Get seen</h3><span class="step-when">From week four, then every week</span></div>
         <div>
-          <p>We walk the chain in order. Idea, hook, packaging, edit, distribution. We stop at the first step that broke and train the person who owns it.</p>
+          <p>The right people learn who you are, what you sell and why it is worth the money.</p>
+          <p>We pick the channels that fit you: a content engine on LinkedIn, X, YouTube or Instagram, and articles that rank in search.</p>
+          <p class="step-out"><strong>Outcome:</strong> at least one channel that runs every week.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-n">05</div>
-        <h3>What you do</h3>
+        <div class="step-head"><h3>Get hired</h3><span class="step-when">From week four, then every week</span></div>
+        <div>
+          <p>We turn the attention into calls. Every post points to one next step: a call, the newsletter or a free resource.</p>
+          <p>Email capture and follow-up emails keep the people who are not ready yet.</p>
+          <p class="step-out"><strong>Outcome:</strong> at least one system that turns views into booked calls.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">06</div>
+        <div class="step-head"><h3>Run it</h3><span class="step-when">Every week</span></div>
+        <div>
+          <p>I fill the gaps on the team, with new hires or people from my own network. Each week we check the numbers.</p>
+          <p>When a post misses, we walk the chain in order: idea, hook, packaging, edit, distribution. We fix the first step that broke.</p>
+          <p class="step-out"><strong>Outcome:</strong> content that ships every week without you in every meeting.</p>
+        </div>
+      </div>
+      <div class="step step-you">
+        <div class="step-head"><h3>What you do</h3></div>
         <div>
           <p>You bring the ideas and show up on camera. Voice notes and DMs are fine. Every week you pick what gets made.</p>
           <p>The team does the rest. You get one dashboard with the goals, the numbers and who owns what.</p>
@@ -367,6 +422,7 @@ footer a { text-decoration: none; }
         <h3>Yes</h3>
         <ul>
           <li>Founders whose name already pays the bills.</li>
+          <li>Funded founders with a real budget for content.</li>
           <li>Personal brands and coaches with a proven offer and a sales team that can close.</li>
           <li>People who want to own their content team, not rent one.</li>
           <li>People who care how it looks.</li>
@@ -399,6 +455,14 @@ footer a { text-decoration: none; }
 <!-- Apply -->
 <section class="apply cream" id="apply">
   <div class="wrap">
+    <div class="arc" aria-label="Short form work">
+      <a class="arc-card" href="/shortform.html" style="--r:-15deg; --y:37.5px; --i:0;"><span class="arc-media" style="background-image:url('https://i.vimeocdn.com/video/2080335707-5b6e6a6e8a6eed75484320f1782986bff3b2f3f92b0a0f329d1465435d85c96e-d_540x960')"><iframe src="https://player.vimeo.com/video/1135111015?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" loading="lazy" tabindex="-1" title="Apex Protocols"></iframe></span><span class="arc-name">Apex Protocols</span></a>
+      <a class="arc-card" href="/shortform.html" style="--r:-9deg; --y:13.5px; --i:1;"><span class="arc-media" style="background-image:url('https://i.vimeocdn.com/video/2028694735-acb66042fbc71c7136dbd8c29f9732493633336b2ac06de625f6901ae62373ca-d_540x960')"><iframe src="https://player.vimeo.com/video/1094996108?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" loading="lazy" tabindex="-1" title="Vieren"></iframe></span><span class="arc-name">Vieren</span></a>
+      <a class="arc-card" href="/shortform.html" style="--r:-3deg; --y:1.5px; --i:2;"><span class="arc-media" style="background-image:url('https://i.vimeocdn.com/video/2160943684-1bdbd5a17ff34ee4cbb44905cc795d54b0066f922bd9bc145abf40daa1492494-d_540x960')"><iframe src="https://player.vimeo.com/video/1195133349?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" loading="lazy" tabindex="-1" title="Cat Caitlinn"></iframe></span><span class="arc-name">Cat Caitlinn</span></a>
+      <a class="arc-card" href="/shortform.html" style="--r:3deg; --y:1.5px; --i:3;"><span class="arc-media" style="background-image:url('https://i.vimeocdn.com/video/2161245919-db8d56801649cdcfc615ccff7f4bf3724c6a1600da03fe86e549f11a31c397f7-d_540x960')"><iframe src="https://player.vimeo.com/video/1195385113?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" loading="lazy" tabindex="-1" title="Steppa"></iframe></span><span class="arc-name">Steppa</span></a>
+      <a class="arc-card" href="/shortform.html" style="--r:9deg; --y:13.5px; --i:4;"><span class="arc-media" style="background-image:url('https://i.vimeocdn.com/video/2080324928-ccc866651c29b9b5eb3d26ba6981788e465895aee17a511edabb4d20e19a7a85-d_540x960')"><iframe src="https://player.vimeo.com/video/1135103105?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" loading="lazy" tabindex="-1" title="Apex Protocols"></iframe></span><span class="arc-name">Apex Protocols</span></a>
+      <a class="arc-card" href="/shortform.html" style="--r:15deg; --y:37.5px; --i:5;"><span class="arc-media" style="background-image:url('https://i.vimeocdn.com/video/1932303451-9529baf1b8323d9c962d6833d0c01784e9982842a2061e8b32ed5da53b1c6136-d_540x960')"><iframe src="https://player.vimeo.com/video/1014229966?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" loading="lazy" tabindex="-1" title="Veld &amp; Sea"></iframe></span><span class="arc-name">Veld &amp; Sea</span></a>
+    </div>
     <h2>Let's build<br>your machine.</h2>
     <p class="sub">Tell me who you are, what you sell and where your content stands today. I reply to every serious application.</p>
     <a href="mailto:richard@aooa.tv?subject=Application" class="btn">Apply</a>
@@ -406,6 +470,15 @@ footer a { text-decoration: none; }
 </section>
 
 </main>
+<script>
+(function(){
+  var arc=document.querySelector('.arc');
+  if(!arc||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  arc.classList.add('closed');
+  var io=new IntersectionObserver(function(e){ if(e[0].isIntersecting){ arc.classList.remove('closed'); io.disconnect(); } },{threshold:.35});
+  io.observe(arc);
+})();
+</script>
 
 <footer>
   <a href="/">Vieren Studio</a>
