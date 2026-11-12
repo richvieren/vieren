@@ -220,14 +220,6 @@ section { padding: 120px var(--gutter); }
 .cream .compare td { border-top-color: var(--line-on-cream); }
 .cream .compare td:first-child { color: var(--muted-on-cream); }
 
-/* Fit */
-.fit { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px; }
-.fit h3 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(40px, 5vw, 64px); text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
-.fit ul { list-style: none; }
-.fit { text-align: center; }
-.fit li { font-size: 16px; line-height: 1.55; padding: 14px 0; border-top: 1px solid var(--line-on-cream); }
-section:not(.cream) .fit li { border-top-color: var(--line-on-dark); }
-.fit .no h3 { color: var(--red); }
 
 
 /* Apply */
@@ -278,12 +270,11 @@ footer a { text-decoration: none; }
   :root { --gutter: 16px; }
   section { padding-top: 80px; padding-bottom: 80px; }
   .top { padding-top: 16px; padding-bottom: 16px; }
-  .pillars, .cases, .fit { grid-template-columns: 1fr; }
+  .pillars, .cases { grid-template-columns: 1fr; }
   .pillar, .pillar + .pillar { padding: 28px 0; border-left: 0; }
   .pillar + .pillar { border-top: 1px solid var(--line-on-dark); }
   .compare th { font-size: 16px; }
   .compare td { font-size: 14px; padding-right: 12px; }
-  .fit { gap: 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -457,8 +448,26 @@ footer a { text-decoration: none; }
   </div>
 </section>
 
-<!-- About -->
+<!-- Why not an agency -->
 <section>
+  <div class="wrap">
+    <h2 class="title">Why not an agency.</h2>
+    <p class="sub">An agency rents you a mid team. I build you a god tier one.</p>
+    <table class="compare">
+      <thead><tr><th scope="col">Agency</th><th scope="col">Vieren</th></tr></thead>
+      <tbody>
+        <tr><td>Their people, shared with every other client.</td><td>Your people, hired for your brand.</td></tr>
+        <tr><td>One house style for everyone.</td><td>A look built on your taste.</td></tr>
+        <tr><td>Reports on views.</td><td>Reports on booked calls and sales.</td></tr>
+        <tr><td>The editing goes offshore.</td><td>I still shoot and cut when it counts.</td></tr>
+        <tr><td>Leaves when the contract ends, and the system leaves too.</td><td>The team, the systems and the playbook stay with you.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- About -->
+<section class="cream">
   <div class="wrap about">
     <figure class="char">
       <!-- Character sheet video: drop the file at /video/cracked/character.mp4 and uncomment the source. -->
@@ -478,55 +487,8 @@ footer a { text-decoration: none; }
   </div>
 </section>
 
-<!-- Why not an agency -->
-<section class="cream">
-  <div class="wrap">
-    <h2 class="title">Why not an agency.</h2>
-    <p class="sub">An agency rents you a mid team. I build you a god tier one.</p>
-    <table class="compare">
-      <thead><tr><th scope="col">Agency</th><th scope="col">Vieren</th></tr></thead>
-      <tbody>
-        <tr><td>Their people, shared with every other client.</td><td>Your people, hired for your brand.</td></tr>
-        <tr><td>One house style for everyone.</td><td>A look built on your taste.</td></tr>
-        <tr><td>Reports on views.</td><td>Reports on booked calls and sales.</td></tr>
-        <tr><td>The editing goes offshore.</td><td>I still shoot and cut when it counts.</td></tr>
-        <tr><td>Leaves when the contract ends, and the system leaves too.</td><td>The team, the systems and the playbook stay with you.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- Fit -->
-<section>
-  <div class="wrap">
-    <h2 class="title">Who this is for.</h2>
-    <p class="sub">I take on a few brands at a time, so I can go deep on each one.</p>
-    <div class="fit">
-      <div>
-        <h3>Yes</h3>
-        <ul>
-          <li>Founders whose name already pays the bills.</li>
-          <li>Funded founders with a real budget for content.</li>
-          <li>Personal brands and coaches with a proven offer and a sales team that can close.</li>
-          <li>People who want to own their content team, not rent one.</li>
-          <li>People who care how it looks.</li>
-        </ul>
-      </div>
-      <div class="no">
-        <h3>Not yet</h3>
-        <ul>
-          <li>Still looking for an offer.</li>
-          <li>No budget for a team.</li>
-          <li>Want viral hacks instead of a system.</li>
-          <li>Start with the <a href="/articles/">articles</a>.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Apply -->
-<section class="apply cream" id="apply">
+<section class="apply" id="apply">
   <div class="wrap">
     <div class="arc" aria-label="Short form work">
       <a class="arc-card" href="/shortform.html" style="--r:-15deg; --y:37.5px; --i:0;"><span class="arc-media" style="background-image:url('https://i.vimeocdn.com/video/2080335707-5b6e6a6e8a6eed75484320f1782986bff3b2f3f92b0a0f329d1465435d85c96e-d_540x960')"><iframe src="https://player.vimeo.com/video/1135111015?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" loading="lazy" tabindex="-1" title="Apex Protocols"></iframe></span><span class="arc-name">Apex Protocols</span></a>
