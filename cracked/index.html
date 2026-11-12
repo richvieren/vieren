@@ -193,6 +193,7 @@ section { padding: 120px var(--gutter); }
 .case div { padding: 18px 18px 22px; }
 .case h3 { font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
 .case span { font-size: 13px; line-height: 1.5; color: var(--muted-on-dark); display: block; }
+.cream .case { color: var(--cream); }
 
 /* About */
 .about { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -216,6 +217,8 @@ section { padding: 120px var(--gutter); }
 .compare th { padding: 0 12px 20px; }
 .compare td { text-align: center; padding: 22px 12px; border-top: 1px solid var(--line-on-dark); font-size: 16px; line-height: 1.55; vertical-align: top; }
 .compare td:first-child { color: var(--muted-on-dark); }
+.cream .compare td { border-top-color: var(--line-on-cream); }
+.cream .compare td:first-child { color: var(--muted-on-cream); }
 
 /* Fit */
 .fit { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px; }
@@ -429,7 +432,7 @@ footer a { text-decoration: none; }
 </section>
 
 <!-- Case studies -->
-<section style="padding-top:40px;">
+<section class="cream">
   <div class="wrap">
     <h2 class="title">Receipts.</h2>
     <p class="sub">Systems I built and run.</p>
@@ -455,7 +458,7 @@ footer a { text-decoration: none; }
 </section>
 
 <!-- About -->
-<section class="cream">
+<section>
   <div class="wrap about">
     <figure class="char">
       <!-- Character sheet video: drop the file at /video/cracked/character.mp4 and uncomment the source. -->
@@ -476,7 +479,7 @@ footer a { text-decoration: none; }
 </section>
 
 <!-- Why not an agency -->
-<section>
+<section class="cream">
   <div class="wrap">
     <h2 class="title">Why not an agency.</h2>
     <p class="sub">An agency rents you a mid team. I build you a god tier one.</p>
@@ -494,7 +497,7 @@ footer a { text-decoration: none; }
 </section>
 
 <!-- Fit -->
-<section class="cream">
+<section>
   <div class="wrap">
     <h2 class="title">Who this is for.</h2>
     <p class="sub">I take on a few brands at a time, so I can go deep on each one.</p>
