@@ -83,105 +83,100 @@ section { padding: 120px var(--gutter); }
 .pillar h3 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(36px, 4vw, 52px); text-transform: uppercase; line-height: 1; margin-bottom: 16px; }
 .pillar p { font-size: 15px; line-height: 1.65; color: var(--muted-on-dark); }
 
-/* How it works: bento cards */
-.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 48px; }
-.b-card { position: relative; display: flex; flex-direction: column; background: #FBF7F1; color: var(--dark); border-radius: 24px; padding: 26px 28px 20px;
-  box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 24px 48px -24px rgba(26,26,26,.22), 0 2px 6px rgba(26,26,26,.05); overflow: hidden; }
+/* How it works: bento cards, sized to fit one screen */
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; margin-top: 40px; }
+.b-card { position: relative; display: flex; flex-direction: column; background: #FBF7F1; color: var(--dark); border-radius: 22px; padding: 16px 20px 12px; min-height: 0;
+  box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 20px 40px -24px rgba(26,26,26,.22), 0 2px 6px rgba(26,26,26,.05); overflow: hidden; }
 .b-warm { background: radial-gradient(120% 90% at 85% 100%, rgba(170,31,35,.20), transparent 60%), linear-gradient(160deg, #F8E9DC 0%, #F1D3C6 100%); }
-.b-dark { background: var(--dark); color: var(--cream); }
-.b-7 { grid-column: span 7; } .b-5 { grid-column: span 5; } .b-4 { grid-column: span 4; } .b-8 { grid-column: span 8; }
-.b-top { display: flex; align-items: baseline; gap: 14px; }
-.b-n { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: 22px; line-height: 1; color: var(--red); }
-.b-card h3 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(30px, 2.6vw, 38px); line-height: .92; text-transform: uppercase; letter-spacing: .005em; }
-.b-when { display: block; font-family: 'Jost', sans-serif; font-size: 14px; color: var(--muted-on-cream); margin-top: 4px; }
-.b-dark .b-when { color: var(--muted-on-dark); }
-.b-body { margin-top: 12px; max-width: 480px; }
-.b-body p { font-size: 14px; line-height: 1.5; color: rgba(33,33,33,.78); }
-.b-dark .b-body p { color: var(--muted-on-dark); }
-.b-body p + p { margin-top: 6px; }
-.b-art { flex: 1; display: flex; align-items: center; justify-content: center; padding: 18px 0 16px; min-height: 0; }
-.b-out { border-top: 1px solid var(--line-on-cream); padding-top: 12px; font-size: 13px; line-height: 1.5; }
-.b-out strong { font-weight: 600; color: var(--red); }
+.b-5 { grid-column: span 5; } .b-4 { grid-column: span 4; } .b-3 { grid-column: span 3; }
+.b-top { display: flex; align-items: baseline; gap: 10px; }
+.b-n { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: 18px; line-height: 1; color: var(--red); }
+.b-card h3 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: 28px; line-height: .95; text-transform: uppercase; }
+.b-when { display: block; font-family: 'Jost', sans-serif; font-size: 13px; color: var(--muted-on-cream); margin-top: 2px; }
+.b-out { font-size: 13px; line-height: 1.35; margin-top: 6px; color: rgba(33,33,33,.6); }
+.b-out strong { font-weight: 600; color: var(--dark); }
+.b-art { flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px 0 8px; }
+.b-more { border-top: 1px solid var(--line-on-cream); padding-top: 6px; }
+.b-more summary { cursor: pointer; list-style: none; font-size: 12px; font-weight: 600; color: var(--red); display: inline-flex; align-items: center; gap: 6px; }
+.b-more summary::-webkit-details-marker { display: none; }
+.b-more summary::after { content: '+'; font-size: 14px; line-height: 1; }
+.b-more[open] summary::after { content: '\2212'; }
+.b-more p { font-size: 13px; line-height: 1.5; color: rgba(33,33,33,.78); margin-top: 6px; }
 
 /* shared bits */
-.pill { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-radius: 12px; padding: 8px 14px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,.75); border: 1px solid rgba(33,33,33,.08); }
-.pill em { font-style: normal; font-weight: 400; color: var(--muted-on-cream); font-size: 12px; }
+.pill { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-radius: 10px; padding: 5px 12px; font-size: 12px; font-weight: 600; background: rgba(255,255,255,.75); border: 1px solid rgba(33,33,33,.08); }
+.pill em { font-style: normal; font-weight: 400; color: var(--muted-on-cream); font-size: 11px; }
 .pill.ink { background: var(--dark); color: var(--cream); border-color: var(--dark); }
 .pill.ink em { color: var(--muted-on-dark); }
-.tile { width: 48px; height: 48px; border-radius: 14px; background: #fff; display: grid; place-items: center; box-shadow: 0 10px 22px -10px rgba(26,26,26,.28), 0 1px 2px rgba(26,26,26,.06); }
-.tile svg { width: 24px; height: 24px; }
-.tile-l { font-size: 12px; color: rgba(33,33,33,.7); text-align: center; margin-top: 6px; }
+.tile { width: 42px; height: 42px; border-radius: 12px; background: #fff; display: grid; place-items: center; box-shadow: 0 8px 18px -10px rgba(26,26,26,.3), 0 1px 2px rgba(26,26,26,.06); }
+.tile svg { width: 21px; height: 21px; }
+.tile-l { font-size: 11px; color: rgba(33,33,33,.7); text-align: center; margin-top: 4px; }
 
 /* 01 venn */
-.venn { position: relative; width: 270px; max-width: 100%; height: 150px; }
-.venn span { position: absolute; top: 0; width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; font-size: 13px; font-weight: 600; }
-.venn .v1 { left: 0; background: rgba(255,255,255,.55); border: 1px solid rgba(33,33,33,.12); padding-left: 18px; }
-.venn .v2 { right: 0; background: rgba(33,33,33,.06); border: 1px solid rgba(33,33,33,.18); justify-content: flex-end; padding-right: 18px; text-align: right; }
-.venn .v1 b, .venn .v2 b { display: block; width: 58px; font-size: 12px; font-weight: 600; line-height: 1.3; }
-.venn .vx { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); background: var(--red); color: var(--cream); font-size: 12px; font-weight: 600; letter-spacing: .02em; padding: 8px 12px; border-radius: 999px; white-space: nowrap; box-shadow: 0 8px 18px -8px rgba(170,31,35,.7); }
+.venn { position: relative; width: 220px; max-width: 100%; height: 120px; }
+.venn span { position: absolute; top: 0; width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; font-size: 11px; font-weight: 600; }
+.venn .v1 { left: 0; background: rgba(255,255,255,.55); border: 1px solid rgba(33,33,33,.12); padding-left: 16px; }
+.venn .v2 { right: 0; background: rgba(33,33,33,.06); border: 1px solid rgba(33,33,33,.18); justify-content: flex-end; padding-right: 16px; text-align: right; }
+.venn .v1 b, .venn .v2 b { display: block; width: 52px; font-weight: 600; line-height: 1.25; }
+.venn .vx { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); background: var(--red); color: var(--cream); font-size: 11px; font-weight: 600; padding: 6px 10px; border-radius: 999px; white-space: nowrap; box-shadow: 0 8px 18px -8px rgba(170,31,35,.7); }
 
 /* 02 ladder */
-.ladder { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 5px; }
+.ladder { width: 100%; max-width: 300px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
 .ladder .pill { font-weight: 500; color: rgba(33,33,33,.55); }
-.ladder .pill:nth-child(2) { margin: 0 10px; } .ladder .pill:nth-child(3) { margin: 0 20px; } .ladder .pill:nth-child(4) { margin: 0 30px; }
-.ladder .arrow { text-align: center; color: var(--muted-on-cream); font-size: 14px; line-height: 1; }
-.ladder .pill.ink { color: var(--cream); padding: 11px 16px; font-size: 14px; }
+.ladder .pill em { display: none; }
+.ladder .pill.ink { grid-column: span 2; color: var(--cream); padding: 8px 12px; font-size: 13px; margin-top: 4px; }
+.ladder .pill.ink em { display: inline; }
 
 /* 03 look */
-.look { display: flex; align-items: center; gap: 24px; }
-.look-vid { width: 96px; aspect-ratio: 9/16; border-radius: 18px; background: #1a1a1a center/cover; box-shadow: 0 18px 36px -14px rgba(26,26,26,.45); transform: rotate(-4deg); }
-.look-kit { display: flex; flex-direction: column; gap: 10px; }
-.swatches { display: flex; gap: 6px; }
-.swatches i { width: 22px; height: 22px; border-radius: 7px; box-shadow: inset 0 0 0 1px rgba(33,33,33,.1); }
-.type-aa { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: 44px; line-height: .8; }
-.cap-chip { display: inline-block; background: #fff; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; box-shadow: 0 6px 14px -8px rgba(26,26,26,.4); }
+.look { display: flex; align-items: center; gap: 16px; }
+.look-vid { width: 64px; aspect-ratio: 9/16; border-radius: 12px; background: #1a1a1a center/cover; box-shadow: 0 14px 28px -12px rgba(26,26,26,.45); transform: rotate(-4deg); }
+.look-kit { display: flex; flex-direction: column; gap: 8px; }
+.swatches { display: flex; gap: 4px; }
+.swatches i { width: 18px; height: 18px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(33,33,33,.1); }
+.type-aa { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: 36px; line-height: .8; }
+.cap-chip { display: inline-block; background: #fff; border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 700; box-shadow: 0 6px 14px -8px rgba(26,26,26,.4); }
 
 /* 04 tiles */
-.tiles { display: grid; grid-template-columns: repeat(3, 64px); gap: 12px 18px; justify-content: center; }
+.tiles { display: grid; grid-template-columns: repeat(6, 52px); gap: 8px 6px; justify-content: center; }
 .tiles > div { display: flex; flex-direction: column; align-items: center; }
 
 /* 05 capture */
-.capture { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 5px; }
-.cap-form { display: flex; align-items: center; background: #fff; border-radius: 999px; padding: 4px 4px 4px 14px; border: 1px solid rgba(33,33,33,.1); box-shadow: 0 10px 22px -14px rgba(26,26,26,.35); }
-.cap-form span { flex: 1; font-size: 13px; color: rgba(33,33,33,.4); }
-.cap-form b { background: var(--dark); color: var(--cream); font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px; }
-.capture .arrow { text-align: center; color: var(--muted-on-cream); font-size: 14px; line-height: 1; }
-.capture .pill { font-weight: 500; padding: 7px 14px; }
+.capture { width: 100%; max-width: 270px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.capture .cap-form, .capture .pill.ink { grid-column: span 2; }
+.cap-form { display: flex; align-items: center; background: #fff; border-radius: 999px; padding: 3px 3px 3px 12px; border: 1px solid rgba(33,33,33,.1); box-shadow: 0 8px 18px -12px rgba(26,26,26,.35); margin-bottom: 4px; }
+.cap-form span { flex: 1; font-size: 12px; color: rgba(33,33,33,.4); }
+.cap-form b { background: var(--dark); color: var(--cream); font-size: 11px; font-weight: 600; padding: 6px 12px; border-radius: 999px; }
+.capture .pill { font-weight: 500; }
+.capture .pill.ink { padding: 7px 12px; margin-top: 4px; }
 
 /* 06 week + chain */
-.run { width: 100%; display: flex; flex-direction: column; gap: 14px; }
-.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; max-width: 300px; }
-.week div { text-align: center; font-size: 11px; font-weight: 600; color: rgba(33,33,33,.45); }
+.run { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; width: 210px; }
+.week div { text-align: center; font-size: 10px; font-weight: 600; color: rgba(33,33,33,.45); }
 .week div.on { color: var(--dark); }
-.week i { display: block; margin-top: 5px; aspect-ratio: 9/16; border-radius: 7px; background: rgba(255,255,255,.55) center/cover; border: 1px solid rgba(33,33,33,.08); }
-.fixchain { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; }
-.fixchain span { padding: 6px 11px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid rgba(33,33,33,.08); }
+.week i { display: block; margin-top: 3px; aspect-ratio: 9/16; border-radius: 5px; background: rgba(255,255,255,.55) center/cover; border: 1px solid rgba(33,33,33,.08); }
+.fixchain { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3px; font-size: 11px; font-weight: 600; }
+.fixchain span { padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid rgba(33,33,33,.08); }
 .fixchain span.bad { background: var(--red); color: var(--cream); border-color: var(--red); }
-.fixchain em { font-style: normal; color: var(--muted-on-cream); }
+.fixchain em { font-style: normal; color: var(--muted-on-cream); font-size: 10px; }
 
-/* you */
-.you { width: 100%; max-width: 230px; display: flex; flex-direction: column; gap: 8px; }
-.voice { display: flex; align-items: center; gap: 12px; background: rgba(237,225,211,.08); border: 1px solid var(--line-on-dark); border-radius: 14px; padding: 8px 12px; }
-.voice .play { width: 28px; height: 28px; border-radius: 50%; background: var(--red); display: grid; place-items: center; flex: none; }
-.voice .wave { display: flex; align-items: center; gap: 3px; height: 20px; flex: 1; }
+/* What you do strip */
+.b-you { grid-column: span 12; display: flex; align-items: center; gap: 24px; background: var(--dark); color: var(--cream); border-radius: 22px; padding: 12px 20px; }
+.b-you h3 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: 28px; line-height: .95; text-transform: uppercase; flex: none; }
+.b-you p { font-size: 13px; line-height: 1.45; color: var(--muted-on-dark); flex: 1; }
+.voice { display: flex; align-items: center; gap: 10px; background: rgba(237,225,211,.08); border: 1px solid var(--line-on-dark); border-radius: 12px; padding: 7px 12px; width: 200px; flex: none; }
+.voice .play { width: 26px; height: 26px; border-radius: 50%; background: var(--red); display: grid; place-items: center; flex: none; }
+.voice .wave { display: flex; align-items: center; gap: 3px; height: 18px; flex: 1; }
 .voice .wave i { width: 3px; border-radius: 2px; background: var(--cream); opacity: .7; }
-.pick { display: flex; gap: 8px; }
-.pick i { flex: 1; aspect-ratio: 9/16; border-radius: 9px; background: #333 center/cover; position: relative; opacity: .45; }
-.pick i.yes { opacity: 1; outline: 2px solid var(--red); outline-offset: 2px; }
-.b-dark .b-out { border-top-color: var(--line-on-dark); color: var(--muted-on-dark); }
 
 @media (max-width: 1024px) {
-  .b-7, .b-5, .b-4, .b-8 { grid-column: span 6; }
-  .b-you { grid-column: span 12; }
+  .b-5, .b-4, .b-3 { grid-column: span 6; }
+  .b-you { flex-wrap: wrap; }
 }
 @media (max-width: 640px) {
-  .bento { gap: 14px; margin-top: 44px; }
-  .b-7, .b-5, .b-4, .b-8, .b-you { grid-column: span 12; }
-  .b-card { padding: 24px 20px 18px; border-radius: 20px; }
-  .b-art { padding: 16px 0 14px; }
-  .venn { width: 250px; height: 140px; } .venn span { width: 140px; height: 140px; }
-  .venn .v1 { padding-left: 14px; } .venn .v2 { padding-right: 14px; }
-  .look-vid { width: 88px; }
+  .b-5, .b-4, .b-3 { grid-column: span 12; }
+  .b-card { min-height: 0; }
+  .b-you { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
 
 /* Chain */
@@ -369,48 +364,47 @@ footer a { text-decoration: none; }
     <p class="sub">Once we're aligned on the dynamics of your business and the goals, I'll take it from there. I'll keep you updated and let you know if I need something, but I operate very independently.</p>
     <p class="sub">Depending on what makes the most sense, I'll either do the work myself or delegate to my network of contractors and consultants.</p>
     <div class="bento">
-      <article class="b-card b-7 b-warm">
+      <article class="b-card b-5 b-warm">
         <div class="b-top"><span class="b-n">01</span><h3>Map it out</h3></div><span class="b-when">Weeks one and two</span>
-        <div class="b-body"><p>I go through every channel, every edit, every number and every person on your team.</p><p>We find where your deals come from today, who your content pulls in versus who you want to sell to, and what you like to make versus what drains you.</p></div>
+        <p class="b-out">Outcome: <strong>a roadmap that says where we start.</strong></p>
         <div class="b-art" aria-hidden="true"><div class="venn"><span class="v1"><b>Who you pull in</b></span><span class="v2"><b>Who you want</b></span><em class="vx" style="font-style:normal">Start here</em></div></div>
-        <p class="b-out"><strong>Outcome:</strong> a roadmap that says where we start.</p>
-      </article>
-      <article class="b-card b-5">
-        <div class="b-top"><span class="b-n">02</span><h3>Set the goals</h3></div><span class="b-when">Week two</span>
-        <div class="b-body"><p>We turn the roadmap into one revenue goal and a short list of numbers under it: views, profile visits, site traffic, newsletter sign-ups and booked calls.</p><p>Every post gets its own tracked link, so each number traces back to a post. We keep the list short, so it adds no admin work.</p></div>
-        <div class="b-art" aria-hidden="true"><div class="ladder"><div class="pill">Views <em>tracked</em></div><div class="pill">Profile visits <em>tracked</em></div><div class="pill">Site traffic <em>tracked</em></div><div class="pill">Newsletter sign-ups <em>tracked</em></div><div class="arrow">&#8595;</div><div class="pill ink">Booked calls <em>the goal</em></div></div></div>
-        <p class="b-out"><strong>Outcome:</strong> one dashboard with a handful of numbers.</p>
+        <details class="b-more"><summary>How</summary><p>I go through every channel, every edit, every number and every person on your team.</p><p>We find where your deals come from today, who your content pulls in versus who you want to sell to, and what you like to make versus what drains you.</p></details>
       </article>
       <article class="b-card b-4">
+        <div class="b-top"><span class="b-n">02</span><h3>Set the goals</h3></div><span class="b-when">Week two</span>
+        <p class="b-out">Outcome: <strong>one dashboard with a handful of numbers.</strong></p>
+        <div class="b-art" aria-hidden="true"><div class="ladder"><div class="pill">Views <em>tracked</em></div><div class="pill">Profile visits <em>tracked</em></div><div class="pill">Site traffic <em>tracked</em></div><div class="pill">Newsletter sign-ups <em>tracked</em></div><div class="pill ink">Booked calls <em>the goal</em></div></div></div>
+        <details class="b-more"><summary>How</summary><p>We turn the roadmap into one revenue goal and a short list of numbers under it: views, profile visits, site traffic, newsletter sign-ups and booked calls.</p><p>Every post gets its own tracked link, so each number traces back to a post. We keep the list short, so it adds no admin work.</p></details>
+      </article>
+      <article class="b-card b-3">
         <div class="b-top"><span class="b-n">03</span><h3>Build the look</h3></div><span class="b-when">Weeks two to four, only if you need it</span>
-        <div class="b-body"><p>If your content has no visual style yet, I make one: captions, colours, type, thumbnails, and the open and end cards.</p><p>Your team gets it as templates, so every post looks like you from the first frame.</p></div>
+        <p class="b-out">Outcome: <strong>a style kit your whole team works from.</strong></p>
         <div class="b-art" aria-hidden="true"><div class="look"><span class="look-vid" style="background-image:url('https://i.vimeocdn.com/video/2160943684-1bdbd5a17ff34ee4cbb44905cc795d54b0066f922bd9bc145abf40daa1492494-d_540x960')"></span><div class="look-kit"><span class="type-aa">Aa</span><div class="swatches"><i style="background:#212121"></i><i style="background:#EDE1D3"></i><i style="background:#AA1F23"></i><i style="background:#C9A27E"></i></div><span><span class="cap-chip">Captions</span></span></div></div></div>
-        <p class="b-out"><strong>Outcome:</strong> a style kit your whole team works from.</p>
+        <details class="b-more"><summary>How</summary><p>If your content has no visual style yet, I make one: captions, colours, type, thumbnails, and the open and end cards.</p><p>Your team gets it as templates, so every post looks like you from the first frame.</p></details>
       </article>
       <article class="b-card b-4">
         <div class="b-top"><span class="b-n">04</span><h3>Get seen</h3></div><span class="b-when">From week four, then every week</span>
-        <div class="b-body"><p>The right people learn who you are, what you sell and why it is worth the money.</p><p>We pick the channels that fit you: a content engine on LinkedIn, X, YouTube or Instagram, and articles that rank in search.</p></div>
+        <p class="b-out">Outcome: <strong>at least one channel that runs every week.</strong></p>
         <div class="b-art" aria-hidden="true"><div class="tiles"><div><span class="tile"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4" fill="#0A66C2"/><rect x="6" y="10" width="2.6" height="8" fill="#fff"/><circle cx="7.3" cy="6.9" r="1.6" fill="#fff"/><path d="M11 10h2.5v1.2c.5-.8 1.4-1.4 2.7-1.4 2 0 2.8 1.3 2.8 3.4V18h-2.6v-4.3c0-1-.3-1.7-1.3-1.7-1 0-1.5.7-1.5 1.8V18H11z" fill="#fff"/></svg></span><span class="tile-l">LinkedIn</span></div><div><span class="tile"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20" stroke="#111" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="tile-l">X</span></div><div><span class="tile"><svg viewBox="0 0 24 24"><rect x="1.5" y="5" width="21" height="14" rx="4.5" fill="#FF0000"/><path d="M10 9l5.5 3-5.5 3z" fill="#fff"/></svg></span><span class="tile-l">YouTube</span></div><div><span class="tile"><svg viewBox="0 0 24 24"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F9A23B"/><stop offset=".5" stop-color="#E1306C"/><stop offset="1" stop-color="#7B3FE4"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="url(#ig)" stroke-width="2.2"/><circle cx="12" cy="12" r="4" fill="none" stroke="url(#ig)" stroke-width="2.2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#E1306C"/></svg></span><span class="tile-l">Instagram</span></div><div><span class="tile"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="#212121" stroke-width="2.4"/><path d="M15 15l5 5" stroke="#AA1F23" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="tile-l">Search</span></div><div><span class="tile"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="#212121" stroke-width="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4" stroke="#212121" stroke-width="2" stroke-linecap="round"/></svg></span><span class="tile-l">Articles</span></div></div></div>
-        <p class="b-out"><strong>Outcome:</strong> at least one channel that runs every week.</p>
+        <details class="b-more"><summary>How</summary><p>The right people learn who you are, what you sell and why it is worth the money.</p><p>We pick the channels that fit you: a content engine on LinkedIn, X, YouTube or Instagram, and articles that rank in search.</p></details>
       </article>
       <article class="b-card b-4">
         <div class="b-top"><span class="b-n">05</span><h3>Get hired</h3></div><span class="b-when">From week four, then every week</span>
-        <div class="b-body"><p>We turn the attention into calls. Every post points to one next step: a call, the newsletter or a free resource.</p><p>Email capture and follow-up emails keep the people who are not ready yet.</p></div>
-        <div class="b-art" aria-hidden="true"><div class="capture"><div class="cap-form"><span>you@company.com</span><b>Join</b></div><div class="arrow">&#8595;</div><div class="pill">Welcome email</div><div class="pill">Follow-up</div><div class="arrow">&#8595;</div><div class="pill ink">Booked call <em>the goal</em></div></div></div>
-        <p class="b-out"><strong>Outcome:</strong> at least one system that turns views into booked calls.</p>
+        <p class="b-out">Outcome: <strong>at least one system that turns views into booked calls.</strong></p>
+        <div class="b-art" aria-hidden="true"><div class="capture"><div class="cap-form"><span>you@company.com</span><b>Join</b></div><div class="pill">Welcome email</div><div class="pill">Follow-up</div><div class="pill ink">Booked call <em>the goal</em></div></div></div>
+        <details class="b-more"><summary>How</summary><p>We turn the attention into calls. Every post points to one next step: a call, the newsletter or a free resource.</p><p>Email capture and follow-up emails keep the people who are not ready yet.</p></details>
       </article>
-      <article class="b-card b-8 b-warm">
+      <article class="b-card b-4 b-warm">
         <div class="b-top"><span class="b-n">06</span><h3>Run it</h3></div><span class="b-when">Every week</span>
-        <div class="b-body"><p>I fill the gaps on the team, with new hires or people from my own network. Each week we check the numbers.</p><p>When a post misses, we walk the chain in order: idea, hook, packaging, edit, distribution. We fix the first step that broke.</p></div>
+        <p class="b-out">Outcome: <strong>content that ships every week without you in every meeting.</strong></p>
         <div class="b-art" aria-hidden="true"><div class="run"><div class="week"><div class="on">M<i style="background-image:url('https://i.vimeocdn.com/video/2080335707-5b6e6a6e8a6eed75484320f1782986bff3b2f3f92b0a0f329d1465435d85c96e-d_270x480')"></i></div><div>T<i></i></div><div class="on">W<i style="background-image:url('https://i.vimeocdn.com/video/2028694735-acb66042fbc71c7136dbd8c29f9732493633336b2ac06de625f6901ae62373ca-d_270x480')"></i></div><div>T<i></i></div><div class="on">F<i style="background-image:url('https://i.vimeocdn.com/video/2161245919-db8d56801649cdcfc615ccff7f4bf3724c6a1600da03fe86e549f11a31c397f7-d_270x480')"></i></div><div>S<i></i></div><div>S<i></i></div></div><div class="fixchain"><span>Idea</span><em>&#8594;</em><span>Hook</span><em>&#8594;</em><span class="bad">Packaging</span><em>&#8594;</em><span>Edit</span><em>&#8594;</em><span>Distribution</span></div></div></div>
-        <p class="b-out"><strong>Outcome:</strong> content that ships every week without you in every meeting.</p>
+        <details class="b-more"><summary>How</summary><p>I fill the gaps on the team, with new hires or people from my own network. Each week we check the numbers.</p><p>When a post misses, we walk the chain in order: idea, hook, packaging, edit, distribution. We fix the first step that broke.</p></details>
       </article>
-      <article class="b-card b-4 b-dark b-you">
-        <div class="b-top"><h3>What you do</h3></div>
-        <div class="b-body"><p>You bring the ideas and show up on camera. Voice notes and DMs are fine. Every week you pick what gets made.</p><p>The team does the rest. You get one dashboard with the goals, the numbers and who owns what.</p></div>
-        <div class="b-art" aria-hidden="true"><div class="you"><div class="voice"><span class="play"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 1.5l7 4.5-7 4.5z" fill="#EDE1D3"/></svg></span><span class="wave"><i style="height:30%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:90%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:30%"></i><i style="height:65%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:25%"></i><i style="height:60%"></i><i style="height:40%"></i><i style="height:70%"></i><i style="height:35%"></i></span></div><div class="pick"><i style="background-image:url('https://i.vimeocdn.com/video/2080324928-ccc866651c29b9b5eb3d26ba6981788e465895aee17a511edabb4d20e19a7a85-d_270x480')"></i><i class="yes" style="background-image:url('https://i.vimeocdn.com/video/2160943684-1bdbd5a17ff34ee4cbb44905cc795d54b0066f922bd9bc145abf40daa1492494-d_540x960')"></i><i style="background-image:url('https://i.vimeocdn.com/video/2080335707-5b6e6a6e8a6eed75484320f1782986bff3b2f3f92b0a0f329d1465435d85c96e-d_270x480')"></i></div></div></div>
-        
-      </article>
+      <div class="b-you">
+        <h3>What you do</h3>
+        <p>You bring the ideas and show up on camera. Voice notes and DMs are fine. Every week you pick what gets made. The team does the rest. You get one dashboard with the goals, the numbers and who owns what.</p>
+        <div class="voice"><span class="play"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 1.5l7 4.5-7 4.5z" fill="#EDE1D3"/></svg></span><span class="wave"><i style="height:30%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:90%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:30%"></i><i style="height:65%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:25%"></i><i style="height:60%"></i><i style="height:40%"></i><i style="height:70%"></i><i style="height:35%"></i></span></div>
+      </div>
     </div>
   </div>
 </section>
