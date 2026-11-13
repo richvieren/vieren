@@ -65,14 +65,14 @@ section { padding: 120px var(--gutter); }
 .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
 
 /* Proof */
-.reel { padding-top: 0; padding-bottom: 100px; }
-.reel-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; background: radial-gradient(90% 120% at 0% 0%, rgba(170,31,35,.28), transparent 60%), linear-gradient(160deg, #2b2826, #1a1918); box-shadow: inset 0 0 0 1px rgba(237,225,211,.08), 0 30px 60px -30px rgba(0,0,0,.6); }
+.reel { position: relative; z-index: 1; padding-top: 0; padding-bottom: 0; background: linear-gradient(var(--dark) 50%, var(--cream) 50%); }
+.reel-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; background: radial-gradient(90% 120% at 0% 0%, rgba(170,31,35,.28), transparent 60%), linear-gradient(160deg, #2b2826, #1a1918); box-shadow: inset 0 0 0 1px rgba(237,225,211,.08), 0 30px 60px -30px rgba(0,0,0,.6), 0 0 90px 10px rgba(170,31,35,.30), 0 50px 140px -20px rgba(170,31,35,.45); }
 .reel-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .reel-ph { position: absolute; inset: 0; display: grid; place-items: center; }
 .reel-play { width: 84px; height: 84px; border-radius: 50%; background: var(--red); display: grid; place-items: center; box-shadow: 0 16px 40px -12px rgba(170,31,35,.7); transition: transform .6s var(--lift, ease); }
 .reel-play svg { width: 28px; height: 28px; margin-left: 4px; fill: var(--cream); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) { .reel-frame:hover .reel-play { transform: scale(1.08); } }
-@media (max-width: 640px) { .reel { padding-bottom: 64px; } .reel-frame { border-radius: 14px; } .reel-play { width: 60px; height: 60px; } .reel-play svg { width: 20px; height: 20px; } }
+@media (max-width: 640px) { .proof .proof-cap { margin-top: 6px; } .reel-frame { box-shadow: inset 0 0 0 1px rgba(237,225,211,.08), 0 0 50px 4px rgba(170,31,35,.3), 0 30px 70px -14px rgba(170,31,35,.42); } .reel-frame { border-radius: 14px; } .reel-play { width: 60px; height: 60px; } .reel-play svg { width: 20px; height: 20px; } }
 .proof { padding-top: 100px; padding-bottom: 100px; text-align: center; }
 .proof-num { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(110px, 20vw, 280px); line-height: .85; color: var(--red); }
 .proof-cap { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -.01em; color: var(--muted-on-cream); margin: -22px auto 64px; max-width: none; line-height: 1.2; }
