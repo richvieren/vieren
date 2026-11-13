@@ -58,7 +58,7 @@ section { padding: 120px var(--gutter); }
 .hero { position: relative; overflow: hidden; }
 .hero > .wrap { position: relative; z-index: 2; }
 .hero-trail { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.hero-trail img { position: absolute; left: 0; top: 0; width: auto; height: auto; max-width: var(--s); max-height: var(--s); transform: translate(-50%, -50%); filter: drop-shadow(0 20px 30px rgba(0,0,0,.5)); visibility: hidden; }
+.hero-trail img { position: absolute; left: 0; top: 0; width: auto; height: auto; max-width: calc(var(--s) * var(--k, 1)); max-height: calc(var(--s) * var(--k, 1)); transform: translate(-50%, -50%); filter: drop-shadow(0 20px 30px rgba(0,0,0,.5)); visibility: hidden; }
 .hero-trail img.on { visibility: visible; animation: trail-in .28s cubic-bezier(.22,1,.36,1); }
 @keyframes trail-in { from { transform: translate(-50%, -50%) scale(.82); } }
 @media (prefers-reduced-motion: reduce) { .hero-trail img.on { animation: none; } }
@@ -594,10 +594,11 @@ footer a { text-decoration: none; }
 (function(){
   var hero=document.querySelector('.hero'), box=document.querySelector('.hero-trail');
   if(!hero||!box) return;
-  var names=['shark','porsche-964','crown','greek-head','sony-vx1000','senna-helmet','banana','espresso-top','vitruvian-man','bones-wheel','envelope-seal','contax-t2','sony-handycam-trv','espresso-cup','nokia-3210','ipod','cd-r','etnies','kodak-200','lightning'];
-  var imgs=names.map(function(n){ var i=new Image(); i.src='/image/cracked/hero/'+n+'.webp'; i.alt=''; i.decoding='async'; box.appendChild(i); return i; });
+  var names=['shark','porsche-964','crown','greek-head','sony-vx1000','senna-helmet','banana','espresso-top','vitruvian-man','bones-wheel','envelope-seal','contax-t2','sony-handycam-trv','espresso-cup','nokia-3210','ipod','cd-r','kodak-200','lightning'];
+  var K={'shark':1.3,'greek-head':1.3,'porsche-964':1.2,'lightning':.6,'espresso-cup':.7,'espresso-top':.7};
+  var imgs=names.map(function(n){ var i=new Image(); if(K[n]) i.style.setProperty('--k',K[n]); i.src='/image/cracked/hero/'+n+'.webp'; i.alt=''; i.decoding='async'; box.appendChild(i); return i; });
   var KEEP=6, idx=0, z=1, shown=[], last=null;
-  function size(){ return innerWidth<640 ? Math.round(innerWidth*.36) : Math.round(Math.min(300,Math.max(170,innerWidth*.19))); }
+  function size(){ return innerWidth<640 ? Math.round(innerWidth*.25) : Math.round(Math.min(210,Math.max(120,innerWidth*.133))); }
   box.style.setProperty('--s',size()+'px');
   addEventListener('resize',function(){ box.style.setProperty('--s',size()+'px'); });
   function place(x,y){
@@ -611,7 +612,7 @@ footer a { text-decoration: none; }
   // starting stack, in the open space
   var r=hero.getBoundingClientRect(), phone=innerWidth<640;
   var sx=phone? r.width*.55 : r.width*.78, sy=phone? 190 : r.height*.32;
-  for(var n=0;n<KEEP;n++) place(sx+(n-2.5)*(phone?24:56), sy+Math.sin(n*1.3)*(phone?18:40));
+  for(var n=0;n<KEEP;n++) place(sx+(n-2.5)*(phone?17:40), sy+Math.sin(n*1.3)*(phone?13:28));
   if(!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   hero.addEventListener('pointermove',function(e){
     if(e.pointerType!=='mouse') return;
