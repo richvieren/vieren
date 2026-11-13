@@ -249,14 +249,18 @@ section { padding: 120px var(--gutter); }
 .about p + p { margin-top: 18px; }
 
 /* Compare */
-.compare { width: 100%; border-collapse: collapse; margin-top: 56px; }
-.compare th { text-align: center; font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; text-transform: none; letter-spacing: -.01em; font-size: 32px; line-height: 1; padding: 0 24px 20px 0; width: 50%; }
-.compare th:last-child { color: var(--red); }
-.compare th { padding: 0 12px 20px; }
-.compare td { text-align: center; padding: 22px 12px; border-top: 1px solid var(--line-on-dark); font-size: 16px; line-height: 1.55; vertical-align: top; }
-.compare td:first-child { color: var(--muted-on-dark); }
-.cream .compare td { border-top-color: var(--line-on-cream); }
-.cream .compare td:first-child { color: var(--muted-on-cream); }
+.cmp { position: relative; margin-top: 56px; border-radius: 24px; overflow: hidden; isolation: isolate; background: #1b1a18; box-shadow: inset 0 0 0 1px rgba(237,225,211,.08); }
+.cmp-wall { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: blur(16px) brightness(.95) saturate(1.3); transform: scale(1.15); }
+.compare { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.compare col.c-what { width: 26%; } .compare col.c-v, .compare col.c-a { width: 37%; }
+.compare thead th { text-align: center; font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; text-transform: none; letter-spacing: -.01em; font-size: 32px; line-height: 1; padding: 30px 20px 26px; color: var(--cream); }
+.compare th.v, .compare td.v { background: rgba(251,247,241,.88); color: var(--dark); }
+.compare thead th.v { color: var(--red); }
+.compare tbody th { text-align: left; font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 16px; line-height: 1.4; padding: 22px 20px 22px 32px; color: var(--cream); vertical-align: middle; }
+.compare tbody td { text-align: center; padding: 22px 20px; font-size: 16px; line-height: 1.5; vertical-align: middle; }
+.compare tbody td.a { color: rgba(237,225,211,.62); }
+.compare tbody tr > * { border-top: 1px solid rgba(237,225,211,.12); }
+.compare tbody tr > .v { border-top-color: rgba(33,33,33,.1); }
 
 
 
@@ -311,8 +315,10 @@ footer a { text-decoration: none; }
   .pillars, .cases { grid-template-columns: 1fr; }
   .pillar, .pillar + .pillar { padding: 28px 0; border-left: 0; }
   .pillar + .pillar { border-top: 1px solid var(--line-on-dark); }
-  .compare th { font-size: 24px; }
-  .compare td { font-size: 14px; padding-right: 12px; }
+  .compare thead th { font-size: 24px; padding: 22px 10px 18px; }
+  .compare tbody td { font-size: 14px; padding: 18px 12px; }
+  .compare col.c-what, .compare .c-what-cell { display: none; }
+  .compare col.c-v, .compare col.c-a { width: 50%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -491,16 +497,20 @@ footer a { text-decoration: none; }
   <div class="wrap">
     <h2 class="title">Why not an agency.</h2>
     <p class="sub">An agency rents you a mid team. I build you a god tier one.</p>
-    <table class="compare">
-      <thead><tr><th scope="col">Agency</th><th scope="col">Vieren</th></tr></thead>
-      <tbody>
-        <tr><td>Their people, shared with every other client.</td><td>Your people, hired for your brand.</td></tr>
-        <tr><td>One house style for everyone.</td><td>A look built on your taste.</td></tr>
-        <tr><td>Reports on views.</td><td>Reports on booked calls and sales.</td></tr>
-        <tr><td>The editing goes offshore.</td><td>I still shoot and cut when it counts.</td></tr>
-        <tr><td>Leaves when the contract ends, and the system leaves too.</td><td>The team, the systems and the playbook stay with you.</td></tr>
-      </tbody>
-    </table>
+    <div class="cmp">
+      <img class="cmp-wall" src="/image/portfolio/reiziger.jpg" alt="" loading="lazy">
+      <table class="compare">
+        <colgroup><col class="c-what"><col class="c-v"><col class="c-a"></colgroup>
+        <thead><tr><td class="c-what-cell"></td><th scope="col" class="v">Vieren</th><th scope="col" class="a">Agency</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" class="c-what-cell">People</th><td class="v">Your people, hired for your brand.</td><td class="a">Their people, shared with every other client.</td></tr>
+          <tr><th scope="row" class="c-what-cell">Look</th><td class="v">A look built on your taste.</td><td class="a">One house style for everyone.</td></tr>
+          <tr><th scope="row" class="c-what-cell">Reporting</th><td class="v">Reports on booked calls and sales.</td><td class="a">Reports on views.</td></tr>
+          <tr><th scope="row" class="c-what-cell">Production</th><td class="v">I still shoot and cut when it counts.</td><td class="a">The editing goes offshore.</td></tr>
+          <tr><th scope="row" class="c-what-cell">After the contract</th><td class="v">The team, the systems and the playbook stay with you.</td><td class="a">Leaves when the contract ends, and the system leaves too.</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
