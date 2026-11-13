@@ -57,9 +57,11 @@ section { padding: 120px var(--gutter); }
 .hero { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 140px; padding-bottom: 80px; }
 .hero { position: relative; overflow: hidden; }
 .hero > .wrap { position: relative; z-index: 2; }
-.hero-float { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.hero-float .fl { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: auto; transform: translate3d(0, var(--py, 0px), 0) rotate(calc(var(--r) + var(--pr, 0deg))); will-change: transform; filter: drop-shadow(0 18px 24px rgba(0,0,0,.45)); }
-@media (max-width: 640px) { .hero-float .fl { display: none; } .hero-float .fl-m { display: block; left: var(--mx); top: var(--my); width: var(--mw); } }
+.hero-trail { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hero-trail img { position: absolute; left: 0; top: 0; width: auto; height: auto; max-width: var(--s); max-height: var(--s); transform: translate(-50%, -50%); filter: drop-shadow(0 20px 30px rgba(0,0,0,.5)); visibility: hidden; }
+.hero-trail img.on { visibility: visible; animation: trail-in .28s cubic-bezier(.22,1,.36,1); }
+@keyframes trail-in { from { transform: translate(-50%, -50%) scale(.82); } }
+@media (prefers-reduced-motion: reduce) { .hero-trail img.on { animation: none; } }
 .hero .hero-sub { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.15; letter-spacing: -.01em; margin: -16px 0 32px; }
 .hero h1 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(64px, 13vw, 210px); line-height: .86; text-transform: uppercase; letter-spacing: .01em; margin-bottom: 40px; }
 .hero h1 span { display: block; }
@@ -355,28 +357,7 @@ footer a { text-decoration: none; }
 
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-float" aria-hidden="true">
-    <img class="fl fl-m" src="/image/cracked/hero/shark.webp" alt="" data-s="0.55" style="--x:-4%;--y:6%;--w:14vw;--r:-6deg;--mx:-6%;--my:9%;--mw:30vw">
-    <img class="fl" src="/image/cracked/hero/vitruvian-man.webp" alt="" data-s="0.12" style="--x:21%;--y:2%;--w:5.5vw;--r:-5deg">
-    <img class="fl fl-m" src="/image/cracked/hero/crown.webp" alt="" data-s="0.3" style="--x:33%;--y:5%;--w:6vw;--r:8deg;--mx:30%;--my:23%;--mw:20vw">
-    <img class="fl" src="/image/cracked/hero/cd-r.webp" alt="" data-s="0.2" style="--x:46%;--y:2%;--w:4vw;--r:0deg">
-    <img class="fl" src="/image/cracked/hero/etnies.webp" alt="" data-s="0.35" style="--x:55%;--y:12%;--w:7vw;--r:-6deg">
-    <img class="fl" src="/image/cracked/hero/senna-helmet.webp" alt="" data-s="0.25" style="--x:64%;--y:2%;--w:6vw;--r:10deg">
-    <img class="fl fl-m" src="/image/cracked/hero/porsche-964.webp" alt="" data-s="0.5" style="--x:76%;--y:7%;--w:24vw;--r:-4deg;--mx:50%;--my:8%;--mw:54vw">
-    <img class="fl fl-m" src="/image/cracked/hero/greek-head.webp" alt="" data-s="0.3" style="--x:88%;--y:33%;--w:10vw;--r:6deg;--mx:78%;--my:22%;--mw:22vw">
-    <img class="fl" src="/image/cracked/hero/lightning.webp" alt="" data-s="0.65" style="--x:83%;--y:31%;--w:3.5vw;--r:12deg">
-    <img class="fl" src="/image/cracked/hero/contax-t2.webp" alt="" data-s="0.25" style="--x:80%;--y:47%;--w:6vw;--r:8deg">
-    <img class="fl fl-m" src="/image/cracked/hero/nokia-3210.webp" alt="" data-s="0.4" style="--x:94%;--y:50%;--w:4vw;--r:-14deg;--mx:90%;--my:36%;--mw:9vw">
-    <img class="fl" src="/image/cracked/hero/sony-vx1000.webp" alt="" data-s="0.55" style="--x:84%;--y:62%;--w:13vw;--r:-6deg">
-    <img class="fl" src="/image/cracked/hero/espresso-cup.webp" alt="" data-s="0.35" style="--x:91%;--y:88%;--w:9vw;--r:0deg">
-    <img class="fl" src="/image/cracked/hero/bones-wheel.webp" alt="" data-s="0.4" style="--x:1%;--y:37%;--w:5.5vw;--r:0deg">
-    <img class="fl" src="/image/cracked/hero/kodak-200.webp" alt="" data-s="0.2" style="--x:8.5%;--y:22%;--w:2.4vw;--r:18deg">
-    <img class="fl" src="/image/cracked/hero/envelope-seal.webp" alt="" data-s="0.3" style="--x:0%;--y:50%;--w:8vw;--r:10deg">
-    <img class="fl" src="/image/cracked/hero/ipod.webp" alt="" data-s="0.7" style="--x:2%;--y:66%;--w:4.5vw;--r:-10deg">
-    <img class="fl fl-m" src="/image/cracked/hero/espresso-top.webp" alt="" data-s="0.45" style="--x:-3%;--y:83%;--w:10vw;--r:0deg;--mx:56%;--my:30%;--mw:20vw">
-    <img class="fl fl-m" src="/image/cracked/hero/banana.webp" alt="" data-s="0.6" style="--x:6%;--y:88%;--w:6vw;--r:-20deg;--mx:4%;--my:29%;--mw:18vw">
-    <img class="fl" src="/image/cracked/hero/sony-handycam-trv.webp" alt="" data-s="0.6" style="--x:44%;--y:93%;--w:12vw;--r:-4deg">
-  </div>
+  <div class="hero-trail" aria-hidden="true"></div>
   <div class="wrap">
     <span class="label">For founders and personal brands</span>
     <h1><span>I build the machine</span><span class="red">behind your name.</span></h1>
@@ -611,17 +592,35 @@ footer a { text-decoration: none; }
   io.observe(arc);
 })();
 (function(){
-  var els=[].slice.call(document.querySelectorAll('.hero-float .fl'));
-  if(!els.length||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var tick=false;
-  function upd(){
-    tick=false;
-    var y=scrollY; if(y>innerHeight*1.5) return;
-    var m=innerWidth<640?.6:1;
-    els.forEach(function(e,i){ var s=+e.dataset.s; e.style.setProperty('--py',(-y*s*m).toFixed(1)+'px'); e.style.setProperty('--pr',((i%2?1:-1)*y*s*.02).toFixed(2)+'deg'); });
+  var hero=document.querySelector('.hero'), box=document.querySelector('.hero-trail');
+  if(!hero||!box) return;
+  var names=['shark','porsche-964','crown','greek-head','sony-vx1000','senna-helmet','banana','espresso-top','vitruvian-man','bones-wheel','envelope-seal','contax-t2','sony-handycam-trv','espresso-cup','nokia-3210','ipod','cd-r','etnies','kodak-200','lightning'];
+  var imgs=names.map(function(n){ var i=new Image(); i.src='/image/cracked/hero/'+n+'.webp'; i.alt=''; i.decoding='async'; box.appendChild(i); return i; });
+  var KEEP=6, idx=0, z=1, shown=[], last=null;
+  function size(){ return innerWidth<640 ? Math.round(innerWidth*.36) : Math.round(Math.min(300,Math.max(170,innerWidth*.19))); }
+  box.style.setProperty('--s',size()+'px');
+  addEventListener('resize',function(){ box.style.setProperty('--s',size()+'px'); });
+  function place(x,y){
+    var i=imgs[idx]; idx=(idx+1)%imgs.length;
+    i.classList.remove('on'); void i.offsetWidth;
+    i.style.left=x+'px'; i.style.top=y+'px'; i.style.zIndex=z++;
+    i.classList.add('on');
+    var k=shown.indexOf(i); if(k>-1) shown.splice(k,1);
+    shown.push(i); if(shown.length>KEEP) shown.shift().classList.remove('on');
   }
-  function req(){ if(!tick){ tick=true; requestAnimationFrame(upd); } }
-  addEventListener('scroll',req,{passive:true}); addEventListener('resize',req); upd();
+  // starting stack, in the open space
+  var r=hero.getBoundingClientRect(), phone=innerWidth<640;
+  var sx=phone? r.width*.55 : r.width*.78, sy=phone? 190 : r.height*.32;
+  for(var n=0;n<KEEP;n++) place(sx+(n-2.5)*(phone?24:56), sy+Math.sin(n*1.3)*(phone?18:40));
+  if(!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  hero.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse') return;
+    var b=hero.getBoundingClientRect(), x=e.clientX-b.left, y=e.clientY-b.top;
+    if(!last){ last=[x,y]; return; }
+    var dx=x-last[0], dy=y-last[1], gap=Math.max(36,size()*.15);
+    if(dx*dx+dy*dy>gap*gap){ last=[x,y]; place(x,y); }
+  });
+  hero.addEventListener('pointerleave',function(){ last=null; });
 })();
 (function(){
   var f=document.querySelector('.reel-frame');
