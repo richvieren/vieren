@@ -70,6 +70,10 @@ section { padding: 120px var(--gutter); }
 .hero-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
 .hero p { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(18px, 2vw, 24px); line-height: 1.5; max-width: 620px; }
 .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.hero > .wrap { text-align: center; }
+.hero .hero-row { flex-direction: column; align-items: center; gap: 32px; }
+.hero .hero-row p { margin: 0 auto; }
+.hero .hero-cta { align-items: center; }
 
 /* Proof */
 .reel { position: relative; z-index: 1; padding-top: 0; padding-bottom: 0; background: linear-gradient(var(--dark) 50%, var(--cream) 50%); }
@@ -611,7 +615,7 @@ footer a { text-decoration: none; }
   }
   // starting stack, in the open space
   var r=hero.getBoundingClientRect(), phone=innerWidth<640;
-  var sx=phone? r.width*.55 : r.width*.78, sy=phone? 190 : r.height*.32;
+  var sx=phone? r.width*.55 : r.width*.83, sy=phone? 190 : r.height*.32;
   for(var n=0;n<KEEP;n++) place(sx+(n-2.5)*(phone?17:40), sy+Math.sin(n*1.3)*(phone?13:28));
   if(!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   hero.addEventListener('pointermove',function(e){
