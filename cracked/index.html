@@ -608,6 +608,9 @@ footer a { text-decoration: none; }
   function place(x,y){
     var i=imgs[idx]; idx=(idx+1)%imgs.length;
     i.classList.remove('on'); void i.offsetWidth;
+    // keep the whole image (and its shadow) inside the hero, so the edge never cuts it
+    var w=i.offsetWidth/2, h=i.offsetHeight/2, W=box.clientWidth, H=box.clientHeight;
+    if(w&&h){ x=Math.min(Math.max(x,w+12),W-w-12); y=Math.min(Math.max(y,h+12),H-h-52); }
     i.style.left=x+'px'; i.style.top=y+'px'; i.style.zIndex=z++;
     i.classList.add('on');
     var k=shown.indexOf(i); if(k>-1) shown.splice(k,1);
