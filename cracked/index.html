@@ -599,8 +599,8 @@ footer a { text-decoration: none; }
 (function(){
   var hero=document.querySelector('.hero'), box=document.querySelector('.hero-trail');
   if(!hero||!box) return;
-  var names=['shark','porsche-964','crown','greek-head','sony-vx1000','senna-helmet','eightball','basketball-hoop','boxing-gloves','vitruvian-man','casio-watch','ak-47','envelope-seal','skull','contax-t2','espresso-cup','nokia-3210','rose','chess-queen','ipod','glock','kodak-200','kettlebell'];
-  var K={'shark':1.3,'greek-head':1.3,'porsche-964':1.2,'espresso-cup':.7,'skull':.7,'ipod':.7,'eightball':.7,'contax-t2':.7,'ak-47':1.3};
+  var names=['shark','porsche-964','crown','greek-head','sony-vx1000','senna-helmet','eightball','leopard','boxing-gloves','vitruvian-man','casio-watch','ak-47','envelope-seal','skull','contax-t2','espresso-cup','wine-bottle','rose','chess-queen','glock','kodak-200','kettlebell'];
+  var K={'shark':1.3,'greek-head':1.3,'porsche-964':1.2,'espresso-cup':.7,'skull':.7,'eightball':.7,'contax-t2':.7,'ak-47':1.3};
   var imgs=names.map(function(n){ var i=new Image(); if(K[n]) i.style.setProperty('--k',K[n]); i.src='/image/cracked/hero/'+n+'.webp'; i.alt=''; i.decoding='async'; box.appendChild(i); return i; });
   var KEEP=6, idx=0, z=1, shown=[], last=null;
   function size(){ return innerWidth<640 ? Math.round(innerWidth*.25) : Math.round(Math.min(210,Math.max(120,innerWidth*.133))); }
