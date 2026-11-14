@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: 'Podium'; src: url('/fonts/podium-sharp.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Perandory Condensed'; src: url('/fonts/perandory-condensed.otf') format('opentype'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Dharma Gothic'; src: url('/fonts/dharma-gothic-heavy.ttf') format('truetype'); font-weight: 800; font-display: swap; }
 @font-face { font-family: 'Portrait Of You'; src: url('/fonts/PortraitOfYou-Regular.woff2?v=2.6') format('woff2'); font-weight: 400; font-display: swap; }
 
@@ -63,7 +64,7 @@ section { padding: 120px var(--gutter); }
 @keyframes trail-in { from { transform: translate(-50%, -50%) scale(.82); } }
 @media (prefers-reduced-motion: reduce) { .hero-trail img.on { animation: none; } }
 .hero .hero-sub { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.15; letter-spacing: -.01em; margin: -16px 0 32px; }
-.hero h1 { font-family: 'Dharma Gothic', sans-serif; font-weight: 800; font-size: clamp(32px, 6.5vw, 105px); line-height: .86; text-transform: uppercase; letter-spacing: .01em; margin-bottom: 40px; }
+.hero h1 { font-family: 'Perandory Condensed', sans-serif; font-weight: 400; font-size: clamp(32px, 6.5vw, 105px); line-height: .86; text-transform: uppercase; letter-spacing: .01em; margin-bottom: 40px; }
 .hero h1 span { display: block; }
 .hero .label { margin-bottom: 10px; }
 .hero h1 .red { color: var(--red); }
@@ -598,7 +599,7 @@ footer a { text-decoration: none; }
 (function(){
   var hero=document.querySelector('.hero'), box=document.querySelector('.hero-trail');
   if(!hero||!box) return;
-  var names=['shark','porsche-964','crown','greek-head','sony-vx1000','senna-helmet','eightball','boxing-gloves','vitruvian-man','casio-watch','ak-47','envelope-seal','skull','contax-t2','espresso-cup','nokia-3210','rose','chess-queen','ipod','glock','kodak-200','kettlebell'];
+  var names=['shark','porsche-964','crown','greek-head','sony-vx1000','senna-helmet','eightball','basketball-hoop','boxing-gloves','vitruvian-man','casio-watch','ak-47','envelope-seal','skull','contax-t2','espresso-cup','nokia-3210','rose','chess-queen','ipod','glock','kodak-200','kettlebell'];
   var K={'shark':1.3,'greek-head':1.3,'porsche-964':1.2,'espresso-cup':.7,'skull':.7,'ipod':.7,'eightball':.7,'contax-t2':.7,'ak-47':1.3};
   var imgs=names.map(function(n){ var i=new Image(); if(K[n]) i.style.setProperty('--k',K[n]); i.src='/image/cracked/hero/'+n+'.webp'; i.alt=''; i.decoding='async'; box.appendChild(i); return i; });
   var KEEP=6, idx=0, z=1, shown=[], last=null;
