@@ -1241,9 +1241,40 @@ footer .fpages a:hover { color: var(--t1); }
   .feat-info h3 { font-size: 24px; }
   footer { flex-direction: column; gap: 8px; text-align: center; }
 }
+
+/* Loading screen: the wordmark and a red line, gone once the first screen is ready (4s at most) */
+#loader { position: fixed; inset: 0; z-index: 10000; background: var(--bg); display: grid; place-items: center; transition: opacity .5s ease, visibility .5s; }
+#loader.done { opacity: 0; visibility: hidden; }
+.ld-mark { font-family: 'Podium', sans-serif; font-weight: 900; font-size: clamp(36px, 10vw, 64px); color: var(--t1); letter-spacing: .02em; text-transform: uppercase; line-height: 1; }
+.ld-bar { width: 100%; height: 2px; margin-top: 16px; background: rgba(237,225,211,.12); overflow: hidden; }
+.ld-bar i { display: block; height: 100%; background: var(--ac); transform-origin: left; transform: scaleX(0); transition: transform .3s ease; }
+@media (prefers-reduced-motion: reduce) { #loader, .ld-bar i { transition: none; } }
+/* Floating images and the logo carousel stick out past the screen edge; clip them so phones do not zoom out */
+html { overflow-x: clip; }
 </style>
 </head>
 <body>
+<div id="loader" aria-hidden="true"><div><div class="ld-mark">Vieren</div><div class="ld-bar"><i></i></div></div></div>
+<noscript><style>#loader{display:none}</style></noscript>
+<script>
+(function(){
+  var L=document.getElementById('loader'), bar=L.querySelector('i'), t0=Date.now(), p=0, done=false;
+  function set(v){ p=Math.max(p,v); bar.style.transform='scaleX('+p.toFixed(3)+')'; }
+  var crawl=setInterval(function(){ set(p+(.9-p)*.07); },120);
+  function finish(){
+    if(done) return; done=true; clearInterval(crawl); set(1);
+    setTimeout(function(){ L.classList.add('done'); setTimeout(function(){ L.remove(); },600); }, Math.max(250,600-(Date.now()-t0)));
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    var wait=[].filter.call(document.images,function(i){ var r=i.getBoundingClientRect(); return !i.complete && r.width>0 && r.top<innerHeight && r.bottom>0; })
+      .map(function(i){ return new Promise(function(res){ i.addEventListener('load',res,{once:true}); i.addEventListener('error',res,{once:true}); }); });
+    [].forEach.call(document.querySelectorAll('video'),function(v){ var r=v.getBoundingClientRect(); if(v.readyState<2 && r.width>0 && r.top<innerHeight && r.bottom>0) wait.push(new Promise(function(res){ v.addEventListener('loadeddata',res,{once:true}); v.addEventListener('error',res,{once:true}); })); });
+    if(document.fonts&&document.fonts.ready) wait.push(document.fonts.ready);
+    Promise.all(wait).then(finish);
+  });
+  addEventListener('load',finish); setTimeout(finish,4000);
+})();
+</script>
 
 <nav>
   <a href="/" class="nav-logo">Vieren</a>
@@ -1362,43 +1393,43 @@ footer .fpages a:hover { color: var(--t1); }
     </div>
     <!-- 2: right -->
     <div class="timeline-entry">
-      <div class="timeline-side"><div class="timeline-year">1998</div><div class="timeline-text">First video camera. Started filming everything.</div><img src="originstory/jvc-firstvideocamera.png" alt="First video camera" style="width:140px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
+      <div class="timeline-side"><div class="timeline-year">1998</div><div class="timeline-text">First video camera. Started filming everything.</div><img loading="lazy" src="originstory/jvc-firstvideocamera.png" alt="First video camera" style="width:140px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
       <div class="timeline-center"><div class="timeline-dot"></div></div>
       <div class="timeline-side"></div>
     </div>
     <!-- 3: left -->
     <div class="timeline-entry">
-      <div class="timeline-side"><div class="timeline-year">2000</div><div class="timeline-text">First digital photo camera. Van der Vieren begins.</div><img src="originstory/camedia5050.png" alt="Olympus Camedia" style="width:280px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
+      <div class="timeline-side"><div class="timeline-year">2000</div><div class="timeline-text">First digital photo camera. Van der Vieren begins.</div><img loading="lazy" src="originstory/camedia5050.png" alt="Olympus Camedia" style="width:280px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
       <div class="timeline-center"><div class="timeline-dot"></div></div>
       <div class="timeline-side"></div>
     </div>
     <!-- 4: right -->
     <div class="timeline-entry">
-      <div class="timeline-side"><div class="timeline-year">2005</div><div class="timeline-text">Sony VX2100. The camera that made everything real.</div><img src="originstory/vx2100.png" alt="Sony VX2100" style="width:140px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
+      <div class="timeline-side"><div class="timeline-year">2005</div><div class="timeline-text">Sony VX2100. The camera that made everything real.</div><img loading="lazy" src="originstory/vx2100.png" alt="Sony VX2100" style="width:140px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
       <div class="timeline-center"><div class="timeline-dot"></div></div>
       <div class="timeline-side"></div>
     </div>
     <!-- 5: left -->
     <div class="timeline-entry">
-      <div class="timeline-side"><div class="timeline-year">2007</div><div class="timeline-text">Sony PMW-EX1. Shooting sk8, BMX and snowboarding.</div><img src="originstory/pmwex1-fullhd.png" alt="Sony PMW-EX1" style="width:210px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
+      <div class="timeline-side"><div class="timeline-year">2007</div><div class="timeline-text">Sony PMW-EX1. Shooting sk8, BMX and snowboarding.</div><img loading="lazy" src="originstory/pmwex1-fullhd.png" alt="Sony PMW-EX1" style="width:210px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
       <div class="timeline-center"><div class="timeline-dot"></div></div>
       <div class="timeline-side"></div>
     </div>
     <!-- 6: right -->
     <div class="timeline-entry">
-      <div class="timeline-side"><div class="timeline-year">2010</div><div class="timeline-text">Canon 5D Mark II. Shot the World Cup in South Africa. Lost my heart there.</div><img src="originstory/5dmarkII.png" alt="Canon 5D Mark II" style="width:140px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
+      <div class="timeline-side"><div class="timeline-year">2010</div><div class="timeline-text">Canon 5D Mark II. Shot the World Cup in South Africa. Lost my heart there.</div><img loading="lazy" src="originstory/5dmarkII.png" alt="Canon 5D Mark II" style="width:140px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
       <div class="timeline-center"><div class="timeline-dot"></div></div>
       <div class="timeline-side"></div>
     </div>
     <!-- 7: left -->
     <div class="timeline-entry">
-      <div class="timeline-side"><div class="timeline-year">2012</div><div class="timeline-text">Start touring with Steve Aoki. One man army across the globe.</div><img src="originstory/aoki.jpg" alt="Steve Aoki tour" style="width:280px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
+      <div class="timeline-side"><div class="timeline-year">2012</div><div class="timeline-text">Start touring with Steve Aoki. One man army across the globe.</div><img loading="lazy" src="originstory/aoki.jpg" alt="Steve Aoki tour" style="width:280px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
       <div class="timeline-center"><div class="timeline-dot"></div></div>
       <div class="timeline-side"></div>
     </div>
     <!-- 8: right -->
     <div class="timeline-entry">
-      <div class="timeline-side"><div class="timeline-year">2018</div><div class="timeline-text">Created the coffee table book.</div><img src="originstory/book.webp" alt="Coffee table book" style="width:280px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
+      <div class="timeline-side"><div class="timeline-year">2018</div><div class="timeline-text">Created the coffee table book.</div><img loading="lazy" src="originstory/book.webp" alt="Coffee table book" style="width:280px;height:auto;margin-top:12px;border:1px solid rgba(255,255,255,0.06);"></div>
       <div class="timeline-center"><div class="timeline-dot"></div></div>
       <div class="timeline-side"></div>
     </div>
@@ -1530,7 +1561,7 @@ footer .fpages a:hover { color: var(--t1); }
   </div>
   <div class="cases-grid">
     <a href="case-study-photo-diary.html" class="case-study-card">
-      <img src="image/casestudies/pd-thumb.jpg" alt="Photo Diary case study">
+      <img loading="lazy" src="image/casestudies/pd-thumb.jpg" alt="Photo Diary case study">
       <div class="case-study-caption">
         <span class="case-study-label">Content Automation</span>
         <h3>Photo Diary</h3>
@@ -1546,7 +1577,7 @@ footer .fpages a:hover { color: var(--t1); }
       </div>
     </a>
     <a href="case-study-fullsend.html" class="case-study-card">
-      <img src="image/casestudies/fullsend-thumb-v2.jpg" alt="Full Send case study">
+      <img loading="lazy" src="image/casestudies/fullsend-thumb-v2.jpg" alt="Full Send case study">
       <div class="case-study-caption">
         <span class="case-study-label">Content Automation</span>
         <h3>Vieren</h3>
@@ -1554,7 +1585,7 @@ footer .fpages a:hover { color: var(--t1); }
       </div>
     </a>
     <a href="case-study-macro-coach.html" class="case-study-card">
-      <img src="image/cs-macro-thumb.jpg?v=2" alt="Macro Coach case study">
+      <img loading="lazy" src="image/cs-macro-thumb.jpg?v=2" alt="Macro Coach case study">
       <div class="case-study-caption">
         <span class="case-study-label">Health Automation</span>
         <h3>Macro Coach</h3>
@@ -1562,7 +1593,7 @@ footer .fpages a:hover { color: var(--t1); }
       </div>
     </a>
     <a href="case-study-anticitizen.html" class="case-study-card">
-      <img src="image/casestudies/anticitizen.png" alt="Anticitizen case study">
+      <img loading="lazy" src="image/casestudies/anticitizen.png" alt="Anticitizen case study">
       <div class="case-study-caption">
         <span class="case-study-label">Content Automation</span>
         <h3>Anticitizen</h3>
@@ -1579,7 +1610,7 @@ footer .fpages a:hover { color: var(--t1); }
   <p class="mod-sub on-dark" style="margin:0 auto 48px;">Documenting the journey.</p>
   <div class="case-cards">
     <div class="case-card">
-      <a href="https://vieren.substack.com/" target="_blank" class="case-card-img brackets brackets-b" style="aspect-ratio:9/16;padding:0;overflow:hidden;"><img src="image/substackvieren.jpg" style="width:100%;height:100%;object-fit:cover;"></a>
+      <a href="https://vieren.substack.com/" target="_blank" class="case-card-img brackets brackets-b" style="aspect-ratio:9/16;padding:0;overflow:hidden;"><img loading="lazy" src="image/substackvieren.jpg" style="width:100%;height:100%;object-fit:cover;"></a>
     </div>
     <div class="case-card">
       <div class="case-card-img brackets brackets-b" style="aspect-ratio:9/16;padding:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/1195385113?background=1&autoplay=1&loop=1&muted=1" allow="autoplay" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;"></iframe></div>
@@ -1645,7 +1676,7 @@ footer .fpages a:hover { color: var(--t1); }
       <div class="pf-float" style="--r:1;left:63%;top:470px" data-speed="55"><img src="image/portfolio/thumb/reiziger.jpg" width="640" height="640" alt="" loading="lazy"></div>
       <a href="portfolio.html" class="pf-polaroid" id="pfPolaroid" aria-label="See the photo portfolio">
         <img class="pf-photo" id="pfPhoto" src="" alt="" loading="lazy">
-        <img class="pf-frame" src="image/instax-frame.png" alt="">
+        <img loading="lazy" class="pf-frame" src="image/instax-frame.png" alt="">
       </a>
     </div>
   </div>
