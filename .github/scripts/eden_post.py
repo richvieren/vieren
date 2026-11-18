@@ -3,7 +3,7 @@
 Reads the jobs diary_inbox.py wrote to $EDEN_JOBS and, per job, follows the Agent steps 6-10 of
 vieren/sops/sop-photo-diary.md: wait until each photo is live, host it in Eden, take the first
 free slot, schedule one post on the platforms the shortcut picked, then read it back.
-"instagram-story" is not an Eden platform: it becomes one Story per photo, in the slots after the post.
+"instagram-story" is not an Eden platform: it becomes one Story per photo, back to back (one slot, one minute apart).
 A job with no "platforms" (an older shortcut) posts to DEFAULT.
 
 Talks to Eden's MCP server (https://mcp.eden.so/mcp) with the API key in $EDEN_API_KEY as a
@@ -115,7 +115,7 @@ def main():
             report(eden, job["key"], eden.tool("eden_schedule_post", args), slot)
             used = slot["epoch"]
         if "instagram-story" in picked:
-            # SOP step 9: one Story per photo, Instagram alone, exactly one image, next free slot each.
+            # SOP step 9: one Story per photo, Instagram alone, exactly one image.
             # "stories" = the rendered Story images (image/stories/), same order as photos; older jobs reuse the photos
             story_media = media
             if job.get("stories"):
@@ -123,13 +123,15 @@ def main():
                 for path in job["stories"][:6]:
                     wait_live(SITE + path)
                     story_media.append(eden.tool("eden_import_scheduling_media", {"url": SITE + path})["asset"])
+            # All Stories of one upload go out back to back: one slot, then one minute apart in photo order.
+            # (One slot per Story spread a hike's Stories over several hours.)
+            sched, slot = free_slot(eden, used)
             for i, m in enumerate(story_media, 1):
-                sched, slot = free_slot(eden, used)
+                when = slot["epoch"] + (i - 1) * 60_000  # epoch is in milliseconds
                 args = {"scheduleId": sched["id"], "platforms": ["instagram"], "text": job["caption"],
-                        "media": [m], "scheduledFor": slot["epoch"], "idempotencyKey": f"{job['key']}-story-{i}",
+                        "media": [m], "scheduledFor": when, "idempotencyKey": f"{job['key']}-story-{i}",
                         "perPlatform": {"instagram": {"story": True}}}
                 report(eden, f"{job['key']}-story-{i}", eden.tool("eden_schedule_post", args), slot)
-                used = slot["epoch"]
 
 
 def free_slot(eden, after):
