@@ -2328,12 +2328,22 @@ const HERO_SECTIONS = [
         clearInterval(autoPlay);
       });
 
-      // Auto-play
-      var autoPlay = setInterval(function() {
-        pos++;
-        if (pos > maxPos()) pos = 0;
-        update();
-      }, 3500);
+      // Auto-play only while the strip is on screen, so the newest photo is the first one
+      // people see. Off screen: stop and go back to the newest. Prev/Next stop it for good.
+      var autoPlay = null, userNav = false;
+      document.getElementById('diaryPrev').addEventListener('click', function() { userNav = true; });
+      document.getElementById('diaryNext').addEventListener('click', function() { userNav = true; });
+      function step() { pos++; if (pos > maxPos()) pos = 0; update(); }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function(es) {
+          if (es[0].isIntersecting) {
+            if (!autoPlay && !userNav) autoPlay = setInterval(step, 3500);
+          } else {
+            clearInterval(autoPlay); autoPlay = null;
+            if (!userNav) { pos = 0; update(); }
+          }
+        }, { threshold: 0.5 }).observe(track);
+      }
 
       window.addEventListener('resize', update);
     });
