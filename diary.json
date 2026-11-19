@@ -1,4 +1,5 @@
 [
+  { "date": "2026-11-19", "tags": ["field-notes"], "photos": ["20261119-202545-1.jpg"] },
   { "date": "2026-11-18", "tags": ["field-notes"], "photos": ["20261118-084805-1.jpg", "20261118-084805-2.jpg", "20261118-084805-3.jpg", "20261118-084805-4.jpg"] },
   { "date": "2026-11-17", "tags": ["field-notes"], "photos": ["20261117-135209-1.jpg"] },
   { "date": "2026-11-04", "tags": ["field-notes"], "photos": ["20261104-232600-1.jpg"] },
@@ -22,6 +23,5 @@
   { "date": "2026-05-16", "tags": ["bts"], "photos": ["RV010527.jpg", "RV010545.jpg", "RV010563.jpg"] },
   { "date": "2026-05-14", "tags": ["bts"], "photos": ["DSCF1495.jpg"] },
   { "date": "2026-05-13", "tags": ["bts"], "photos": ["DSCF1436.jpg", "DSCF1445.jpg"] },
-  { "date": "2026-05-06", "tags": ["bts"], "photos": ["RV010407.jpg", "RV010416.jpg"] },
-  { "date": "2017-01-01", "tags": ["field-notes"], "photos": ["20261119-202545-1.jpg"] }
+  { "date": "2026-05-06", "tags": ["bts"], "photos": ["RV010407.jpg", "RV010416.jpg"] }
 ]
