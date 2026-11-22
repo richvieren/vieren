@@ -1152,6 +1152,12 @@ nav {
 @media (max-width: 900px) { .cases-grid { grid-template-columns: 1fr; } }
 
 
+/* ══ FOOTER PARALLAX ══ (after the Osmo parallax-image-layers demo; Richard and the photo are two layers that move as one) */
+.pfoot { position: relative; height: clamp(420px, 90svh, 1000px); overflow: hidden; background: var(--bg); }
+.pfoot-layers { position: absolute; left: 0; right: 0; top: -16%; bottom: 0; will-change: transform; }
+.pfoot-layers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 46% 62%; }
+.pfoot-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(rgba(33,33,33,0), var(--bg)); pointer-events: none; }
+
 /* ══ FOOTER ══ */
 footer {
   padding: 32px 40px; border-top: 1px solid rgba(255,255,255,.06);
@@ -2003,6 +2009,15 @@ html { overflow-x: clip; }
   </div>
 </section>
 
+<!-- ══ FOOTER PARALLAX ══ -->
+<section class="pfoot" aria-label="Richard Van der Vieren on a rock above the Atlantic, Cape Town">
+  <div class="pfoot-layers" data-pfoot>
+    <img src="image/parallax/footer-bg.jpg" alt="" loading="lazy" decoding="async" width="2048" height="1536">
+    <img src="image/parallax/footer-me.png" alt="" loading="lazy" decoding="async" width="2048" height="1536">
+  </div>
+  <div class="pfoot-fade"></div>
+</section>
+
 <footer>
   <span class="fl">Vieren &copy; 2026</span>
   <nav class="fpages" aria-label="Pages">
@@ -2409,5 +2424,19 @@ function shockwave(e) {
 
 </script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script>
+// ══ FOOTER PARALLAX ══ photo + Richard move together, slower than the page
+window.addEventListener('DOMContentLoaded', function () {
+  var el = document.querySelector('[data-pfoot]');
+  if (!el || !window.gsap || !window.ScrollTrigger || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.fromTo(el, { yPercent: 0 }, { yPercent: 12, ease: 'none',
+    scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom bottom', scrub: 0 } });
+  // The X embeds above grow after load; re-measure when the page height changes
+  var t; new ResizeObserver(function () { clearTimeout(t); t = setTimeout(function () { ScrollTrigger.refresh(); }, 200); }).observe(document.body);
+});
+</script>
 </body>
 </html>
