@@ -1156,6 +1156,7 @@ nav {
 .pfoot { position: relative; height: clamp(420px, 90svh, 1000px); overflow: hidden; background: var(--bg); }
 .pfoot-layers { position: absolute; left: 0; right: 0; top: -16%; bottom: 0; will-change: transform; }
 .pfoot-layers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 46% 62%; }
+.pfoot-layers img.pfoot-logo { inset: auto; left: 50%; width: min(86vw, 1000px); height: auto; object-fit: fill; transform: translateX(-50%); }
 .pfoot-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(rgba(33,33,33,0), var(--bg)); pointer-events: none; }
 
 /* ══ FOOTER ══ */
@@ -2010,9 +2011,10 @@ html { overflow-x: clip; }
 </section>
 
 <!-- ══ FOOTER PARALLAX ══ -->
-<section class="pfoot" aria-label="Richard Van der Vieren on a rock above the Atlantic, Cape Town">
+<section class="pfoot" aria-label="Richard Van der Vieren on a rock above the sea at sunset">
   <div class="pfoot-layers" data-pfoot>
     <img src="image/parallax/footer-bg.jpg" alt="" loading="lazy" decoding="async" width="2048" height="1536">
+    <img class="pfoot-logo" src="image/parallax/footer-logo.png" alt="Vieren" loading="lazy" decoding="async" width="1351" height="628" data-pfoot-logo>
     <img src="image/parallax/footer-me.png" alt="" loading="lazy" decoding="async" width="2048" height="1536">
   </div>
   <div class="pfoot-fade"></div>
@@ -2429,11 +2431,22 @@ function shockwave(e) {
 <script>
 // ══ FOOTER PARALLAX ══ photo + Richard move together, slower than the page
 window.addEventListener('DOMContentLoaded', function () {
-  var el = document.querySelector('[data-pfoot]');
+  var el = document.querySelector('[data-pfoot]'), logo = document.querySelector('[data-pfoot-logo]');
+  // Logo bottom sits on the rock at Richard's feet: map photo pixel y=1050 (2048x1536, cover, object-position 46% 62%) into the layer box
+  function placeLogo() {
+    if (!el || !logo) return;
+    var W = el.offsetWidth, H = el.offsetHeight, k = Math.max(W / 2048, H / 1536);
+    var feet = (H - 1536 * k) * 0.62 + 1050 * k;
+    logo.style.top = (feet - logo.offsetWidth * 628 / 1351) + 'px';
+  }
+  placeLogo(); window.addEventListener('resize', placeLogo);
   if (!el || !window.gsap || !window.ScrollTrigger || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
   gsap.fromTo(el, { yPercent: 0 }, { yPercent: 12, ease: 'none',
     scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom bottom', scrub: 0 } });
+  // The logo has its own speed: it starts higher in the sky and lands behind Richard at the end of the page
+  gsap.fromTo(logo, { xPercent: -50, x: 0, y: function () { return -0.3 * el.parentNode.offsetHeight; } }, { xPercent: -50, x: 0, y: 0, ease: 'none', immediateRender: true,
+    scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom bottom', scrub: 0, invalidateOnRefresh: true } });
   // The X embeds above grow after load; re-measure when the page height changes
   var t; new ResizeObserver(function () { clearTimeout(t); t = setTimeout(function () { ScrollTrigger.refresh(); }, 200); }).observe(document.body);
 });
