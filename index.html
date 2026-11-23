@@ -1080,17 +1080,9 @@ nav {
 }
 
 /* ══ DECK CTA ══ */
-.deck {
-  padding: 120px 40px;
-  display: flex; align-items: center; justify-content: center;
-}
-.deck-card {
-  width: 100%; max-width: 800px; aspect-ratio: 16/10;
-  background: var(--s2); border-radius: 16px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 20px; position: relative; overflow: hidden;
-}
-.deck-card h2 {
+/* "Want To Learn More?" sits in the black footer, above the sitemap */
+footer .fcta { margin: auto 0 64px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+footer .fcta h2 {
   font-family: 'Grave Shade', serif;
   font-size: clamp(24px, 3vw, 36px); color: var(--t1);
 }
@@ -1154,7 +1146,13 @@ nav {
 
 /* ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" (osmo.supply/demo/parallax-image-layers), CSS copied as is.
    Only changes: Richard's plates, his title font, and object-position top so he stands under the title. */
-.parallax { width: 100%; position: relative; overflow: hidden; background: #000; }
+.parallax { width: 100%; position: relative; overflow: hidden; background: #EDE1D3;
+  --fade: calc(0.22 * max(100svh, 100vw)); margin-top: calc(-1 * var(--fade)); }
+/* Not in the demo: the scene starts under the bottom of the tweet wall. The wall's cream fades out over it, and the top
+   22% of the sky (pure sky: the beach starts at canvas row 2105 of 7235 = 29%) feathers in from the same cream. */
+.bigdeal { position: relative; z-index: 3; background: linear-gradient(to bottom, #EDE1D3 calc(100% - var(--fade)), rgba(237,225,211,0) 100%);
+  --fade: calc(0.22 * max(100svh, 100vw)); }
+.parallax__header { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%); }
 .parallax__header { z-index: 2; padding: 10em 1em; justify-content: center; align-items: center; min-height: max(100svh, 100vw); display: flex; position: relative; } /* Not in the demo: the plates are square, so the scene is at least as tall as it is wide and the whole photo shows, sky top to black. */
 .parallax__visuals { object-fit: cover; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; }
 .parallax__black-line-overflow { z-index: 20; background-color: #000; width: 100%; height: 2px; position: absolute; bottom: -1px; left: 0; }
@@ -1162,14 +1160,14 @@ nav {
 .parallax__layer-img { pointer-events: none; object-fit: cover; object-position: 50% 0%; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; }
 .parallax__layer-title { justify-content: center; align-items: center; width: 100%; height: 100svh; display: flex; position: absolute; top: 0; left: 0; }
 .parallax__title { pointer-events: auto; text-align: center; margin: 0 0 .1em;
-  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(28px, 8.2vw, 96px); line-height: 1; white-space: nowrap;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(24px, 7vw, 80px); line-height: 1; white-space: nowrap;
   text-transform: uppercase; letter-spacing: .02em; color: var(--t1); position: relative; }
 
 /* ══ FOOTER ══ */
 /* Black (#000) like the bottom of the front rock plate, so the footer sitemap continues the photo */
 /* The footer is the demo's .parallax__content: a full screen of black under the scene, holding the sitemap */
 footer { background: #000; padding: 48px 40px 32px; min-height: 100svh; display: flex; flex-direction: column; position: relative; }
-footer > nav.fpages { margin: auto 0; }
+footer > nav.fpages { margin: 0 0 auto; }
 footer > * { position: relative; z-index: 3; }
 footer .fbase { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 56px; }
 footer .fl { font-size: 13px; color: var(--t4); }
@@ -1248,7 +1246,7 @@ footer .fpages a:hover { color: var(--t1); }
   .proj-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  nav, .who, .what, .addressing, .work, .deck, footer { padding-left: 20px; padding-right: 20px; }
+  nav, .who, .what, .addressing, .work, footer { padding-left: 20px; padding-right: 20px; }
   .nav-cta { font-size: 10px; letter-spacing: .08em; padding: 8px 12px; }
   .nav-logo { font-size: 17px; }
   .proj-showcase { padding-left: 20px; padding-right: 20px; }
@@ -1995,7 +1993,7 @@ html { overflow-x: clip; }
 </section>
 
 <!-- ══ WALL OF LOVE ══ -->
-<section style="padding:120px 40px;background:#EDE1D3;text-align:center;">
+<section class="bigdeal" style="padding:120px 40px;text-align:center;">
   <span class="pill" style="display:inline-block;font-family:'Portrait Of You',sans-serif;font-weight:400;font-synthesis:none;font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:#212121;margin-bottom:32px;">I'm Kind Of A Big Deal</span>
   <style>#tweet-wall twitter-widget,#tweet-wall .twitter-tweet-rendered{margin:0!important;}@media(max-width:768px){#tweet-wall{columns:1!important;}}</style>
   <div id="tweet-wall" style="columns:3;column-gap:10px;max-width:1200px;margin:0 auto;">
@@ -2005,17 +2003,6 @@ html { overflow-x: clip; }
     <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/Hidenout3/status/2059322178495975831"></a></blockquote></div>
     <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/Voidalist/status/2059066626704621822"></a></blockquote></div>
     <div style="break-inside:avoid;margin-bottom:10px;"><blockquote class="twitter-tweet" data-theme="light" data-conversation="none"><a href="https://x.com/AndreasPitzer/status/2063636656993837366"></a></blockquote></div>
-  </div>
-</section>
-
-<!-- ══ DECK CTA ══ -->
-<section class="deck">
-  <div class="deck-card">
-    <h2>Want To Learn More?</h2>
-    <div class="deck-btns">
-      <a href="https://riz.eden.so/call/vieren" target="_blank" rel="noopener" class="deck-btn">Book A Meeting</a>
-      <a href="mailto:hello@vieren.studio" class="deck-btn">Get In Touch</a>
-    </div>
   </div>
 </section>
 
@@ -2036,6 +2023,13 @@ html { overflow-x: clip; }
     </div>
   </section>
 <footer>
+  <div class="fcta">
+    <h2>Want To Learn More?</h2>
+    <div class="deck-btns">
+      <a href="https://riz.eden.so/call/vieren" target="_blank" rel="noopener" class="deck-btn">Book A Meeting</a>
+      <a href="mailto:hello@vieren.studio" class="deck-btn">Get In Touch</a>
+    </div>
+  </div>
   <nav class="fpages" aria-label="Sitemap">
     <ul>
       <li><a href="/">Home</a></li>
@@ -2459,8 +2453,8 @@ function shockwave(e) {
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script>
-// ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" JS, copied as is. Layer 1 = sky (70), 2 = beach and mountains (55),
-// 3 = title (40), 4 = rock with Richard (25, added between the demo's title and front), 5 = front rocks (10).
+// ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" JS. Speeds spread wider than the demo for a stronger depth:
+// 1 = sky (90), 2 = beach and mountains (70), 3 = title (55), 4 = rock with Richard (30), 5 = front rocks (5).
 document.addEventListener('DOMContentLoaded', function () {
   if (!window.gsap) return;
   document.querySelectorAll('[data-parallax-layers]').forEach(function (triggerElement) {
@@ -2468,7 +2462,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // but measured live on every scroll: the X embeds above load late and change the page height, which left
     // ScrollTrigger's saved positions wrong and moved the layers while the scene was still low on the screen.
     var tl = gsap.timeline({ paused: true });
-    var layers = [{ layer: '1', yPercent: 70 }, { layer: '2', yPercent: 55 }, { layer: '3', yPercent: 40 }, { layer: '4', yPercent: 25 }, { layer: '5', yPercent: 10 }];
+    var layers = [{ layer: '1', yPercent: 90 }, { layer: '2', yPercent: 70 }, { layer: '3', yPercent: 55 }, { layer: '4', yPercent: 30 }, { layer: '5', yPercent: 5 }];
     layers.forEach(function (layerObj, idx) {
       tl.to(triggerElement.querySelectorAll('[data-parallax-layer="' + layerObj.layer + '"]'), { yPercent: layerObj.yPercent, ease: 'none' }, idx === 0 ? undefined : '<');
     });
