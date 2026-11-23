@@ -2458,15 +2458,16 @@ function shockwave(e) {
 </script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script>
 // ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" JS, copied as is. Layer 1 = sky (70), 2 = beach and mountains (55),
 // 3 = title (40), 4 = rock with Richard (25, added between the demo's title and front), 5 = front rocks (10).
 document.addEventListener('DOMContentLoaded', function () {
-  if (!window.gsap || !window.ScrollTrigger) return;
-  gsap.registerPlugin(ScrollTrigger);
+  if (!window.gsap) return;
   document.querySelectorAll('[data-parallax-layers]').forEach(function (triggerElement) {
-    var tl = gsap.timeline({ scrollTrigger: { trigger: triggerElement, start: '0% 0%', end: '100% 0%', scrub: 0 } });
+    // Same timeline as the demo. Its progress is the demo's ScrollTrigger range (start '0% 0%', end '100% 0%', scrub 0),
+    // but measured live on every scroll: the X embeds above load late and change the page height, which left
+    // ScrollTrigger's saved positions wrong and moved the layers while the scene was still low on the screen.
+    var tl = gsap.timeline({ paused: true });
     var layers = [{ layer: '1', yPercent: 70 }, { layer: '2', yPercent: 55 }, { layer: '3', yPercent: 40 }, { layer: '4', yPercent: 25 }, { layer: '5', yPercent: 10 }];
     layers.forEach(function (layerObj, idx) {
       tl.to(triggerElement.querySelectorAll('[data-parallax-layer="' + layerObj.layer + '"]'), { yPercent: layerObj.yPercent, ease: 'none' }, idx === 0 ? undefined : '<');
@@ -2477,17 +2478,19 @@ document.addEventListener('DOMContentLoaded', function () {
     var header = triggerElement.closest('.parallax__header'), title = triggerElement.querySelector('.parallax__layer-title');
     var imgs = triggerElement.querySelectorAll('.parallax__layer-img'), lastW = 0;
     function frame() {
-      var W = header.offsetWidth, H = header.offsetHeight; if (W === lastW) return; lastW = W;
+      var W = header.offsetWidth, H = header.offsetHeight; if (W + 'x' + H === lastW) return; lastW = W + 'x' + H;
       var bh = 1.175 * 1.2 * H, top = -0.175 * 1.2 * H, k = Math.max(W, bh) / 7235, over = bh - 7235 * k;
       var p = over < 0 ? Math.min(1, Math.max(0, (top + 2600 * k - 0.12 * H) / -over)) : 0.5;
-      imgs.forEach(function (im) { im.style.objectPosition = '50% ' + (p * 100) + '%'; });
+      // The front rocks always sit on the bottom edge, so their black always runs into the footer (wide screens crop more).
+      imgs.forEach(function (im) { im.style.objectPosition = '50% ' + (im.getAttribute('data-parallax-layer') === '5' ? 100 : p * 100) + '%'; });
       title.style.top = (top + over * p + 3150 * k - title.offsetHeight / 2) + 'px';
     }
     frame(); window.addEventListener('resize', frame);
-    // Not in the demo: the X embeds above grow after load and move the trigger. Re-measure only while the scene is
-    // not scrubbing, so the layers never jump on screen.
-    var t; new ResizeObserver(function () { clearTimeout(t); t = setTimeout(function () {
-      if (!tl.scrollTrigger.isActive) ScrollTrigger.refresh(); }, 300); }).observe(document.body);
+    function update() {
+      var r = triggerElement.getBoundingClientRect();
+      tl.progress(Math.min(1, Math.max(0, -r.top / r.height)));
+    }
+    update(); window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update);
   });
 });
 </script>
