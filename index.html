@@ -1081,7 +1081,7 @@ nav {
 
 /* ══ DECK CTA ══ */
 /* "Want To Learn More?" sits in the black footer, above the sitemap */
-footer .fcta { margin: auto 0 64px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+footer .fcta { margin: 0 0 56px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
 footer .fcta h2 {
   font-family: 'Grave Shade', serif;
   font-size: clamp(24px, 3vw, 36px); color: var(--t1);
@@ -1158,7 +1158,7 @@ footer .fcta h2 {
 .parallax__black-line-overflow { z-index: 20; background-color: #000; width: 100%; height: 2px; position: absolute; bottom: -1px; left: 0; }
 .parallax__layers { object-fit: cover; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; overflow: hidden; }
 .parallax__layer-img { pointer-events: none; object-fit: cover; object-position: 50% 0%; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; }
-.parallax__layer-title { justify-content: center; align-items: center; width: 100%; height: 100svh; display: flex; position: absolute; top: 0; left: 0; }
+.parallax__layer-title { justify-content: center; align-items: center; width: 100%; height: 100%; display: flex; position: absolute; top: 0; left: 0; }
 .parallax__title { pointer-events: auto; text-align: center; margin: 0 0 .1em;
   font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(24px, 7vw, 80px); line-height: 1; white-space: nowrap;
   text-transform: uppercase; letter-spacing: .02em; color: var(--t1); position: relative; }
@@ -1166,8 +1166,8 @@ footer .fcta h2 {
 /* ══ FOOTER ══ */
 /* Black (#000) like the bottom of the front rock plate, so the footer sitemap continues the photo */
 /* The footer is the demo's .parallax__content: a full screen of black under the scene, holding the sitemap */
-footer { background: #000; padding: 48px 40px 32px; min-height: 100svh; display: flex; flex-direction: column; position: relative; }
-footer > nav.fpages { margin: 0 0 auto; }
+footer { background: #000; padding: 24px 40px 32px; display: flex; flex-direction: column; position: relative; }
+footer > nav.fpages { margin: 0; }
 footer > * { position: relative; z-index: 3; }
 footer .fbase { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 56px; }
 footer .fl { font-size: 13px; color: var(--t4); }
@@ -2474,7 +2474,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var W = header.offsetWidth, H = header.offsetHeight; if (W + 'x' + H === lastW) return; lastW = W + 'x' + H;
       // The photo fills the scene height exactly (the scene is never shorter than it is wide), so 1 canvas px = H / 7235.
       var k = H / 7235;
-      title.style.top = (3150 * k - title.offsetHeight / 2) + 'px';
+      // The title layer is as tall as the scene, so its 55% moves against the same base as the rock's 30%.
+      title.style.top = (3150 * k - H / 2) + 'px';
     }
     frame(); window.addEventListener('resize', frame);
     function update() {
