@@ -1152,25 +1152,25 @@ nav {
 @media (max-width: 900px) { .cases-grid { grid-template-columns: 1fr; } }
 
 
-/* ══ FOOTER PARALLAX ══ (after the Osmo parallax-image-layers demo: sky, text, sea and mountains, rocks with Richard, each at its own speed) */
-.pfoot { position: relative; height: clamp(420px, 90svh, 1000px); overflow: hidden; background: var(--bg); }
+/* ══ FOOTER PARALLAX ══ (after the Osmo parallax-image-layers demo). Richard's Photoshop plates on one 7235 x 7235 canvas:
+   sea and mountains, sky, text, rock with Richard, front rocks fading to black. Each moves at its own speed. */
+.pfoot { position: relative; height: max(100svh, min(100vw, 140svh)); overflow: hidden; background: #000; }
 .pfoot-layer { position: absolute; inset: 0; will-change: transform; }
-.pfoot-layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 46% 62%; }
+.pfoot-layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
 .pfoot-text { position: absolute; left: 50%; top: 30%; width: 92vw; margin: 0; transform: translateX(-50%); text-align: center;
   font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(28px, 8.2vw, 96px); line-height: 1; white-space: nowrap;
   text-transform: uppercase; letter-spacing: .02em; color: var(--t1); }
-.pfoot-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(rgba(33,33,33,0), var(--bg)); pointer-events: none; }
 
 /* ══ FOOTER ══ */
-footer {
-  padding: 32px 40px; border-top: 1px solid rgba(255,255,255,.06);
-  display: flex; justify-content: space-between; align-items: center;
-}
+/* Black (#000) like the bottom of the front rock plate, so the footer sitemap continues the photo */
+footer { background: #000; padding: 48px 40px 32px; }
+footer .fbase { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 56px; }
 footer .fl { font-size: 13px; color: var(--t4); }
 footer .fr { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); }
 /* Page links in the footer; "footer nav" resets the fixed top-nav rules */
-footer nav.fpages { position: static; padding: 0; z-index: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
-footer .fpages a { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); transition: color .3s; }
+footer nav.fpages { position: static; padding: 0; z-index: auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+footer .fpages ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; }
+footer .fpages a { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--t4); transition: color .3s; }
 footer .fpages a:hover { color: var(--t1); }
 
 /* ══ VIDEO OVERLAY ══ */
@@ -1561,7 +1561,7 @@ html { overflow-x: clip; }
 </section>
 
 <!-- ══ CASE STUDIES ══ -->
-<section class="cases-section">
+<section class="cases-section" id="cases">
   <div class="cases-header">
     <h2>Automation case studies.</h2>
     <p class="mod-sub">Consultancy-based work for founders who need a creative operator, not another agency.</p>
@@ -2014,23 +2014,38 @@ html { overflow-x: clip; }
 
 <!-- ══ FOOTER PARALLAX ══ -->
 <section class="pfoot" aria-label="Richard Van der Vieren on a rock above the sea at sunset">
-  <div class="pfoot-layer" data-pfoot-depth="0.7"><img src="image/parallax/footer-sky.jpg" alt="" loading="lazy" decoding="async" width="2048" height="1536"></div>
+  <div class="pfoot-layer" data-pfoot-depth="0.4"><img src="image/parallax/footer-sea-1600.webp" srcset="image/parallax/footer-sea-1600.webp 1600w, image/parallax/footer-sea-2800.webp 2800w" sizes="(orientation: portrait) 100vh, 100vw" alt="" loading="lazy" decoding="async" width="1600" height="1600"></div>
+  <div class="pfoot-layer" data-pfoot-depth="0.7"><img src="image/parallax/footer-sky-1600.webp" srcset="image/parallax/footer-sky-1600.webp 1600w, image/parallax/footer-sky-2800.webp 2800w" sizes="(orientation: portrait) 100vh, 100vw" alt="" loading="lazy" decoding="async" width="1600" height="1600"></div>
   <div class="pfoot-layer" data-pfoot-depth="0.55"><p class="pfoot-text" data-pfoot-logo>You have reached<br>the bottom<br>the only way is up</p></div>
-  <div class="pfoot-layer" data-pfoot-depth="0.4"><img src="image/parallax/footer-mid.webp" alt="" loading="lazy" decoding="async" width="2048" height="1536"></div>
-  <div class="pfoot-layer" data-pfoot-depth="0.12"><img src="image/parallax/footer-front.webp" alt="" loading="lazy" decoding="async" width="2048" height="1536"></div>
-  <div class="pfoot-fade"></div>
+  <div class="pfoot-layer" data-pfoot-depth="0.25"><img src="image/parallax/footer-rock-1600.webp" srcset="image/parallax/footer-rock-1600.webp 1600w, image/parallax/footer-rock-2800.webp 2800w" sizes="(orientation: portrait) 100vh, 100vw" alt="" loading="lazy" decoding="async" width="1600" height="1600"></div>
+  <div class="pfoot-layer" data-pfoot-depth="0.1"><img src="image/parallax/footer-front-1600.webp" srcset="image/parallax/footer-front-1600.webp 1600w, image/parallax/footer-front-2800.webp 2800w" sizes="(orientation: portrait) 100vh, 100vw" alt="" loading="lazy" decoding="async" width="1600" height="1600"></div>
 </section>
 
 <footer>
-  <span class="fl">Vieren &copy; 2026</span>
-  <nav class="fpages" aria-label="Pages">
-    <a href="portfolio.html">Portfolio</a>
-    <a href="diary.html">Photo Diary</a>
-    <a href="shortform.html">Short Form</a>
-    <a href="/articles/">Articles</a>
-    <a href="privacy.html">Privacy</a>
+  <nav class="fpages" aria-label="Sitemap">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="diary.html">Photo Diary</a></li>
+      <li><a href="shortform.html">Short Form</a></li>
+      <li><a href="/articles/">Articles</a></li>
+      <li><a href="#cases">Case Studies</a></li>
+      <li><a href="/cracked/">Cracked</a></li>
+    </ul>
+    <ul>
+      <li><a href="mailto:hello@vieren.studio">Email</a></li>
+      <li><a href="https://www.youtube.com/c/aooatv" target="_blank" rel="noopener">YouTube</a></li>
+      <li><a href="https://www.linkedin.com/in/vieren" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://www.instagram.com/richvieren" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://x.com/richvieren" target="_blank" rel="noopener">X</a></li>
+      <li><a href="https://vieren.substack.com/" target="_blank" rel="noopener">Substack</a></li>
+    </ul>
   </nav>
-  <span class="fr">Belgium &middot; South Africa</span>
+  <div class="fbase">
+    <span class="fl">Vieren &copy; 2026</span>
+    <nav class="fpages" aria-label="Legal"><ul><li><a href="privacy.html">Privacy</a></li></ul></nav>
+    <span class="fr">Belgium &middot; South Africa</span>
+  </div>
 </footer>
 
 <script>
@@ -2430,15 +2445,14 @@ function shockwave(e) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script>
-// ══ FOOTER PARALLAX ══ four layers, each at its own speed: sky (slowest), text, sea and mountains, rocks with Richard (fastest)
+// ══ FOOTER PARALLAX ══ five layers, each at its own speed: sky (slowest), text, sea and mountains, rock with Richard, front rocks (fastest)
 window.addEventListener('DOMContentLoaded', function () {
   var sec = document.querySelector('.pfoot'), logo = document.querySelector('[data-pfoot-logo]');
   if (!sec || !logo) return;
-  // Text bottom sits just above the mountain top (photo y=760 of 2048x1536, cover, object-position 46% 62%).
-  // Phones: Richard is large on screen, so the text sits above his head (photo y=770).
+  // Text bottom sits at canvas y=3200 of 7235 (cover, object-position 50% 100%): Richard (y 2600-3540) stands in front of the last line.
   function placeLogo() {
-    var W = sec.offsetWidth, H = sec.offsetHeight, k = Math.max(W / 2048, H / 1536);
-    var y = (H - 1536 * k) * 0.62 + (W < 700 ? 770 : 760) * k;
+    var W = sec.offsetWidth, H = sec.offsetHeight, k = Math.max(W / 7235, H / 7235);
+    var y = (H - 7235 * k) + 3200 * k;
     logo.style.top = (y - logo.offsetHeight) + 'px';
   }
   placeLogo(); window.addEventListener('resize', placeLogo); if (document.fonts) document.fonts.ready.then(placeLogo);
