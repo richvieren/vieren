@@ -2454,7 +2454,7 @@ function shockwave(e) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script>
 // ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" JS. Speeds spread wider than the demo for a stronger depth:
-// 1 = sky (90), 2 = beach and mountains (70), 3 = title (55), 4 = rock with Richard (30), 5 = front rocks (5).
+// 1 = sky (90), 2 = beach and mountains (70), 3 = title (rises, see below), 4 = rock with Richard (30), 5 = front rocks (5).
 document.addEventListener('DOMContentLoaded', function () {
   if (!window.gsap) return;
   document.querySelectorAll('[data-parallax-layers]').forEach(function (triggerElement) {
@@ -2462,10 +2462,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // but measured live on every scroll: the X embeds above load late and change the page height, which left
     // ScrollTrigger's saved positions wrong and moved the layers while the scene was still low on the screen.
     var tl = gsap.timeline({ paused: true });
-    var layers = [{ layer: '1', yPercent: 90 }, { layer: '2', yPercent: 70 }, { layer: '3', yPercent: 55 }, { layer: '4', yPercent: 30 }, { layer: '5', yPercent: 5 }];
+    var layers = [{ layer: '1', yPercent: 90 }, { layer: '2', yPercent: 70 }, { layer: '4', yPercent: 30 }, { layer: '5', yPercent: 5 }];
     layers.forEach(function (layerObj, idx) {
       tl.to(triggerElement.querySelectorAll('[data-parallax-layer="' + layerObj.layer + '"]'), { yPercent: layerObj.yPercent, ease: 'none' }, idx === 0 ? undefined : '<');
     });
+    // Not in the demo: the title rises. It starts hidden behind the black of the front rocks (canvas row 7000, 53% of the
+    // scene below its place) and climbs faster than the rock, landing behind Richard at 55% of the scroll
+    // (53 - 66 * 0.55 = 30 * 0.55: level with the rock), which is about where the page ends.
+    tl.fromTo(triggerElement.querySelectorAll('[data-parallax-layer="3"]'), { yPercent: 53 }, { yPercent: -13, ease: 'none' }, 0);
     // Not in the demo: Richard's plates are one square 7235 px canvas, shown whole from sky top to black.
     // Put the title centre on canvas y=3150, so he (y 2600-3540) stands in front of it. Runs once per scene size.
     var header = triggerElement.closest('.parallax__header'), title = triggerElement.querySelector('.parallax__layer-title');
