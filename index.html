@@ -2025,13 +2025,13 @@ html { overflow-x: clip; }
     <div class="parallax__visuals">
       <div class="parallax__black-line-overflow"></div>
       <div data-parallax-layers class="parallax__layers">
-        <img src="image/parallax/footer-sea-1600.webp" srcset="image/parallax/footer-sea-1600.webp 1600w, image/parallax/footer-sea-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="1" alt="" class="parallax__layer-img">
-        <img src="image/parallax/footer-sky-1600.webp" srcset="image/parallax/footer-sky-1600.webp 1600w, image/parallax/footer-sky-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="1" alt="" class="parallax__layer-img">
-        <div data-parallax-layer="2" class="parallax__layer-title">
+        <img src="image/parallax/footer-sky2-1600.webp" srcset="image/parallax/footer-sky2-1600.webp 1600w, image/parallax/footer-sky2-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="1" alt="" class="parallax__layer-img">
+        <img src="image/parallax/footer-beach-1600.webp" srcset="image/parallax/footer-beach-1600.webp 1600w, image/parallax/footer-beach-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="2" alt="" class="parallax__layer-img">
+        <div data-parallax-layer="3" class="parallax__layer-title">
           <p class="parallax__title">You have reached<br>the bottom<br>the only way is up</p>
         </div>
-        <img src="image/parallax/footer-rock-1600.webp" srcset="image/parallax/footer-rock-1600.webp 1600w, image/parallax/footer-rock-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="3" alt="" class="parallax__layer-img">
-        <img src="image/parallax/footer-front-1600.webp" srcset="image/parallax/footer-front-1600.webp 1600w, image/parallax/footer-front-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="4" alt="" class="parallax__layer-img">
+        <img src="image/parallax/footer-rock-1600.webp" srcset="image/parallax/footer-rock-1600.webp 1600w, image/parallax/footer-rock-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="4" alt="" class="parallax__layer-img">
+        <img src="image/parallax/footer-front-1600.webp" srcset="image/parallax/footer-front-1600.webp 1600w, image/parallax/footer-front-2800.webp 2800w" sizes="(max-width: 700px) 50vh, 100vw" loading="eager" decoding="async" width="1600" height="1600" data-parallax-layer="5" alt="" class="parallax__layer-img">
       </div>
     </div>
   </section>
@@ -2460,14 +2460,14 @@ function shockwave(e) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script>
-// ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" JS, copied as is. Layer 1 = sea and sky (back), 2 = title,
-// 3 = rock with Richard, 4 = front rocks. Layer 3 sits between the demo's 40 (title) and 10 (front).
+// ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" JS, copied as is. Layer 1 = sky (70), 2 = beach and mountains (55),
+// 3 = title (40), 4 = rock with Richard (25, added between the demo's title and front), 5 = front rocks (10).
 document.addEventListener('DOMContentLoaded', function () {
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
   document.querySelectorAll('[data-parallax-layers]').forEach(function (triggerElement) {
     var tl = gsap.timeline({ scrollTrigger: { trigger: triggerElement, start: '0% 0%', end: '100% 0%', scrub: 0 } });
-    var layers = [{ layer: '1', yPercent: 70 }, { layer: '2', yPercent: 40 }, { layer: '3', yPercent: 25 }, { layer: '4', yPercent: 10 }];
+    var layers = [{ layer: '1', yPercent: 70 }, { layer: '2', yPercent: 55 }, { layer: '3', yPercent: 40 }, { layer: '4', yPercent: 25 }, { layer: '5', yPercent: 10 }];
     layers.forEach(function (layerObj, idx) {
       tl.to(triggerElement.querySelectorAll('[data-parallax-layer="' + layerObj.layer + '"]'), { yPercent: layerObj.yPercent, ease: 'none' }, idx === 0 ? undefined : '<');
     });
