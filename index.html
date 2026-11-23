@@ -1146,13 +1146,17 @@ footer .fcta h2 {
 
 /* ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" (osmo.supply/demo/parallax-image-layers), CSS copied as is.
    Only changes: Richard's plates, his title font, and object-position top so he stands under the title. */
-.parallax { width: 100%; position: relative; overflow: hidden; background: #EDE1D3;
-  --fade: calc(0.22 * max(100svh, 100vw)); margin-top: calc(-1 * var(--fade)); }
-/* Not in the demo: the scene starts under the bottom of the tweet wall. The wall's cream fades out over it, and the top
-   22% of the sky (pure sky: the beach starts at canvas row 2105 of 7235 = 29%) feathers in from the same cream. */
-.bigdeal { position: relative; z-index: 3; background: linear-gradient(to bottom, #EDE1D3 calc(100% - var(--fade)), rgba(237,225,211,0) 100%);
-  --fade: calc(0.22 * max(100svh, 100vw)); }
-.parallax__header { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%); }
+.parallax { width: 100%; position: relative; overflow: hidden; background: #C9BEC5;
+  --fade: calc(0.24 * max(100svh, 100vw)); margin-top: calc(-1 * var(--fade)); }
+/* Not in the demo: the scene starts under the bottom of the tweet wall. Behind the last tweets the cream eases into the
+   sky's own colour (#C9BEC5, the mean of the sky plate's top rows), then the top 24% of the sky (pure sky: the beach
+   starts at canvas row 2105 of 7235 = 29%) fades in over that same colour, so only the cloud texture appears. */
+.bigdeal { position: relative; z-index: 3; --fade: calc(0.24 * max(100svh, 100vw));
+  background: linear-gradient(to bottom, #EDE1D3 calc(100% - var(--fade) - 60vh), #E7DBD1 calc(100% - var(--fade) - 45vh),
+    #DBD0CC calc(100% - var(--fade) - 30vh), #CFC4C7 calc(100% - var(--fade) - 15vh), #C9BEC5 calc(100% - var(--fade)), rgba(201,190,197,0) 100%); }
+.parallax__header {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgba(0,0,0,.1) 6%, rgba(0,0,0,.5) 12%, rgba(0,0,0,.9) 18%, #000 24%);
+          mask-image: linear-gradient(to bottom, transparent 0, rgba(0,0,0,.1) 6%, rgba(0,0,0,.5) 12%, rgba(0,0,0,.9) 18%, #000 24%); }
 .parallax__header { z-index: 2; padding: 10em 1em; justify-content: center; align-items: center; min-height: max(100svh, 100vw); display: flex; position: relative; } /* Not in the demo: the plates are square, so the scene is at least as tall as it is wide and the whole photo shows, sky top to black. */
 .parallax__visuals { object-fit: cover; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; }
 .parallax__black-line-overflow { z-index: 20; background-color: #000; width: 100%; height: 2px; position: absolute; bottom: -1px; left: 0; }
@@ -2454,7 +2458,7 @@ function shockwave(e) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script>
 // ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" JS. Speeds spread wider than the demo for a stronger depth:
-// 1 = sky (90), 2 = beach and mountains (70), 3 = title (rises, see below), 4 = rock with Richard (30), 5 = front rocks (5).
+// 1 = sky (90), 2 = beach and mountains (70), 3 = title (80: nearly still on screen, apart from the rock), 4 = rock with Richard (30), 5 = front rocks (5).
 document.addEventListener('DOMContentLoaded', function () {
   if (!window.gsap) return;
   document.querySelectorAll('[data-parallax-layers]').forEach(function (triggerElement) {
@@ -2462,14 +2466,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // but measured live on every scroll: the X embeds above load late and change the page height, which left
     // ScrollTrigger's saved positions wrong and moved the layers while the scene was still low on the screen.
     var tl = gsap.timeline({ paused: true });
-    var layers = [{ layer: '1', yPercent: 90 }, { layer: '2', yPercent: 70 }, { layer: '4', yPercent: 30 }, { layer: '5', yPercent: 5 }];
+    var layers = [{ layer: '1', yPercent: 90 }, { layer: '2', yPercent: 70 }, { layer: '3', yPercent: 80 }, { layer: '4', yPercent: 30 }, { layer: '5', yPercent: 5 }];
     layers.forEach(function (layerObj, idx) {
       tl.to(triggerElement.querySelectorAll('[data-parallax-layer="' + layerObj.layer + '"]'), { yPercent: layerObj.yPercent, ease: 'none' }, idx === 0 ? undefined : '<');
     });
-    // Not in the demo: the title rises. It starts hidden behind the black of the front rocks (canvas row 7000, 53% of the
-    // scene below its place) and climbs faster than the rock, landing behind Richard at 55% of the scroll
-    // (53 - 66 * 0.55 = 30 * 0.55: level with the rock), which is about where the page ends.
-    tl.fromTo(triggerElement.querySelectorAll('[data-parallax-layer="3"]'), { yPercent: 53 }, { yPercent: -13, ease: 'none' }, 0);
     // Not in the demo: Richard's plates are one square 7235 px canvas, shown whole from sky top to black.
     // Put the title centre on canvas y=3150, so he (y 2600-3540) stands in front of it. Runs once per scene size.
     var header = triggerElement.closest('.parallax__header'), title = triggerElement.querySelector('.parallax__layer-title');
