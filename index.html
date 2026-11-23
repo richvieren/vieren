@@ -1155,11 +1155,11 @@ nav {
 /* ══ FOOTER PARALLAX ══ Osmo "Parallax Image Layers" (osmo.supply/demo/parallax-image-layers), CSS copied as is.
    Only changes: Richard's plates, his title font, and object-position top so he stands under the title. */
 .parallax { width: 100%; position: relative; overflow: hidden; background: #000; }
-.parallax__header { z-index: 2; padding: 10em 1em; justify-content: center; align-items: center; min-height: 100svh; display: flex; position: relative; }
-.parallax__visuals { object-fit: cover; width: 100%; max-width: none; height: 120%; position: absolute; top: 0; left: 0; }
+.parallax__header { z-index: 2; padding: 10em 1em; justify-content: center; align-items: center; min-height: max(100svh, 100vw); display: flex; position: relative; } /* Not in the demo: the plates are square, so the scene is at least as tall as it is wide and the whole photo shows, sky top to black. */
+.parallax__visuals { object-fit: cover; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; }
 .parallax__black-line-overflow { z-index: 20; background-color: #000; width: 100%; height: 2px; position: absolute; bottom: -1px; left: 0; }
 .parallax__layers { object-fit: cover; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; overflow: hidden; }
-.parallax__layer-img { pointer-events: none; object-fit: cover; object-position: 50% 0%; width: 100%; max-width: none; height: 117.5%; position: absolute; top: -17.5%; left: 0; }
+.parallax__layer-img { pointer-events: none; object-fit: cover; object-position: 50% 0%; width: 100%; max-width: none; height: 100%; position: absolute; top: 0; left: 0; }
 .parallax__layer-title { justify-content: center; align-items: center; width: 100%; height: 100svh; display: flex; position: absolute; top: 0; left: 0; }
 .parallax__title { pointer-events: auto; text-align: center; margin: 0 0 .1em;
   font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(28px, 8.2vw, 96px); line-height: 1; white-space: nowrap;
@@ -2472,18 +2472,15 @@ document.addEventListener('DOMContentLoaded', function () {
     layers.forEach(function (layerObj, idx) {
       tl.to(triggerElement.querySelectorAll('[data-parallax-layer="' + layerObj.layer + '"]'), { yPercent: layerObj.yPercent, ease: 'none' }, idx === 0 ? undefined : '<');
     });
-    // Not in the demo: Richard's plates are one square 7235 px canvas. Crop it as low as possible, so the black at the
-    // bottom of the front rocks reaches the bottom edge, but keep his head below the top 12% of the screen.
-    // Put the title centre on canvas y=3150, so he (y 2600-3540) stands in front of it. Runs once per screen width.
+    // Not in the demo: Richard's plates are one square 7235 px canvas, shown whole from sky top to black.
+    // Put the title centre on canvas y=3150, so he (y 2600-3540) stands in front of it. Runs once per scene size.
     var header = triggerElement.closest('.parallax__header'), title = triggerElement.querySelector('.parallax__layer-title');
-    var imgs = triggerElement.querySelectorAll('.parallax__layer-img'), lastW = 0;
+    var lastW = 0;
     function frame() {
       var W = header.offsetWidth, H = header.offsetHeight; if (W + 'x' + H === lastW) return; lastW = W + 'x' + H;
-      var bh = 1.175 * 1.2 * H, top = -0.175 * 1.2 * H, k = Math.max(W, bh) / 7235, over = bh - 7235 * k;
-      var p = over < 0 ? Math.min(1, Math.max(0, (top + 2600 * k - 0.12 * H) / -over)) : 0.5;
-      // The front rocks always sit on the bottom edge, so their black always runs into the footer (wide screens crop more).
-      imgs.forEach(function (im) { im.style.objectPosition = '50% ' + (im.getAttribute('data-parallax-layer') === '5' ? 100 : p * 100) + '%'; });
-      title.style.top = (top + over * p + 3150 * k - title.offsetHeight / 2) + 'px';
+      // The photo fills the scene height exactly (the scene is never shorter than it is wide), so 1 canvas px = H / 7235.
+      var k = H / 7235;
+      title.style.top = (3150 * k - title.offsetHeight / 2) + 'px';
     }
     frame(); window.addEventListener('resize', frame);
     function update() {
