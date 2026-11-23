@@ -1152,12 +1152,12 @@ nav {
 @media (max-width: 900px) { .cases-grid { grid-template-columns: 1fr; } }
 
 
-/* ══ FOOTER PARALLAX ══ (after the Osmo parallax-image-layers demo; Richard and the photo are two layers that move as one) */
+/* ══ FOOTER PARALLAX ══ (after the Osmo parallax-image-layers demo: sky, text, sea and mountains, rocks with Richard, each at its own speed) */
 .pfoot { position: relative; height: clamp(420px, 90svh, 1000px); overflow: hidden; background: var(--bg); }
-.pfoot-layers { position: absolute; left: 0; right: 0; top: -32%; bottom: 0; will-change: transform; }
-.pfoot-layers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 46% 62%; }
+.pfoot-layer { position: absolute; inset: 0; will-change: transform; }
+.pfoot-layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 46% 62%; }
 .pfoot-text { position: absolute; left: 50%; top: 30%; width: 92vw; margin: 0; transform: translateX(-50%); text-align: center;
-  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(28px, 8.2vw, 124px); line-height: 1; white-space: nowrap;
+  font-family: 'Portrait Of You', sans-serif; font-weight: 400; font-synthesis: none; font-size: clamp(28px, 8.2vw, 96px); line-height: 1; white-space: nowrap;
   text-transform: uppercase; letter-spacing: .02em; color: var(--t1); }
 .pfoot-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(rgba(33,33,33,0), var(--bg)); pointer-events: none; }
 
@@ -2014,11 +2014,10 @@ html { overflow-x: clip; }
 
 <!-- ══ FOOTER PARALLAX ══ -->
 <section class="pfoot" aria-label="Richard Van der Vieren on a rock above the sea at sunset">
-  <div class="pfoot-layers" data-pfoot>
-    <img src="image/parallax/footer-bg.jpg" alt="" loading="lazy" decoding="async" width="2048" height="1536">
-    <p class="pfoot-text" data-pfoot-logo>You have reached<br>the bottom<br>the only way is up</p>
-    <img src="image/parallax/footer-me.png" alt="" loading="lazy" decoding="async" width="2048" height="1536">
-  </div>
+  <div class="pfoot-layer" data-pfoot-depth="0.7"><img src="image/parallax/footer-sky.jpg" alt="" loading="lazy" decoding="async" width="2048" height="1536"></div>
+  <div class="pfoot-layer" data-pfoot-depth="0.55"><p class="pfoot-text" data-pfoot-logo>You have reached<br>the bottom<br>the only way is up</p></div>
+  <div class="pfoot-layer" data-pfoot-depth="0.4"><img src="image/parallax/footer-mid.webp" alt="" loading="lazy" decoding="async" width="2048" height="1536"></div>
+  <div class="pfoot-layer" data-pfoot-depth="0.12"><img src="image/parallax/footer-front.webp" alt="" loading="lazy" decoding="async" width="2048" height="1536"></div>
   <div class="pfoot-fade"></div>
 </section>
 
@@ -2431,25 +2430,27 @@ function shockwave(e) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script>
-// ══ FOOTER PARALLAX ══ photo + Richard move together, slower than the page
+// ══ FOOTER PARALLAX ══ four layers, each at its own speed: sky (slowest), text, sea and mountains, rocks with Richard (fastest)
 window.addEventListener('DOMContentLoaded', function () {
-  var el = document.querySelector('[data-pfoot]'), logo = document.querySelector('[data-pfoot-logo]');
-  // Text bottom sits on the rock at Richard's feet: map photo pixel y=1050 (2048x1536, cover, object-position 46% 62%) into the layer box
+  var sec = document.querySelector('.pfoot'), logo = document.querySelector('[data-pfoot-logo]');
+  if (!sec || !logo) return;
+  // Text bottom sits just above the mountain top (photo y=760 of 2048x1536, cover, object-position 46% 62%).
+  // Phones: Richard is large on screen, so the text sits above his head (photo y=770).
   function placeLogo() {
-    if (!el || !logo) return;
-    var W = el.offsetWidth, H = el.offsetHeight, k = Math.max(W / 2048, H / 1536);
-    // Phones: Richard is large on screen, so the text sits above his head (photo y=795) instead of behind him
-    var feet = (H - 1536 * k) * 0.62 + (W < 700 ? 795 : 1050) * k;
-    logo.style.top = (feet - logo.offsetHeight) + 'px';
+    var W = sec.offsetWidth, H = sec.offsetHeight, k = Math.max(W / 2048, H / 1536);
+    var y = (H - 1536 * k) * 0.62 + (W < 700 ? 770 : 760) * k;
+    logo.style.top = (y - logo.offsetHeight) + 'px';
   }
   placeLogo(); window.addEventListener('resize', placeLogo); if (document.fonts) document.fonts.ready.then(placeLogo);
-  if (!el || !window.gsap || !window.ScrollTrigger || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.gsap || !window.ScrollTrigger || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
-  gsap.fromTo(el, { yPercent: 0 }, { yPercent: 23.5, ease: 'none',
-    scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom bottom', scrub: 0 } });
-  // The text has its own speed: it starts higher in the sky and lands behind Richard at the end of the page
-  gsap.fromTo(logo, { xPercent: -50, x: 0, y: function () { return -0.7 * el.parentNode.offsetHeight; } }, { xPercent: -50, x: 0, y: 0, ease: 'none', immediateRender: true,
-    scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom bottom', scrub: 0, invalidateOnRefresh: true } });
+  gsap.set(logo, { xPercent: -50, x: 0 });
+  // All layers line up as the photo at the end of the page. Before that, a deeper layer sits higher and comes down more, so it moves slower.
+  sec.querySelectorAll('[data-pfoot-depth]').forEach(function (layer) {
+    var d = parseFloat(layer.getAttribute('data-pfoot-depth'));
+    gsap.fromTo(layer, { y: function () { return -d * sec.offsetHeight; } }, { y: 0, ease: 'none', immediateRender: true,
+      scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom bottom', scrub: 0, invalidateOnRefresh: true } });
+  });
   // The X embeds above grow after load; re-measure when the page height changes
   var t; new ResizeObserver(function () { clearTimeout(t); t = setTimeout(function () { ScrollTrigger.refresh(); }, 200); }).observe(document.body);
 });
