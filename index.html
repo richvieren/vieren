@@ -1157,6 +1157,9 @@ nav {
 .pfoot { position: relative; z-index: 1; height: 100svh; min-height: 480px; background: #000; }
 /* Back layers are clipped to the section. The front rocks are not: they rise over the scene and their black runs into the footer. */
 .pfoot-clip { position: absolute; inset: 0; overflow: hidden; }
+/* The scene stays hidden until all plates have loaded, so the text never shows on its own */
+.pfoot-clip, .pfoot-front { transition: opacity .6s ease; }
+.pfoot.is-waiting .pfoot-clip, .pfoot.is-waiting .pfoot-front { opacity: 0; }
 .pfoot-front { position: absolute; left: calc(50% - var(--pf-s, 100%) / 2); top: var(--pf-y, 0); width: var(--pf-s, 100%); height: var(--pf-s, 100%); will-change: transform; pointer-events: none; }
 .pfoot-front img { display: block; width: 100%; height: 100%; }
 /* The plate ends in pure black; continue that black below it, so nothing shows under the rocks while they rise */
@@ -2023,12 +2026,12 @@ html { overflow-x: clip; }
 <!-- ══ FOOTER PARALLAX ══ -->
 <section class="pfoot" aria-label="Richard Van der Vieren on a rock above the sea at sunset">
   <div class="pfoot-clip">
-    <div class="pfoot-layer" data-pfoot-depth="0.4"><img src="image/parallax/footer-sea-1600.webp" srcset="image/parallax/footer-sea-1600.webp 1600w, image/parallax/footer-sea-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" fetchpriority="low" decoding="async" width="1600" height="1600"></div>
-    <div class="pfoot-layer" data-pfoot-depth="0.4"><img src="image/parallax/footer-sky-1600.webp" srcset="image/parallax/footer-sky-1600.webp 1600w, image/parallax/footer-sky-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" fetchpriority="low" decoding="async" width="1600" height="1600"></div>
+    <div class="pfoot-layer" data-pfoot-depth="0.4"><img src="image/parallax/footer-sea-1600.webp" srcset="image/parallax/footer-sea-1600.webp 1600w, image/parallax/footer-sea-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" decoding="async" width="1600" height="1600"></div>
+    <div class="pfoot-layer" data-pfoot-depth="0.4"><img src="image/parallax/footer-sky-1600.webp" srcset="image/parallax/footer-sky-1600.webp 1600w, image/parallax/footer-sky-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" decoding="async" width="1600" height="1600"></div>
     <div class="pfoot-layer" data-pfoot-depth="0.55"><p class="pfoot-text" data-pfoot-logo>You have reached<br>the bottom<br>the only way is up</p></div>
-    <div class="pfoot-layer" data-pfoot-depth="0.25"><img src="image/parallax/footer-rock-1600.webp" srcset="image/parallax/footer-rock-1600.webp 1600w, image/parallax/footer-rock-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" fetchpriority="low" decoding="async" width="1600" height="1600"></div>
+    <div class="pfoot-layer" data-pfoot-depth="0.25"><img src="image/parallax/footer-rock-1600.webp" srcset="image/parallax/footer-rock-1600.webp 1600w, image/parallax/footer-rock-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" decoding="async" width="1600" height="1600"></div>
   </div>
-  <div class="pfoot-front" data-pfoot-depth="-0.35"><img src="image/parallax/footer-front-1600.webp" srcset="image/parallax/footer-front-1600.webp 1600w, image/parallax/footer-front-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" fetchpriority="low" decoding="async" width="1600" height="1600"></div>
+  <div class="pfoot-front" data-pfoot-depth="-0.35"><img src="image/parallax/footer-front-1600.webp" srcset="image/parallax/footer-front-1600.webp 1600w, image/parallax/footer-front-2800.webp 2800w" sizes="(max-width: 700px) 50vh, (orientation: portrait) 100vh, 100vw" alt="" decoding="async" width="1600" height="1600"></div>
 </section>
 
 <footer>
@@ -2460,8 +2463,11 @@ function shockwave(e) {
 window.addEventListener('DOMContentLoaded', function () {
   var sec = document.querySelector('.pfoot'), logo = document.querySelector('[data-pfoot-logo]'), foot = document.querySelector('footer');
   if (!sec || !logo || !foot) return;
-  // Decode the large layer images ahead of time, so every plate is ready to paint when the scene comes into view
-  sec.querySelectorAll('img').forEach(function (im) { if (im.decode) im.decode().catch(function () {}); });
+  // Hide the scene until every plate has loaded and decoded, then fade it in (a failed image does not block it)
+  sec.classList.add('is-waiting');
+  Promise.all([].map.call(sec.querySelectorAll('img'), function (im) {
+    return (im.decode ? im.decode() : Promise.resolve()).catch(function () {});
+  })).then(function () { sec.classList.remove('is-waiting'); });
   // Canvas 7235 x 7235, cover. Text bottom at canvas y=3200, so Richard (y 2600-3540) stands in front of the last line.
   // The image is moved up so the text top sits at 12% of the screen; it never shows past the canvas bottom.
   // The front rocks (negative depth) rise faster than the page, over the rock with Richard.
