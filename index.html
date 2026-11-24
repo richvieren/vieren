@@ -1485,13 +1485,11 @@ html { overflow-x: clip; }
 </script>
 
 <style>
-.manifesto-row{max-width:960px;margin:0 auto;position:relative;z-index:1;will-change:transform;}   /* text only, centred block */
-/* Grunge edge, after the Wolf Children site: the Photo Diary's cream comes up over the red module with a torn, sprayed top.
-   image/grunge-edge.png is 1600x120, drawn at full width so it keeps its shape: 7.5vw tall. The red module clips its text,
-   and the text lags at 0.4x scroll speed once the module's bottom passes the bottom of the window, so the edge rides over it */
-.manifesto-section{position:relative;overflow:hidden;padding-bottom:calc(72px + 7.5vw) !important;}
-.manifesto-edge{position:absolute;left:0;right:0;bottom:-1px;height:calc(7.5vw + 1px);z-index:2;background:#EDE1D3;pointer-events:none;
-  -webkit-mask:url(image/grunge-edge.png) top / 100% 7.5vw no-repeat;mask:url(image/grunge-edge.png) top / 100% 7.5vw no-repeat;}
+.manifesto-row{max-width:960px;margin:0 auto;}   /* text only, centred block */
+.manifesto-section{background:#163015;}
+.manifesto-section h1,.manifesto-section p{font-family:'Perandory Condensed',sans-serif;font-weight:400;font-synthesis:none;color:#fff;margin:0;}
+.manifesto-section h1{font-size:clamp(28px,4.4vw,56px);line-height:1.05;}
+.manifesto-section p{font-size:clamp(20px,2.6vw,32px);line-height:1.15;margin-top:24px;}
 </style>
 
 <!-- ══ PROJECTS ══ -->
@@ -1519,39 +1517,14 @@ html { overflow-x: clip; }
 </section>
 
 <!-- ══ MANIFESTO ══ -->
-<section class="manifesto-section" style="background:#aa1f23;padding:72px 40px;">
+<section class="manifesto-section" style="padding:72px 40px;">
   <div class="manifesto-row">
     <div class="manifesto-text">
-      <h1 style="font-family:'Archivo',sans-serif;font-size:clamp(20px,3vw,36px);line-height:1.2;color:var(--t1);font-weight:700;margin:0;">
-        Vieren is a one man hybrid production studio run by Richard Van der Vieren.
-      </h1>
-      <p style="font-family:'Archivo',sans-serif;font-size:clamp(15px,1.8vw,20px);line-height:1.35;color:rgba(237,225,211,.75);margin-top:28px;font-weight:500;">
-        He is fusing a rare overlap of deep technical agentic skill and world-class creative craft.
-      </p>
+      <h1>Vieren is a one man hybrid production studio run by Richard Van der Vieren.</h1>
+      <p>He is fusing a rare overlap of deep technical agentic skill and world-class creative craft.</p>
     </div>
   </div>
-  <div class="manifesto-edge" aria-hidden="true"></div>
 </section>
-<script>
-// Parallax: the manifesto text lags at 0.4x scroll speed once the module's bottom passes the bottom of the window, so the torn cream edge rides over it
-(function () {
-  var sec = document.querySelector('.manifesto-section'), row = sec && sec.querySelector('.manifesto-row');
-  if (!row) return;
-  var still = matchMedia('(prefers-reduced-motion: reduce)'), ticking = false;
-  function frame() {
-    ticking = false;
-    if (still.matches) { row.style.transform = ''; return; }
-    var r = sec.getBoundingClientRect(), h = innerHeight;
-    if (r.bottom < 0 || r.top > h) return;
-    var lag = Math.max(0, h - r.bottom) * 0.4;
-    row.style.transform = lag ? 'translate3d(0,' + lag.toFixed(1) + 'px,0)' : '';
-  }
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
-  addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll);
-  frame();
-})();
-</script>
 
 <!-- ══ PHOTO DIARY ══ -->
 <section class="diary-section" id="diarySection">
