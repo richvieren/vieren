@@ -1189,6 +1189,11 @@ footer .fpages a { font-size: 11px; letter-spacing: .2em; text-transform: upperc
 footer .fpages a:hover { color: var(--t1); }
 footer > nav.fpages a { color: #fff; }
 footer > nav.fpages a:hover { color: var(--t1); }
+/* Sitemap row: Fractional Head Of Content sits in the exact centre, one group on each side */
+footer .fmain { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px 28px; align-items: center; width: 100%; }
+footer .fmain .fside-l { justify-content: flex-end; }
+footer .fmain .fside-r { justify-content: flex-start; }
+@media (max-width: 1400px) { footer .fmain { grid-template-columns: 1fr; } footer .fmain .fside-l, footer .fmain .fside-r { justify-content: center; } }
 footer .flogo { font-family: 'Podium', sans-serif; font-weight: 900; font-size: 16px; color: #fff; letter-spacing: .02em; text-transform: uppercase; }
 
 /* ══ VIDEO OVERLAY ══ */
@@ -2018,16 +2023,20 @@ html { overflow-x: clip; }
     </div>
   </div>
   <nav class="fpages" aria-label="Sitemap">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="diary.html">Photo Diary</a></li>
-      <li><a href="shortform.html">Short Form</a></li>
-      <li><a href="/articles/">Articles</a></li>
-      <li><a href="#film">Film Work</a></li>
-      <li><a href="#cases">Case Studies</a></li>
-      <li><a href="/cracked/">Fractional Head Of Content</a></li>
-    </ul>
+    <div class="fmain">
+      <ul class="fside-l">
+        <li><a href="/">Home</a></li>
+        <li><a href="portfolio.html">Photo Portfolio</a></li>
+        <li><a href="diary.html">Photo Diary</a></li>
+        <li><a href="#cases">Automation Case Studies</a></li>
+      </ul>
+      <ul class="fmid"><li><a href="/cracked/">Fractional Head Of Content</a></li></ul>
+      <ul class="fside-r">
+        <li><a href="shortform.html">Short Form</a></li>
+        <li><a href="#film">Film Work</a></li>
+        <li><a href="/articles/">Articles</a></li>
+      </ul>
+    </div>
     <ul>
       <li><a href="mailto:hello@vieren.studio">Email</a></li>
       <li><a href="https://www.youtube.com/c/aooatv" target="_blank" rel="noopener">YouTube</a></li>
